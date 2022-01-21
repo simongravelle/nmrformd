@@ -1,6 +1,9 @@
+LICENSE
 README.md
 setup.py
 nmrformd/__init__.py
+nmrformd/nmrformd.py
+nmrformd/utils.py
 nmrformd.egg-info/PKG-INFO
 nmrformd.egg-info/SOURCES.txt
 nmrformd.egg-info/dependency_links.txt

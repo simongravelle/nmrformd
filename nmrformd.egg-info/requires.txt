@@ -1,2 +1,2 @@
-mdanalsyis
+mdanalysis
 pytest
