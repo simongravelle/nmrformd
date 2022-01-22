@@ -55,13 +55,13 @@ class NMR:
                  target_i,
                  neighbor_j,
                  type_analysis,
-                 number_j,
+                 number_i,
                  order):
         self.u = u
         self.target_i = target_i
         self.neighbor_j = neighbor_j
         self.type_analysis = type_analysis
-        self.number_j = number_j
+        self.number_i = number_i
         self.order = order
         self.data = None
         self.rij = None
@@ -76,9 +76,16 @@ class NMR:
         self._define_constants()
         self._read_universe()
 
-        self._select_proton()
+        self._select_target_i()
 
-        self._initialise_data()
+        for cpti, i in enumerate(self.index_i):
+            self.cpti = cpti
+            self.i  = i
+            self._select_proton()
+            if cpti == 0:
+                self._initialise_data()
+
+
         self._evaluate_correlation_ij()
         self._calculate_fourier_transform()
         self._calculate_spectrum()
@@ -93,14 +100,22 @@ class NMR:
         self.group_neighbor_j = self.u.select_atoms(self.neighbor_j)
         assert self.group_neighbor_j.atoms.n_atoms > 0, "empty neighbor group j"
 
+    def _select_target_i(self):
+        if self.number_i == 0:
+            self.index_i = np.array(self.group_target_i.atoms.indices)
+        elif self.number_i > self.group_target_i.atoms.n_atoms:
+            print('number_i larger than the number of atom in group target i, all atoms selected')
+            self.index_i = np.array(self.group_target_i.atoms.indices)
+        else:
+            self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
+
     def _select_proton(self):
         assert (self.type_analysis == "inter_molecular") | \
                (self.type_analysis == "intra_molecular") | \
                (self.type_analysis == "full"), \
                'unknown value for type_analysis, choose inter_molecular or intra_molecular or full'
 
-        self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=1))
-        self.group_i = self.u.select_atoms('index '+str(self.index_i[0]))
+        self.group_i = self.u.select_atoms('index '+str(self.i))
         self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[0]]
 
         if self.type_analysis == "inter_molecular":
