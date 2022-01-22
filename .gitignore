@@ -1,8 +1,9 @@
 # MDAnalysis stuff
 **/trajectory.xtc_offsets.npz
 
-# virtural environment stuff:
+# pycharm virtual environment stuff:
 venv
+.idea
 
 # python stuff:
 __pycache__
