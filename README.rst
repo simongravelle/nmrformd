@@ -3,6 +3,11 @@ NMRforMD
 
 NMRforMD is a python script to calculate NMR relaxation times from molecular dynamics trajectory files. Used in combination with MDAnalysis, it allows for the analysis of trajectory files from LAMMPS, GROMACS, or AMBER simulation package.
 
+Information
+-----------
+
+NMRforMD is in development and likely to return errors. Please raise an issue here if you find one. 
+
 How to
 ------
 
