@@ -9,8 +9,5 @@ def test_nmr():
     gj = "type HW"
     t = "full"
     nmr_result = NMR.NMR(u, gi, gj, t, 100, "m0")
-
-    print(1/nmr_result.R1[0])
-    print(1/nmr_result.R2[0])
-
+    
     assert np.isclose(1/nmr_result.R1[0], 1/nmr_result.R2[0], rtol=1e-4, atol=0)
