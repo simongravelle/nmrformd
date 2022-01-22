@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def test_nmr():
     u = mda.Universe("../test/bulk_h2o/topology.tpr", "../test/bulk_h2o/trajectory.xtc")
 
-    nmr_result = NMR.NMR(u, "type HW", "type HW", "full", 1, "m0")
+    nmr_result = NMR.NMR(u, "type HW", "type HW", "full", 10, "m0")
 
     print()
     print()
