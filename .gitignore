@@ -1,6 +1,12 @@
 
 **/trajectory.xtc_offsets.npz
+
+Untitled.ipynb
+
+venv
+
 __pycache__
 **/__pycache__
-Untitled.ipynb
-venv
+
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
