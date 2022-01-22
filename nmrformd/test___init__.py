@@ -4,9 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def test_nmr():
-    u = mda.Universe("../test/bulk_h2o/topology.tpr", "../test/bulk_h2o/trajectory.xtc")
+    u = mda.Universe("../tests/bulk_h2o/topology.tpr", "../tests/bulk_h2o/trajectory.xtc")
 
-    nmr_result = NMR.NMR(u, "type HW", "type HW", "full", 1000, "m012")
+    nmr_result = NMR.NMR(u, "type HW", "type HW", "full", 100, "m012")
 
     print()
     print()
