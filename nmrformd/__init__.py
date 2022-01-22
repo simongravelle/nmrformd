@@ -56,6 +56,11 @@ def correlation_function(a, b=None):
         cor = np.real(res[:len(a)]) / np.array(range(len(a), 0, -1))
     return cor
 
+def find_nearest(array, value):
+    array = np.asarray(array)
+    idx = (np.abs(array - value)).argmin()
+    return idx
+
 
 class NMR:
     def __init__(self,
@@ -96,6 +101,7 @@ class NMR:
 
         self._calculate_fourier_transform()
         self._calculate_spectrum()
+        self.calculateT1T2()
 
     def _define_constants(self):
         self.gamma = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
@@ -223,3 +229,12 @@ class NMR:
             interpolation_2 = interp1d(self.f, self.J_2, fill_value="extrapolate")
             self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
             self.R2 = (1/4)*(interpolation_0(self.f[0])+10*interpolation_1(self.f) + interpolation_2(2 * self.f))
+
+    def calculateT1T2(self,f0=None):
+        if f0 == None:
+            self.T1 = 1/self.R1[0]
+            self.T2 = 1/self.R2[0]
+        else:
+            idx = find_nearest(self.f,f0)
+            self.T1 = 1 / self.R1[idx]
+            self.T2 = 1 / self.R2[idx]
