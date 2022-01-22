@@ -13,5 +13,7 @@ setup(name='nmrformd',
          install_requires=[
        "mdanalysis",
        "pytest",
+       "numpy",
+       "random",
       ]      
       )
