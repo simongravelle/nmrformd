@@ -4,7 +4,6 @@ from scipy.interpolate import interp1d
 import numpy as np
 import random
 
-
 def fourier_transform(a):
     """
     Wrapper function that takes the data in real space with
@@ -173,24 +172,26 @@ class NMR:
             elif self.order == 'm012':
                 for m in range(3):
                     self.gij[m] += correlation_function(self.data[m, :, idx_j])
+        self.gij = np.real(self.gij)
 
     def _calculate_fourier_transform(self):
-        self.gij /= self.cpt_i
+        self.gij /= self.cpt_i+1
         self.gij *= self.K / cst.angstrom ** 6
         if self.order == 'm0':
             fij = fourier_transform(np.vstack([self.t, self.gij]).T)
-            self.f = fij.T[0]
-            self.J_0 = fij.T[1]
+            self.f = np.real(fij.T[0])
+            self.J_0 = np.real(fij.T[1])
+
         elif self.order == 'm012':
             for m in range(3):
                 fij = fourier_transform(np.vstack([self.t, self.gij[m]]).T)
-                self.f = fij.T[0]
+                self.f = np.real(fij.T[0])
                 if m == 0:
-                    self.J_0 = fij.T[1]
+                    self.J_0 = np.real(fij.T[1])
                 elif m == 1:
-                    self.J_1 = fij.T[1]
+                    self.J_1 = np.real(fij.T[1])
                 elif m == 2:
-                    self.J_2 = fij.T[1]
+                    self.J_2 = np.real(fij.T[1])
 
     def vector_ij(self):
         """calculate 3D vector between position_i and position_j assuming pbc"""
