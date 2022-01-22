@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def test_nmr():
     u = mda.Universe("../test/bulk_h2o/topology.tpr", "../test/bulk_h2o/trajectory.xtc")
 
-    nmr_result = NMR.NMR(u, "type HW", "type HW", "full", 10, "m0")
+    nmr_result = NMR.NMR(u, "type HW", "type HW", "full", 1000, "m012")
 
     print()
     print()
@@ -17,7 +17,8 @@ def test_nmr():
     #print(nmr_result.gij.t)
     #print(nmr_result.gij.t)
     #print(nmr_result.f.shape)
-    print(nmr_result.R1[0])
+    print(1/nmr_result.R1[0])
+    print(1/nmr_result.R2[0])
 
     #np.savetxt('test.dat', np.stack(nmr_result.t.T,nmr_result.gij[0].T), delimiter=' ')
 

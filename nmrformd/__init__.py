@@ -12,14 +12,23 @@ def fourier_transform(a):
     with columns frequency, signal
     Units in : ps, signal
     Units out : MHz, s*signal
+
+    Credit to the fourier transform function of MAICoS
+    https://maicos-devel.gitlab.io/maicos/index.html
     """
     dt = (a[1, 0] - a[0, 0]) * cst.pico  # second
     return np.vstack((np.fft.rfftfreq(len(a), dt) / cst.mega, np.fft.rfft(a[:, 1], norm=None) * dt * 2)).T
 
 
 def correlation_function(a, b=None):
-    """Uses fast fourier transforms to give the correlation function
-    of two arrays, or, if only one array is given, its auto correlation."""
+    """Uses fast fourier transforms to calculate the correlation function.
+
+    If two arrays are given, the cross-correlation is returned.
+    If one array is given, the auto-correlation is returned.
+
+    Credit to the correlation function of MAICoS
+    https://maicos-devel.gitlab.io/maicos/index.html
+    """
     if len(a.shape) > 1:
         a2 = np.append(a,
                        np.zeros((2 ** int(np.ceil((np.log(len(a)) / np.log(2)))) - len(a), a.shape[1])),
@@ -78,15 +87,14 @@ class NMR:
 
         self._select_target_i()
 
-        for cpti, i in enumerate(self.index_i):
-            self.cpti = cpti
-            self.i  = i
+        for cpt_i, i in enumerate(self.index_i):
+            self.cpt_i = cpt_i
+            self.i = i
             self._select_proton()
-            if cpti == 0:
+            if cpt_i == 0:
                 self._initialise_data()
+            self._evaluate_correlation_ij()
 
-
-        self._evaluate_correlation_ij()
         self._calculate_fourier_transform()
         self._calculate_spectrum()
 
@@ -115,12 +123,13 @@ class NMR:
                (self.type_analysis == "full"), \
                'unknown value for type_analysis, choose inter_molecular or intra_molecular or full'
 
-        self.group_i = self.u.select_atoms('index '+str(self.i))
-        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[0]]
+        self.group_i = self.u.select_atoms('index '+str(self.index_i[self.cpt_i]))
+        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]
 
         if self.type_analysis == "inter_molecular":
-            self.index_j = self.group_neighbor_j.atoms.indices[(self.group_neighbor_j.resids == self.resids_i)
-                                                               & (self.group_neighbor_j.indices != self.index_i[0])]
+            self.index_j = \
+                self.group_neighbor_j.atoms.indices[(self.group_neighbor_j.resids == self.resids_i)
+                                                    & (self.group_neighbor_j.indices != self.index_i[self.cpt_i])]
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
         elif self.type_analysis == "intra_molecular":
@@ -128,7 +137,8 @@ class NMR:
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
         elif self.type_analysis == "full":
-            self.index_j = self.group_neighbor_j.atoms.indices[self.group_neighbor_j.indices != self.index_i[0]]
+            self.index_j = \
+                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.indices != self.index_i[self.cpt_i]]
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
 
@@ -163,9 +173,10 @@ class NMR:
             elif self.order == 'm012':
                 for m in range(3):
                     self.gij[m] += correlation_function(self.data[m, :, idx_j])
-        self.gij *= self.K / cst.angstrom ** 6
 
     def _calculate_fourier_transform(self):
+        self.gij /= self.cpt_i
+        self.gij *= self.K / cst.angstrom ** 6
         if self.order == 'm0':
             fij = fourier_transform(np.vstack([self.t, self.gij]).T)
             self.f = fij.T[0]
