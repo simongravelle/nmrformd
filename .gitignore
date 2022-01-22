@@ -1,1 +1,4 @@
-test/run*
+
+**/trajectory.xtc_offsets.npz
+__pycache__
+**/__pycache__
