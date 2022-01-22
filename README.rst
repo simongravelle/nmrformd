@@ -8,6 +8,15 @@ Information
 
 NMRforMD is in development and likely to return errors. Please raise an issue here if you find one. 
 
+Installation
+------------
+
+Clone this repository on your computer, then use pip from the main directory:
+
+.. code-block:: bash
+
+	pip install .
+
 How to
 ------
 
@@ -49,5 +58,11 @@ Finally, choose either "m0" or "m012" for calculation using only the spherical h
 
 	nmr_result = NMR.NMR(u, groupe_i, group_j, analysis, n_i, "m0")
 
-Results can be accessed from the nmr_result. 
+Results can be accessed from the nmr_result. For exampl 
+
+Known issues
+------------
+
+- for very large trajectory file, the code requires a lot of memory
+
 
