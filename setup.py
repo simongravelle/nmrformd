@@ -15,5 +15,6 @@ setup(name='nmrformd',
        "pytest",
        "numpy",
        "random",
+       "scipy",
       ]      
       )
