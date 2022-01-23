@@ -1,0 +1,4 @@
+mdanalysis
+numpy
+pytest
+scipy
