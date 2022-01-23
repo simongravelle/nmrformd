@@ -75,4 +75,6 @@ Known issues
 - for very large trajectory file, the code requires a lot of memory
 - only residue are accepted to differentiate atoms from the same molecule/structure/residue
 
+.. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
+
 .. inclusion-readme-end
