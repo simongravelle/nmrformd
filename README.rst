@@ -1,5 +1,9 @@
 .. inclusion-readme-intro-start
 
+<h3 align="center">
+  <img src="https://raw.githubusercontent.com/maxhumber/gif/master/logo/gif.png" width="300px" alt="gif">
+</h3>
+
 NMRforMD
 ########
 
@@ -67,13 +71,13 @@ Finally, choose either "m0" or "m012" for calculation using only the spherical h
 
 	nmr_result = NMR.NMR(u, groupe_i, group_j, analysis, n_i, "m0")
 
-Results can be accessed from the nmr_result. For exampl 
+Results can be accessed from the nmr_result.
 
 Known issues
 ------------
 
 - for very large trajectory file, the code requires a lot of memory
-- only residue are accepted to differentiate atoms from the same molecule/structure/residue
+- currently only residue are accepted to differentiate atoms from the same molecule/structure/residue
 
 .. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
 
