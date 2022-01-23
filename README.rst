@@ -1,9 +1,5 @@
 .. inclusion-readme-intro-start
 
-<h3 align="center">
-  <img src="https://raw.githubusercontent.com/maxhumber/gif/master/logo/gif.png" width="300px" alt="gif">
-</h3>
-
 NMRforMD
 ########
 
