@@ -7,5 +7,5 @@ Changelog
 
 .. toctree::
    :maxdepth: 2
-   :caption: MAICoS
+   :caption: NMRforMD
    :hidden:

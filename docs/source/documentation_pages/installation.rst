@@ -23,5 +23,5 @@ Then type in a terminal:
 
 .. toctree::
    :maxdepth: 2
-   :caption: MAICoS
+   :caption: NMRforMD
    :hidden:
