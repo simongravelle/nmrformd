@@ -1,0 +1,10 @@
+README.rst
+setup.cfg
+setup.py
+nmrformd/__init__.py
+nmrformd.egg-info/PKG-INFO
+nmrformd.egg-info/SOURCES.txt
+nmrformd.egg-info/dependency_links.txt
+nmrformd.egg-info/not-zip-safe
+nmrformd.egg-info/requires.txt
+nmrformd.egg-info/top_level.txt
