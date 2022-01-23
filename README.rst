@@ -1,5 +1,10 @@
 .. inclusion-readme-intro-start
 
+.. image:: https://gitlab.com/maicos-devel/maicos/-/raw/develop/docs/source/images/logo_MAICOS_small.png
+   :align: left
+   :alt: MAICoS
+
+
 NMRforMD
 ########
 
