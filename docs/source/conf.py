@@ -58,4 +58,4 @@ html_theme = 'press'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-#html_logo = "images/logo.png"
+html_logo = "images/NMRforMD.png"
