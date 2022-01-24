@@ -1,5 +1,4 @@
-.. image:: https://github.com/simongravelle/nmrformd/blob/main/docs/source/images/NMRforMD_README.png
-	:class: align-center
+.. image:: https://github.com/simongravelle/nmrformd/blob/main/docs/source/images/NMRforMD_READMEc.png
 
 .. inclusion-readme-intro-start
 
