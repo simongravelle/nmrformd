@@ -5,6 +5,8 @@
 	#   :align: left
 	#   :alt: MAICoS
 
+.. image:: https://github.com/simongravelle/nmrformd/blob/main/docs/source/images/NMRforMD_2.png
+
 
 NMRforMD
 ########
