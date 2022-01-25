@@ -7,7 +7,7 @@ NMRforMD is a python script to calculate NMR relaxation times from molecular dyn
 .. inclusion-readme-intro-end
 
 For details, tutorials, and examples, please have a look at
-the `documentation`_.
+the `documentation`_. (in construction)
 
 .. inclusion-readme-start
 
