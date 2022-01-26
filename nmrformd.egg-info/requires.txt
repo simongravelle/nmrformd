@@ -1,4 +1,0 @@
-mdanalysis
-numpy
-pytest
-scipy
