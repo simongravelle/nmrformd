@@ -1,7 +1,5 @@
 .. inclusion-readme-intro-start
 
-.. image:: https://gitlab.com/maicos-devel/maicos/-/raw/develop/docs/source/images/logo_MAICOS_small.png
-
 NMRforMD ########
 
 NMRforMD is a python script to calculate NMR relaxation times from
