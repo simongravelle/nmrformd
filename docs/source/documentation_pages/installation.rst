@@ -1,5 +1,3 @@
-.. _label_installation:
-
 ============
 Installation
 ============
