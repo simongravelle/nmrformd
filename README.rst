@@ -37,10 +37,10 @@ Or, clone this repository on your computer and use pip from the main directory:
 
 .. inclusion-readme-installation-end
 
-.. inclusion-readme-howto-start
-
 How to
 ------
+
+.. inclusion-readme-howto-start
 
 In a python script, import NMRforMD and MDAnalysis:
 
