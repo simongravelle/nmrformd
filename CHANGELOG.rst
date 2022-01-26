@@ -11,13 +11,21 @@ The rules for NMRforMD' CHANGELOG file:
 
 .. inclusion-marker-changelog-start
 
-v0.0 (2022/01/20)
+v0.0.1 (2022/01/26)
+-----------------
+
+Simon Gravelle
+
+- added caracteristic time measurement
+- added NMRforMD to pypi
+
+v0.0.0 (2022/01/20)
 -----------------
 
 Simon Gravelle
 
 - created test
-- added NMRforMD to pypi
+- added NMRforMD to pypi test
 - created sphinx doc
 - first commit
 
