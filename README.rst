@@ -19,7 +19,11 @@ NMRforMD is in development and likely to return errors. Please raise an issue he
 Installation
 ------------
 
-Clone this repository on your computer, then use pip from the main directory:
+Using pip, type in a terminal:
+
+	pip install nmrformd
+
+Or, clone this repository on your computer and use pip from the main directory:
 
 .. code-block:: bash
 
