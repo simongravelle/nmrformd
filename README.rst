@@ -29,11 +29,15 @@ Or, clone this repository on your computer and use pip from the main directory:
 
 .. code-block:: bash
 
+	git clone git@github.com:simongravelle/nmrformd.git
+	
+	cd nmrformd/
+
 	pip install .
 
 .. inclusion-readme-installation-end
 
-.. inclusion-readme-start
+.. inclusion-readme-howto-start
 
 How to
 ------
@@ -78,6 +82,8 @@ Finally, choose either "m0" or "m012" for calculation using only the spherical h
 
 Results can be accessed from the nmr_result.
 
+.. inclusion-readme-howto-end
+
 Known issues
 ------------
 
@@ -86,5 +92,3 @@ Known issues
 
 .. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
 .. _`MDAnalysis`: https://www.mdanalysis.org/
-
-.. inclusion-readme-end
