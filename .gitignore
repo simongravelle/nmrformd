@@ -20,3 +20,5 @@ docs/build
 # own stuff
 cheat.txt
 logo/
+nmrformd.egg-info
+dist
