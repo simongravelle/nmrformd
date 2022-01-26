@@ -14,10 +14,10 @@ NMRforMD is in development and likely to return errors. Please raise an issue he
 For details, tutorials, and examples, have a look at
 the `documentation`_. (in construction)
 
-.. inclusion-readme-installation-start
-
 Installation
 ------------
+
+.. inclusion-readme-installation-start
 
 Using pip, type in a terminal:
 
