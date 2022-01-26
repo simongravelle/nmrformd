@@ -1,4 +1,5 @@
-NMRforMD ########
+NMRforMD 
+########
 
 NMRforMD is a python script to calculate NMR relaxation times from
 molecular dynamics trajectory files. Used in combination with

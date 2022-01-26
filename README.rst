@@ -33,6 +33,7 @@ In a python script, import NMRforMD and MDAnalysis:
 .. code-block:: python3
 
 	import nmrformd as NMR
+	
 	import MDAnalysis as mda
 
 Then create a MDAnalysis universe:

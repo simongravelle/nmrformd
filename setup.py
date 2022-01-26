@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(name='nmrformd',
-      version='0.0.0',
+      version='0.0.1',
       description='Calculate NMR relaxation time from molecular dynamics trajectory file',
-      long_description=open('README').read(),
+      long_description=open('PiPY/README.rst').read(),
       url='https://github.com/simongravelle/nmrformd',
       download_url='https://github.com/simongravelle/nmrformd/archive/refs/tags/v0.0.1.tar.gz',
       author='Simon Gravelle',
