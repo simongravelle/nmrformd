@@ -4,6 +4,7 @@ from scipy.interpolate import interp1d
 import numpy as np
 import random
 
+
 def fourier_transform(a):
     """
     Wrapper function that takes the data in real space with
@@ -56,6 +57,7 @@ def correlation_function(a, b=None):
         cor = np.real(res[:len(a)]) / np.array(range(len(a), 0, -1))
     return cor
 
+
 def find_nearest(array, value):
     array = np.asarray(array)
     idx = (np.abs(array - value)).argmin()
@@ -85,6 +87,10 @@ class NMR:
         self.sh21 = None
         self.sh22 = None
         self.gij = None
+        self.T1 = None
+        self.T2 = None
+        self.tau = None
+        self.delta_omega = None
 
         self._define_constants()
         self._read_universe()
@@ -101,7 +107,9 @@ class NMR:
 
         self._calculate_fourier_transform()
         self._calculate_spectrum()
-        self.calculateT1T2()
+        self.calculate_relaxationtime()
+        self.calculate_tau()
+        self.calculate_secondmoment()
 
     def _define_constants(self):
         self.gamma = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
@@ -230,11 +238,36 @@ class NMR:
             self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
             self.R2 = (1/4)*(interpolation_0(self.f[0])+10*interpolation_1(self.f) + interpolation_2(2 * self.f))
 
-    def calculateT1T2(self,f0=None):
-        if f0 == None:
+    def calculate_relaxationtime(self, f0=None):
+        if f0 is None:
             self.T1 = 1/self.R1[0]
             self.T2 = 1/self.R2[0]
         else:
-            idx = find_nearest(self.f,f0)
+            idx = find_nearest(self.f, f0)
             self.T1 = 1 / self.R1[idx]
             self.T2 = 1 / self.R2[idx]
+
+    def calculate_tau(self):
+        """
+        Calculate correlation time using tau = 0.5 J(0) / G(0) and convert in pico second
+        """
+        if self.order == "m0":
+            self.tau = 0.5 * (self.J_0[0] / self.gij[0][0])
+        elif self.order == "m012":
+            self.tau = np.array([0.5*(self.J_0[0] / self.gij[0][0]),
+                                 0.5*(self.J_1[0] / self.gij[0][1]),
+                                 0.5*(self.J_2[0] / self.gij[0][2])])
+        self.tau /= cst.pico
+
+    def calculate_secondmoment(self):
+        """
+        Calculate second moment Delta omega from G(0) = (1/3) (Delta omega)**2
+        and convert in the units of kHz /2 pi
+        """
+        if self.order == "m0":
+            self.delta_omega = np.sqrt(3*self.gij[0][0])
+        elif self.order == "m012":
+            self.delta_omega = np.array([np.sqrt(3*self.gij[0][0]),
+                                         np.sqrt(3*self.gij[0][1]),
+                                         np.sqrt(3*self.gij[0][2])])
+        self.delta_omega /= 1000*2*np.pi
