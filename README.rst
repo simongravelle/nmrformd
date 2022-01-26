@@ -9,6 +9,7 @@ Information
 
 NMRforMD is in development and likely to return errors. Please raise an issue here if you find one. 
 
+.. _`MDAnalysis`: https://www.mdanalysis.org/
 .. inclusion-readme-intro-end
 
 For details, tutorials, and examples, have a look at
@@ -91,4 +92,4 @@ Known issues
 - currently only residue are accepted to differentiate atoms from the same molecule/structure/residue
 
 .. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
-.. _`MDAnalysis`: https://www.mdanalysis.org/
+
