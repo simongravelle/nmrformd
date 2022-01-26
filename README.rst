@@ -21,6 +21,8 @@ Installation
 
 Using pip, type in a terminal:
 
+.. code-block:: bash
+
 	pip install nmrformd
 
 Or, clone this repository on your computer and use pip from the main directory:
