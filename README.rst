@@ -12,8 +12,7 @@ NMRforMD is in development and likely to return errors. Please raise an issue he
 .. _`MDAnalysis`: https://www.mdanalysis.org/
 .. inclusion-readme-intro-end
 
-For details, tutorials, and examples, have a look at
-the `documentation`_. (in construction)
+For details and a tutorial, have a look at the `documentation`_.
 
 Installation
 ------------
