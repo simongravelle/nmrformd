@@ -11,5 +11,5 @@ MNRforMD
    :hidden:
    
    ./documentation_pages/installation
-   ./documentation_pages/howto
    ./documentation_pages/changelog
+   ./documentation_pages/tutorial1
