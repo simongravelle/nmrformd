@@ -2,7 +2,7 @@ import MDAnalysis as mda
 import nmrformd as NMR
 import numpy as np
 
-print(pwd)
+#print(pwd)
 
 #def test_nmr():
 u = mda.Universe("bulk_h2o/topology.tpr", "bulk_h2o/trajectory.xtc")
