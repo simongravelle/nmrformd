@@ -13,8 +13,8 @@ class NMR:
                  target_i,
                  neighbor_j,
                  type_analysis,
-                 number_i,
-                 order):
+                 number_i = 0,
+                 order = "m0"):
         self.u = u
         self.target_i = target_i
         self.neighbor_j = neighbor_j
