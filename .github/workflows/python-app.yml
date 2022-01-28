@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest .
+        pip install flake8 pytest coverage .
         pip install sphinx sphinx-press-theme
         pwd
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -36,4 +36,4 @@ jobs:
     - name: Test with pytest
       run: |
         cd tests
-        pytest mytest.py
+        coverage run -m pytest mytest.py
