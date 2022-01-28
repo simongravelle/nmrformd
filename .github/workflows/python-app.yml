@@ -38,3 +38,4 @@ jobs:
         cd tests
         coverage run -m pytest mytest.py
         coverage report -m
+        coverage html
