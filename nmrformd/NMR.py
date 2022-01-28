@@ -4,7 +4,7 @@ from scipy.interpolate import interp1d
 import numpy as np
 import random
 
-from utilities import fourier_transform, correlation_function, find_nearest
+from .utilities import fourier_transform, correlation_function, find_nearest
 
 
 class NMR:
