@@ -9,9 +9,7 @@ def test_nmr():
     gi = "type HW"
     gj = "type HW"
     t = "full"
-    nmr_result = NMR.NMR(u, gi, gj, t, 1, "m012")
+    N = 5
+    nmr_result = NMR.NMR(u, gi, gj, t, number_i=N)
 
     print(nmr_result.delta_omega)
-
-
-    # assert np.isclose(1/nmr_result.R1[0], 1/nmr_result.R2[0], rtol=1e-4, atol=0)
