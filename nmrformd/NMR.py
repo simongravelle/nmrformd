@@ -1,3 +1,5 @@
+ #!/usr/bin/env python3
+
 from scipy import constants as cst
 from scipy.special import sph_harm
 from scipy.interpolate import interp1d
