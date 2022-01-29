@@ -6,6 +6,8 @@ In this tutorial, the NMR relaxation time T1 of water is going to be measured us
 water molecules simulated with `GROMACS`_. If you want to generate longer trajectory files, the 
 input files are available in this `repository`_. 
 
+
+
 File preparation
 ################
 
@@ -85,16 +87,16 @@ Let us choose full:
 	analysis = "full"
 
 Choose a number n_i of atom of the group i to consider for the calculation. These atoms will be chosen 
-randomly from the group group_i. Here let us use 400 (i.e. all the atoms, as the statistic is already 
+randomly from the group group_i. Here let us use 0 (when 0 is selected, all the atoms of the group are considered which is better here since the statistic is already 
 very small):
 
 .. code-block:: python3
 
-	n_i = 400
+	n_i = 0
 
-Finally, choose either m0 or m012 for calculation using only the spherical harmonic m=0 (enough for 
+Finally, choose either "m0" or "m012" for calculation using only the spherical harmonic m=0 (enough for 
 isotropic liquid) or all three harmonic m=0, 1 and 2 (can be necessary for more complex system, such 
-as water confined in a slit). Here, our system being isotropic, let us choose m0.
+as water confined in a slit). Here, our system being isotropic, let us choose "m0".
 
 Then, run NMRforMD:
 
@@ -121,12 +123,14 @@ Which returns:
 
 .. code-block:: python3
 
-	NMR relaxation time T1 = 2.48 s
-	NMR relaxation time  T2 = 2.48 s
-	Correlation time = 3.93 ps
+	NMR relaxation time T1 = 2.58 s
+	NMR relaxation time  T2 = 2.58 s
+	Correlation time = 3.75 ps
+
 	
-The agreement with experiment is not ideal (experiments give T1 ~ 3s), which is due here to the too short 
-simulation time, as well as too big of a timestep. 
+The agreement with experiment is not perfect here (experiments give T1 ~ 3s) because of the short 
+simulation time. Full 1/T1 spectrum can be extracted from 1/nmr_result.R1, and the 
+frequency range as nmr_result.f, see the image at the top of this page.
 
 .. _`this paper`: https://www.sciencedirect.com/science/article/abs/pii/S1090780717300319
 .. _`MDAnalysis`: https://www.mdanalysis.org
