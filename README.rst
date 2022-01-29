@@ -14,6 +14,9 @@ NMRforMD is in development and likely to return errors. Please raise an issue he
 
 For details and a tutorial, have a look at the `documentation`_.
 
+.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/water_and_T1.png
+	:width: 100%
+
 Installation
 ------------
 
