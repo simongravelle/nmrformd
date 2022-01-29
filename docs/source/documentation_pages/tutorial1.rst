@@ -7,6 +7,7 @@ water molecules simulated with `GROMACS`_. If you want to generate longer trajec
 input files are available in this `repository`_. 
 
 .. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/water_and_T1.png
+	:width: 100%
 
 File preparation
 ################
