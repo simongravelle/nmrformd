@@ -104,6 +104,7 @@
 @map color 13 to (103, 7, 72), "maroon"
 @map color 14 to (64, 224, 208), "turquoise"
 @map color 15 to (0, 139, 0), "green4"
+@map color 16 to (43, 201, 129), "green_spinx"
 @reference date 0
 @date wrap off
 @date wrap year 1950
@@ -123,7 +124,7 @@
 @timestamp rot 0
 @timestamp font 0
 @timestamp char size 1.000000
-@timestamp def "Sat Jan 29 11:15:05 2022"
+@timestamp def "Sat Jan 29 11:29:01 2022"
 @r0 off
 @link r0 to g0
 @r0 type above
@@ -170,7 +171,7 @@
 @g0 fixedpoint format general general
 @g0 fixedpoint prec 6, 6
 @with g0
-@    world 1000, 1, 1000000, 100
+@    world 1000, 0.6, 1000000, 200
 @    stack world 0, 0, 0, 0
 @    znorm 1
 @    view 0.150000, 0.150000, 0.650000, 0.650000
@@ -317,9 +318,9 @@
 @    s0 type xy
 @    s0 symbol 1
 @    s0 symbol size 1.000000
-@    s0 symbol color 4
+@    s0 symbol color 16
 @    s0 symbol pattern 1
-@    s0 symbol fill color 4
+@    s0 symbol fill color 16
 @    s0 symbol fill pattern 1
 @    s0 symbol linewidth 1.0
 @    s0 symbol linestyle 1
@@ -329,7 +330,7 @@
 @    s0 line type 1
 @    s0 line linestyle 0
 @    s0 line linewidth 1.0
-@    s0 line color 4
+@    s0 line color 16
 @    s0 line pattern 1
 @    s0 baseline type 0
 @    s0 baseline off
@@ -351,7 +352,7 @@
 @    s0 avalue offset 0.000000 , 0.000000
 @    s0 errorbar on
 @    s0 errorbar place both
-@    s0 errorbar color 4
+@    s0 errorbar color 16
 @    s0 errorbar pattern 1
 @    s0 errorbar size 1.000000
 @    s0 errorbar linewidth 1.0
