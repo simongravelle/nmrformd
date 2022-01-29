@@ -17,7 +17,7 @@ For details and a tutorial, have a look at the `documentation`_.
 .. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/water_and_T1.png
 	:width: 100%
 	
-	This is the caption of the figure (a simple paragraph).
+Left: bulk water molecule. Right: NMR relaxation time T1 of bulk water caclulated with NMRforMD.
 
 Installation
 ------------
