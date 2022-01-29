@@ -1,4 +1,4 @@
-.. image:: https://github.com/simongravelle/nmrformd/blob/main/docs/source/images/NMRforMD_READMEc.png
+.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/NMRforMD_READMEc.png
 
 .. inclusion-readme-intro-start
 
