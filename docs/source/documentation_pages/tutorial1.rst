@@ -6,7 +6,7 @@ In this tutorial, the NMR relaxation time T1 of water is going to be measured us
 water molecules simulated with `GROMACS`_. If you want to generate longer trajectory files, the 
 input files are available in this `repository`_. 
 
-
+.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/water_and_T1.png
 
 File preparation
 ################
