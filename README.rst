@@ -7,10 +7,12 @@ NMRforMD is a python script to calculate NMR relaxation times from molecular dyn
 Information
 -----------
 
-NMRforMD is in development and likely to return errors. Please raise an issue here if you find one. For details and a tutorial, have a look at the `documentation`_.
+NMRforMD is in development and likely to return errors. Please raise an issue here if you find one.
 
 .. _`MDAnalysis`: https://www.mdanalysis.org/
 .. inclusion-readme-intro-end
+
+ For details and a tutorial, have a look at the `documentation`_.
 	
 Installation
 ------------
@@ -46,8 +48,8 @@ Known issues
 ------------
 
 - for very large trajectory file, the code requires a lot of memory
-- currently only residue are accepted to differentiate atoms from the same molecule/structure/residue
-- the code has mostly be tested with GROMACS trajectory file
+- currently only residues have been tested
+- the code has mostly been tested with GROMACS trajectory file
 
 .. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
 
