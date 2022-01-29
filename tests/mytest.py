@@ -64,15 +64,17 @@ def test_nmr():
     analysis_type = "full"
     number_i = 0
     order = "m012"
+    f0 = 10000
     nmr_result = NMR.NMR(u, group_i,
-                         group_j, analysis_type,
-                         number_i, order)
+                         group_j, analysis_type, 
+                         number_i, order, f0)
     T1 = nmr_result.T1
     T2 = nmr_result.T2
     Dw = nmr_result.delta_omega
     tau = nmr_result.tau
 
-    assert np.isclose(T1, 10.2213, rtol=1e-4, atol=0)
-    assert np.isclose(T2, 16.1024, rtol=1e-4, atol=0)
+    assert np.isclose(T1, 13.7666, rtol=1e-4, atol=0)
+    assert np.isclose(T2, 9.27393, rtol=1e-4, atol=0)
     assert np.isclose(Dw[0], 22.92421, rtol=1e-4, atol=0)
     assert np.isclose(tau[0], 6.891118, rtol=1e-4, atol=0)
+    
