@@ -1,3 +1,5 @@
+ #!/usr/bin/env python3
+
 from scipy import constants as cst
 import numpy as np
 
