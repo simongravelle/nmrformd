@@ -130,7 +130,7 @@ Which returns:
 
 	
 The agreement with experiment is not perfect here (experiments give T1 ~ 3s) because of the short 
-simulation time. Full 1/T1 spectrum can be extracted from 1/nmr_result.R1, and the 
+simulation time. Full relaxation time T1 spectrum can be extracted from 1/nmr_result.R1, and the 
 frequency range as nmr_result.f, see the image at the top of this page.
 
 .. _`this paper`: https://www.sciencedirect.com/science/article/abs/pii/S1090780717300319
