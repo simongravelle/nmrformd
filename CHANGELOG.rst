@@ -11,8 +11,23 @@ The rules for NMRforMD' CHANGELOG file:
 
 .. inclusion-marker-changelog-start
 
+v0.0.3 (2022/01/29)
+-------------------
+
+Simon Gravelle
+
+- added coverage for pytest
+
+v0.0.2 (2022/01/28)
+-------------------
+
+Simon Gravelle
+
+- created separate py files
+- improved pytest
+
 v0.0.1 (2022/01/26)
------------------
+-------------------
 
 Simon Gravelle
 
@@ -20,7 +35,7 @@ Simon Gravelle
 - added NMRforMD to pypi
 
 v0.0.0 (2022/01/20)
------------------
+-------------------
 
 Simon Gravelle
 
