@@ -16,7 +16,8 @@ class NMR:
                  neighbor_j,
                  type_analysis,
                  number_i = 0,
-                 order = "m0"):
+                 order = "m0",
+                 f0 = None):
         self.u = u
         self.target_i = target_i
         self.neighbor_j = neighbor_j
@@ -52,7 +53,8 @@ class NMR:
 
         self._calculate_fourier_transform()
         self._calculate_spectrum()
-        self.calculate_relaxationtime()
+        self.f0 = f0
+        self.calculate_relaxationtime(self.f0)
         self.calculate_tau()
         self.calculate_secondmoment()
 
