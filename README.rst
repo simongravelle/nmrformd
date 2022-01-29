@@ -7,12 +7,10 @@ NMRforMD is a python script to calculate NMR relaxation times from molecular dyn
 Information
 -----------
 
-NMRforMD is in development and likely to return errors. Please raise an issue here if you find one. 
+NMRforMD is in development and likely to return errors. Please raise an issue here if you find one. For details and a tutorial, have a look at the `documentation`_.
 
 .. _`MDAnalysis`: https://www.mdanalysis.org/
 .. inclusion-readme-intro-end
-
-For details and a tutorial, have a look at the `documentation`_.
 	
 Installation
 ------------
@@ -34,6 +32,13 @@ Or, clone this repository on your computer and use pip from the main directory:
 	cd nmrformd/
 
 	pip install .
+	
+You can run the test using pytest:
+	
+.. code-block:: bash	
+	
+	cd tests
+	pytest mytest.py
 
 .. inclusion-readme-installation-end
 
