@@ -19,11 +19,13 @@ class NMR:
                  order = "m0",
                  f0 = None):
 
-        '''
+        ''' Calculate NMR relaxation time from MDAnalysis universe
 
         Parameters
         ----------
-        u
+
+        u : universe
+            MDAnalysis universe
         target_i
         neighbor_j
         type_analysis
