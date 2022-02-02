@@ -18,6 +18,20 @@ class NMR:
                  number_i = 0,
                  order = "m0",
                  f0 = None):
+
+        '''
+
+        Parameters
+        ----------
+        u
+        target_i
+        neighbor_j
+        type_analysis
+        number_i
+        order
+        f0
+        '''
+
         self.u = u
         self.target_i = target_i
         self.neighbor_j = neighbor_j
@@ -59,6 +73,12 @@ class NMR:
         self.calculate_secondmoment()
 
     def _define_constants(self):
+        '''
+
+        Returns
+        -------
+
+        '''
         self.gamma = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
         self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.gamma**4  # m6/s2
 
