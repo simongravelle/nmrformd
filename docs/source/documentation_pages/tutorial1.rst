@@ -135,7 +135,7 @@ frequency range as nmr_result.f, see the image at the top of this page.
 
 .. _`this paper`: https://www.sciencedirect.com/science/article/abs/pii/S1090780717300319
 .. _`MDAnalysis`: https://www.mdanalysis.org
-.. _`repository`: https://www.mdanalysis.org
+.. _`repository`: https://github.com/simongravelle/nmrformd/tree/main/tests
 .. _`GROMACS` : https://www.gromacs.org/
 
 .. toctree::
