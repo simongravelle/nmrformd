@@ -10,7 +10,7 @@ input files are available in this `repository`_.
 	:width: 100%
 
 File preparation
-################
+----------------
 
 Clone the NMRforMD repository, and go to the tests/bulk_h2o/ folder:
 
@@ -20,7 +20,7 @@ Clone the NMRforMD repository, and go to the tests/bulk_h2o/ folder:
 	cd tests/bulk_h2o/
 	
 Python script
-#############
+-------------
 
 Then, in a Python script, import NMRforMD, numpy, and MDAnalysis:
 
@@ -106,7 +106,7 @@ Then, run NMRforMD:
 	nmr_result = NMR.NMR(u, group_i, group_j, analysis, n_i, "m0")
 
 Data analysis
-#############
+-------------
 
 Let us extract a few quantity from nmr_result, such as the NMR relaxation times T1 and T2 (which are
 expected to be equal for water), and the correlation time tau:
