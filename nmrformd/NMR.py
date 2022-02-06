@@ -218,7 +218,10 @@ class NMR:
 
     def calculate_tau(self):
         """
-        Calculate correlation time using tau = 0.5 J(0) / G(0) and convert in pico second
+        Calculate correlation time using tau = 0.5 J(0) / G(0).
+
+        The unit are in picosecond. If only the 0th m order is used, one value for tau
+        is returned, if all three m orders are used, three values for tau are used.
         """
         if self.order == "m0":
             self.tau = 0.5 * (self.J_0[0] / self.gij[0][0])
@@ -230,8 +233,12 @@ class NMR:
 
     def calculate_secondmoment(self):
         """
-        Calculate second moment Delta omega from G(0) = (1/3) (Delta omega)**2
-        and convert in the units of kHz /2 pi
+        Calculate second moment Delta omega.
+
+        The unit of Delta omega are kHz /2 pi. The formula is G(0) = (1/3)
+        (Delta omega)**2 where G(0) is the correlation function
+        at time 0. If only the 0th m order is used, one value for Delta omega
+        is returned, if all three m orders are used, three values for Delta omega are used.
         """
         if self.order == "m0":
             self.delta_omega = np.sqrt(3*self.gij[0][0])
