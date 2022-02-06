@@ -12,4 +12,5 @@ MNRforMD
    
    ./documentation_pages/installation
    ./documentation_pages/changelog
-   ./documentation_pages/tutorial1
+   ./documentation_pages/tutorial1 
+   ./modules/NMR
