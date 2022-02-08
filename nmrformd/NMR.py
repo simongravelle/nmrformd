@@ -81,8 +81,8 @@ class NMR:
         -------
 
         '''
-        self.gamma = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
-        self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.gamma**4  # m6/s2
+        self.GAMMA = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
+        self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.GAMMA**4  # m6/s2
 
     def _read_universe(self):
         self.group_target_i = self.u.select_atoms(self.target_i)
