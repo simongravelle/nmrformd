@@ -1,5 +1,5 @@
-Modules and functions
-=====================
+NMR module
+==========
 
 .. automodule:: nmrformd.NMR
     :members:
