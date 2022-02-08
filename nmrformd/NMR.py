@@ -10,6 +10,29 @@ from .utilities import fourier_transform, correlation_function, find_nearest
 
 
 class NMR:
+    """Calculate NMR relaxation time from MDAnalysis universe
+
+    Parameters
+    ----------
+
+    u : MDAnalysis.core.universe.Universe
+        MDAnalysis universe containing all the information describing
+        the molecular dynamics system.
+    target_i : AtomGroup
+        Target group of the atoms ``i`` for the NMR calculation.
+    neighbor_j : AtomGroup
+        Neighbor group of the atoms ``j`` for the NMR calculation.
+    type_analysis : str
+        Type of analysis, which can be ``full``, ``intra_molecular``, or ``inter_molecular``.
+    number_i : int, default 0
+        Number of atom of the group ``target_i`` to consider. If ``number = 0``, all atoms
+        are considered.
+    order : str, default ``m0``
+        Order of the analysis, which can be ``m0`` or ``m012``.
+    f0 : int, default ``None``
+        Frequency for the calculation of ``T1`` and ``T2``.  If ``None``, ``f = 0`` is used.
+    """
+
     def __init__(self,
                  u,
                  target_i,
@@ -18,21 +41,6 @@ class NMR:
                  number_i = 0,
                  order = "m0",
                  f0 = None):
-
-        ''' Calculate NMR relaxation time from MDAnalysis universe
-
-        Parameters
-        ----------
-
-        u : universe
-            MDAnalysis universe
-        target_i
-        neighbor_j
-        type_analysis
-        number_i
-        order
-        f0
-        '''
 
         self.u = u
         self.target_i = target_i
@@ -70,17 +78,11 @@ class NMR:
         self._calculate_fourier_transform()
         self._calculate_spectrum()
         self.f0 = f0
-        self.calculate_relaxationtime(self.f0)
-        self.calculate_tau()
-        self.calculate_secondmoment()
+        self._calculate_relaxationtime(self.f0)
+        self._calculate_tau()
+        self._calculate_secondmoment()
 
     def _define_constants(self):
-        '''
-
-        Returns
-        -------
-
-        '''
         self.GAMMA = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
         self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.GAMMA**4  # m6/s2
 
@@ -139,9 +141,9 @@ class NMR:
             self.position_i = self.group_i.atoms.positions
             self.position_j = self.group_j.atoms.positions
             self.box = self.u.dimensions
-            self.vector_ij()
-            self.cartesian_to_spherical()
-            self.spherical_harmonic()
+            self._vector_ij()
+            self._cartesian_to_spherical()
+            self._spherical_harmonic()
             if self.order == 'm0':
                 self.data[:, cpt] = self.sh20
             elif self.order == 'm012':
@@ -176,16 +178,16 @@ class NMR:
                 elif m == 2:
                     self.J_2 = np.real(fij.T[1])
 
-    def vector_ij(self):
+    def _vector_ij(self):
         """calculate 3D vector between position_i and position_j assuming pbc"""
         self.rij = (np.remainder(self.position_i - self.position_j + self.box[:3]/2., self.box[:3]) - self.box[:3]/2.).T
 
-    def cartesian_to_spherical(self):
+    def _cartesian_to_spherical(self):
         self.r = np.sqrt(self.rij[0]**2 + self.rij[1]**2 + self.rij[2]**2)
         self.theta = np.arctan2(np.sqrt(self.rij[0]**2 + self.rij[1]**2), self.rij[2])
         self.phi = np.arctan2(self.rij[1], self.rij[0])
 
-    def spherical_harmonic(self):
+    def _spherical_harmonic(self):
         """evaluate harmonic functions from rij vector
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
@@ -207,7 +209,7 @@ class NMR:
             self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
             self.R2 = (1/4)*(interpolation_0(self.f[0])+10*interpolation_1(self.f) + interpolation_2(2 * self.f))
 
-    def calculate_relaxationtime(self, f0=None):
+    def _calculate_relaxationtime(self, f0=None):
         if f0 is None:
             self.T1 = 1/self.R1[0]
             self.T2 = 1/self.R2[0]
@@ -216,7 +218,7 @@ class NMR:
             self.T1 = 1 / self.R1[idx]
             self.T2 = 1 / self.R2[idx]
 
-    def calculate_tau(self):
+    def _calculate_tau(self):
         """
         Calculate correlation time using tau = 0.5 J(0) / G(0).
 
@@ -231,7 +233,7 @@ class NMR:
                                  0.5*(self.J_2[0] / self.gij[0][2])])
         self.tau /= cst.pico
 
-    def calculate_secondmoment(self):
+    def _calculate_secondmoment(self):
         """
         Calculate second moment Delta omega.
 
