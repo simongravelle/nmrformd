@@ -134,7 +134,7 @@ class NMR:
         elif self.order == "m012":
             self.data = np.zeros((3, self.u.trajectory.n_frames, self.group_j.atoms.n_atoms), dtype=np.complex64)
             self.gij = np.zeros((3, self.u.trajectory.n_frames), dtype=np.float32)
-        self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.u.trajectory.dt, 4)
+        self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.u.trajectory.dt/10, 4)
 
     def _evaluate_correlation_ij(self):
         for cpt, ts in enumerate(self.u.trajectory):
