@@ -162,6 +162,7 @@ class NMR:
     def _calculate_fourier_transform(self):
         self.gij /= self.cpt_i+1
         self.gij *= self.K / cst.angstrom ** 6
+        self.gij *= 2  # 2 hydrogens per carbon atoms
         if self.order == 'm0':
             fij = fourier_transform(np.vstack([self.t, self.gij]).T)
             self.f = np.real(fij.T[0])
