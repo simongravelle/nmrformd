@@ -38,6 +38,8 @@ class NMR:
                  target_i,
                  neighbor_j,
                  type_analysis,
+                 actual_dt,
+                 hydrogen_per_atom,
                  number_i = 0,
                  order = "m0",
                  f0 = None):
@@ -61,6 +63,8 @@ class NMR:
         self.T2 = None
         self.tau = None
         self.delta_omega = None
+        self.actual_dt = actual_dt
+        self.hydrogen_per_atom = hydrogen_per_atom
 
         self._define_constants()
         self._read_universe()
@@ -134,7 +138,7 @@ class NMR:
         elif self.order == "m012":
             self.data = np.zeros((3, self.u.trajectory.n_frames, self.group_j.atoms.n_atoms), dtype=np.complex64)
             self.gij = np.zeros((3, self.u.trajectory.n_frames), dtype=np.float32)
-        self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.u.trajectory.dt/10, 4)
+        self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.actual_dt, 4)
 
     def _evaluate_correlation_ij(self):
         for cpt, ts in enumerate(self.u.trajectory):
@@ -162,7 +166,7 @@ class NMR:
     def _calculate_fourier_transform(self):
         self.gij /= self.cpt_i+1
         self.gij *= self.K / cst.angstrom ** 6
-        self.gij *= 2  # 2 hydrogens per carbon atoms
+        self.gij *= self.hydrogen_per_atom
         if self.order == 'm0':
             fij = fourier_transform(np.vstack([self.t, self.gij]).T)
             self.f = np.real(fij.T[0])
