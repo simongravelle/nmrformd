@@ -10,8 +10,8 @@ The code is available on `Github`_.
 .. _`Github`: https://github.com/simongravelle/nmrformd
 
 .. include:: ../../README.rst
-.. inclusion-basic-intro-start
-.. inclusion-basic-intro-end
+   :start-after: inclusion-basic-intro-start
+   :end-before: inclusion-basic-intro-end
 
 .. toctree::
    :maxdepth: 2
