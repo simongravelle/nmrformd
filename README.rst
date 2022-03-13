@@ -43,6 +43,7 @@ You can run the test using pytest:
 	pytest mytest.py
 
 .. inclusion-readme-installation-end
+.. inclusion-basic-intro-start
 
 Basic example
 -------------
@@ -58,6 +59,8 @@ a molecular dynamics. See the tutorial for more information.
 	nmr_result = NMR.NMR(u, "type H", "type H", "full", 0, "m0")
 
 The NMR relaxation time T1 is given by ``nmr_result.T1``.
+
+.. inclusion-basic-intro-end
 
 Known issues
 ------------
