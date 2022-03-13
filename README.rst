@@ -56,9 +56,9 @@ a molecular dynamics simulations. See the `tutorial`_ for more information.
 .. code-block:: python3
 
 	import MDAnalysis as mda
-	import nmrformd as NMR
+	import nmrformd
 	u = mda.Universe("topology.tpr", "trajectory.xtc")
-	nmr_result = NMR.NMR(u, "type H", "type H", "full", 0, "m0")
+	nmr_result = nmrformd.NMR(u, "type H", "type H", "full", 0, "m0")
 
 The NMR relaxation time T1 is given by ``nmr_result.T1``.
 
