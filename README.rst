@@ -44,6 +44,21 @@ You can run the test using pytest:
 
 .. inclusion-readme-installation-end
 
+Basic example
+-------------
+
+This is an example showing how to use NMRforMD to measure NMR signal from 
+a molecular dynamics. See the tutorial for more information.
+
+.. code-block:: python3
+
+	import MDAnalysis as mda
+	import nmrformd as NMR
+	u = mda.Universe("topology.tpr", "trajectory.xtc")
+	nmr_result = NMR.NMR(u, "type H", "type H", "full", 0, "m0")
+
+The NMR relaxation time T1 is given by ``nmr_result.T1``.
+
 Known issues
 ------------
 

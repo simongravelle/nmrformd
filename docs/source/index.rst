@@ -5,7 +5,7 @@ MNRforMD
    :start-after: inclusion-readme-intro-start
    :end-before: inclusion-readme-intro-end
    
-The code is available on `Github`_
+The code is available on `Github`_.
    
 .. _`Github`: https://github.com/simongravelle/nmrformd
 
