@@ -49,7 +49,9 @@ Basic example
 -------------
 
 This is an example showing how to use NMRforMD to measure NMR signal from 
-a molecular dynamics. See the tutorial for more information.
+a molecular dynamics simulations. See the `tutorial`_ for more information.
+
+.. _`tutorial`: https://nmrformd.readthedocs.io/en/latest/documentation_pages/tutorial1.html
 
 .. code-block:: python3
 
