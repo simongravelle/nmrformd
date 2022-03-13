@@ -1,6 +1,10 @@
 MNRforMD
 ========
 
+.. image:: images/NMRforMD.png
+   :align: right
+   :width: 100
+
 .. include:: ../../README.rst
    :start-after: inclusion-readme-intro-start
    :end-before: inclusion-readme-intro-end
