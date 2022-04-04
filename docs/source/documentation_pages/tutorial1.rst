@@ -34,7 +34,7 @@ Create a MDAnalysis universe:
 
 .. code-block:: python3
 
-	u = mda.Universe("topology.tpr","trajectory.xtc")
+	u = mda.Universe("topology.tpr", "trajectory.xtc")
 
 Let us extract a few information from the universe, just to know what we are dealing with:
 
