@@ -39,7 +39,7 @@ class NMR:
                  neighbor_j,
                  type_analysis,
                  actual_dt = 0,
-                 hydrogen_per_atom = 1,
+                 hydrogen_per_atom = 1.0,
                  number_i = 0,
                  order = "m0",
                  f0 = None):
