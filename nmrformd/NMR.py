@@ -38,8 +38,8 @@ class NMR:
                  target_i,
                  neighbor_j,
                  type_analysis,
-                 actual_dt,
-                 hydrogen_per_atom,
+                 actual_dt = 0,
+                 hydrogen_per_atom = 1,
                  number_i = 0,
                  order = "m0",
                  f0 = None):
@@ -50,6 +50,8 @@ class NMR:
         self.type_analysis = type_analysis
         self.number_i = number_i
         self.order = order
+        self.actual_dt = actual_dt
+        self.hydrogen_per_atom = hydrogen_per_atom
         self.data = None
         self.rij = None
         self.r = None
@@ -63,8 +65,6 @@ class NMR:
         self.T2 = None
         self.tau = None
         self.delta_omega = None
-        self.actual_dt = actual_dt
-        self.hydrogen_per_atom = hydrogen_per_atom
 
         self._define_constants()
         self._read_universe()
@@ -100,7 +100,7 @@ class NMR:
         if self.number_i == 0:
             self.index_i = np.array(self.group_target_i.atoms.indices)
         elif self.number_i > self.group_target_i.atoms.n_atoms:
-            # print('number_i larger than the number of atom in group target i, all atoms selected')
+            print('number_i larger than the number of atom in group target i, all atoms selected')
             self.index_i = np.array(self.group_target_i.atoms.indices)
         else:
             self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
@@ -138,7 +138,10 @@ class NMR:
         elif self.order == "m012":
             self.data = np.zeros((3, self.u.trajectory.n_frames, self.group_j.atoms.n_atoms), dtype=np.complex64)
             self.gij = np.zeros((3, self.u.trajectory.n_frames), dtype=np.float32)
-        self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.actual_dt, 4)
+        if self.actual_dt == 0:
+            self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.u.trajectory.dt, 4)
+        else :
+            self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.actual_dt, 4)
 
     def _evaluate_correlation_ij(self):
         for cpt, ts in enumerate(self.u.trajectory):
