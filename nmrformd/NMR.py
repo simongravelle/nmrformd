@@ -100,7 +100,7 @@ class NMR:
         if self.number_i == 0:
             self.index_i = np.array(self.group_target_i.atoms.indices)
         elif self.number_i > self.group_target_i.atoms.n_atoms:
-            print('number_i larger than the number of atom in group target i, all atoms selected')
+            # print('number_i larger than the number of atom in group target i, all atoms selected')
             self.index_i = np.array(self.group_target_i.atoms.indices)
         else:
             self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
