@@ -40,7 +40,10 @@ class NMR:
                  type_analysis,
                  number_i = 0,
                  order = "m0",
-                 f0 = None):
+                 f0 = None,
+                 actual_dt = 0,
+                 hydrogen_per_atom = 1.0
+                 ):
 
         self.u = u
         self.target_i = target_i
@@ -48,6 +51,8 @@ class NMR:
         self.type_analysis = type_analysis
         self.number_i = number_i
         self.order = order
+        self.actual_dt = actual_dt
+        self.hydrogen_per_atom = hydrogen_per_atom
         self.data = None
         self.rij = None
         self.r = None
@@ -134,7 +139,10 @@ class NMR:
         elif self.order == "m012":
             self.data = np.zeros((3, self.u.trajectory.n_frames, self.group_j.atoms.n_atoms), dtype=np.complex64)
             self.gij = np.zeros((3, self.u.trajectory.n_frames), dtype=np.float32)
-        self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.u.trajectory.dt, 4)
+        if self.actual_dt == 0:
+            self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.u.trajectory.dt, 4)
+        else :
+            self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.actual_dt, 4)
 
     def _evaluate_correlation_ij(self):
         for cpt, ts in enumerate(self.u.trajectory):
@@ -162,6 +170,7 @@ class NMR:
     def _calculate_fourier_transform(self):
         self.gij /= self.cpt_i+1
         self.gij *= self.K / cst.angstrom ** 6
+        self.gij *= np.float32(self.hydrogen_per_atom)
         if self.order == 'm0':
             fij = fourier_transform(np.vstack([self.t, self.gij]).T)
             self.f = np.real(fij.T[0])
