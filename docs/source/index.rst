@@ -1,9 +1,21 @@
 MNRforMD
 ========
 
+.. image:: images/NMRforMD.png
+   :align: right
+   :width: 100
+
 .. include:: ../../README.rst
    :start-after: inclusion-readme-intro-start
    :end-before: inclusion-readme-intro-end
+   
+The code is available on `Github`_.
+   
+.. _`Github`: https://github.com/simongravelle/nmrformd
+
+.. include:: ../../README.rst
+   :start-after: inclusion-basic-intro-start
+   :end-before: inclusion-basic-intro-end
 
 .. toctree::
    :maxdepth: 2
