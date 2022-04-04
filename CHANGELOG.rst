@@ -11,6 +11,13 @@ The rules for NMRforMD' CHANGELOG file:
 
 .. inclusion-marker-changelog-start
 
+v0.0.7 (2022/04/04)
+-------------------
+
+Simon Gravelle
+
+- added posibility to deal with coarse grained model
+
 v0.0.3 (2022/01/29)
 -------------------
 
