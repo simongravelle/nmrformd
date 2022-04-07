@@ -215,6 +215,8 @@ class NMR:
             interpolation_0 = interp1d(self.f, self.J_0, fill_value="extrapolate")
             interpolation_1 = interp1d(self.f, self.J_1, fill_value="extrapolate")
             interpolation_2 = interp1d(self.f, self.J_2, fill_value="extrapolate")
+            # correction as Grivet does not use the same expression for K as Singer...
+            # to be improved 
             self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
             self.R2 = (1/4)*(interpolation_0(self.f[0])+10*interpolation_1(self.f) + interpolation_2(2 * self.f))
 
