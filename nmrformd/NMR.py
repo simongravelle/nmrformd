@@ -217,7 +217,9 @@ class NMR:
             interpolation_2 = interp1d(self.f, self.J_2, fill_value="extrapolate")
             # correction as Grivet does not use the same expression for K as Singer...
             # to be improved 
-            self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
+            # seems to be a factor 1/3 missing
+            self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)            
+            # and an additional 3/2 factor probably missing for R2
             self.R2 = (1/4)*(interpolation_0(self.f[0])+10*interpolation_1(self.f) + interpolation_2(2 * self.f))
 
     def _calculate_relaxationtime(self, f0=None):
