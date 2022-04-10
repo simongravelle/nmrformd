@@ -1,5 +1,5 @@
 # MDAnalysis stuff
-**/trajectory.xtc_offsets.npz
+**/*xtc_offsets.npz
 
 # pycharm virtual environment stuff:
 venv
