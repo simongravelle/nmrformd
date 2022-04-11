@@ -18,10 +18,10 @@ def test_nmr():
     Dw = nmr_result.delta_omega
     tau = nmr_result.tau
 
-    assert np.isclose(T1, 1.029287, rtol=1e-4, atol=0)
-    assert np.isclose(T2, 1.029287, rtol=1e-4, atol=0)
-    assert np.isclose(Dw, 23.2686, rtol=1e-4, atol=0)
-    assert np.isclose(tau, 13.6358, rtol=1e-4, atol=0)
+    assert np.isclose(T1, 1.029287074574358, rtol=1e-4, atol=0)
+    assert np.isclose(T2, 1.029287074574358, rtol=1e-4, atol=0)
+    assert np.isclose(Dw, 56.996441578600304, rtol=1e-4, atol=0)
+    assert np.isclose(tau, 13.635804446316115, rtol=1e-4, atol=0)
 
     group_i = "type HW and index 0:20"
     group_j = "type HW and index 0:20"
@@ -38,7 +38,7 @@ def test_nmr():
 
     assert np.isclose(T1, 1.0305, rtol=1e-4, atol=0)
     assert np.isclose(T2, 1.0305, rtol=1e-4, atol=0)
-    assert np.isclose(Dw, 23.1847, rtol=1e-4, atol=0)
+    assert np.isclose(Dw, 56.7908, rtol=1e-4, atol=0)
     assert np.isclose(tau, 13.7180, rtol=1e-4, atol=0)
 
     group_i = "type HW and index 0:40"
@@ -56,7 +56,7 @@ def test_nmr():
 
     assert np.isclose(T1, 400.4619, rtol=1e-4, atol=0)
     assert np.isclose(T2, 400.4619, rtol=1e-4, atol=0)
-    assert np.isclose(Dw, 2.44846, rtol=1e-4, atol=0)
+    assert np.isclose(Dw, 5.99748, rtol=1e-4, atol=0)
     assert np.isclose(tau, 3.16528, rtol=1e-4, atol=0)
 
     group_i = "type HW and index 0:40"
@@ -73,8 +73,7 @@ def test_nmr():
     Dw = nmr_result.delta_omega
     tau = nmr_result.tau
 
-    assert np.isclose(T1, 13.7666, rtol=1e-4, atol=0)
-    assert np.isclose(T2, 9.27393, rtol=1e-4, atol=0)
-    assert np.isclose(Dw[0], 22.92421, rtol=1e-4, atol=0)
+    assert np.isclose(T1, 4.931728, rtol=1e-4, atol=0)
+    assert np.isclose(T2, 3.853544, rtol=1e-4, atol=0)
+    assert np.isclose(Dw[0], 56.152647, rtol=1e-4, atol=0)
     assert np.isclose(tau[0], 6.891118, rtol=1e-4, atol=0)
-    

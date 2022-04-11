@@ -42,7 +42,8 @@ class NMR:
                  order = "m0",
                  f0 = None,
                  actual_dt = 0,
-                 hydrogen_per_atom = 1.0
+                 hydrogen_per_atom = 1.0,
+                 spin = 1/2
                  ):
 
         self.u = u
@@ -66,6 +67,7 @@ class NMR:
         self.T2 = None
         self.tau = None
         self.delta_omega = None
+        self.spin = spin
 
         self._define_constants()
         self._read_universe()
@@ -89,7 +91,9 @@ class NMR:
 
     def _define_constants(self):
         self.GAMMA = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
-        self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.GAMMA**4  # m6/s2
+        #self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.GAMMA**4  # m6/s2
+        self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
+                 * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)  # m6/s2
 
     def _read_universe(self):
         self.group_target_i = self.u.select_atoms(self.target_i)
@@ -201,25 +205,20 @@ class NMR:
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
-        self.sh20 = sph_harm(0, 2, self.phi, self.theta) / np.power(self.r, 3)
+        self.sh20 = np.sqrt(16 * np.pi/ 5) * sph_harm(0, 2, self.phi, self.theta) / np.power(self.r, 3)
         if self.order == 'm012':
-            self.sh21 = sph_harm(1, 2, self.phi, self.theta) / np.power(self.r, 3)
-            self.sh22 = sph_harm(2, 2, self.phi, self.theta) / np.power(self.r, 3)
+            self.sh21 = np.sqrt(8 * np.pi/ 15) * sph_harm(1, 2, self.phi, self.theta) / np.power(self.r, 3)
+            self.sh22 = np.sqrt(32 * np.pi/ 15) * sph_harm(2, 2, self.phi, self.theta) / np.power(self.r, 3)
 
     def _calculate_spectrum(self):
+        interpolation_0 = interp1d(self.f, self.J_0, fill_value="extrapolate")
         if self.order == "m0":
-            interpolation_0 = interp1d(self.f, self.J_0, fill_value="extrapolate")
-            self.R1 = interpolation_0(self.f)+4*interpolation_0(2*self.f)
-            self.R2 = 3/2*interpolation_0(self.f[0])+5/2*interpolation_0(self.f) + interpolation_0(2 * self.f)
+            self.R1 = (interpolation_0(self.f) + 4 * interpolation_0(2 * self.f))/6
+            self.R2 = (3/2*interpolation_0(self.f[0])+5/2*interpolation_0(self.f) + interpolation_0(2 * self.f))/6
         elif self.order == "m012":
-            interpolation_0 = interp1d(self.f, self.J_0, fill_value="extrapolate")
             interpolation_1 = interp1d(self.f, self.J_1, fill_value="extrapolate")
             interpolation_2 = interp1d(self.f, self.J_2, fill_value="extrapolate")
-            # correction as Grivet does not use the same expression for K as Singer...
-            # to be improved 
-            # seems to be a factor 1/3 missing
-            self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)            
-            # and an additional 3/2 factor probably missing for R2
+            self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
             self.R2 = (1/4)*(interpolation_0(self.f[0])+10*interpolation_1(self.f) + interpolation_2(2 * self.f))
 
     def _calculate_relaxationtime(self, f0=None):
