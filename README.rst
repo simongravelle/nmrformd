@@ -29,7 +29,7 @@ Or, clone this repository on your computer and use pip from the main directory:
 
 .. code-block:: bash
 
-	git clone git@github.com:simongravelle/nmrformd.git
+	git clone https://github.com/simongravelle/nmrformd.git
 	
 	cd nmrformd/
 
