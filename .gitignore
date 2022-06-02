@@ -24,3 +24,8 @@ logo/
 nmrformd.egg-info/
 dist/
 build/
+
+.tox/
+docs/bin/
+docs/lib/
+docs/pyvenv.cfg
