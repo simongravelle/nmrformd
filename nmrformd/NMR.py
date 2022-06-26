@@ -1,12 +1,21 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
+"""Main file for NMRforMD package."""
+# -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-
+#
+# Copyright (c) 2022 Authors and contributors
+# Simon Gravelle
+#
+# Released under the GNU Public Licence, v3 or any higher version
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-from scipy import constants as cst
-from scipy.special import sph_harm
-from scipy.interpolate import interp1d
-import numpy as np
 import random
 
-from .utilities import fourier_transform, correlation_function, find_nearest
+import numpy as np
+from scipy import constants as cst
+from scipy.interpolate import interp1d
+from scipy.special import sph_harm
+
+from .utilities import correlation_function, find_nearest, fourier_transform
 
 
 class NMR:
@@ -111,45 +120,55 @@ class NMR:
             self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
 
     def _select_proton(self):
-        assert (self.type_analysis == "inter_molecular") | \
-               (self.type_analysis == "intra_molecular") | \
-               (self.type_analysis == "full"), \
-               'unknown value for type_analysis, choose inter_molecular or intra_molecular or full'
+        assert (self.type_analysis == "inter_molecular") | (self.type_analysis == "intra_molecular") | (self.type_analysis == "full"), \  # noqa
+               'Unknown value for type_analysis, choose inter_molecular or intra_molecular or full' # noqa
 
-        self.group_i = self.u.select_atoms('index '+str(self.index_i[self.cpt_i]))
-        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]
+        self.group_i = self.u.select_atoms('index '+str(self.index_i[self.cpt_i]))  # noqa
+        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]  # noqa
 
-        if self.type_analysis == "inter_molecular":
+        if self.type_analysis == "intra_molecular":
             self.index_j = \
-                self.group_neighbor_j.atoms.indices[(self.group_neighbor_j.resids == self.resids_i)
-                                                    & (self.group_neighbor_j.indices != self.index_i[self.cpt_i])]
+                self.group_neighbor_j.atoms.indices[(self.group_neighbor_j.resids == self.resids_i)  # noqa
+                                                    & (self.group_neighbor_j.indices != self.index_i[self.cpt_i])]  # noqa
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
-        elif self.type_analysis == "intra_molecular":
-            self.index_j = self.group_neighbor_j.atoms.indices[self.group_neighbor_j.resids != self.resids_i]
+        elif self.type_analysis == "inter_molecular":
+            self.index_j = \
+                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.resids  # noqa
+                                                    != self.resids_i]
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
         elif self.type_analysis == "full":
             self.index_j = \
-                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.indices != self.index_i[self.cpt_i]]
+                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.indices  # noqa
+                                                    != self.index_i[self.cpt_i]]  # noqa
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
 
     def _initialise_data(self):
-        assert (self.order == "m0") | (self.order == "m012"), 'unknown value for  order, choose m0 or m012'
+        assert (self.order == "m0") | (self.order == "m012"), \
+            'Unknown value for order, choose m0 or m012.'
         if self.order == "m0":
-            self.data = np.zeros((1, self.u.trajectory.n_frames, self.group_j.atoms.n_atoms), dtype=np.float32)
-            self.gij = np.zeros((1,  self.u.trajectory.n_frames), dtype=np.float32)
+            self.data = np.zeros((1, self.u.trajectory.n_frames,
+                                 self.group_j.atoms.n_atoms),
+                                 dtype=np.float32)
+            self.gij = np.zeros((1,  self.u.trajectory.n_frames),
+                                dtype=np.float32)
         elif self.order == "m012":
-            self.data = np.zeros((3, self.u.trajectory.n_frames, self.group_j.atoms.n_atoms), dtype=np.complex64)
-            self.gij = np.zeros((3, self.u.trajectory.n_frames), dtype=np.float32)
+            self.data = np.zeros((3, self.u.trajectory.n_frames,
+                                 self.group_j.atoms.n_atoms),
+                                 dtype=np.complex64)
+            self.gij = np.zeros((3, self.u.trajectory.n_frames),
+                                dtype=np.float32)
         if self.actual_dt == 0:
-            self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.u.trajectory.dt, 4)
-        else :
-            self.t = np.arange(self.u.trajectory.n_frames) * np.round(self.actual_dt, 4)
+            self.t = np.arange(self.u.trajectory.n_frames) \
+                * np.round(self.u.trajectory.dt, 4)
+        else:
+            self.t = np.arange(self.u.trajectory.n_frames) \
+                * np.round(self.actual_dt, 4)
 
     def _evaluate_correlation_ij(self):
-        for cpt, ts in enumerate(self.u.trajectory):
+        for cpt, _ts in enumerate(self.u.trajectory):
             self.position_i = self.group_i.atoms.positions
             self.position_j = self.group_j.atoms.positions
             self.box = self.u.dimensions
@@ -192,34 +211,52 @@ class NMR:
                     self.J_2 = np.real(fij.T[1])
 
     def _vector_ij(self):
-        """calculate 3D vector between position_i and position_j assuming pbc"""
-        self.rij = (np.remainder(self.position_i - self.position_j + self.box[:3]/2., self.box[:3]) - self.box[:3]/2.).T
+        """Calculate distance between position_i and position_j.
+
+        PBC are assumed.
+        """
+        self.rij = (np.remainder(self.position_i - self.position_j
+                    + self.box[:3]/2., self.box[:3]) - self.box[:3]/2.).T
 
     def _cartesian_to_spherical(self):
         self.r = np.sqrt(self.rij[0]**2 + self.rij[1]**2 + self.rij[2]**2)
-        self.theta = np.arctan2(np.sqrt(self.rij[0]**2 + self.rij[1]**2), self.rij[2])
+        self.theta = np.arctan2(np.sqrt(self.rij[0]**2
+                                + self.rij[1]**2), self.rij[2])
         self.phi = np.arctan2(self.rij[1], self.rij[0])
 
     def _spherical_harmonic(self):
-        """evaluate harmonic functions from rij vector
+        """Evaluate harmonic functions from rij vector.
+
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
-        self.sh20 = np.sqrt(16 * np.pi/ 5) * sph_harm(0, 2, self.phi, self.theta) / np.power(self.r, 3)
+        self.sh20 = np.sqrt(16 * np.pi / 5) \
+            * sph_harm(0, 2, self.phi, self.theta) / np.power(self.r, 3)
         if self.order == 'm012':
-            self.sh21 = np.sqrt(8 * np.pi/ 15) * sph_harm(1, 2, self.phi, self.theta) / np.power(self.r, 3)
-            self.sh22 = np.sqrt(32 * np.pi/ 15) * sph_harm(2, 2, self.phi, self.theta) / np.power(self.r, 3)
+            self.sh21 = np.sqrt(8 * np.pi / 15) \
+                * sph_harm(1, 2, self.phi, self.theta) / np.power(self.r, 3)
+            self.sh22 = np.sqrt(32 * np.pi / 15) \
+                * sph_harm(2, 2, self.phi, self.theta) / np.power(self.r, 3)
 
     def _calculate_spectrum(self):
         interpolation_0 = interp1d(self.f, self.J_0, fill_value="extrapolate")
         if self.order == "m0":
-            self.R1 = (interpolation_0(self.f) + 4 * interpolation_0(2 * self.f))/6
-            self.R2 = (3/2*interpolation_0(self.f[0])+5/2*interpolation_0(self.f) + interpolation_0(2 * self.f))/6
+            self.R1 = (interpolation_0(self.f)
+                       + 4 * interpolation_0(2 * self.f))/6
+            self.R2 = (3/2*interpolation_0(self.f[0])
+                       + 5/2*interpolation_0(self.f)
+                       + interpolation_0(2 * self.f))/6
         elif self.order == "m012":
-            interpolation_1 = interp1d(self.f, self.J_1, fill_value="extrapolate")
-            interpolation_2 = interp1d(self.f, self.J_2, fill_value="extrapolate")
+            interpolation_1 = interp1d(self.f,
+                                       self.J_1,
+                                       fill_value="extrapolate")
+            interpolation_2 = interp1d(self.f,
+                                       self.J_2,
+                                       fill_value="extrapolate")
             self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
-            self.R2 = (1/4)*(interpolation_0(self.f[0])+10*interpolation_1(self.f) + interpolation_2(2 * self.f))
+            self.R2 = (1/4)*(interpolation_0(self.f[0])
+                             + 10*interpolation_1(self.f)
+                             + interpolation_2(2 * self.f))
 
     def _calculate_relaxationtime(self, f0=None):
         if f0 is None:
@@ -234,8 +271,9 @@ class NMR:
         """
         Calculate correlation time using tau = 0.5 J(0) / G(0).
 
-        The unit are in picosecond. If only the 0th m order is used, one value for tau
-        is returned, if all three m orders are used, three values for tau are used.
+        The unit are in picosecond. If only the 0th m order is used,
+        one value for tau is returned, if all three m orders are used,
+        three values for tau are used.
         """
         if self.order == "m0":
             self.tau = 0.5 * (self.J_0[0] / self.gij[0][0])
@@ -252,7 +290,8 @@ class NMR:
         The unit of Delta omega are kHz /2 pi. The formula is G(0) = (1/3)
         (Delta omega)**2 where G(0) is the correlation function
         at time 0. If only the 0th m order is used, one value for Delta omega
-        is returned, if all three m orders are used, three values for Delta omega are used.
+        is returned, if all three m orders are used, three values for Delta
+        omega are used.
         """
         if self.order == "m0":
             self.delta_omega = np.sqrt(3*self.gij[0][0])
