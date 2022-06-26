@@ -1,8 +1,21 @@
+#!/usr/bin/env python3
+"""Test file for NMRForMD package."""
+# -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-
+#
+# Copyright (c) 2022 Authors and contributors
+# Simon Gravelle
+#
+# Released under the GNU Public Licence, v3 or any higher version
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import MDAnalysis as mda
-import nmrformd as NMR
 import numpy as np
 
+import nmrformd as NMR
+
+
 def test_nmr():
+    """Test NMR module."""
     u = mda.Universe("bulk_h2o/topology.tpr", "bulk_h2o/trajectory.xtc")
 
     group_i = "type HW and index 0:20"
@@ -66,7 +79,7 @@ def test_nmr():
     order = "m012"
     f0 = 10000
     nmr_result = NMR.NMR(u, group_i,
-                         group_j, analysis_type, 
+                         group_j, analysis_type,
                          number_i, order, f0)
     T1 = nmr_result.T1
     T2 = nmr_result.T2
