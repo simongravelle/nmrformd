@@ -10,6 +10,7 @@
 
 import random
 
+import MDAnalysis.core.groups
 import numpy as np
 from scipy import constants as cst
 from scipy.interpolate import interp1d
@@ -45,22 +46,21 @@ class NMR:
     """
 
     def __init__(self,
-                 u,
-                 atom_group,
-                 type_analysis,
-                 number_i=0,
-                 order="m0",
-                 f0=None,
-                 actual_dt=None,
-                 hydrogen_per_atom=1.0,
-                 spin=1/2,
-                 start=0,
-                 stop=-1,
-                 step=1,
-                 pbc=True
+                 u: MDAnalysis.Universe,
+                 atom_group: MDAnalysis.AtomGroup,
+                 type_analysis: str,
+                 number_i: int =0,
+                 order: str ="m0",
+                 f0: float =None,
+                 actual_dt: float =None,
+                 hydrogen_per_atom: float =1.0,
+                 spin: float =1/2,
+                 start: int =0,
+                 stop: int =-1,
+                 step: int =1,
+                 pbc: bool = True
                  ):
         """Initialise class NMR.
-        :type start: object
         """
 
 
@@ -105,6 +105,7 @@ class NMR:
         self._read_universe()
         self._select_target_i()
 
+        # Loop on all the atom of group i
         for _cpt_i, i in enumerate(self.index_i):
             self._cpt_i = _cpt_i
             self.i = i
@@ -135,6 +136,8 @@ class NMR:
 
         Gamma is the gyromagnetic constant in Hz/T, and
         K has the units of m^6/s^2
+        # @tocheck the units
+        # @tofix do atoms have all the same gyromag ratio?
         """
         self._GAMMA = 2 * np.pi * 42.6e6
         self._K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
@@ -198,7 +201,11 @@ class NMR:
             self.group_j = self.u.select_atoms('index ' + _str_j)
 
     def _initialise_data(self):
-        """Initialise data arrays."""
+        """Initialise data arrays.
+
+        # @tofix if step>1, matrix will be too large
+        # either adapt or cut it before calculating correlation
+        """
         if self.order == "m0":
             self._data = np.zeros((1, self.u.trajectory.n_frames,
                                   self.group_j.atoms.n_atoms),
@@ -225,7 +232,7 @@ class NMR:
         Run over the MDA trajectory. If start, stop, or step are
         specified, only a sub-part of the trajectory is analysed.
 
-        Note: if step is used, the timestep is adapted.
+        Note: if step>1 is given, the timestep is adapted.
         """
         for cpt, _ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
             self._position_i = self.group_i.atoms.positions
@@ -235,9 +242,9 @@ class NMR:
             self._cartesian_to_spherical()
             self._spherical_harmonic()
             if self.order == 'm0':
-                self._data[:, cpt] = self.sh20
+                self._data[:, cpt] = self._sh20
             elif self.order == 'm012':
-                self._data[:, cpt] = self.sh20, self.sh21, self.sh22
+                self._data[:, cpt] = self._sh20, self._sh21, self._sh22
         self._calculate_correlation_ij()
 
     def _calculate_correlation_ij(self):
@@ -251,24 +258,30 @@ class NMR:
         self.gij = np.real(self.gij)
 
     def _calculate_fourier_transform(self):
+        # normalise gij by the number of iteration
         self.gij /= self._cpt_i+1
+        # dimensionalize the correlation function
+        # from A-6 to s2/m6
+        # @tocheck units
         self.gij *= self._K / cst.angstrom ** 6
+        # for coarse grained models, possibly more than 1 hydrogen per atom
         self.gij *= np.float32(self.hydrogen_per_atom)
         if self.order == 'm0':
             fij = fourier_transform(np.vstack([self.t, self.gij]).T)
             self.f = np.real(fij.T[0])
-            self.J_0 = np.real(fij.T[1])
-
+            self.J = np.real(fij.T[1])
         elif self.order == 'm012':
-            for m in range(3):
-                fij = fourier_transform(np.vstack([self.t, self.gij[m]]).T)
+            for _m in range(3):
+                fij = fourier_transform(np.vstack([self.t, self.gij[_m]]).T)
                 self.f = np.real(fij.T[0])
-                if m == 0:
-                    self.J_0 = np.real(fij.T[1])
-                elif m == 1:
-                    self.J_1 = np.real(fij.T[1])
-                elif m == 2:
-                    self.J_2 = np.real(fij.T[1])
+                if _m == 0:
+                    _J_0 = np.real(fij.T[1])
+                elif _m == 1:
+                    _J_1 = np.real(fij.T[1])
+                elif _m == 2:
+                    _J_2 = np.real(fij.T[1])
+            self.J = np.array([_J_0, _J_1, _J_2])
+
 
     def _vector_ij(self):
         """Calculate distance between position_i and position_j.
@@ -294,35 +307,32 @@ class NMR:
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
-        self.sh20 = np.sqrt(16 * np.pi / 5) \
+        self._sh20 = np.sqrt(16 * np.pi / 5) \
             * sph_harm(0, 2, self._phi, self._theta) / np.power(self._r, 3)
         if self.order == "m0":
-            self.sh20 = self.sh20.real
+            self._sh20 = self._sh20.real
         if self.order == "m012":
-            self.sh21 = np.sqrt(8 * np.pi / 15) \
+            self._sh21 = np.sqrt(8 * np.pi / 15) \
                 * sph_harm(1, 2, self._phi, self._theta) / np.power(self._r, 3)
-            self.sh22 = np.sqrt(32 * np.pi / 15) \
+            self._sh22 = np.sqrt(32 * np.pi / 15) \
                 * sph_harm(2, 2, self._phi, self._theta) / np.power(self._r, 3)
 
     def _calculate_spectrum(self):
-        interpolation_0 = interp1d(self.f, self.J_0, fill_value="extrapolate")
+        """Calculate spectrums R1 and R2 from J."""
         if self.order == "m0":
-            self.R1 = (interpolation_0(self.f)
-                       + 4 * interpolation_0(2 * self.f))/6
-            self.R2 = (3/2*interpolation_0(self.f[0])
-                       + 5/2*interpolation_0(self.f)
-                       + interpolation_0(2 * self.f))/6
+            _inter1d = interp1d(self.f, self.J, fill_value="extrapolate")
+            self.R1 = (_inter1d(self.f)
+                       + 4 * _inter1d(2 * self.f))/6
+            self.R2 = (3/2*_inter1d(self.f[0])
+                       + 5/2*_inter1d(self.f)
+                       + _inter1d(2 * self.f))/6
         elif self.order == "m012":
-            interpolation_1 = interp1d(self.f,
-                                       self.J_1,
-                                       fill_value="extrapolate")
-            interpolation_2 = interp1d(self.f,
-                                       self.J_2,
-                                       fill_value="extrapolate")
-            self.R1 = interpolation_1(self.f) + interpolation_2(2 * self.f)
-            self.R2 = (1/4)*(interpolation_0(self.f[0])
-                             + 10*interpolation_1(self.f)
-                             + interpolation_2(2 * self.f))
+            _inter1d_0 = interp1d(self.f, self.J[0], fill_value="extrapolate")
+            _inter1d_1 = interp1d(self.f, self.J[1], fill_value="extrapolate")
+            _inter1d_2 = interp1d(self.f, self.J[2], fill_value="extrapolate")
+            self.R1 = _inter1d_1(self.f) + _inter1d_2(2 * self.f)
+            self.R2 = (1/4)*(_inter1d_0(self.f[0])+ 10*_inter1d_1(self.f)
+                             + _inter1d_2(2 * self.f))
 
     def _calculate_relaxationtime(self, f0=None):
         if f0 is None:
@@ -342,11 +352,11 @@ class NMR:
         three values for tau are used.
         """
         if self.order == "m0":
-            self.tau = 0.5 * (self.J_0[0] / self.gij[0][0])
+            self.tau = 0.5 * (self.J[0] / self.gij[0][0])
         elif self.order == "m012":
-            self.tau = np.array([0.5*(self.J_0[0] / self.gij[0][0]),
-                                 0.5*(self.J_1[0] / self.gij[0][1]),
-                                 0.5*(self.J_2[0] / self.gij[0][2])])
+            self.tau = np.array([0.5*(self.J[0] / self.gij[0][0]),
+                                 0.5*(self.J[1] / self.gij[0][1]),
+                                 0.5*(self.J[2] / self.gij[0][2])])
         self.tau /= cst.pico
 
     def _calculate_secondmoment(self):

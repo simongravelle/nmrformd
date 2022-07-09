@@ -18,8 +18,8 @@ def test_nmr():
     """Test NMR module."""
     u = mda.Universe("bulk_h2o/topology.tpr", "bulk_h2o/trajectory.xtc")
 
-    group_i = "type HW and index 0:20"
-    group_j = "type HW and index 0:20"
+    group_i = "type HW  and index 0:10"
+    group_j = "type HW and index 0:10"
     type_analysis = "intra_molecular"
     number_i = 0
     order = "m0"
@@ -29,8 +29,12 @@ def test_nmr():
     nmr_result = NMR.NMR(u, atom_group, type_analysis,
                          number_i, order)
     T1 = nmr_result.T1
-    print("T1 = " + str(np.round(T1, 3)) + " s")
 
+    print("\n")
+    print("\n")
+    print("T1 = " + str(np.round(T1, 3)) + " s\n")
+    print("\n")
+    print("\n")
 
 
     #nmr_result = NMR.NMR(u, atom_group, "inter_molecular",
