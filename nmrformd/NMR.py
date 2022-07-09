@@ -46,25 +46,46 @@ class NMR:
 
     def __init__(self,
                  u,
-                 target_i,
-                 neighbor_j,
+                 atom_group,
                  type_analysis,
                  number_i=0,
                  order="m0",
                  f0=None,
-                 actual_dt=0,
+                 actual_dt=None,
                  hydrogen_per_atom=1.0,
-                 spin=1 / 2
+                 spin=1/2,
+                 start=0,
+                 stop=-1,
+                 step=1,
+                 pbc=True
                  ):
-        """Initialise class NMR."""
+        """Initialise class NMR.
+        :type start: object
+        """
+
+
+
         self.u = u
-        self.target_i = target_i
-        self.neighbor_j = neighbor_j
+        if len(atom_group) == 0:
+            raise ValueError("Missing atom group")
+        elif len(atom_group) == 1:
+            self.target_i = atom_group[0]
+            self.neighbor_j = atom_group[0]
+        elif len(atom_group) == 2:
+            self.target_i = atom_group[0]
+            self.neighbor_j = atom_group[1]
+        elif len(atom_group) >= 3:
+            raise ValueError("More than 2 atom groups")
         self.type_analysis = type_analysis
         self.number_i = number_i
         self.order = order
         self.actual_dt = actual_dt
         self.hydrogen_per_atom = hydrogen_per_atom
+        self.spin = spin
+        self.start = start
+        self.stop = stop
+        self.step = step
+        self.pbc = pbc
         self.data = None
         self.rij = None
         self.r = None
@@ -78,18 +99,18 @@ class NMR:
         self.T2 = None
         self.tau = None
         self.delta_omega = None
-        self.spin = spin
 
+        self._verify_entry()
         self._define_constants()
         self._read_universe()
-
         self._select_target_i()
 
-        for cpt_i, i in enumerate(self.index_i):
-            self.cpt_i = cpt_i
+        for _cpt_i, i in enumerate(self.index_i):
+            self._cpt_i = _cpt_i
             self.i = i
-            self._select_proton()
-            if cpt_i == 0:
+            self._select_atoms_group_i()
+            self._select_atoms_group_j()
+            if _cpt_i == 0:
                 self._initialise_data()
             self._evaluate_correlation_ij()
 
@@ -100,97 +121,138 @@ class NMR:
         self._calculate_tau()
         self._calculate_secondmoment()
 
+    def _verify_entry(self):
+        """Verify that entries are correct."""
+        _possible_analysis = ["inter_molecular", "intra_molecular", "full"]
+        if self.type_analysis not in _possible_analysis:
+            raise ValueError("type_analysis can only be inter_molecular, intra_molecular, and full.")
+        _possible_order = ["m0", "m012"]
+        if self.order not in _possible_order:
+            raise ValueError("order can only be m0 and m012.")
+
     def _define_constants(self):
-        self.GAMMA = 2 * np.pi * 42.6e6  # gyromagnetic constant in Hz/T
-        # self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.GAMMA**4
-        self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
-            * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)  # m6/s2
+        """Define the pre-factor K.
+
+        Gamma is the gyromagnetic constant in Hz/T, and
+        K has the units of m^6/s^2
+        """
+        self._GAMMA = 2 * np.pi * 42.6e6
+        self._K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
+            * cst.hbar ** 2 * self._GAMMA ** 4 * self.spin * (1 + self.spin)
 
     def _read_universe(self):
+        """Create atom groups from chosen atom selections.
+
+        The created groups must not be empty.
+        """
         self.group_target_i = self.u.select_atoms(self.target_i)
-        assert self.group_target_i.atoms.n_atoms > 0, "empty target group i"
         self.group_neighbor_j = self.u.select_atoms(self.neighbor_j)
-        assert self.group_neighbor_j.atoms.n_atoms > 0, "empty neighbor group j"
+        # Assert that both groups contain atoms
+        if self.group_target_i.atoms.n_atoms == 0:
+            raise ValueError("Empty atom groups i")
+        elif self.group_neighbor_j.atoms.n_atoms == 0:
+            raise ValueError("Empty atom groups j")
 
     def _select_target_i(self):
         if self.number_i == 0:
             self.index_i = np.array(self.group_target_i.atoms.indices)
         elif self.number_i > self.group_target_i.atoms.n_atoms:
-            print('number_i larger than the number of atom in group target i, all atoms selected')
+            print('Note : number_i is larger than the number of atoms in group target i\n'
+                  '-> All the atoms of the group i have been selected')
             self.index_i = np.array(self.group_target_i.atoms.indices)
         else:
             self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
+    def _select_atoms_group_i(self):
+        """Select atoms of the group i for the calculation."""
+        self.group_i = self.u.select_atoms('index ' + str(self.index_i[self._cpt_i]))
+        self._resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self._cpt_i]]
 
-    def _select_proton(self):
-        assert (self.type_analysis == "inter_molecular") | (self.type_analysis == "intra_molecular") | (self.type_analysis == "full")  # noqa
+    def _select_atoms_group_j(self):
+        """Select atoms of the group j for the calculation.
 
-        self.group_i = self.u.select_atoms('index ' + str(self.index_i[self.cpt_i]))
-        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]
+        For intra molecular analysis, group j are made of atoms of the
+        same residue as group i.
+        For inter molecular analysis, group j are made of atoms of
+        different residues as group i.
+        For full analysis, group j are made of atoms that are not in group i.
+        """
 
         if self.type_analysis == "intra_molecular":
-            self.index_j = \
-                self.group_neighbor_j.atoms.indices[(self.group_neighbor_j.resids == self.resids_i) & (self.group_neighbor_j.indices != self.index_i[self.cpt_i])]
-            self.str_j = ' '.join(str(e) for e in self.index_j)
-            self.group_j = self.u.select_atoms('index ' + self.str_j)
+            _same_residue : bool = self.group_neighbor_j.resids == self._resids_i
+            _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
+            _index_j = self.group_neighbor_j.atoms.indices[_same_residue & _different_atom]
+            if not _index_j:
+                raise ValueError("Empty atom groups j, wrong combination of type_analysis"
+                                 "and group selection?")
+            _str_j = ' '.join(str(e) for e in _index_j)
+            self.group_j = self.u.select_atoms('index ' + _str_j)
         elif self.type_analysis == "inter_molecular":
-            self.index_j = \
-                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.resids != self.resids_i]
-            self.str_j = ' '.join(str(e) for e in self.index_j)
-            self.group_j = self.u.select_atoms('index ' + self.str_j)
+            _different_residue : bool = self.group_neighbor_j.resids != self._resids_i
+            _index_j = self.group_neighbor_j.atoms.indices[_different_residue]
+            _str_j = ' '.join(str(e) for e in _index_j)
+            self.group_j = self.u.select_atoms('index ' + _str_j)
         elif self.type_analysis == "full":
-            self.index_j = \
-                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.indices != self.index_i[self.cpt_i]]
-            self.str_j = ' '.join(str(e) for e in self.index_j)
-            self.group_j = self.u.select_atoms('index ' + self.str_j)
+            _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
+            _index_j = self.group_neighbor_j.atoms.indices[_different_atom]
+            _str_j = ' '.join(str(e) for e in _index_j)
+            self.group_j = self.u.select_atoms('index ' + _str_j)
 
     def _initialise_data(self):
-        assert (self.order == "m0") | (self.order == "m012"), \
-            'Unknown value for order, choose m0 or m012.'
+        """Initialise data arrays."""
         if self.order == "m0":
-            self.data = np.zeros((1, self.u.trajectory.n_frames,
-                                 self.group_j.atoms.n_atoms),
-                                 dtype=np.float32)
+            self._data = np.zeros((1, self.u.trajectory.n_frames,
+                                  self.group_j.atoms.n_atoms),
+                                  dtype=np.float32)
             self.gij = np.zeros((1,  self.u.trajectory.n_frames),
-                                dtype=np.float32)
+                                 dtype=np.float32)
         elif self.order == "m012":
-            self.data = np.zeros((3, self.u.trajectory.n_frames,
-                                 self.group_j.atoms.n_atoms),
-                                 dtype=np.complex64)
+            self._data = np.zeros((3, self.u.trajectory.n_frames,
+                                  self.group_j.atoms.n_atoms),
+                                  dtype=np.complex64)
             self.gij = np.zeros((3, self.u.trajectory.n_frames),
                                 dtype=np.float32)
-        if self.actual_dt == 0:
-            self.t = np.arange(self.u.trajectory.n_frames) \
-                * np.round(self.u.trajectory.dt, 4)
+        if self.actual_dt is None:
+            _timestep = np.round(self.u.trajectory.dt, 4)
         else:
-            self.t = np.arange(self.u.trajectory.n_frames) \
-                * np.round(self.actual_dt, 4)
+            _timestep = self.actual_dt
+        if self.step > 1:
+            _timestep *= self.step
+        self.t = np.arange(self.u.trajectory.n_frames) * _timestep
 
     def _evaluate_correlation_ij(self):
-        for cpt, _ts in enumerate(self.u.trajectory):
-            self.position_i = self.group_i.atoms.positions
-            self.position_j = self.group_j.atoms.positions
-            self.box = self.u.dimensions
+        """Evaluate the correlation function.
+
+        Run over the MDA trajectory. If start, stop, or step are
+        specified, only a sub-part of the trajectory is analysed.
+
+        Note: if step is used, the timestep is adapted.
+        """
+        for cpt, _ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
+            self._position_i = self.group_i.atoms.positions
+            self._position_j = self.group_j.atoms.positions
+            self._box = self.u.dimensions
             self._vector_ij()
             self._cartesian_to_spherical()
             self._spherical_harmonic()
             if self.order == 'm0':
-                self.data[:, cpt] = self.sh20
+                self._data[:, cpt] = self.sh20
             elif self.order == 'm012':
-                self.data[:, cpt] = self.sh20, self.sh21, self.sh22
+                self._data[:, cpt] = self.sh20, self.sh21, self.sh22
         self._calculate_correlation_ij()
 
     def _calculate_correlation_ij(self):
-        for idx_j in range(self.group_j.atoms.n_atoms):
+        """Calculate the correlation function from ."""
+        for _idx_j in range(self.group_j.atoms.n_atoms):
             if self.order == 'm0':
-                self.gij += correlation_function(self.data[0, :, idx_j])
+                self.gij += correlation_function(self._data[0, :, _idx_j])
             elif self.order == 'm012':
                 for m in range(3):
-                    self.gij[m] += correlation_function(self.data[m, :, idx_j])
+                    self.gij[m] += correlation_function(self._data[m, :, _idx_j])
         self.gij = np.real(self.gij)
 
     def _calculate_fourier_transform(self):
-        self.gij /= self.cpt_i+1
-        self.gij *= self.K / cst.angstrom ** 6
+        self.gij /= self._cpt_i+1
+        self.gij *= self._K / cst.angstrom ** 6
         self.gij *= np.float32(self.hydrogen_per_atom)
         if self.order == 'm0':
             fij = fourier_transform(np.vstack([self.t, self.gij]).T)
@@ -211,30 +273,36 @@ class NMR:
     def _vector_ij(self):
         """Calculate distance between position_i and position_j.
 
-        PBC are assumed.
+        By default, periodic boundary conditions are assumed.
         """
-        self.rij = (np.remainder(self.position_i - self.position_j
-                    + self.box[:3]/2., self.box[:3]) - self.box[:3]/2.).T
+        if self.pbc:
+            self._rij = (np.remainder(self._position_i - self._position_j
+                         + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
+        else:
+            self._rij = (self._position_i - self._position_j).T
 
     def _cartesian_to_spherical(self):
-        self.r = np.sqrt(self.rij[0]**2 + self.rij[1]**2 + self.rij[2]**2)
-        self.theta = np.arctan2(np.sqrt(self.rij[0]**2
-                                + self.rij[1]**2), self.rij[2])
-        self.phi = np.arctan2(self.rij[1], self.rij[0])
+        """Convert cartesian coordinate to spherical."""
+        self._r = np.sqrt(self._rij[0]**2 + self._rij[1]**2 + self._rij[2]**2)
+        self._theta = np.arctan2(np.sqrt(self._rij[0]**2
+                                + self._rij[1]**2), self._rij[2])
+        self._phi = np.arctan2(self._rij[1], self._rij[0])
 
     def _spherical_harmonic(self):
-        """Evaluate harmonic functions from rij vector.
+        """Evaluate spherical harmonic functions from rij vector.
 
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
         self.sh20 = np.sqrt(16 * np.pi / 5) \
-            * sph_harm(0, 2, self.phi, self.theta) / np.power(self.r, 3)
-        if self.order == 'm012':
+            * sph_harm(0, 2, self._phi, self._theta) / np.power(self._r, 3)
+        if self.order == "m0":
+            self.sh20 = self.sh20.real
+        if self.order == "m012":
             self.sh21 = np.sqrt(8 * np.pi / 15) \
-                * sph_harm(1, 2, self.phi, self.theta) / np.power(self.r, 3)
+                * sph_harm(1, 2, self._phi, self._theta) / np.power(self._r, 3)
             self.sh22 = np.sqrt(32 * np.pi / 15) \
-                * sph_harm(2, 2, self.phi, self.theta) / np.power(self.r, 3)
+                * sph_harm(2, 2, self._phi, self._theta) / np.power(self._r, 3)
 
     def _calculate_spectrum(self):
         interpolation_0 = interp1d(self.f, self.J_0, fill_value="extrapolate")
