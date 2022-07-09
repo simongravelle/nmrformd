@@ -8,4 +8,4 @@
 # Released under the GNU Public Licence, v3 or any higher version
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# from .NMR import *
+from .NMR import *
