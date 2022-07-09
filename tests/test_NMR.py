@@ -1,27 +1,62 @@
+#!/usr/bin/env python3
+"""Test file for NMRForMD package."""
+# -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-
+#
+# Copyright (c) 2022 Authors and contributors
+# Simon Gravelle
+#
+# Released under the GNU Public Licence, v3 or any higher version
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import MDAnalysis as mda
 import numpy as np
 
-import nmrformd as nmrmd
+import nmrformd as NMR
 
-u = mda.Universe("bulk_h2o/topology.tpr", "bulk_h2o/trajectory.xtc")
+#from datafiles import (SPCE_GRO, SPCE_ITP)
 
-group_i = "type HW and index 0:20"
-group_j = "type HW and index 0:20"
-analysis_type = "full"
-number_i = 0
-order = "m0"
-nmr_result = nmrmd.NMR(u, group_i,
-                     group_j, analysis_type,
-                     number_i, order)
-T1 = nmr_result.T1
-T2 = nmr_result.T2
-Dw = nmr_result.delta_omega
-tau = nmr_result.tau
+#from pkg_resources import resource_filename
 
-print()
-print(T1)
+import os
+cwd = os.getcwd()
+print(cwd)
 
-assert np.isclose(T1, 1.029287074574358, rtol=1e-4, atol=0)
-assert np.isclose(T2, 1.029287074574358, rtol=1e-4, atol=0)
-assert np.isclose(Dw, 56.996441578600304, rtol=1e-4, atol=0)
-assert np.isclose(tau, 13.635804446316115, rtol=1e-4, atol=0)
+mda.Universe("water/spce.itp", "water/spce.gro", topology_format='itp')
+
+def create_universe(n_molecules, angle_deg):
+    """Create universe with regularly-spaced water molecules."""
+    fluid = []
+    for _n in range(n_molecules):
+        fluid.append(mda.Universe("water/spce.itp",
+                                  "water/spce.gro",
+                                  topology_format='itp'))
+    dimensions = fluid[0].dimensions
+
+    translations = [(0, 0, 0),
+                    (0, 0, 10)]
+
+    for molecule, translation in zip(fluid, translations):
+        molecule.atoms.translate(translation)
+    u = mda.Merge(*[molecule.atoms for molecule in fluid])
+
+    dimensions[2] *= n_molecules
+    u.dimensions = dimensions
+    u.residues.molnums = list(range(1, n_molecules + 1))
+    return u
+
+class TestNMR(object):
+    """Tests for the NMR class using only two water molecules.
+
+    The distance between the two molecules is 1 nm, and
+    they do not move.
+    """
+
+    def test_2_water_0(self):
+        u =  create_universe(2, 0)
+        group_H2O_1 = ["name HW1"]
+
+        #print(group_H2O_1.atoms.names)
+        #print(group_H2O_1.atoms.positions)
+
+        nmr_result = NMR.NMR(u, group_H2O_1, "full", 0, "m0", actual_dt = 2)
+        
