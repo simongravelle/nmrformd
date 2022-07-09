@@ -19,11 +19,10 @@ from .utilities import correlation_function, find_nearest, fourier_transform
 
 
 class NMR:
-    """Calculate NMR relaxation time from MDAnalysis universe
+    """Calculate NMR relaxation time from MDAnalysis universe.
 
     Parameters
     ----------
-
     u : MDAnalysis.core.universe.Universe
         MDAnalysis universe containing all the information describing
         the molecular dynamics system.
@@ -32,14 +31,17 @@ class NMR:
     neighbor_j : AtomGroup
         Neighbor group of the atoms ``j`` for the NMR calculation.
     type_analysis : str
-        Type of analysis, which can be ``full``, ``intra_molecular``, or ``inter_molecular``.
+        Type of analysis, which can be ``full``, ``intra_molecular``,
+        or ``inter_molecular``.
     number_i : int, default 0
-        Number of atom of the group ``target_i`` to consider. If ``number = 0``, all atoms
+        Number of atom of the group ``target_i`` to consider.
+        If ``number = 0``, all atoms
         are considered.
     order : str, default ``m0``
         Order of the analysis, which can be ``m0`` or ``m012``.
     f0 : int, default ``None``
-        Frequency for the calculation of ``T1`` and ``T2``.  If ``None``, ``f = 0`` is used.
+        Frequency for the calculation of ``T1`` and ``T2``.
+        If ``None``, ``f = 0`` is used.
     """
 
     def __init__(self,
@@ -47,14 +49,14 @@ class NMR:
                  target_i,
                  neighbor_j,
                  type_analysis,
-                 number_i = 0,
-                 order = "m0",
-                 f0 = None,
-                 actual_dt = 0,
-                 hydrogen_per_atom = 1.0,
-                 spin = 1/2
+                 number_i=0,
+                 order="m0",
+                 f0=None,
+                 actual_dt=0,
+                 hydrogen_per_atom=1.0,
+                 spin=1 / 2
                  ):
-
+        """Initialise class NMR."""
         self.u = u
         self.target_i = target_i
         self.neighbor_j = neighbor_j
@@ -99,10 +101,10 @@ class NMR:
         self._calculate_secondmoment()
 
     def _define_constants(self):
-        self.GAMMA = 2*np.pi*42.6e6  # gyromagnetic constant in Hz/T
-        #self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.GAMMA**4  # m6/s2
+        self.GAMMA = 2 * np.pi * 42.6e6  # gyromagnetic constant in Hz/T
+        # self.K = (3*np.pi/5)*(cst.mu_0/4/np.pi)**2*cst.hbar**2*self.GAMMA**4
         self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
-                 * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)  # m6/s2
+            * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)  # m6/s2
 
     def _read_universe(self):
         self.group_target_i = self.u.select_atoms(self.target_i)
@@ -120,28 +122,24 @@ class NMR:
             self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
 
     def _select_proton(self):
-        assert (self.type_analysis == "inter_molecular") | (self.type_analysis == "intra_molecular") | (self.type_analysis == "full"), \  # noqa
-               'Unknown value for type_analysis, choose inter_molecular or intra_molecular or full' # noqa
+        assert (self.type_analysis == "inter_molecular") | (self.type_analysis == "intra_molecular") | (self.type_analysis == "full")  # noqa
 
-        self.group_i = self.u.select_atoms('index '+str(self.index_i[self.cpt_i]))  # noqa
-        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]  # noqa
+        self.group_i = self.u.select_atoms('index ' + str(self.index_i[self.cpt_i]))
+        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]
 
         if self.type_analysis == "intra_molecular":
             self.index_j = \
-                self.group_neighbor_j.atoms.indices[(self.group_neighbor_j.resids == self.resids_i)  # noqa
-                                                    & (self.group_neighbor_j.indices != self.index_i[self.cpt_i])]  # noqa
+                self.group_neighbor_j.atoms.indices[(self.group_neighbor_j.resids == self.resids_i) & (self.group_neighbor_j.indices != self.index_i[self.cpt_i])]
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
         elif self.type_analysis == "inter_molecular":
             self.index_j = \
-                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.resids  # noqa
-                                                    != self.resids_i]
+                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.resids != self.resids_i]
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
         elif self.type_analysis == "full":
             self.index_j = \
-                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.indices  # noqa
-                                                    != self.index_i[self.cpt_i]]  # noqa
+                self.group_neighbor_j.atoms.indices[self.group_neighbor_j.indices != self.index_i[self.cpt_i]]
             self.str_j = ' '.join(str(e) for e in self.index_j)
             self.group_j = self.u.select_atoms('index ' + self.str_j)
 
