@@ -1,0 +1,20 @@
+REMARK generated coordinate pdb file from car Insight file
+ATOM      1  O   XXXX    1       1.375   1.139   1.157  1.00  0.00   SURF      O
+ATOM      2  O   XXXX    1       3.240   0.621   2.959  1.00  0.00   SURF      O
+ATOM      3  O   XXXX    1       2.755   2.495   4.761  1.00  0.00   SURF      O
+ATOM      4  O   XXXX    1       0.299   1.760   4.248  1.00  0.00   SURF      O
+ATOM      5  O   XXXX    1       3.831   3.116   2.446  1.00  0.00   SURF      O
+ATOM      6  O   XXXX    1       0.783   3.634   0.644  1.00  0.00   SURF      O
+ATOM      7  Si  XXXX    1       2.310   0.000   1.802  1.00  0.00   SURF     Si
+ATOM      8  Si  XXXX    1       3.758   2.000   3.603  1.00  0.00   SURF     Si
+ATOM      9  Si  XXXX    1       1.302   2.255  -0.000  1.00  0.00   SURF     Si
+ATOM     10  O   XXXX    2       3.831   5.393   1.157  1.00  0.00   SURF      O
+ATOM     11  O   XXXX    2       0.783   4.876   2.959  1.00  0.00   SURF      O
+ATOM     12  O   XXXX    2       0.299   6.750   4.761  1.00  0.00   SURF      O
+ATOM     13  O   XXXX    2       2.755   6.015   4.248  1.00  0.00   SURF      O
+ATOM     14  O   XXXX    2       1.375   7.371   2.446  1.00  0.00   SURF      O
+ATOM     15  O   XXXX    2       3.240   7.888   0.644  1.00  0.00   SURF      O
+ATOM     16  Si  XXXX    2       4.766   4.255   1.802  1.00  0.00   SURF     Si
+ATOM     17  Si  XXXX    2       1.302   6.255   3.603  1.00  0.00   SURF     Si
+ATOM     18  Si  XXXX    2       3.758   6.509  -0.000  1.00  0.00   SURF     Si
+END

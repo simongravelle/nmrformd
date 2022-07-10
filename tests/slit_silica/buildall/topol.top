@@ -1,0 +1,13 @@
+#include "ff/forcefield.itp"
+#include "ff/silica.itp"
+#include "ff/tip4peps.itp"
+#include "ff/ions.itp"
+
+[ System ]
+Silica slit with water and counter ions
+
+[ Molecules ]
+
+SiOH 1
+NA 20
+SOL 2986
