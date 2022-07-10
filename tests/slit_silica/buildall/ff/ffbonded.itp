@@ -1,0 +1,7 @@
+[ bondtypes ]
+; i    j  func       b0          kb
+S      O       1    0.15 3.7656e4
+
+[ angletypes ]
+; i    j  func       b0          kb
+O    S      O       1    109.5    520
