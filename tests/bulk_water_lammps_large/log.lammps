@@ -1,0 +1,107 @@
+LAMMPS (20 Nov 2019)
+# LAMMPS input file
+# Bulk TIP4P/2005 water system
+# author : Simon Gravelle
+############### variables
+variable pre equal 1 # desired pressure (Atm)
+variable tem equal 293.15 # desired temperature (K)
+############### main parameters
+units real # style of units (A, fs, Kcal/mol)
+atom_style full # molecular + charge
+bond_style harmonic
+angle_style harmonic
+boundary p p p # periodic boundary conditions
+pair_style lj/cut/tip4p/long 1 2 1 1 0.105 10 10 # cut-off 1 nm
+kspace_style pppm/tip4p 1.0e-4
+pair_modify mix arithmetic tail yes # eij = sqrt(ei*ej), dij = 0.5*(di+dj)
+############### import positions and parameters
+read_data conf.data
+  orthogonal box = (-11.4085 -11.4085 -11.4085) to (11.4085 11.4085 11.4085)
+  2 by 1 by 2 MPI processor grid
+  reading atoms ...
+  1200 atoms
+  reading velocities ...
+  1200 velocities
+  scanning bonds ...
+  2 = max bonds/atom
+  scanning angles ...
+  1 = max angles/atom
+  reading bonds ...
+  800 bonds
+  reading angles ...
+  400 angles
+  2 = max # of 1-2 neighbors
+  1 = max # of 1-3 neighbors
+  1 = max # of 1-4 neighbors
+  2 = max # of special neighbors
+  special bonds CPU = 0.000296686 secs
+  read_data CPU = 0.00489035 secs
+include PARM.lammps
+############### mass parameters
+mass 		1 15.9994 # O water TIP4P/2005
+mass 		2 1.008 # H water TIP4P/2005
+############### pair coeffs
+pair_coeff 	1 1 0.18481 3.165 # TIP4P/2005
+pair_coeff 	2 2 0.0 0.0 # TIP4P/2005
+############### bond coeffs
+bond_coeff 	1 0 0.9572 # TIP4P/2005
+############### angle coeffs
+angle_coeff 	1 0 104.52 # TIP4P/2005
+############### groups # descriptions
+group wat type 1 2 # water
+1200 atoms in group wat
+group hyd type 2 # hydrogen
+800 atoms in group hyd
+############### dynamics
+timestep 2 # (fs)
+fix myshk wat shake 1.0e-5 200 0 b 1 a 1 # shake with increases precision
+  0 = # of size 2 clusters
+  0 = # of size 3 clusters
+  0 = # of size 4 clusters
+  400 = # of frozen angles
+  find clusters CPU = 0.000229508 secs
+fix mynvt all nvt temp ${tem} ${tem} 100 # nvt equilibrium
+fix mynvt all nvt temp 293.15 ${tem} 100 
+fix mynvt all nvt temp 293.15 293.15 100 
+############### output
+dump dp1 wat xtc 500 traj.xtc
+thermo 1000
+############### run
+run 500000 # 200 ps
+PPPM initialization ...
+  extracting TIP4P info from pair style
+  using 12-bit tables for long-range coulomb (src/kspace.cpp:323)
+  G vector (1/distance) = 0.283588
+  grid = 15 15 15
+  stencil order = 5
+  estimated absolute RMS force accuracy = 0.01686
+  estimated relative force accuracy = 5.07734e-05
+  using double precision FFTW3
+  3d grid and FFT values/proc = 4312 960
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 12.21
+  ghost atom cutoff = 12.21
+  binsize = 6.105, bins = 4 4 4
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut/tip4p/long, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 8.828 | 8.843 | 8.853 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0    299.67103   -4814.3383            0   -4100.6216   -98.701453 
+    1000    301.61899   -4824.5934            0   -4106.2374    366.21837 
+    2000    299.46456   -4828.2999            0    -4115.075    314.37518 
+    3000    284.95175   -4799.8544            0   -4121.1942   -463.71559 
+    4000    308.54377   -4789.0311            0   -4054.1825   -611.17024 
+    5000    287.86745   -4729.4425            0    -4043.838    284.67521 
+    6000     289.1772   -4789.9927            0   -4101.2688    408.04852 
+    7000    285.90967     -4812.34            0   -4131.3983    1526.1728 
+    8000    278.73655   -4738.8741            0   -4075.0165    88.176535 
+    9000     300.0555   -4720.8227            0   -4006.1903     139.9551 
+   10000    299.16795   -4770.8667            0   -4058.3482   -93.099398 
+   11000    288.48869    -4736.429            0    -4049.345    1137.2037 
+   12000    298.08683   -4795.9031            0   -4085.9594    2
