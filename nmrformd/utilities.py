@@ -25,9 +25,9 @@ def fourier_transform(a):
     Credit to the fourier transform function of MAICoS
     https://maicos-devel.gitlab.io/maicos/index.html
     """
-    dt = (a[1, 0] - a[0, 0]) * cst.pico  # second
-    return np.vstack((np.fft.rfftfreq(len(a), dt)
-                     / cst.mega, np.fft.rfft(a[:, 1], norm=None) * dt * 2)).T
+    _dt = (a[1, 0] - a[0, 0]) * cst.pico  # second
+    return np.vstack((np.fft.rfftfreq(len(a), _dt)
+                     / cst.mega, np.fft.rfft(a[:, 1], norm=None) * _dt * 2)).T
 
 def correlation_function(data):
     """Use fast fourier transforms to calculate the correlation function.
