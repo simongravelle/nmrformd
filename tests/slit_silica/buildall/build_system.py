@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[54]:
+# In[1]:
 
 
 import sys
@@ -13,7 +13,7 @@ from copy import copy, deepcopy
 from scipy.spatial import distance
 
 
-# In[26]:
+# In[2]:
 
 
 sys.path.append('/home/simon/Git/python-for-lammps')
@@ -22,7 +22,7 @@ sys.path.append("./")
 from utils import generate_random_location, generate_random_orientation,                   search_closest_neighbor
 
 
-# In[27]:
+# In[4]:
 
 
 data_path = "silica_surfaces/"
@@ -37,7 +37,7 @@ data_files = ["silica_Q3_4_7OH_0pct_ion.lammps05",
 
 # ## initialise
 
-# In[28]:
+# In[5]:
 
 
 cpt_atom = 0
@@ -56,7 +56,7 @@ residue_name = []
 
 # ## import silica and counter ions
 
-# In[29]:
+# In[6]:
 
 
 id_silica = 4
@@ -67,17 +67,17 @@ silica_width = np.max(silica_info.coords.T[2])-np.min(silica_info.coords.T[2])
 
 # ## initial box dimension
 
-# In[30]:
+# In[7]:
 
 
 Lx = silica_info.box_dimensions[0][1] # Angstrom
 Ly = silica_info.box_dimensions[1][1] # Angstrom
-Lz = 135 # Angstrom
+Lz = 50 # Angstrom
 
 
 # ## place silica
 
-# In[31]:
+# In[7]:
 
 
 name_SiOH = ['O', 'O', 'Si', 'H']
@@ -98,7 +98,7 @@ for cpt, id_atom in enumerate(silica_info.atom_labels):
 
 # ## place counter ions
 
-# In[32]:
+# In[8]:
 
 
 name_Na = ['Na']
@@ -118,7 +118,7 @@ for cpt, id_atom in enumerate(silica_info.atom_labels):
 
 # ## define water
 
-# In[33]:
+# In[9]:
 
 
 H2O_XYZ = np.array([[0, 0, 0],        [0.5858,   0.757, 0.0],        [0.5858,   -0.757,  0.0],        [0.104,  0.0, 0.0]])
@@ -127,7 +127,7 @@ H2O_type = ['OW', 'HW1', 'HW2', 'MW']
 
 # ## place water
 
-# In[34]:
+# In[10]:
 
 
 # random placement
@@ -153,11 +153,11 @@ H2O_type = ['OW', 'HW1', 'HW2', 'MW']
 #        failled_insert += 1
 
 
-# In[35]:
+# In[11]:
 
 
 cut_off = 2 # Angstrom
-delta = 2.6
+delta = 2.9
 # ordered placement
 for x in np.arange(0, Lx, delta):
     for y in np.arange(0, Ly, delta):
@@ -179,7 +179,7 @@ for x in np.arange(0, Lx, delta):
                     cpt_atom += 1  
 
 
-# In[36]:
+# In[12]:
 
 
 print(str(cpt_h2o) + " inserted water molecules")
