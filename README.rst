@@ -2,18 +2,29 @@
 
 .. inclusion-readme-intro-start
 
-NMRforMD is a python script to calculate NMR relaxation times from molecular dynamics trajectory files. Used in combination with `MDAnalysis`_, it allows for the analysis of trajectory files from LAMMPS, GROMACS, or AMBER simulation package.
+NMRforMD is a python toolkit to calculate NMR relaxation times
+from molecular dynamics trajectory files. Used in combination
+with `MDAnalysis`_, it allows for the analysis of trajectory
+files from `LAMMPS`_ and `GROMACS`_ simulation package.
 
 Information
 -----------
 
-NMRforMD is in development and likely to return errors. Please raise an issue here if you find one.
+This documentation is separated in four parts: tutorials, how-to scripts,
+description, and theory.
 
 .. _`MDAnalysis`: https://www.mdanalysis.org/
+.. _`LAMMPS`: https://www.lammps.org/
+.. _`GROMACS`: https://www.gromacs.org/
 .. inclusion-readme-intro-end
 
-For details and a tutorial, have a look at the `documentation`_.
-	
+For details and instructions for beginners,
+have a look at the `documentation`_.
+
+Notes :
+    - NMRforMD is still in development, please raise an issue here if you encounter a problem.
+    - the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages
+
 Installation
 ------------
 
@@ -23,9 +34,12 @@ Using pip, type in a terminal:
 
 .. code-block:: bash
 
-	pip install nmrformd
+	pip3 install nmrformd
 
-Or, clone this repository on your computer and use pip from the main directory:
+.. inclusion-readme-installation-end
+
+To get the last version, clone this repository on your computer
+and use pip3 from the main directory:
 
 .. code-block:: bash
 
@@ -35,14 +49,13 @@ Or, clone this repository on your computer and use pip from the main directory:
 
 	pip install .
 	
-You can run the test using pytest:
+You can run the tests using pytest:
 	
 .. code-block:: bash	
 	
 	cd tests
-	pytest mytest.py
+	pytest .
 
-.. inclusion-readme-installation-end
 .. inclusion-basic-intro-start
 
 Basic example
@@ -58,7 +71,7 @@ a molecular dynamics simulations. See the `tutorial`_ for more information.
 	import MDAnalysis as mda
 	import nmrformd
 	u = mda.Universe("topology.tpr", "trajectory.xtc")
-	nmr_result = nmrformd.NMR(u, "type H", "type H", "full", 0, "m0")
+	nmr_result = nmrformd.NMR(u, "type H", "type H")
 
 The NMR relaxation time T1 is given by ``nmr_result.T1``.
 
@@ -68,8 +81,6 @@ Known issues
 ------------
 
 - for very large trajectory file, the code requires a lot of memory
-- currently only residues have been tested
-- the code has mostly been tested with GROMACS trajectory file
 
 .. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
 
