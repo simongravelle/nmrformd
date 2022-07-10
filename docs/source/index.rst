@@ -19,27 +19,33 @@ if you encounter a problem.
    :caption: Tutorials
    :hidden:
    
-   ./tutorials/installation
-   ./tutorials/tutorial01
+   tutorials/installation
+   tutorials/tutorial01
 
-#.. toctree::
-#   :maxdepth: 2
-#   :caption: How-to scripts
-#   :hidden:
+.. toctree::
+   :maxdepth: 2
+   :caption: How-to scripts
+   :hidden:
 
-#   ./documentation_pages/installation
-#   ./documentation_pages/tutorial1
+   how_to/coarse_graining
 
-#.. toctree::
-#   :maxdepth: 2
-#   :caption: Description
-#   :hidden:
+.. toctree::
+   :maxdepth: 2
+   :caption: Description
+   :hidden:
 
-#   ./modules/NMR
+   modules/NMR
 
-#.. toctree::
-#   :maxdepth: 2
-#   :caption: Theory
-#   :hidden:
+.. toctree::
+   :maxdepth: 2
+   :caption: Theory
+   :hidden:
 
-#   ./documentation_pages/changelog
+   theory/NMR
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contributing
+   :hidden:
+
+   ./contributing/changelog
