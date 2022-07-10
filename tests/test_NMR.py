@@ -9,6 +9,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import MDAnalysis as mda
+from scipy import constants as cst
 import numpy as np
 import nmrformd as nmrmd
 
@@ -78,3 +79,19 @@ def test_spherical_harmonic():
     assert np.isclose(np.imag(nmr_2._sh20), 0.0)
     assert np.isclose(np.imag(nmr_2._sh21), 0.0)
     assert np.isclose(np.imag(nmr_2._sh22), 0.0)
+
+def test_correlation():
+    u = import_universe()
+    group_H2O_1 = ["type 2"]
+    nmr_1 = nmrmd.NMR(u, group_H2O_1)
+    _pref = nmr_1._K / cst.angstrom ** 6
+    assert np.isclose(np.unique(nmr_1.gij/_pref), 1/8**6)
+    nmr_2 = nmrmd.NMR(u, group_H2O_1, order="m012")
+    assert np.isclose(np.unique(nmr_2.gij[0] / _pref), 1 / 8 ** 6)
+    assert np.isclose(np.unique(nmr_2.gij[1] / _pref), 0)
+    assert np.isclose(np.unique(nmr_2.gij[2] / _pref), 1/8 ** 6)
+    nmr_3 = nmrmd.NMR(u, group_H2O_1, pbc=False)
+    assert np.isclose(np.unique(nmr_3.gij / _pref), 1 / 10 ** 6)
+
+
+

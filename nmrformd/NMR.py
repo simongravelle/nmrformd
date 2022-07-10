@@ -55,9 +55,9 @@ class NMR:
                  actual_dt: float =None,
                  hydrogen_per_atom: float =1.0,
                  spin: float =1/2,
-                 start: int =0,
-                 stop: int =-1,
-                 step: int =1,
+                 start: int = 0,
+                 stop: int = 0,
+                 step: int = 1,
                  pbc: bool = True
                  ):
         """Initialise class NMR.
@@ -83,7 +83,10 @@ class NMR:
         self.hydrogen_per_atom = hydrogen_per_atom
         self.spin = spin
         self.start = start
-        self.stop = stop
+        if stop == 0:
+            self.stop = u.trajectory.n_frames
+        else:
+            self.stop = stop
         self.step = step
         self.pbc = pbc
         self.data = None
@@ -169,7 +172,6 @@ class NMR:
         """Select atoms of the group i for the calculation."""
         self.group_i = self.u.select_atoms('index ' + str(self.index_i[self._cpt_i]))
         self._resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self._cpt_i]]
-        #print(self.group_i)
 
     def _select_atoms_group_j(self):
         """Select atoms of the group j for the calculation.
@@ -235,7 +237,8 @@ class NMR:
 
         Note: if step>1 is given, the timestep is adapted.
         """
-        for cpt, _ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
+        for _cpt, _ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
+
             self._position_i = self.group_i.atoms.positions
             self._position_j = self.group_j.atoms.positions
             self._box = self.u.dimensions
@@ -243,9 +246,9 @@ class NMR:
             self._cartesian_to_spherical()
             self._spherical_harmonic()
             if self.order == 'm0':
-                self._data[:, cpt] = self._sh20
+                self._data[:, _cpt] = self._sh20
             elif self.order == 'm012':
-                self._data[:, cpt] = self._sh20, self._sh21, self._sh22
+                self._data[:, _cpt] = self._sh20, self._sh21, self._sh22
         self._calculate_correlation_ij()
 
     def _calculate_correlation_ij(self):
