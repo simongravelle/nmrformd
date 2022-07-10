@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test file for NMRForMD package."""
+"""Tests for the NMR class using only two water molecules."""
 # -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-
 #
 # Copyright (c) 2022 Authors and contributors
@@ -10,53 +10,71 @@
 
 import MDAnalysis as mda
 import numpy as np
+import nmrformd as nmrmd
 
-import nmrformd as NMR
+def import_universe():
+    data = "two_water/twomolecules.data"
+    trj = "two_water/twomolecules.xtc"
+    return mda.Universe(data, trj)
 
-#from datafiles import (SPCE_GRO, SPCE_ITP)
+def test_shape_array():
+    """Assert that the data matrix dimension is consistent."""
+    u = import_universe()
+    n_frames = u.trajectory.n_frames
+    group_H2O_1 = ["type 2"]
+    nmr_1 = nmrmd.NMR(u, group_H2O_1)
+    assert nmr_1._data.shape == (1, n_frames, 1)
+    assert nmr_1.gij.shape == (1, n_frames)
+    assert nmr_1.t.shape == (n_frames,)
+    n_fft = len(np.arange(np.int32(n_frames / 2)+1))
+    assert nmr_1.J.shape == (n_fft,)
+    assert nmr_1.f.shape == (n_fft,)
+    assert nmr_1.R1.shape == (n_fft,)
+    assert nmr_1.R2.shape == (n_fft,)
+    nmr_2 = nmrmd.NMR(u, group_H2O_1, order="m012")
+    assert nmr_2._data.shape == (3, n_frames, 1)
+    assert nmr_2.gij.shape == (3, n_frames)
+    assert nmr_2.t.shape == (n_frames,)
+    assert nmr_2.J.shape == (3, n_fft)
+    assert nmr_2.f.shape == (n_fft,)
+    assert nmr_2.R1.shape == (n_fft,)
+    assert nmr_2.R2.shape == (n_fft,)
+    assert nmr_2.gij.T[0].shape == (3,)
 
-#from pkg_resources import resource_filename
+def test_distance():
+    """Assert that the calculated distance is correct."""
+    u = import_universe()
+    group_H2O_1 = ["type 2"]
+    nmr_1 = nmrmd.NMR(u, group_H2O_1)
+    assert np.isclose(nmr_1._rij[0][0], -8.0)
+    assert np.isclose(nmr_1._rij[1][0], 0.0)
+    assert np.isclose(nmr_1._rij[2][0], 0.0)
+    nmr_2 = nmrmd.NMR(u, group_H2O_1, pbc = False)
+    assert np.isclose(nmr_2._rij[0][0], 10.0)
+    assert np.isclose(nmr_2._rij[1][0], 0.0)
+    assert np.isclose(nmr_2._rij[2][0], 0.0)
 
-import os
-cwd = os.getcwd()
-print(cwd)
+def test_spherical():
+    u = import_universe()
+    group_H2O_1 = ["type 2"]
+    nmr_1 = nmrmd.NMR(u, group_H2O_1)
+    assert np.isclose(nmr_1._r[0], 8.0)
+    assert np.isclose(nmr_1._theta[0], np.pi/2)
+    assert np.isclose(nmr_1._phi[0], np.pi)
+    nmr_2 = nmrmd.NMR(u, group_H2O_1, pbc = False)
+    assert np.isclose(nmr_2._r[0], 10.0)
+    assert np.isclose(nmr_2._theta[0], np.pi/2)
+    assert np.isclose(nmr_2._phi[0], 0)
 
-mda.Universe("water/spce.itp", "water/spce.gro", topology_format='itp')
-
-def create_universe(n_molecules, angle_deg):
-    """Create universe with regularly-spaced water molecules."""
-    fluid = []
-    for _n in range(n_molecules):
-        fluid.append(mda.Universe("water/spce.itp",
-                                  "water/spce.gro",
-                                  topology_format='itp'))
-    dimensions = fluid[0].dimensions
-
-    translations = [(0, 0, 0),
-                    (0, 0, 10)]
-
-    for molecule, translation in zip(fluid, translations):
-        molecule.atoms.translate(translation)
-    u = mda.Merge(*[molecule.atoms for molecule in fluid])
-
-    dimensions[2] *= n_molecules
-    u.dimensions = dimensions
-    u.residues.molnums = list(range(1, n_molecules + 1))
-    return u
-
-class TestNMR(object):
-    """Tests for the NMR class using only two water molecules.
-
-    The distance between the two molecules is 1 nm, and
-    they do not move.
-    """
-
-    def test_2_water_0(self):
-        u =  create_universe(2, 0)
-        group_H2O_1 = ["name HW1"]
-
-        #print(group_H2O_1.atoms.names)
-        #print(group_H2O_1.atoms.positions)
-
-        nmr_result = NMR.NMR(u, group_H2O_1, "full", 0, "m0", actual_dt = 2)
-        
+def test_spherical_harmonic():
+    u = import_universe()
+    group_H2O_1 = ["type 2"]
+    nmr_1 = nmrmd.NMR(u, group_H2O_1)
+    assert np.isclose(nmr_1._sh20[0], -1 / 8**3)
+    nmr_2 = nmrmd.NMR(u, group_H2O_1, order="m012")
+    assert np.isclose(np.real(nmr_2._sh20), -1 / 8**3)
+    assert np.isclose(np.real(nmr_2._sh21), 0.0)
+    assert np.isclose(np.real(nmr_2._sh22), 1 / 8**3)
+    assert np.isclose(np.imag(nmr_2._sh20), 0.0)
+    assert np.isclose(np.imag(nmr_2._sh21), 0.0)
+    assert np.isclose(np.imag(nmr_2._sh22), 0.0)

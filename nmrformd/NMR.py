@@ -48,7 +48,7 @@ class NMR:
     def __init__(self,
                  u: MDAnalysis.Universe,
                  atom_group: MDAnalysis.AtomGroup,
-                 type_analysis: str,
+                 type_analysis: str = "full",
                  number_i: int =0,
                  order: str ="m0",
                  f0: float =None,
@@ -169,6 +169,7 @@ class NMR:
         """Select atoms of the group i for the calculation."""
         self.group_i = self.u.select_atoms('index ' + str(self.index_i[self._cpt_i]))
         self._resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self._cpt_i]]
+        #print(self.group_i)
 
     def _select_atoms_group_j(self):
         """Select atoms of the group j for the calculation.
@@ -253,8 +254,8 @@ class NMR:
             if self.order == 'm0':
                 self.gij += correlation_function(self._data[0, :, _idx_j])
             elif self.order == 'm012':
-                for m in range(3):
-                    self.gij[m] += correlation_function(self._data[m, :, _idx_j])
+                for _m in range(3):
+                    self.gij[_m] += correlation_function(self._data[_m, :, _idx_j])
         self.gij = np.real(self.gij)
 
     def _calculate_fourier_transform(self):
@@ -297,8 +298,7 @@ class NMR:
     def _cartesian_to_spherical(self):
         """Convert cartesian coordinate to spherical."""
         self._r = np.sqrt(self._rij[0]**2 + self._rij[1]**2 + self._rij[2]**2)
-        self._theta = np.arctan2(np.sqrt(self._rij[0]**2
-                                + self._rij[1]**2), self._rij[2])
+        self._theta = np.arctan2(np.sqrt(self._rij[0]**2+ self._rij[1]**2), self._rij[2])
         self._phi = np.arctan2(self._rij[1], self._rij[0])
 
     def _spherical_harmonic(self):
@@ -307,15 +307,15 @@ class NMR:
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
-        self._sh20 = np.sqrt(16 * np.pi / 5) \
-            * sph_harm(0, 2, self._phi, self._theta) / np.power(self._r, 3)
+        _a_0 = np.sqrt(16 * np.pi / 5)
+        _a_1 = np.sqrt(8 * np.pi / 15)
+        _a_2 = np.sqrt(32 * np.pi / 15)
+        self._sh20 = _a_0 * sph_harm(0, 2, self._phi, self._theta) / np.power(self._r, 3)
         if self.order == "m0":
             self._sh20 = self._sh20.real
         if self.order == "m012":
-            self._sh21 = np.sqrt(8 * np.pi / 15) \
-                * sph_harm(1, 2, self._phi, self._theta) / np.power(self._r, 3)
-            self._sh22 = np.sqrt(32 * np.pi / 15) \
-                * sph_harm(2, 2, self._phi, self._theta) / np.power(self._r, 3)
+            self._sh21 = _a_1 * sph_harm(1, 2, self._phi, self._theta) / np.power(self._r, 3)
+            self._sh22 = _a_2 * sph_harm(2, 2, self._phi, self._theta) / np.power(self._r, 3)
 
     def _calculate_spectrum(self):
         """Calculate spectrums R1 and R2 from J."""
@@ -354,9 +354,9 @@ class NMR:
         if self.order == "m0":
             self.tau = 0.5 * (self.J[0] / self.gij[0][0])
         elif self.order == "m012":
-            self.tau = np.array([0.5*(self.J[0] / self.gij[0][0]),
-                                 0.5*(self.J[1] / self.gij[0][1]),
-                                 0.5*(self.J[2] / self.gij[0][2])])
+            self.tau = np.array([0.5*(self.J[0][0] / self.gij.T[0][0]),
+                                 0.5*(self.J[1][0] / self.gij.T[0][1]),
+                                 0.5*(self.J[2][0] / self.gij.T[0][2])])
         self.tau /= cst.pico
 
     def _calculate_secondmoment(self):
