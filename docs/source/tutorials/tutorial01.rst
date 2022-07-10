@@ -1,5 +1,5 @@
-Tutorial
-========
+Tutorial 1
+==========
 
 In this tutorial, the NMR relaxation time T1 of water is going to be measured using 'NMRforMD'. 
 `MDAnalysis`_, `numpy`_, and `matplotlib`_ and NMRforMD must be installed. 
@@ -129,7 +129,4 @@ Plot the spectrum and the correlation functions
 .. _`repository`: https://github.com/simongravelle/nmrformd/tree/main/tests
 .. _`LAMMPS`: https://www.lammps.org/
 
-.. toctree::
-   :maxdepth: 2
-   :caption: NMRforMD
-   :hidden:
+

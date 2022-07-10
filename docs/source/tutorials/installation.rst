@@ -25,7 +25,3 @@ You can run the tests using pytest:
 	cd tests
 	pytest .
 
-.. toctree::
-   :maxdepth: 2
-   :caption: NMRforMD
-   :hidden:
