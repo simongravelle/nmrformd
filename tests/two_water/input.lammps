@@ -1,0 +1,16 @@
+# no dynamics
+units real
+atom_style full
+bond_style harmonic
+pair_style lj/cut 10.0
+read_data singlemolecule.data
+mass * 1
+pair_coeff * * 0 0
+bond_coeff * 0 0
+replicate 2 1 1
+change_box all x final -4 14
+dump mydump1 all xtc 1 twomolecules.xtc
+dump mydump2 all atom 1 twomolecules.lammpstrj
+#dump_modify mydump element O H
+run 9
+write_data twomolecules.data
