@@ -63,8 +63,6 @@ class NMR:
         """Initialise class NMR.
         """
 
-
-
         self.u = u
         if len(atom_group) == 0:
             raise ValueError("Missing atom group")
