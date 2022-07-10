@@ -121,7 +121,7 @@ class NMR:
         self._calculate_fourier_transform()
         self._calculate_spectrum()
         self.f0 = f0
-        self._calculate_relaxationtime(self.f0)
+        self._calculate_relaxationtime()
         self._calculate_tau()
         self._calculate_secondmoment()
 
@@ -337,12 +337,12 @@ class NMR:
             self.R2 = (1/4)*(_inter1d_0(self.f[0])+ 10*_inter1d_1(self.f)
                              + _inter1d_2(2 * self.f))
 
-    def _calculate_relaxationtime(self, f0=None):
-        if f0 is None:
+    def _calculate_relaxationtime(self):
+        if self.f0 is None:
             self.T1 = 1/self.R1[0]
             self.T2 = 1/self.R2[0]
         else:
-            idx = find_nearest(self.f, f0)
+            idx = find_nearest(self.f, self.f0)
             self.T1 = 1 / self.R1[idx]
             self.T2 = 1 / self.R2[idx]
 
