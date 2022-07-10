@@ -1,6 +1,6 @@
 ;======================== running ============= ; description
 integrator = md ; leap-frog algorithm for integrating Newton’s equations of motion.
-nsteps = 25000 ; maximum number of steps to integrate or minimize (lager than the 5ns necessary for equilibration)
+nsteps = 100000 ; maximum number of steps to integrate
 dt = 0.001 ; time step for integration (1 fs)
 comm_mode = linear ; remove center of mass translation
 comm_grps = system ; group(s) for center of mass motion removal
@@ -13,9 +13,9 @@ nstlist = 10 ; frequency to update the neighbor list
 ns_type = grid
 
 ;======================== output ============== ; description
-nstlog = 2000 ; number of steps that elapse between writing energies to the log file
-nstenergy = 2000 ; number of steps that elapse between writing energies to energy file
-nstxout-compressed = 2000 ; frequency to write coordinates to xtc trajectory
+nstlog = 1000 ; number of steps that elapse between writing energies to the log file
+nstenergy = 1000 ; number of steps that elapse between writing energies to energy file
+nstxout-compressed = 1000 ; frequency to write coordinates to xtc trajectory
 
 ;======================== van der Waals ======= ; description
 vdw-type = Cut-off ; plain cut-off with rlist >= rvdw
@@ -39,10 +39,3 @@ tc-grps = Water SiOH Na ; groups to couple to separate temperature baths
 tau-t = 0.5 0.5 0.5 ; time constant for coupling (ps)
 ref-t = 300 300 300 ; reference temperature for coupling (K)
 nhchainlength = 1 ; number of chained Nose-Hoover thermostats
-
-; ======================= press. coupling ===== ; description
-pcoupl = berendsen ; exponential relaxation pressure coupling with time constant
-Pcoupltype = anisotropic ; isotropic pressure coupling
-tau_p = 1. ; time constant for pressure coupling (ps)
-ref_p = 1. 1. 1. 0. 0. 0. ; reference pressure for coupling (bar)
-compressibility = 4.5e-5 4.5e-5 4.5e-5 0 0 0 ; compressibility (bar-1)
