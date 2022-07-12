@@ -3,8 +3,8 @@ message: "If you use this software, please cite it as below."
 authors:
   - family-names: Gravele
     given-names: Simon
-    orcid: https://orcid.org/0000-0003-2149-6706
+    orcid: "https://orcid.org/0000-0003-2149-6706"
 title: "NMRforMD"
 version: 0.0.8
-doi:  DOI: 10.5281/zenodo.6821215 
+doi:  "DOI: 10.5281/zenodo.6821215" 
 date-released: 2022-07-12
