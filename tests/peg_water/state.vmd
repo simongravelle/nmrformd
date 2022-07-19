@@ -300,8 +300,8 @@ mol addfile traj.xtc type xtc first 0 last -1 step 1 filebonds 1 autobonds 1 wai
 mol delrep 0 top
 mol representation VDW 0.900000 62.000000
 mol color Name
-mol selection {type 1 and z <  4}
-mol material Opaque
+mol selection {type 1 and z <  6}
+mol material Goodsell
 mol addrep top
 mol selupdate 0 top 0
 mol colupdate 0 top 0
@@ -334,8 +334,8 @@ mol clipplane normal 5 0 top {0.0 0.0 1.0}
 mol clipplane status 5 0 top {0}
 mol representation VDW 0.500000 62.000000
 mol color Name
-mol selection {type 2 and z < 4}
-mol material Opaque
+mol selection {type 2 and z < 6}
+mol material Goodsell
 mol addrep top
 mol selupdate 1 top 0
 mol colupdate 1 top 0
@@ -369,7 +369,7 @@ mol clipplane status 5 1 top {0}
 mol representation VDW 1.000000 62.000000
 mol color Name
 mol selection {type 3}
-mol material Opaque
+mol material Goodsell
 mol addrep top
 mol selupdate 2 top 0
 mol colupdate 2 top 0
@@ -403,7 +403,7 @@ mol clipplane status 5 2 top {0}
 mol representation VDW 0.800000 62.000000
 mol color Name
 mol selection {type 4}
-mol material Opaque
+mol material Goodsell
 mol addrep top
 mol selupdate 3 top 0
 mol colupdate 3 top 0
@@ -437,7 +437,7 @@ mol clipplane status 5 3 top {0}
 mol representation VDW 0.500000 62.000000
 mol color Name
 mol selection {type 5}
-mol material Opaque
+mol material Goodsell
 mol addrep top
 mol selupdate 4 top 0
 mol colupdate 4 top 0
@@ -471,7 +471,7 @@ mol clipplane status 5 4 top {0}
 mol representation VDW 0.800000 62.000000
 mol color Name
 mol selection {type 6}
-mol material Opaque
+mol material Goodsell
 mol addrep top
 mol selupdate 5 top 0
 mol colupdate 5 top 0
@@ -505,7 +505,7 @@ mol clipplane status 5 5 top {0}
 mol representation VDW 0.400000 62.000000
 mol color Name
 mol selection {type 7}
-mol material Opaque
+mol material Goodsell
 mol addrep top
 mol selupdate 6 top 0
 mol colupdate 6 top 0
@@ -537,10 +537,10 @@ mol clipplane color  5 6 top {0.5 0.5 0.5 }
 mol clipplane normal 5 6 top {0.0 0.0 1.0}
 mol clipplane status 5 6 top {0}
 mol rename top conf.gro
-set viewpoints([molinfo top]) {{{1 0 0 0.0547334} {0 1 0 0.0744418} {0 0 1 -0.2148} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.113739 0 0 0} {0 0.113739 0 0} {0 0 0.113739 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 0.0547334} {0 1 0 0.0744418} {0 0 1 -0.2148} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.113603 0 0 0} {0 0.113603 0 0} {0 0 0.113603 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
-# done with molecule 0
+# done with molecule 1
 foreach v $viewplist {
   molinfo $v set {center_matrix rotate_matrix scale_matrix global_matrix} $viewpoints($v)
 }
@@ -722,6 +722,7 @@ color scale colors CET_R2 {0.0 0.0 0.0} {0.0 0.0 0.0} {0.0 0.0 0.0}
     {color Segname {} blue}
     {color Conformation {all} blue}
     {color Molecule {0} blue}
+    {color Molecule {1} red}
     {color Molecule {conf.gro} blue}
     {color Structure {3_10_Helix} blue}
     {color Surface {Grasp} gray}
