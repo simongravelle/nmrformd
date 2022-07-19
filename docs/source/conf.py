@@ -25,7 +25,7 @@ extensions = [
 ]
 
 # Execute the notebooks
-nbsphinx_execute = 'always'
+nbsphinx_execute = 'never'
 nbsphinx_allow_errors = True
 exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
