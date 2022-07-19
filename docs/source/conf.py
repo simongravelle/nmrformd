@@ -14,14 +14,20 @@ copyright = 'All source code is available under the GNU General Public License v
 author = 'Simon Gravelle'
 
 version = '0.0'
-release = '0.0.8'
+release = '0.0.9'
 
 
 # -- General configuration ---------------------------------------------------
 
 extensions = [
     'sphinx.ext.autodoc',
+    'nbsphinx',
 ]
+
+# Execute the notebooks
+nbsphinx_execute = 'always'
+nbsphinx_allow_errors = True
+exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
 templates_path = ['_templates']
 
