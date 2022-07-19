@@ -301,7 +301,7 @@ mol delrep 0 top
 mol representation VDW 1.000000 62.000000
 mol color Name
 mol selection {type OW}
-mol material Opaque
+mol material Goodsell
 mol addrep top
 mol selupdate 0 top 0
 mol colupdate 0 top 0
@@ -335,7 +335,7 @@ mol clipplane status 5 0 top {0}
 mol representation VDW 0.700000 62.000000
 mol color Name
 mol selection {type HW1 HW2}
-mol material Opaque
+mol material Goodsell
 mol addrep top
 mol selupdate 1 top 0
 mol colupdate 1 top 0
@@ -370,7 +370,7 @@ mol rename top conf.gro
 set viewpoints([molinfo top]) {{{1 0 0 0.0547334} {0 1 0 0.0744418} {0 0 1 -0.2148} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.0947821 0 0 0} {0 0.0947821 0 0} {0 0 0.0947821 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
-# done with molecule 0
+# done with molecule 1
 foreach v $viewplist {
   molinfo $v set {center_matrix rotate_matrix scale_matrix global_matrix} $viewpoints($v)
 }
@@ -537,6 +537,8 @@ color scale colors CET_R2 {0.0 0.0 0.0} {0.0 0.0 0.0} {0.0 0.0 0.0}
     {color Segname {} blue}
     {color Conformation {all} blue}
     {color Molecule {0} blue}
+    {color Molecule {1} red}
+    {color Molecule {conf.gro} red}
     {color Structure {3_10_Helix} blue}
     {color Surface {Grasp} gray}
     {color Labels {Springs} orange}
