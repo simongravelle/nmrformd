@@ -17,5 +17,5 @@ delete_atoms overlap 1.5 H2O PEG mol yes
 fix myshk H2O shake 1.0e-5 200 0 b 1 a 1
 fix mynpt all nvt temp 300 300 100
 dump dp1 all xtc 1000 traj.xtc
-thermo 1000
-run 200000
+thermo 5000
+run 1000000

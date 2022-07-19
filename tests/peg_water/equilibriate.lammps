@@ -15,9 +15,9 @@ include PARM.lammps
 group H2O type 1 2
 group PEG type 3 4 5 6 7
 delete_atoms overlap 1.5 H2O PEG mol yes
-dump mydmp all atom 1000 dump.lammpstrj
+dump mydmp all atom 20000 dump.lammpstrj
 fix myshk H2O shake 1.0e-5 200 0 b 1 a 1
 fix mynpt all npt temp 300 300 100 iso 1 1 1000
-thermo 1000
-run 10000
+thermo 10000
+run 100000
 write_data PEG_H2O.data
