@@ -12,8 +12,6 @@ __pycache__
 # jupyter-notebook stuff:
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
-*.ipynb
-**/*.ipynb
 
 # sphinx stuff:
 docs/build
