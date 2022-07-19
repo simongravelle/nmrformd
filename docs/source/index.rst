@@ -21,6 +21,7 @@ if you encounter a problem.
    
    tutorials/installation
    tutorials/tutorial01
+   tutorials/tutorial02
 
 .. toctree::
    :maxdepth: 2
