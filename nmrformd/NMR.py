@@ -15,6 +15,7 @@ import numpy as np
 from scipy import constants as cst
 from scipy.interpolate import interp1d
 from scipy.special import sph_harm
+from MDAnalysis.analysis.distances import distance_array
 
 from .utilities import correlation_function, find_nearest, fourier_transform
 
@@ -239,7 +240,7 @@ class NMR:
 
             self._position_i = self.group_i.atoms.positions
             self._position_j = self.group_j.atoms.positions
-            self._box = self.u.dimensions
+            self._box = self._ts.dimensions
             self._vector_ij()
             self._cartesian_to_spherical()
             self._spherical_harmonic()
@@ -291,10 +292,13 @@ class NMR:
         By default, periodic boundary conditions are assumed.
         """
         if self.pbc:
-            self._rij = (np.remainder(self._position_i - self._position_j
-                         + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
+            self._rij = distance_array(self._position_i, self._position_j, self._box)
+            #self._rij = (np.remainder(self._position_i - self._position_j
+            #             + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
         else:
-            self._rij = (self._position_i - self._position_j).T
+            self._rij = distance_array(self._position_i, self._position_j)
+            # to be verified
+            #self._rij = (self._position_i - self._position_j).T
 
     def _cartesian_to_spherical(self):
         """Convert cartesian coordinate to spherical."""
