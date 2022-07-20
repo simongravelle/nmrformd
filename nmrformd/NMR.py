@@ -237,13 +237,8 @@ class NMR:
         Note: if step>1 is given, the timestep is adapted.
         """
         for _cpt, _ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
-
-            self._x_i = self.group_i.atoms.positions.T[0].T
-            self._y_i = self.group_i.atoms.positions.T[1].T
-            self._z_i = self.group_i.atoms.positions.T[2].T
-            self._x_j = self.group_j.atoms.positions.T[0].T
-            self._y_j = self.group_j.atoms.positions.T[1].T
-            self._z_j = self.group_j.atoms.positions.T[2].T            
+            self._position_i = self.group_i.atoms.positions
+            self._position_j = self.group_j.atoms.positions
             self._box = _ts.dimensions
             self._vector_ij()
             self._cartesian_to_spherical()
@@ -294,36 +289,20 @@ class NMR:
         """Calculate distance between position_i and position_j.
 
         By default, periodic boundary conditions are assumed.
+        @tofix add warning for non triclinic box, trajectory must be corrected before :
+        https://lipyphilic.readthedocs.io/en/latest/reference/transformations.html#transform-triclinic-coordinates-to-their-orthorhombic-representation
         """
         if self.pbc:
-            _xij = distance_array(np.array([self._x_i, self._y_i*0, self._z_i*0]).T, 
-                                  np.array([self._x_j, self._y_j*0, self._z_j*0]).T,
-                                  self._box)
-            _yij = distance_array(np.array([self._x_i*0, self._y_i, self._z_i*0]).T, 
-                                  np.array([self._x_j*0, self._y_j, self._z_j*0]).T,
-                                  self._box)
-            _zij = distance_array(np.array([self._x_i*0, self._y_i*0, self._z_i]).T, 
-                                  np.array([self._x_j*0, self._y_j*0, self._z_j]).T,
-                                  self._box)
-            self._rij = np.array([_xij, _yij, _zij])
-            #self._rij = (np.remainder(self._position_i - self._position_j
-            #             + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
+            self._rij = (np.remainder(self._position_i - self._position_j
+                         + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
         else:
-            _xij = distance_array(np.array([self._x_i, self._y_i*0, self._z_i*0]).T, 
-                                  np.array([self._x_j, self._y_j*0, self._z_j*0]).T)
-            _yij = distance_array(np.array([self._x_i*0, self._y_i, self._z_i*0]).T, 
-                                  np.array([self._x_j*0, self._y_j, self._z_j*0]).T)
-            _zij = distance_array(np.array([self._x_i*0, self._y_i*0, self._z_i]).T, 
-                                  np.array([self._x_j*0, self._y_j*0, self._z_j]).T)
-            self._rij = np.array([_xij, _yij, _zij])
-            # to be verified
-            #self._rij = (self._position_i - self._position_j).T
+            self._rij = (self._position_i - self._position_j).T
 
     def _cartesian_to_spherical(self):
         """Convert cartesian coordinate to spherical."""
-        self._r = np.sqrt(self._rij[0]**2 + self._rij[1]**2 + self._rij[2]**2)
-        self._theta = np.arctan2(np.sqrt(self._rij[0]**2+ self._rij[1]**2), self._rij[2])
-        self._phi = np.arctan2(self._rij[1], self._rij[0])
+        self._r = np.sqrt(self._xij**2 + self._yij**2 + self._zij**2)
+        self._theta = np.arctan2(np.sqrt(self._xij**2 + self._yij**2), self._zij)
+        self._phi = np.arctan2(self._yij, self._xij)
 
     def _spherical_harmonic(self):
         """Evaluate spherical harmonic functions from rij vector.
