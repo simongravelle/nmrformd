@@ -238,9 +238,13 @@ class NMR:
         """
         for _cpt, _ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
 
-            self._position_i = self.group_i.atoms.positions
-            self._position_j = self.group_j.atoms.positions
-            self._box = self._ts.dimensions
+            self._x_i = self.group_i.atoms.positions.T[0].T
+            self._y_i = self.group_i.atoms.positions.T[1].T
+            self._z_i = self.group_i.atoms.positions.T[2].T
+            self._x_j = self.group_j.atoms.positions.T[0].T
+            self._y_j = self.group_j.atoms.positions.T[1].T
+            self._z_j = self.group_j.atoms.positions.T[2].T            
+            self._box = _ts.dimensions
             self._vector_ij()
             self._cartesian_to_spherical()
             self._spherical_harmonic()
@@ -292,11 +296,26 @@ class NMR:
         By default, periodic boundary conditions are assumed.
         """
         if self.pbc:
-            self._rij = distance_array(self._position_i, self._position_j, self._box)
+            _xij = distance_array(np.array([self._x_i, self._y_i*0, self._z_i*0]).T, 
+                                  np.array([self._x_j, self._y_j*0, self._z_j*0]).T,
+                                  self._box)
+            _yij = distance_array(np.array([self._x_i*0, self._y_i, self._z_i*0]).T, 
+                                  np.array([self._x_j*0, self._y_j, self._z_j*0]).T,
+                                  self._box)
+            _zij = distance_array(np.array([self._x_i*0, self._y_i*0, self._z_i]).T, 
+                                  np.array([self._x_j*0, self._y_j*0, self._z_j]).T,
+                                  self._box)
+            self._rij = np.array([_xij, _yij, _zij])
             #self._rij = (np.remainder(self._position_i - self._position_j
             #             + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
         else:
-            self._rij = distance_array(self._position_i, self._position_j)
+            _xij = distance_array(np.array([self._x_i, self._y_i*0, self._z_i*0]).T, 
+                                  np.array([self._x_j, self._y_j*0, self._z_j*0]).T)
+            _yij = distance_array(np.array([self._x_i*0, self._y_i, self._z_i*0]).T, 
+                                  np.array([self._x_j*0, self._y_j, self._z_j*0]).T)
+            _zij = distance_array(np.array([self._x_i*0, self._y_i*0, self._z_i]).T, 
+                                  np.array([self._x_j*0, self._y_j*0, self._z_j]).T)
+            self._rij = np.array([_xij, _yij, _zij])
             # to be verified
             #self._rij = (self._position_i - self._position_j).T
 
