@@ -35,7 +35,7 @@ def test_nmr():
                     order="m012")
     assert np.isclose(nmr_2.tau[0], 4.667102)
     assert np.isclose(nmr_2.delta_omega[0], 37.809311)
-    assert np.isclose(nmr_2.T1, 1.877145) # 7.1193362 # large difference induced by new distance evaluation ?
+    assert np.isclose(nmr_2.T1, 7.1193362)
 
     nmr_3 = nmrmd.NMR(u, [group_i, group_j], f0=1e5)
     assert np.isclose(nmr_3.T1, 11.42645)
