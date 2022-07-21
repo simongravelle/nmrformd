@@ -1,3 +1,5 @@
+.. image:: https://readthedocs.org/projects/nmrformd/badge/?version=latest
+
 .. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/NMRforMD_READMEc.png
 
 .. inclusion-readme-intro-start
@@ -31,10 +33,6 @@ bulk water reservoir, a PEG molecule, and water in a slit silica pore.
 
 For details and instructions for beginners,
 have a look at the `documentation`_.
-
-.. image:: https://readthedocs.org/projects/nmrformd/badge/?version=latest
-:target: https://nmrformd.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
 
 Installation
 ------------
