@@ -23,6 +23,9 @@ Notes :
     
     
 .. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/main_image.png
+
+Example of systems that can be analysed using NMRforMD, from left to right: a 
+bulk water reservoir, a PEG molecule, and water in a slit silica pore. 
     
 .. inclusion-readme-intro-end
 
