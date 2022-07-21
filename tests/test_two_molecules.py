@@ -47,17 +47,13 @@ def test_distance():
     u = import_universe()
     group_H2O_1 = ["type 2"]
     nmr_1 = nmrmd.NMR(u, group_H2O_1)
-    print()
-    print(nmr_1._xij[0])
-    print(nmr_1._xij[0])
-    print()
-    assert np.isclose(nmr_1._xij[0], -8.0)
-    assert np.isclose(nmr_1._yij[0], 0.0)
-    assert np.isclose(nmr_1._zij[0], 0.0)
+    assert np.isclose(nmr_1._rij[0][0], -8.0)
+    assert np.isclose(nmr_1._rij[1][0], 0.0)
+    assert np.isclose(nmr_1._rij[2][0], 0.0)
     nmr_2 = nmrmd.NMR(u, group_H2O_1, pbc = False)
-    assert np.isclose(nmr_2._xij[0], 10.0)
-    assert np.isclose(nmr_2._yij[0], 0.0)
-    assert np.isclose(nmr_2._zij[0], 0.0)
+    assert np.isclose(nmr_2._rij[0][0], 10.0)
+    assert np.isclose(nmr_2._rij[1][0], 0.0)
+    assert np.isclose(nmr_2._rij[2][0], 0.0)
 
 def test_spherical():
     u = import_universe()

@@ -1,5 +1,6 @@
 # MDAnalysis stuff
 **/*xtc_offsets.npz
+**/*xtc_offsets.lock
 
 # pycharm virtual environment stuff:
 venv

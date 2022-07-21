@@ -300,9 +300,9 @@ class NMR:
 
     def _cartesian_to_spherical(self):
         """Convert cartesian coordinate to spherical."""
-        self._r = np.sqrt(self._xij**2 + self._yij**2 + self._zij**2)
-        self._theta = np.arctan2(np.sqrt(self._xij**2 + self._yij**2), self._zij)
-        self._phi = np.arctan2(self._yij, self._xij)
+        self._r = np.sqrt(self._rij[0]**2 + self._rij[1]**2 + self._rij[2]**2)
+        self._theta = np.arctan2(np.sqrt(self._rij[0]**2 + self._rij[1]**2), self._rij[2])
+        self._phi = np.arctan2(self._rij[1], self._rij[0])
 
     def _spherical_harmonic(self):
         """Evaluate spherical harmonic functions from rij vector.
