@@ -24,6 +24,7 @@ def test_shape_array():
     n_frames = u.trajectory.n_frames
     group_H2O_1 = ["type 2"]
     nmr_1 = nmrmd.NMR(u, group_H2O_1)
+
     assert nmr_1._data.shape == (1, n_frames, 1)
     assert nmr_1.gij.shape == (1, n_frames)
     assert nmr_1.t.shape == (n_frames,)

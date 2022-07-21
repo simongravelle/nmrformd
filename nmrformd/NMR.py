@@ -36,10 +36,11 @@ class NMR:
     number_i : int, default 0
         Number of atom of the target group to consider for the calculation.
         If ``number_i = 0``, all atoms are considered.
-    order : str, default ``m012``
+    order : str, default ``m0``
         Order of the analysis, which can be ``m0`` or ``m012``.
         With ``m0``, only the spherical harmonic of order 0 is considered, 
-        this is only valid for isotropic systems.
+        this is only valid for isotropic systems. For nonisotropic systems,
+        use ``m012``.
     f0 : int, default ``None``
         Frequency at which ``T1`` and ``T2`` are calculated.
         If ``None``, ``f = 0`` is used.
@@ -64,7 +65,7 @@ class NMR:
                  atom_group: MDAnalysis.AtomGroup,
                  type_analysis: str = "full",
                  number_i: int =0,
-                 order: str ="m012",
+                 order: str ="m0",
                  f0: float =None,
                  actual_dt: float =None,
                  hydrogen_per_atom: float =1.0,
