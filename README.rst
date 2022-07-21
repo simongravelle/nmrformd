@@ -7,23 +7,27 @@ from molecular dynamics trajectory files. Used in combination
 with `MDAnalysis`_, it allows for the analysis of trajectory
 files from `LAMMPS`_ and `GROMACS`_ simulation package.
 
-Information
------------
-
-This documentation is separated in four parts: tutorials, how-to scripts,
-description, and theory.
+..
+	This documentation is separated in four parts: tutorials, how-to scripts,
+	description, and theory.
 
 .. _`MDAnalysis`: https://www.mdanalysis.org/
 .. _`LAMMPS`: https://www.lammps.org/
 .. _`GROMACS`: https://www.gromacs.org/
+.. _`Github`: https://github.com/simongravelle/nmrformd
+
+Notes :
+    - NMRforMD is still in development, please raise an issue on `Github`_ if you encounter a problem
+    - the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages, as long as they are compatible with MDAnalysis
+    - NMRforMD does not work with triclinic box, use MDAnalysis to convert your trajectory to orthorhombic
+    
+    
+.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/main_image.png
+    
 .. inclusion-readme-intro-end
 
 For details and instructions for beginners,
 have a look at the `documentation`_.
-
-Notes :
-    - NMRforMD is still in development, please raise an issue here if you encounter a problem.
-    - the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages
 
 Installation
 ------------

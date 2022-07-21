@@ -9,11 +9,6 @@ MNRforMD
    :start-after: inclusion-readme-intro-start
    :end-before: inclusion-readme-intro-end
 
-Note : NMRforMD is still in development, please raise an issue on `Github`_
-if you encounter a problem.
-
-.. _`Github`: https://github.com/simongravelle/nmrformd
-
 .. toctree::
    :maxdepth: 2
    :caption: Tutorials
@@ -22,13 +17,6 @@ if you encounter a problem.
    tutorials/installation
    tutorials/tutorial01
    tutorials/tutorial02
-
-.. toctree::
-   :maxdepth: 2
-   :caption: How-to scripts
-   :hidden:
-
-   how_to/coarse_graining
 
 .. toctree::
    :maxdepth: 2
