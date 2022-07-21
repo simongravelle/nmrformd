@@ -108,9 +108,9 @@ class NMR:
         self._select_target_i()
 
         # Loop on all the atom of group i
-        for _cpt_i, i in enumerate(self.index_i):
+        for _cpt_i, _ in enumerate(self.index_i):
             self._cpt_i = _cpt_i
-            self.i = i
+            #self.atom_index_i = atom_index_i # not used
             self._select_atoms_group_i()
             self._select_atoms_group_j()
             if _cpt_i == 0:
@@ -186,7 +186,7 @@ class NMR:
             _same_residue : bool = self.group_neighbor_j.resids == self._resids_i
             _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
             _index_j = self.group_neighbor_j.atoms.indices[_same_residue & _different_atom]
-            if not _index_j:
+            if not _index_j.any():
                 raise ValueError("Empty atom groups j, wrong combination of type_analysis"
                                  "and group selection?")
             _str_j = ' '.join(str(e) for e in _index_j)
@@ -194,11 +194,16 @@ class NMR:
         elif self.type_analysis == "inter_molecular":
             _different_residue : bool = self.group_neighbor_j.resids != self._resids_i
             _index_j = self.group_neighbor_j.atoms.indices[_different_residue]
+            if not _index_j.any():
+                raise ValueError("Empty atom groups j, wrong combination of type_analysis"
+                                 "and group selection?")
             _str_j = ' '.join(str(e) for e in _index_j)
             self.group_j = self.u.select_atoms('index ' + _str_j)
         elif self.type_analysis == "full":
             _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
             _index_j = self.group_neighbor_j.atoms.indices[_different_atom]
+            if not _index_j.any():
+                raise ValueError("Empty atom groups j")
             _str_j = ' '.join(str(e) for e in _index_j)
             self.group_j = self.u.select_atoms('index ' + _str_j)
 
