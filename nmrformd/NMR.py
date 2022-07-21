@@ -25,25 +25,38 @@ class NMR:
 
     Parameters
     ----------
-    u : MDAnalysis.core.universe.Universe
+    u : MDAnalysis.Universe
         MDAnalysis universe containing all the information describing
         the molecular dynamics system.
-    target_i : AtomGroup
-        Target group of the atoms ``i`` for the NMR calculation.
-    neighbor_j : AtomGroup
-        Neighbor group of the atoms ``j`` for the NMR calculation.
-    type_analysis : str
+    atom_group : [MDAnalysis.AtomGroup, MDAnalysis.AtomGroup]
+        Target and Neighbor groups, respectively.
+    type_analysis : str, default ``full``
         Type of analysis, which can be ``full``, ``intra_molecular``,
         or ``inter_molecular``.
     number_i : int, default 0
-        Number of atom of the group ``target_i`` to consider.
-        If ``number = 0``, all atoms
-        are considered.
-    order : str, default ``m0``
+        Number of atom of the target group to consider for the calculation.
+        If ``number_i = 0``, all atoms are considered.
+    order : str, default ``m012``
         Order of the analysis, which can be ``m0`` or ``m012``.
+        With ``m0``, only the spherical harmonic of order 0 is considered, 
+        this is only valid for isotropic systems.
     f0 : int, default ``None``
-        Frequency for the calculation of ``T1`` and ``T2``.
+        Frequency at which ``T1`` and ``T2`` are calculated.
         If ``None``, ``f = 0`` is used.
+    actual_dt : float, default ``None``
+        Can be used to specify a different time interface between frames than the 
+        one detected by MDAnalysis.
+    hydrogen_per_atom : float, default 1.0
+        Specify the number of hydrogen per atom, usefull for 
+        coarse-grained simulations.
+    start : int, default 0
+        To specify the first frame to be considered for the analysis.
+    stop : int, default 0
+        To specify the last frame to be considered for the analysis.
+    step : int, default 1
+        To jump frame during the analysis.  
+    pdb : bool, default True
+        To turn off/on the periodic boundary condition treatment.            
     """
 
     def __init__(self,
@@ -51,7 +64,7 @@ class NMR:
                  atom_group: MDAnalysis.AtomGroup,
                  type_analysis: str = "full",
                  number_i: int =0,
-                 order: str ="m0",
+                 order: str ="m012",
                  f0: float =None,
                  actual_dt: float =None,
                  hydrogen_per_atom: float =1.0,

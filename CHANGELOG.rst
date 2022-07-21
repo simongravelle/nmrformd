@@ -11,44 +11,20 @@ The rules for NMRforMD' CHANGELOG file:
 
 .. inclusion-marker-changelog-start
 
-v0.0.7 (2022/04/04)
+v0.1.0 (----/--/--)
 -------------------
 
 Simon Gravelle
 
-- added posibility to deal with coarse grained model
-
-v0.0.3 (2022/01/29)
--------------------
-
-Simon Gravelle
-
+- added theory to the documentation
+- created 2 tutorials
+- added posibility to deal with coarse grained simulations
 - added coverage for pytest
-
-v0.0.2 (2022/01/28)
--------------------
-
-Simon Gravelle
-
 - created separate py files
-- improved pytest
-
-v0.0.1 (2022/01/26)
--------------------
-
-Simon Gravelle
-
 - added caracteristic time measurement
 - added NMRforMD to pypi
-
-v0.0.0 (2022/01/20)
--------------------
-
-Simon Gravelle
-
 - created test
-- added NMRforMD to pypi test
-- created sphinx doc
+- created sphinx documentation
 - first commit
 
 .. inclusion-marker-changelog-end
