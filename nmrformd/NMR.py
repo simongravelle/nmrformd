@@ -255,7 +255,7 @@ class NMR:
             # ensure that the box is orthonormal
             if not np.all(self._box[3:] == self._box[3:][0]) & np.all(self._box[3:][0] == 90.0):
                 raise ValueError("NMRforMD does not accept non-orthogonal box"
-                                 "Use triclinic_to_orthorhombic from lipyphilic"
+                                 "Use triclinic_to_orthorhombic from the package lipyphilic"
                                  "to convert the trajectory file.")
             self._vector_ij()
             self._cartesian_to_spherical()
@@ -365,7 +365,7 @@ class NMR:
 
         The unit are in picosecond. If only the 0th m order is used,
         one value for tau is returned, if all three m orders are used,
-        three values for tau are used.
+        three values for tau are returned.
         """
         if self.order == "m0":
             self.tau = 0.5 * (self.J[0] / self.gij[0][0])
@@ -383,7 +383,7 @@ class NMR:
         (Delta omega)**2 where G(0) is the correlation function
         at time 0. If only the 0th m order is used, one value for Delta omega
         is returned, if all three m orders are used, three values for Delta
-        omega are used.
+        omega are returned.
         """
         if self.order == "m0":
             self.delta_omega = np.sqrt(3*self.gij[0][0])
