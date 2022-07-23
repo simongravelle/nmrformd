@@ -252,6 +252,11 @@ class NMR:
             self._position_i = self.group_i.atoms.positions
             self._position_j = self.group_j.atoms.positions
             self._box = _ts.dimensions
+            # ensure that the box is orthonormal
+            if not np.all(self._box[3:] == self._box[3:][0]) & np.all(self._box[3:][0] == 90.0):
+                raise ValueError("NMRforMD does not accept non-orthogonal box"
+                                 "Use triclinic_to_orthorhombic from lipyphilic"
+                                 "to convert the trajectory file.")
             self._vector_ij()
             self._cartesian_to_spherical()
             self._spherical_harmonic()
@@ -298,12 +303,7 @@ class NMR:
 
 
     def _vector_ij(self):
-        """Calculate distance between position_i and position_j.
-
-        By default, periodic boundary conditions are assumed.
-        @tofix add warning for non triclinic box, trajectory must be corrected before :
-        https://lipyphilic.readthedocs.io/en/latest/reference/transformations.html#transform-triclinic-coordinates-to-their-orthorhombic-representation
-        """
+        """Calculate distance between position_i and position_j."""
         if self.pbc:
             self._rij = (np.remainder(self._position_i - self._position_j
                          + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
@@ -350,6 +350,7 @@ class NMR:
                              + _inter1d_2(2 * self.f))
 
     def _calculate_relaxationtime(self):
+        """Calculate the relaxation time at a given frequency f0 (default is 0)"""
         if self.f0 is None:
             self.T1 = 1/self.R1[0]
             self.T2 = 1/self.R2[0]
