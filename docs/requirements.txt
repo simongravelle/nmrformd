@@ -2,3 +2,5 @@ sphinx
 furo
 scipy
 nbsphinx
+ipykernel
+ipywidgets
