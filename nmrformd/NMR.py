@@ -195,32 +195,23 @@ class NMR:
         different residues as group i.
         For full analysis, group j are made of atoms that are not in group i.
         """
-
         if self.type_analysis == "intra_molecular":
             _same_residue : bool = self.group_neighbor_j.resids == self._resids_i
             _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
             _index_j = self.group_neighbor_j.atoms.indices[_same_residue & _different_atom]
-            if not _index_j.any():
-                raise ValueError("Empty atom groups j, wrong combination of type_analysis"
-                                 "and group selection?")
             _str_j = ' '.join(str(e) for e in _index_j)
-            self.group_j = self.u.select_atoms('index ' + _str_j)
         elif self.type_analysis == "inter_molecular":
             _different_residue : bool = self.group_neighbor_j.resids != self._resids_i
             _index_j = self.group_neighbor_j.atoms.indices[_different_residue]
-            # #tofix : wrong condition !
-            #if not _index_j.any():
-            #    raise ValueError("Empty atom groups j, wrong combination of type_analysis"
-            #                     "and group selection?")
             _str_j = ' '.join(str(e) for e in _index_j)
-            self.group_j = self.u.select_atoms('index ' + _str_j)
-            
         elif self.type_analysis == "full":
             _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
             _index_j = self.group_neighbor_j.atoms.indices[_different_atom]
-            if not _index_j.any():
-                raise ValueError("Empty atom groups j")
             _str_j = ' '.join(str(e) for e in _index_j)
+        if len(_str_j) == 0:
+            raise ValueError("Empty atom groups j \n"
+                             "Wrong combination of type_analysis and group selection?")
+        else:
             self.group_j = self.u.select_atoms('index ' + _str_j)
 
     def _initialise_data(self):

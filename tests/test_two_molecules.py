@@ -103,4 +103,16 @@ def test_fourier_transform():
     assert np.isclose(1e8 * np.unique(nmr_1.J[0]), 4.89951158)
     assert np.isclose(1e8 * np.unique(nmr_1.J[1]), 0.0)
 
-
+def test_group():
+    """Assert that the number of atoms in groups in correct."""
+    u = import_universe()
+    group_H2O_1 = ["type 2 3"]
+    nmr_1 = nmrmd.NMR(u, group_H2O_1, type_analysis="intra_molecular")
+    assert nmr_1.group_i.atoms.n_atoms == 1
+    assert nmr_1.group_j.atoms.n_atoms == 1
+    nmr_2 = nmrmd.NMR(u, group_H2O_1, type_analysis="inter_molecular")
+    assert nmr_2.group_i.atoms.n_atoms == 1
+    assert nmr_2.group_j.atoms.n_atoms == 2
+    nmr_3 = nmrmd.NMR(u, group_H2O_1, type_analysis="full")
+    assert nmr_3.group_i.atoms.n_atoms == 1
+    assert nmr_3.group_j.atoms.n_atoms == 3
