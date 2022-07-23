@@ -16,15 +16,13 @@ v0.1.0 (----/--/--)
 
 Simon Gravelle
 
-- added theory to the documentation
-- created 2 tutorials
+- created 2 tutorials + installation instruction
+- created sphinx documentation
 - added posibility to deal with coarse grained simulations
 - added coverage for pytest
-- created separate py files
-- added caracteristic time measurement
 - added NMRforMD to pypi
-- created test
-- created sphinx documentation
-- first commit
+- created test from a universe of 2 molecules
+- created test from LAMMPS trj file
+- created NMR class
 
 .. inclusion-marker-changelog-end
