@@ -2,3 +2,4 @@ sphinx
 furo
 scipy
 nbsphinx
+MDAnalysis
