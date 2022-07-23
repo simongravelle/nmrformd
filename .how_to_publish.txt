@@ -1,0 +1,23 @@
+From : https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9
+
+Install last version using pip install -e .
+
+Update version in conf.py
+
+Update CITATION.cff
+
+Update setup.py
+
+Update CHANGELOG
+
+Create source distribution using python3 setup.py sdist
+
+Create a new release on Github using the generated tar.gz file
+
+Update the link in setup.py
+
+Create wheel using python3 setup.py bdist_wheel
+
+Upload to pypi using twine upload dist/nmrformd-0.1.0* \
+
+

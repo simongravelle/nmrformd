@@ -90,6 +90,7 @@ Known issues
 ------------
 
 - for very large trajectory file, the code requires a lot of memory
+- the code has only beed tested with hydrogen atoms
 
 .. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
 
