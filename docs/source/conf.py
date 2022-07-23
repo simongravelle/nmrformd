@@ -13,8 +13,8 @@ project = 'NMRforMD'
 copyright = 'All source code is available under the GNU General Public License v3.0'
 author = 'Simon Gravelle'
 
-version = '0.0'
-release = '0.0.9'
+version = '0.1'
+release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------

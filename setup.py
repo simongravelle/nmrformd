@@ -11,13 +11,13 @@
 from setuptools import setup
 
 setup(name='nmrformd',
-      version='v0.0.9',
+      version='v0.1.0',
       description='Calculate NMR relaxation time from \
                    molecular dynamics trajectory file',
       long_description=open('README.rst').read(),
       long_description_content_type='text/x-rst',
       url='https://github.com/simongravelle/nmrformd',
-      download_url='https://github.com/simongravelle/nmrformd/archive/refs/tags/v0.0.9.tar.gz',  # noqa
+      download_url='https://github.com/simongravelle/nmrformd/releases/download/v0.1.0/nmrformd-0.1.0.tar.gz',  # noqa
       author='Simon Gravelle',
       author_email='simon.gravelle@live.fr',
       license='GNU GENERAL PUBLIC LICENSE',

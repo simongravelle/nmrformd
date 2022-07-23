@@ -11,7 +11,14 @@ The rules for NMRforMD' CHANGELOG file:
 
 .. inclusion-marker-changelog-start
 
-v0.1.0 (----/--/--)
+v0.1.1 (---/--/--)
+-------------------
+
+Simon Gravelle
+
+- 
+
+v0.1.0 (2022/07/23)
 -------------------
 
 Simon Gravelle
