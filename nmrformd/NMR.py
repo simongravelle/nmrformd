@@ -15,7 +15,6 @@ import numpy as np
 from scipy import constants as cst
 from scipy.interpolate import interp1d
 from scipy.special import sph_harm
-from MDAnalysis.analysis.distances import distance_array
 
 from .utilities import correlation_function, find_nearest, fourier_transform
 
@@ -181,6 +180,7 @@ class NMR:
             self.index_i = np.array(self.group_target_i.atoms.indices)
         else:
             self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
+
     def _select_atoms_group_i(self):
         """Select atoms of the group i for the calculation."""
         self.group_i = self.u.select_atoms('index ' + str(self.index_i[self._cpt_i]))
@@ -241,7 +241,9 @@ class NMR:
         self.t = np.arange(self.u.trajectory.n_frames) * _timestep
 
     def _evaluate_correlation_ij(self):
-        """Evaluate the correlation function.
+        """Evaluate the correlation function. 
+        
+        @tofix find better name
 
         Run over the MDA trajectory. If start, stop, or step are
         specified, only a sub-part of the trajectory is analysed.
@@ -267,7 +269,7 @@ class NMR:
         self._calculate_correlation_ij()
 
     def _calculate_correlation_ij(self):
-        """Calculate the correlation function from ."""
+        """Calculate the correlation function."""
         for _idx_j in range(self.group_j.atoms.n_atoms):
             if self.order == 'm0':
                 self.gij += correlation_function(self._data[0, :, _idx_j])
@@ -277,6 +279,11 @@ class NMR:
         self.gij = np.real(self.gij)
 
     def _calculate_fourier_transform(self):
+        """Calculate spectral density J.
+        
+        Calculate the spectral density J from the 
+        Fourier transform of the correlation function.
+        """
         # normalise gij by the number of iteration
         self.gij /= self._cpt_i+1
         # dimensionalize the correlation function
@@ -301,7 +308,6 @@ class NMR:
                     _J_2 = np.real(fij.T[1])
             self.J = np.array([_J_0, _J_1, _J_2])
 
-
     def _vector_ij(self):
         """Calculate distance between position_i and position_j."""
         if self.pbc:
@@ -323,12 +329,12 @@ class NMR:
         note: scipy uses the opposite convention
         """
         _a_0 = np.sqrt(16 * np.pi / 5)
-        _a_1 = np.sqrt(8 * np.pi / 15)
-        _a_2 = np.sqrt(32 * np.pi / 15)
         self._sh20 = _a_0 * sph_harm(0, 2, self._phi, self._theta) / np.power(self._r, 3)
         if self.order == "m0":
             self._sh20 = self._sh20.real
         if self.order == "m012":
+            _a_1 = np.sqrt(8 * np.pi / 15)
+            _a_2 = np.sqrt(32 * np.pi / 15)
             self._sh21 = _a_1 * sph_harm(1, 2, self._phi, self._theta) / np.power(self._r, 3)
             self._sh22 = _a_2 * sph_harm(2, 2, self._phi, self._theta) / np.power(self._r, 3)
 
