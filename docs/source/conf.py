@@ -36,6 +36,7 @@ exclude_patterns = ['_build', '**.ipynb_checkpoints']
 pygments_style = 'tango'
 
 html_theme = 'furo'
+html_title = "    "
 
 html_static_path = ['_static']
 
