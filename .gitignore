@@ -23,6 +23,7 @@ logo/
 nmrformd.egg-info/
 dist/
 build/
+tests/bulk_water_lammps/*.lammpstrj
 
 .tox/
 docs/bin/
