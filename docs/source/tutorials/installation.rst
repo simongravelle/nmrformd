@@ -1,9 +1,15 @@
 Installation
 ============
 
+Install the last published version
+----------------------------------
+
 .. include:: ../../../README.rst
    :start-after: inclusion-readme-installation-start
    :end-before: inclusion-readme-installation-end
+
+Install the last (development) version
+--------------------------------------
 
 To get the last version of NMRforMD, clone the repository from `Github`_ on your computer
 and use pip3 from the main directory:
@@ -24,4 +30,3 @@ You can run the tests using pytest:
 	
 	cd tests
 	pytest .
-
