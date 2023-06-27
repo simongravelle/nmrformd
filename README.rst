@@ -92,6 +92,7 @@ Known issues
 
 - for very large trajectory file, the code requires a lot of memory
 - the code has only beed tested with hydrogen atoms (spin 1/2)
+- only works for dipolar interaction, not quadrupolar interaction
 
 .. _`documentation`: https://nmrformd.readthedocs.io/en/latest/
 
