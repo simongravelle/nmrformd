@@ -1,4 +1,4 @@
-# MDAnalysis stuff
+# MDAnalysis files
 **/*xtc_offsets.npz
 **/*xtc_offsets.lock
 
@@ -6,26 +6,24 @@
 venv
 .idea
 
-# python stuff:
-__pycache__
+# python files:
 **/__pycache__
 
-# jupyter-notebook stuff:
-.ipynb_checkpoints/
+# jupyter-notebook files:
 **/.ipynb_checkpoints/
 
-# sphinx stuff:
+# sphinx build:
 docs/build
 
 # own stuff
-cheat.txt
-logo/
 nmrformd.egg-info/
 dist/
 build/
-tests/bulk_water_lammps/*.lammpstrj
 
 .tox/
 docs/bin/
 docs/lib/
 docs/pyvenv.cfg
+
+# LAMMPS files
+**/log.lammps

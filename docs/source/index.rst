@@ -1,10 +1,6 @@
 NMRforMD
 ========
 
-.. image:: images/NMRforMD.png
-   :align: right
-   :width: 100
-
 .. include:: ../../README.rst
    :start-after: inclusion-readme-intro-start
    :end-before: inclusion-readme-intro-end
@@ -15,7 +11,7 @@ NMRforMD
    :hidden:
    
    tutorials/installation
-   tutorials/tutorial01
+   tutorials/bulk-water
    tutorials/tutorial02
 
 .. toctree::
