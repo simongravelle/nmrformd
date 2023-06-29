@@ -1,4 +1,4 @@
-MNRforMD
+NMRforMD
 ========
 
 .. image:: images/NMRforMD.png

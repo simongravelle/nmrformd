@@ -24,7 +24,6 @@ Notes :
     - the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages, as long as they are compatible with MDAnalysis
     - NMRforMD does not work with triclinic box, use MDAnalysis to convert your trajectory to orthorhombic
     
-    
 .. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/main_image.png
 
 Example of systems that can be analysed using NMRforMD, from left to right: a 

@@ -2,7 +2,7 @@
 """Main file for NMRforMD package."""
 # -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-
 #
-# Copyright (c) 2022 Authors and contributors
+# Copyright (c) 2023 Authors and contributors
 # Simon Gravelle
 #
 # Released under the GNU Public Licence, v3 or any higher version
@@ -63,12 +63,12 @@ class NMR:
                  u: MDAnalysis.Universe,
                  atom_group: MDAnalysis.AtomGroup,
                  type_analysis: str = "full",
-                 number_i: int =0,
-                 order: str ="m0",
-                 f0: float =None,
-                 actual_dt: float =None,
-                 hydrogen_per_atom: float =1.0,
-                 spin: float =1/2,
+                 number_i: int = 0,
+                 order: str = "m0",
+                 f0: float = None,
+                 actual_dt: float = None,
+                 hydrogen_per_atom: float = 1.0,
+                 spin: float = 1/2,
                  start: int = 0,
                  stop: int = 0,
                  step: int = 1,
