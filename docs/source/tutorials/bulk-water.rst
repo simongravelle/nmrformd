@@ -154,8 +154,10 @@ Extract T1
 
 >> NMR relaxation time T1 = 3.08 s
 
-The value you get may vary a little, depending on which hydrogen atoms
-were randomly selected by NMRforMD.
+..  container:: justify
+
+    The value you get may vary a little, depending on which hydrogen atoms
+    were randomly selected by NMRforMD.
 
 Plot the spectrum
 -----------------
