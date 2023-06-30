@@ -66,7 +66,7 @@ class NMR:
                  neighbor_group: MDAnalysis.AtomGroup = None,
                  type_analysis: str = "full",
                  number_i: int = 0,
-                 isotropic: bool = "True",
+                 isotropic: bool = True,
                  f0: float = None,
                  actual_dt: float = None,
                  hydrogen_per_atom: float = 1.0,
@@ -87,7 +87,7 @@ class NMR:
         self.type_analysis = type_analysis
         self.number_i = number_i
         self.isotropic = isotropic
-        if self.isotropic == "True":
+        if self.isotropic:
             self.dim = 1
         else:
             self.dim = 3
@@ -151,6 +151,7 @@ class NMR:
 
         Gamma is the gyromagnetic constant in Hz/T, and
         K has the units of m^6/s^2
+        Prefactors are for the harmonic functions
         # @tocheck the units
         # @tofix do atoms have all the same gyromag ratio? Its only for hydrogen so far.
         # One should allow to specify it, or one should tabulate it.
@@ -158,6 +159,9 @@ class NMR:
         self.GAMMA = 2 * np.pi * 42.6e6
         self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
             * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)
+        self.prefactors = [np.sqrt(16 * np.pi / 5),
+                           np.sqrt(8 * np.pi / 15),
+                           np.sqrt(32 * np.pi / 15)]
 
     def select_target_i(self):
         if self.number_i == 0:
@@ -270,7 +274,7 @@ class NMR:
         for m in range(self.dim):
             fij = fourier_transform(np.vstack([self.t, self.gij[m]]).T)
             self.J.append(np.real(fij.T[1]))
-        self.J = np.array(self.J)[0]
+        self.J = np.array(self.J)
         self.f = np.real(fij.T[0])
 
     def vector_ij(self):
@@ -294,32 +298,27 @@ class NMR:
         note: scipy uses the opposite convention
         """
         # Prefactors harmonic functions
-        prefactors = [np.sqrt(16 * np.pi / 5), np.sqrt(8 * np.pi / 15), np.sqrt(32 * np.pi / 15)]
+        
         sph_val = []
         for m in range(self.dim):
-            sph_val.append(prefactors[m] * sph_harm(m, 2, self.phi, self.theta) / np.power(self.r, 3))
+            sph_val.append(self.prefactors[m] * sph_harm(m, 2, self.phi, self.theta) / np.power(self.r, 3))
         if self.isotropic:
             sph_val[0] = sph_val[0].real
         self.sph_val = sph_val
 
     def calculate_spectrum(self):
         """Calculate spectrums R1 and R2 from J."""
-        if self.isotropic == "True":
-            inter1d = interp1d(self.f, self.J, fill_value="extrapolate")
-            self.R1 = (inter1d(self.f)
-                       + 4 * inter1d(2 * self.f))/6
-            self.R2 = (3/2*inter1d(self.f[0])
-                       + 5/2*inter1d(self.f)
-                       + inter1d(2 * self.f))/6
-        elif self.isotropic == "False":
-            inter1d_0 = interp1d(self.f, self.J[0], fill_value="extrapolate")
+        inter1d_0 = interp1d(self.f, self.J[0], fill_value="extrapolate")
+        if self.isotropic:
+            self.R1 = (inter1d_0(self.f) + 4 * inter1d_0(2 * self.f))/6
+            self.R2 = (3/2*inter1d_0(self.f[0]) + 5/2*inter1d_0(self.f)
+                       + inter1d_0(2 * self.f))/6
+        elif self.isotropic is False:
             inter1d_1 = interp1d(self.f, self.J[1], fill_value="extrapolate")
             inter1d_2 = interp1d(self.f, self.J[2], fill_value="extrapolate")
             self.R1 = inter1d_1(self.f) + inter1d_2(2 * self.f)
             self.R2 = (1/4)*(inter1d_0(self.f[0])+ 10*inter1d_1(self.f)
                              + inter1d_2(2 * self.f))
-        else:
-            raise ValueError("'isotropic' value is wrong, choose True or False")
         
     def calculate_relaxationtime(self):
         """Calculate the relaxation time at a given frequency f0 (default is 0)"""
