@@ -27,8 +27,10 @@ class NMR:
     u : MDAnalysis.Universe
         MDAnalysis universe containing all the information describing
         the molecular dynamics system.
-    atom_group : [MDAnalysis.AtomGroup, MDAnalysis.AtomGroup]
-        Target and Neighbor groups, respectively.
+    atom_group : MDAnalysis.AtomGroup
+        Target atom groups for NMR calculation.
+    neighbor_group : MDAnalysis.AtomGroup
+        Neighbor atom groups. If not specified, atom_group is used.
     type_analysis : str, default ``full``
         Type of analysis, which can be ``full``, ``intra_molecular``,
         or ``inter_molecular``.
@@ -62,9 +64,10 @@ class NMR:
     def __init__(self,
                  u: MDAnalysis.Universe,
                  atom_group: MDAnalysis.AtomGroup,
+                 neighbor_group: MDAnalysis.AtomGroup = None,
                  type_analysis: str = "full",
                  number_i: int = 0,
-                 order: str = "m0",
+                 order: str = "m0", # use isotropic TRUE/FALSE
                  f0: float = None,
                  actual_dt: float = None,
                  hydrogen_per_atom: float = 1.0,
@@ -74,20 +77,14 @@ class NMR:
                  step: int = 1,
                  pbc: bool = True
                  ):
-        """Initialise class NMR.
-        """
+        """Initialise class NMR."""
 
         self.u = u
-        if len(atom_group) == 0:
-            raise ValueError("Missing atom group")
-        elif len(atom_group) == 1:
-            self.target_i = atom_group[0]
-            self.neighbor_j = atom_group[0]
-        elif len(atom_group) == 2:
-            self.target_i = atom_group[0]
-            self.neighbor_j = atom_group[1]
-        elif len(atom_group) >= 3:
-            raise ValueError("More than 2 atom groups")
+        self.target_i = atom_group
+        if neighbor_group is None:
+            self.neighbor_j = atom_group
+        else:
+            self.neighbor_j = neighbor_group
         self.type_analysis = type_analysis
         self.number_i = number_i
         self.order = order
@@ -115,9 +112,8 @@ class NMR:
         self.tau = None
         self.delta_omega = None
 
-        self._verify_entry()
-        self._define_constants()
-        self._read_universe()
+        self.verify_entry()
+        self.define_constants()
         self._select_target_i()
 
         # Loop on all the atom of group i
@@ -137,49 +133,41 @@ class NMR:
         self._calculate_tau()
         self._calculate_secondmoment()
 
-    def _verify_entry(self):
-        """Verify that entries are correct."""
+    def verify_entry(self):
+        """Verify that entries are correct, and that groups are not empty."""
         _possible_analysis = ["inter_molecular", "intra_molecular", "full"]
         if self.type_analysis not in _possible_analysis:
             raise ValueError("type_analysis can only be inter_molecular, intra_molecular, and full.")
         _possible_order = ["m0", "m012"]
         if self.order not in _possible_order:
-            raise ValueError("order can only be m0 and m012.")
+            raise ValueError("order can only be m0 and m012.")        
+        if self.target_i.n_atoms == 0:
+            raise ValueError("Empty atom group")
+        if self.neighbor_j.n_atoms == 0:
+            raise ValueError("Empty neighbor atom group")
 
-    def _define_constants(self):
+    def define_constants(self):
         """Define the pre-factor K.
 
         Gamma is the gyromagnetic constant in Hz/T, and
         K has the units of m^6/s^2
         # @tocheck the units
-        # @tofix do atoms have all the same gyromag ratio?
+        # @tofix do atoms have all the same gyromag ratio? Its only for hydrogen so far.
+        # One should allow to specify it, or one should tabulate it.
         """
-        self._GAMMA = 2 * np.pi * 42.6e6
-        self._K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
+        self.GAMMA = 2 * np.pi * 42.6e6
+        self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
             * cst.hbar ** 2 * self._GAMMA ** 4 * self.spin * (1 + self.spin)
-
-    def _read_universe(self):
-        """Create atom groups from chosen atom selections.
-
-        The created groups must not be empty.
-        """
-        self.group_target_i = self.u.select_atoms(self.target_i)
-        self.group_neighbor_j = self.u.select_atoms(self.neighbor_j)
-        # Assert that both groups contain atoms
-        if self.group_target_i.atoms.n_atoms == 0:
-            raise ValueError("Empty atom groups i")
-        elif self.group_neighbor_j.atoms.n_atoms == 0:
-            raise ValueError("Empty atom groups j")
 
     def _select_target_i(self):
         if self.number_i == 0:
-            self.index_i = np.array(self.group_target_i.atoms.indices)
-        elif self.number_i > self.group_target_i.atoms.n_atoms:
+            self.index_i = np.array(self.target_i.atoms.indices)
+        elif self.number_i > self.target_i.atoms.n_atoms:
             print('Note : number_i is larger than the number of atoms in group target i\n'
                   '-> All the atoms of the group i have been selected')
-            self.index_i = np.array(self.group_target_i.atoms.indices)
+            self.index_i = np.array(self.target_i.atoms.indices)
         else:
-            self.index_i = np.array(random.choices(self.group_target_i.atoms.indices, k=self.number_i))
+            self.index_i = np.array(random.choices(self.target_i.atoms.indices, k=self.number_i))
 
     def _select_atoms_group_i(self):
         """Select atoms of the group i for the calculation."""
