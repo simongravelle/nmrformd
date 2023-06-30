@@ -1,30 +1,31 @@
-Solvated polymer
-================
+Water in silica
+===============
 
 .. container:: hatnote
 
-   Dealing with multiple groups
+   The case of anisotropic systems
 
-.. image:: ../../../examples/polymer-in-water/figures/peg-dark.png
+.. image:: ../../../examples/water-in-silica/figures/silica-dark.png
     :class: only-dark
-    :alt: PEG-water mixture simulated with gromacs - NMR relaxation time calculation
-    :width: 350
+    :alt: Nanoconfined water simulated with gromacs - NMR relaxation time calculation
+    :width: 250
     :align: right
 
-.. image:: ../../../examples/polymer-in-water/figures/peg-light.png
+.. image:: ../../../examples/water-in-silica/figures/silica-light.png
     :class: only-light
-    :alt: PEG-water mixture simulated with gromacs - NMR relaxation time calculation
-    :width: 350
+    :alt: Nanoconfined water simulated with gromacs - NMR relaxation time calculation
+    :width: 250
     :align: right
 
 .. container:: justify
 
-    In this tutorial, the NMR relaxation time :math:`T_1` of a water-polymer (PEG) is measured using
+    In this tutorial, the NMR relaxation time :math:`T_1` of water confined 
+    within a slit nanopore is measured using
     NMRforMD. Make sure you followed the 'bulk water' tutorial first.
 
-    The system is made of 334 TIP4P water molecules and 20 PEG300 polymer molecules
-    simulated in the NVT ensemble with GROMACS at a temperature of 295.15°K. The total
-    duration of the simulation is 5\,ns, and the timestep is 1 fs. You can
+    The system is made of 592 TIP4P water molecules and 20 sodium counter ion (Na+)
+    simulated with GROMACS at a temperature of 300°K. The total
+    duration of the simulation is 1\,ns, and the timestep is 1 fs. You can
     access the input files in this
     `repository <https://github.com/simongravelle/nmrformd/tree/main/tests>`__,
     which you can use to create larger system or longer trajectory. If
