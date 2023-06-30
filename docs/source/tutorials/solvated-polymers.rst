@@ -22,7 +22,7 @@ Solvated polymer
     In this tutorial, the NMR relaxation time :math:`T_1` of a water-polymer (PEG) is measured using
     NMRforMD. Make sure you followed the 'bulk water' tutorial first.
 
-    The system is made of 334 TIP4P water molecules qnd 20 PEG300 polymer molecules
+    The system is made of 334 TIP4P water molecules and 20 PEG300 polymer molecules
     simulated in the NVT ensemble with GROMACS at a temperature of 295.15°K. The total
     duration of the simulation is 5\,ns, and the timestep is 1 fs. You can
     access the input files in this
