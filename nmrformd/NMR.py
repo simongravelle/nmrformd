@@ -37,11 +37,10 @@ class NMR:
     number_i : int, default 0
         Number of atom of the target group to consider for the calculation.
         If ``number_i = 0``, all atoms are considered.
-    order : str, default ``m0``
-        Order of the analysis, which can be ``m0`` or ``m012``.
-        With ``m0``, only the spherical harmonic of order 0 is considered, 
-        this is only valid for isotropic systems. For nonisotropic systems,
-        use ``m012``.
+    isotropic : bool, default ``True``
+        If isotropic is true, only the spherical harmonic of order 0 is considered, 
+        which is usually valid for bulk systems. For non-isotropic systems,
+        use ``False``.
     f0 : int, default ``None``
         Frequency at which ``T1`` and ``T2`` are calculated.
         If ``None``, ``f = 0`` is used.
@@ -67,7 +66,7 @@ class NMR:
                  neighbor_group: MDAnalysis.AtomGroup = None,
                  type_analysis: str = "full",
                  number_i: int = 0,
-                 order: str = "m0", # use isotropic TRUE/FALSE
+                 isotropic: bool = "True",
                  f0: float = None,
                  actual_dt: float = None,
                  hydrogen_per_atom: float = 1.0,
@@ -87,7 +86,11 @@ class NMR:
             self.neighbor_j = neighbor_group
         self.type_analysis = type_analysis
         self.number_i = number_i
-        self.order = order
+        self.isotropic = isotropic
+        if self.isotropic == "True":
+            self.dim = 1
+        else:
+            self.dim = 3
         self.actual_dt = actual_dt
         self.hydrogen_per_atom = hydrogen_per_atom
         self.spin = spin
@@ -114,33 +117,30 @@ class NMR:
 
         self.verify_entry()
         self.define_constants()
-        self._select_target_i()
+        self.select_target_i()
 
         # Loop on all the atom of group i
-        for _cpt_i, _ in enumerate(self.index_i):
-            self._cpt_i = _cpt_i
+        for cpt_i, _ in enumerate(self.index_i):
+            self.cpt_i = cpt_i
             #self.atom_index_i = atom_index_i # not used
-            self._select_atoms_group_i()
-            self._select_atoms_group_j()
-            if _cpt_i == 0:
-                self._initialise_data()
-            self._evaluate_correlation_ij()
+            self.select_atoms_group_i()
+            self.select_atoms_group_j()
+            if cpt_i == 0:
+                self.initialise_data()
+            self.evaluate_correlation_ij()
 
-        self._calculate_fourier_transform()
-        self._calculate_spectrum()
+        self.calculate_fourier_transform()
+        self.calculate_spectrum()
         self.f0 = f0
-        self._calculate_relaxationtime()
-        self._calculate_tau()
-        self._calculate_secondmoment()
+        self.calculate_relaxationtime()
+        #self.calculate_tau()
+        #self.calculate_secondmoment()
 
     def verify_entry(self):
         """Verify that entries are correct, and that groups are not empty."""
-        _possible_analysis = ["inter_molecular", "intra_molecular", "full"]
-        if self.type_analysis not in _possible_analysis:
-            raise ValueError("type_analysis can only be inter_molecular, intra_molecular, and full.")
-        _possible_order = ["m0", "m012"]
-        if self.order not in _possible_order:
-            raise ValueError("order can only be m0 and m012.")        
+        possible_analysis = ["inter_molecular", "intra_molecular", "full"]
+        if self.type_analysis not in possible_analysis:
+            raise ValueError("type_analysis can only be inter_molecular, intra_molecular, and full.")      
         if self.target_i.n_atoms == 0:
             raise ValueError("Empty atom group")
         if self.neighbor_j.n_atoms == 0:
@@ -157,9 +157,9 @@ class NMR:
         """
         self.GAMMA = 2 * np.pi * 42.6e6
         self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
-            * cst.hbar ** 2 * self._GAMMA ** 4 * self.spin * (1 + self.spin)
+            * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)
 
-    def _select_target_i(self):
+    def select_target_i(self):
         if self.number_i == 0:
             self.index_i = np.array(self.target_i.atoms.indices)
         elif self.number_i > self.target_i.atoms.n_atoms:
@@ -169,12 +169,12 @@ class NMR:
         else:
             self.index_i = np.array(random.choices(self.target_i.atoms.indices, k=self.number_i))
 
-    def _select_atoms_group_i(self):
+    def select_atoms_group_i(self):
         """Select atoms of the group i for the calculation."""
-        self.group_i = self.u.select_atoms('index ' + str(self.index_i[self._cpt_i]))
-        self._resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self._cpt_i]]
+        self.group_i = self.u.select_atoms('index ' + str(self.index_i[self.cpt_i]))
+        self._resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]
 
-    def _select_atoms_group_j(self):
+    def select_atoms_group_j(self):
         """Select atoms of the group j for the calculation.
 
         For intra molecular analysis, group j are made of atoms of the
@@ -184,51 +184,43 @@ class NMR:
         For full analysis, group j are made of atoms that are not in group i.
         """
         if self.type_analysis == "intra_molecular":
-            _same_residue : bool = self.group_neighbor_j.resids == self._resids_i
-            _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
-            _index_j = self.group_neighbor_j.atoms.indices[_same_residue & _different_atom]
-            _str_j = ' '.join(str(e) for e in _index_j)
+            same_residue : bool = self.neighbor_j.resids == self._resids_i
+            different_atom : bool = self.neighbor_j.indices != self.index_i[self.cpt_i]
+            index_j = self.neighbor_j.atoms.indices[same_residue & different_atom]
+            str_j = ' '.join(str(e) for e in index_j)
         elif self.type_analysis == "inter_molecular":
-            _different_residue : bool = self.group_neighbor_j.resids != self._resids_i
-            _index_j = self.group_neighbor_j.atoms.indices[_different_residue]
-            _str_j = ' '.join(str(e) for e in _index_j)
+            different_residue : bool = self.neighbor_j.resids != self._resids_i
+            index_j = self.neighbor_j.atoms.indices[different_residue]
+            str_j = ' '.join(str(e) for e in index_j)
         elif self.type_analysis == "full":
-            _different_atom : bool = self.group_neighbor_j.indices != self.index_i[self._cpt_i]
-            _index_j = self.group_neighbor_j.atoms.indices[_different_atom]
-            _str_j = ' '.join(str(e) for e in _index_j)
-        if len(_str_j) == 0:
+            different_atom : bool = self.neighbor_j.indices != self.index_i[self.cpt_i]
+            index_j = self.neighbor_j.atoms.indices[different_atom]
+            str_j = ' '.join(str(e) for e in index_j)
+        if len(str_j) == 0:
             raise ValueError("Empty atom groups j \n"
                              "Wrong combination of type_analysis and group selection?")
         else:
-            self.group_j = self.u.select_atoms('index ' + _str_j)
+            self.group_j = self.u.select_atoms('index ' + str_j)
 
-    def _initialise_data(self):
+    def initialise_data(self):
         """Initialise data arrays.
 
         # @tofix if step>1, matrix will be too large
         # either adapt or cut it before calculating correlation
         """
-        if self.order == "m0":
-            self._data = np.zeros((1, self.u.trajectory.n_frames,
-                                  self.group_j.atoms.n_atoms),
-                                  dtype=np.float32)
-            self.gij = np.zeros((1,  self.u.trajectory.n_frames),
-                                 dtype=np.float32)
-        elif self.order == "m012":
-            self._data = np.zeros((3, self.u.trajectory.n_frames,
-                                  self.group_j.atoms.n_atoms),
-                                  dtype=np.complex64)
-            self.gij = np.zeros((3, self.u.trajectory.n_frames),
+        self.data = np.zeros((self.dim, self.u.trajectory.n_frames // self.step,
+                                self.group_j.atoms.n_atoms),
+                                dtype=np.float32)
+        self.gij = np.zeros((self.dim,  self.u.trajectory.n_frames // self.step),
                                 dtype=np.float32)
         if self.actual_dt is None:
-            _timestep = np.round(self.u.trajectory.dt, 4)
+            self.timestep = np.round(self.u.trajectory.dt, 4)
         else:
-            _timestep = self.actual_dt
-        if self.step > 1:
-            _timestep *= self.step
-        self.t = np.arange(self.u.trajectory.n_frames) * _timestep
+            self.timestep = self.actual_dt
+        self.timestep *= self.step
+        self.t = np.arange(self.u.trajectory.n_frames) * self.timestep
 
-    def _evaluate_correlation_ij(self):
+    def evaluate_correlation_ij(self):
         """Evaluate the correlation function. 
         
         @tofix find better name
@@ -238,112 +230,98 @@ class NMR:
 
         Note: if step>1 is given, the timestep is adapted.
         """
-        for _cpt, _ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
-            self._position_i = self.group_i.atoms.positions
-            self._position_j = self.group_j.atoms.positions
-            self._box = _ts.dimensions
+        for cpt, ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
+            self.position_i = self.group_i.atoms.positions
+            self.position_j = self.group_j.atoms.positions
+            self.box = ts.dimensions
             # ensure that the box is orthonormal
-            if not np.all(self._box[3:] == self._box[3:][0]) & np.all(self._box[3:][0] == 90.0):
+            if not np.all(self.box[3:] == self.box[3:][0]) & np.all(self.box[3:][0] == 90.0):
                 raise ValueError("NMRforMD does not accept non-orthogonal box"
-                                 "Use triclinic_to_orthorhombic from the package lipyphilic"
-                                 "to convert the trajectory file.")
-            self._vector_ij()
-            self._cartesian_to_spherical()
-            self._spherical_harmonic()
-            if self.order == 'm0':
-                self._data[:, _cpt] = self._sh20
-            elif self.order == 'm012':
-                self._data[:, _cpt] = self._sh20, self._sh21, self._sh22
-        self._calculate_correlation_ij()
+                                 "You can use triclinic_to_orthorhombic from the package"
+                                 "lipyphilic to convert the trajectory file.")
+            self.vector_ij()
+            self.cartesian_to_spherical()
+            self.spherical_harmonic()
+            self.data[:, cpt] = self.sph_val
+        self.calculate_correlation_ij()
 
-    def _calculate_correlation_ij(self):
+    def calculate_correlation_ij(self):
         """Calculate the correlation function."""
-        for _idx_j in range(self.group_j.atoms.n_atoms):
-            if self.order == 'm0':
-                self.gij += correlation_function(self._data[0, :, _idx_j])
-            elif self.order == 'm012':
-                for _m in range(3):
-                    self.gij[_m] += correlation_function(self._data[_m, :, _idx_j])
+        for idx_j in range(self.group_j.atoms.n_atoms):
+            for m in range(self.dim):
+                self.gij[m] += correlation_function(self.data[m, :, idx_j])
         self.gij = np.real(self.gij)
 
-    def _calculate_fourier_transform(self):
+    def calculate_fourier_transform(self):
         """Calculate spectral density J.
         
         Calculate the spectral density J from the 
         Fourier transform of the correlation function.
         """
         # normalise gij by the number of iteration
-        self.gij /= self._cpt_i+1
+        self.gij /= self.cpt_i+1
         # dimensionalize the correlation function
         # from A-6 to s2/m6
         # @tocheck units
-        self.gij *= self._K / cst.angstrom ** 6
+        self.gij *= self.K / cst.angstrom ** 6
         # for coarse grained models, possibly more than 1 hydrogen per atom
         self.gij *= np.float32(self.hydrogen_per_atom)
-        if self.order == 'm0':
-            fij = fourier_transform(np.vstack([self.t, self.gij]).T)
-            self.f = np.real(fij.T[0])
-            self.J = np.real(fij.T[1])
-        elif self.order == 'm012':
-            for _m in range(3):
-                fij = fourier_transform(np.vstack([self.t, self.gij[_m]]).T)
-                self.f = np.real(fij.T[0])
-                if _m == 0:
-                    _J_0 = np.real(fij.T[1])
-                elif _m == 1:
-                    _J_1 = np.real(fij.T[1])
-                elif _m == 2:
-                    _J_2 = np.real(fij.T[1])
-            self.J = np.array([_J_0, _J_1, _J_2])
+        self.J = []
+        for m in range(self.dim):
+            fij = fourier_transform(np.vstack([self.t, self.gij[m]]).T)
+            self.J.append(np.real(fij.T[1]))
+        self.J = np.array(self.J)[0]
+        self.f = np.real(fij.T[0])
 
-    def _vector_ij(self):
+    def vector_ij(self):
         """Calculate distance between position_i and position_j."""
         if self.pbc:
-            self._rij = (np.remainder(self._position_i - self._position_j
-                         + self._box[:3]/2., self._box[:3]) - self._box[:3]/2.).T
+            self.rij = (np.remainder(self.position_i - self.position_j
+                         + self.box[:3]/2., self.box[:3]) - self.box[:3]/2.).T
         else:
-            self._rij = (self._position_i - self._position_j).T
+            self.rij = (self.position_i - self.position_j).T
 
-    def _cartesian_to_spherical(self):
+    def cartesian_to_spherical(self):
         """Convert cartesian coordinate to spherical."""
-        self._r = np.sqrt(self._rij[0]**2 + self._rij[1]**2 + self._rij[2]**2)
-        self._theta = np.arctan2(np.sqrt(self._rij[0]**2 + self._rij[1]**2), self._rij[2])
-        self._phi = np.arctan2(self._rij[1], self._rij[0])
+        self.r = np.sqrt(self.rij[0]**2 + self.rij[1]**2 + self.rij[2]**2)
+        self.theta = np.arctan2(np.sqrt(self.rij[0]**2 + self.rij[1]**2), self.rij[2])
+        self.phi = np.arctan2(self.rij[1], self.rij[0])
 
-    def _spherical_harmonic(self):
+    def spherical_harmonic(self):
         """Evaluate spherical harmonic functions from rij vector.
 
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
-        _a_0 = np.sqrt(16 * np.pi / 5)
-        self._sh20 = _a_0 * sph_harm(0, 2, self._phi, self._theta) / np.power(self._r, 3)
-        if self.order == "m0":
-            self._sh20 = self._sh20.real
-        if self.order == "m012":
-            _a_1 = np.sqrt(8 * np.pi / 15)
-            _a_2 = np.sqrt(32 * np.pi / 15)
-            self._sh21 = _a_1 * sph_harm(1, 2, self._phi, self._theta) / np.power(self._r, 3)
-            self._sh22 = _a_2 * sph_harm(2, 2, self._phi, self._theta) / np.power(self._r, 3)
+        # Prefactors harmonic functions
+        prefactors = [np.sqrt(16 * np.pi / 5), np.sqrt(8 * np.pi / 15), np.sqrt(32 * np.pi / 15)]
+        sph_val = []
+        for m in range(self.dim):
+            sph_val.append(prefactors[m] * sph_harm(m, 2, self.phi, self.theta) / np.power(self.r, 3))
+        if self.isotropic:
+            sph_val[0] = sph_val[0].real
+        self.sph_val = sph_val
 
-    def _calculate_spectrum(self):
+    def calculate_spectrum(self):
         """Calculate spectrums R1 and R2 from J."""
-        if self.order == "m0":
-            _inter1d = interp1d(self.f, self.J, fill_value="extrapolate")
-            self.R1 = (_inter1d(self.f)
-                       + 4 * _inter1d(2 * self.f))/6
-            self.R2 = (3/2*_inter1d(self.f[0])
-                       + 5/2*_inter1d(self.f)
-                       + _inter1d(2 * self.f))/6
-        elif self.order == "m012":
-            _inter1d_0 = interp1d(self.f, self.J[0], fill_value="extrapolate")
-            _inter1d_1 = interp1d(self.f, self.J[1], fill_value="extrapolate")
-            _inter1d_2 = interp1d(self.f, self.J[2], fill_value="extrapolate")
-            self.R1 = _inter1d_1(self.f) + _inter1d_2(2 * self.f)
-            self.R2 = (1/4)*(_inter1d_0(self.f[0])+ 10*_inter1d_1(self.f)
-                             + _inter1d_2(2 * self.f))
-
-    def _calculate_relaxationtime(self):
+        if self.isotropic == "True":
+            inter1d = interp1d(self.f, self.J, fill_value="extrapolate")
+            self.R1 = (inter1d(self.f)
+                       + 4 * inter1d(2 * self.f))/6
+            self.R2 = (3/2*inter1d(self.f[0])
+                       + 5/2*inter1d(self.f)
+                       + inter1d(2 * self.f))/6
+        elif self.isotropic == "False":
+            inter1d_0 = interp1d(self.f, self.J[0], fill_value="extrapolate")
+            inter1d_1 = interp1d(self.f, self.J[1], fill_value="extrapolate")
+            inter1d_2 = interp1d(self.f, self.J[2], fill_value="extrapolate")
+            self.R1 = inter1d_1(self.f) + inter1d_2(2 * self.f)
+            self.R2 = (1/4)*(inter1d_0(self.f[0])+ 10*inter1d_1(self.f)
+                             + inter1d_2(2 * self.f))
+        else:
+            raise ValueError("'isotropic' value is wrong, choose True or False")
+        
+    def calculate_relaxationtime(self):
         """Calculate the relaxation time at a given frequency f0 (default is 0)"""
         if self.f0 is None:
             self.T1 = 1/self.R1[0]
@@ -353,23 +331,20 @@ class NMR:
             self.T1 = 1 / self.R1[idx]
             self.T2 = 1 / self.R2[idx]
 
-    def _calculate_tau(self):
+    def calculate_tau(self):
         """
         Calculate correlation time using tau = 0.5 J(0) / G(0).
 
-        The unit are in picosecond. If only the 0th m order is used,
-        one value for tau is returned, if all three m orders are used,
+        The unit are in picosecond. If only the 0th m order is used (isotropic=True),
+        one value for tau is returned, if all three m orders are used (isotropic=False),
         three values for tau are returned.
         """
-        if self.order == "m0":
-            self.tau = 0.5 * (self.J[0] / self.gij[0][0])
-        elif self.order == "m012":
-            self.tau = np.array([0.5*(self.J[0][0] / self.gij.T[0][0]),
-                                 0.5*(self.J[1][0] / self.gij.T[0][1]),
-                                 0.5*(self.J[2][0] / self.gij.T[0][2])])
-        self.tau /= cst.pico
+        tau = []
+        for m in range(self.dim):
+            tau.append(0.5*(self.J[m][0] / self.gij.T[0][m]) / cst.pico)
+        self.tau = tau
 
-    def _calculate_secondmoment(self):
+    def calculate_secondmoment(self):
         """
         Calculate second moment Delta omega.
 
@@ -379,10 +354,7 @@ class NMR:
         is returned, if all three m orders are used, three values for Delta
         omega are returned.
         """
-        if self.order == "m0":
-            self.delta_omega = np.sqrt(3*self.gij[0][0])
-        elif self.order == "m012":
-            self.delta_omega = np.array([np.sqrt(3*self.gij[0][0]),
-                                         np.sqrt(3*self.gij[0][1]),
-                                         np.sqrt(3*self.gij[0][2])])
-        self.delta_omega /= 1000*2*np.pi
+        delta_omega = []
+        for m in range(self.dim):
+            delta_omega.append(np.sqrt(3*self.gij[0][m]) / (1000*2*np.pi))
+        self.delta_omega = delta_omega

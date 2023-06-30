@@ -12,7 +12,7 @@ NMRforMD
    
    tutorials/installation
    tutorials/bulk-water
-   tutorials/tutorial02
+   tutorials/solvated-polymers
 
 .. toctree::
    :maxdepth: 2
