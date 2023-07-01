@@ -19,6 +19,7 @@ NMRforMD
 
    tutorials/installation
    modules/NMR
+   modules/utilities
 
 .. toctree::
    :maxdepth: 2
