@@ -1,7 +1,7 @@
 sphinx
 sphinx-favicon
 sphinxcontrib.bibtex
-#nbsphinx
+nbsphinx
 furo
 scipy
 MDAnalysis
