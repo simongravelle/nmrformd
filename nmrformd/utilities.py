@@ -18,6 +18,9 @@ def autocorrelation_function(data):
     Credit to the correlation function of MAICoS:
     https://maicos-devel.gitlab.io/maicos/index.html
 
+    data has the units of Angtroms**-3
+    output has the units of Angtroms**-6
+
     **Parameters**
 
     data : numpy.ndarray

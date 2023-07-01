@@ -86,6 +86,7 @@ class NMR:
             self.neighbor_j = neighbor_group
         self.type_analysis = type_analysis
         self.number_i = number_i
+        self.f0 = f0
         self.isotropic = isotropic
         if self.isotropic:
             self.dim = 1
@@ -118,7 +119,6 @@ class NMR:
         self.verify_entry()
         self.define_constants()
         self.select_target_i()
-
         # Loop on all the atom of group i
         for cpt_i, _ in enumerate(self.index_i):
             self.cpt_i = cpt_i
@@ -127,11 +127,12 @@ class NMR:
             self.select_atoms_group_j()
             if cpt_i == 0:
                 self.initialise_data()
-            self.evaluate_correlation_ij()
-
+            self.loop_over_trajectory()
+            self.calculate_correlation_ij()
+        # calculate spectrums
+        self.apply_prefactor()
         self.calculate_fourier_transform()
         self.calculate_spectrum()
-        self.f0 = f0
         self.calculate_relaxationtime()
         #self.calculate_tau()
         #self.calculate_secondmoment()
@@ -221,8 +222,8 @@ class NMR:
         self.timestep *= self.step
         self.t = np.arange(self.u.trajectory.n_frames) * self.timestep
 
-    def evaluate_correlation_ij(self):
-        """Evaluate the correlation function. 
+    def loop_over_trajectory(self):
+        """Loop of the MDA trajectory and extract rij. 
         
         @tofix find better name
 
@@ -244,7 +245,6 @@ class NMR:
             self.cartesian_to_spherical()
             self.spherical_harmonic()
             self.data[:, cpt] = self.sph_val
-        self.calculate_correlation_ij()
 
     def calculate_correlation_ij(self):
         """Calculate the correlation function."""
@@ -253,20 +253,27 @@ class NMR:
                 self.gij[m] += autocorrelation_function(self.data[m, :, idx_j])
         self.gij = np.real(self.gij)
 
+    def apply_prefactor(self):
+        """Apply prefartors to correlation function.
+        
+        1) Divide Gij by the number of spin pairs
+        2) Convert Gij from A**-6 to m**-6
+        3) Multiply Gij by the constant K to convert Gij from m**-6 to s**-2
+        4) For coarse grained model, apply a coefficient "hydrogen_per_atom" != 1
+        """
+        # normalise gij by the number of iteration (or number of pair spin)
+        self.gij /= self.cpt_i+1
+        self.gij *= self.K/cst.angstrom ** 6
+        if self.hydrogen_per_atom != 1:
+            self.gij *= np.float32(self.hydrogen_per_atom)
+
     def calculate_fourier_transform(self):
         """Calculate spectral density J.
         
         Calculate the spectral density J from the 
         Fourier transform of the correlation function.
         """
-        # normalise gij by the number of iteration (or number of pair spin)
-        self.gij /= self.cpt_i+1
-        # dimensionalize the correlation function
-        # from A-6 to s2/m6
-        # @tocheck units
-        self.gij *= self.K / cst.angstrom ** 6
         # for coarse grained models, possibly more than 1 hydrogen per atom
-        self.gij *= np.float32(self.hydrogen_per_atom)
         self.J = []
         for m in range(self.dim):
             fij = fourier_transform(np.vstack([self.t, self.gij[m]]).T)
@@ -275,7 +282,10 @@ class NMR:
         self.f = np.real(fij.T[0])
 
     def vector_ij(self):
-        """Calculate distance between position_i and position_j."""
+        """Calculate distance between position_i and position_j.
+        
+        By defaults, periodic boundary conditions are assumed, but can also be turned off.
+        """
         if self.pbc:
             self.rij = (np.remainder(self.position_i - self.position_j
                          + self.box[:3]/2., self.box[:3]) - self.box[:3]/2.).T
@@ -294,8 +304,6 @@ class NMR:
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
-        # Prefactors harmonic functions
-        
         sph_val = []
         for m in range(self.dim):
             sph_val.append(self.prefactors[m] * sph_harm(m, 2, self.phi, self.theta) / np.power(self.r, 3))
@@ -314,7 +322,7 @@ class NMR:
             inter1d_1 = interp1d(self.f, self.J[1], fill_value="extrapolate")
             inter1d_2 = interp1d(self.f, self.J[2], fill_value="extrapolate")
             self.R1 = inter1d_1(self.f) + inter1d_2(2 * self.f)
-            self.R2 = (1/4)*(inter1d_0(self.f[0])+ 10*inter1d_1(self.f)
+            self.R2 = (1/4)*(inter1d_0(self.f[0]) + 10*inter1d_1(self.f)
                              + inter1d_2(2 * self.f))
         
     def calculate_relaxationtime(self):
