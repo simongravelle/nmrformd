@@ -29,7 +29,7 @@ bulk water reservoir, a PEG molecule, and water in a slit silica pore.
     
 .. inclusion-readme-intro-end
 
-.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/figures/system-white.png
+.. image:: docs/source/figures/systems/system-white.png
 
 For details and instructions for beginners,
 have a look at the `documentation`_.
