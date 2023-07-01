@@ -23,10 +23,12 @@ Notes and known issues
 .. image:: docs/source/figures/systems/system-white.png
 
 Figure : Example of systems that can be analysed using NMRforMD, from left to right: a 
-bulk water reservoir, a PEG molecule, and water in a slit silica pore. 
+bulk water system, a polymer-water mixture, and water in a slit silica pore with some counter-ions.
+All LAMMPS and GRAOMCS input scripts are given in the `examples/`_ folder. 
 
 |mdanalysis| |readthedoc|
 
+.. _`examples/`: examples/
 .. _`MDAnalysis`: https://www.mdanalysis.org/
 .. _`LAMMPS`: https://www.lammps.org/
 .. _`GROMACS`: https://www.gromacs.org/
