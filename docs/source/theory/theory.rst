@@ -61,8 +61,8 @@ spin quantum number, and
 
 where :math:`\mu_0` is the vacuum permeability.
 
-Separating intra-molecular and inter-molecular
-----------------------------------------------
+Intra/inter contributions
+-------------------------
 
 Intra-molecular and inter-molecular contributions to :math:`R_1`
 can be extracted separately, by splitting the correlation functions as:
@@ -75,6 +75,12 @@ can be extracted separately, by splitting the correlation functions as:
 where :math:`N_\text{R}` and :math:`N_\text{T}` are partial ensembles,
 where R denotes the rotational and T the translational relaxation modes,
 see Ref :cite:`singerMolecularDynamicsSimulations2017` for more details.
+
+Isotropic system
+----------------
+
+For isotropic system, the correlation functions are proportional to each others, 
+and only :math:`G^{(0)} (t)` needs to be calculated.
 
 .. bibliography::
    :style: unsrt
