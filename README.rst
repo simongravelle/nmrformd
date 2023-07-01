@@ -41,10 +41,29 @@ Build the documentation localy from the `docs/`_ folder by typing:
 
 Publish a new pip version by following those |instructions|.
 
-1 - update the version in *docs/source/conf.py*
+1 - if necessary, update *docs/source/conf.py*, *CITATION.cff*, and *setup.py*
 
+2 - Create source distribution using
 
+.. code-block:: bash 
 
+    python3 setup.py sdist
+
+3 - Create a new release on Github using the generated tar.gz file
+
+4 - Update the link in setup.py
+
+5 - Create wheel using:
+
+.. code-block:: bash 
+
+    python3 setup.py bdist_wheel
+
+6 - Upload to pypi using (with the appropriate number):
+
+.. code-block:: bash 
+    
+    twine upload dist/nmrformd-0.1.0* \
 
 .. _`docs/`: docs/
 .. _`examples/`: examples/
