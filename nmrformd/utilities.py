@@ -21,7 +21,6 @@ def autocorrelation_function(data):
     **Parameters**
 
     data : numpy.ndarray
-        The input array to calculate the correlation
 
     **Returns**
 
@@ -36,25 +35,44 @@ def autocorrelation_function(data):
     res = np.fft.ifft(sf, axis=0)
     return np.real(res[:len(data)]) / np.array(range(len(data), 0, -1))
 
-def find_nearest(array, value):
-    """Find nearest value."""
-    array = np.asarray(array)
-    idx = (np.abs(array - value)).argmin()
+def find_nearest(data, value):
+    """Find nearest value within an array.
+    
+    **Parameters**
+
+    data : numpy.ndarray
+    value : numpy.float
+
+    **Returns**
+    ids : numpy.int
+        The index of the closest point
+    """
+    data = np.asarray(data)
+    idx = (np.abs(data - value)).argmin()
     return idx
 
-def fourier_transform(a):
+def fourier_transform(data):
     """
-    Calculate Fourier transform.
+    Calculate the Fourier transform of an array.
 
     Wrap function that takes the data in real space with
     columns time, frequency and returns the data in Fourier space
     with columns frequency, signal
+    
     Units in : ps, signal
     Units out : MHz, s*signal
+
+    **Parameters**
+
+    data : numpy.ndarray
+
+    **Returns**
+
+    np.ndarray
 
     Credit to the fourier transform function of MAICoS
     https://maicos-devel.gitlab.io/maicos/index.html
     """
-    _dt = (a[1, 0] - a[0, 0]) * cst.pico  # second
-    return np.vstack((np.fft.rfftfreq(len(a), _dt)
-                     / cst.mega, np.fft.rfft(a[:, 1], norm=None) * _dt * 2)).T
+    dt = (data[1, 0] - data[0, 0]) * cst.pico  # second
+    return np.vstack((np.fft.rfftfreq(len(data), dt)
+                     / cst.mega, np.fft.rfft(data[:, 1], norm=None) * dt * 2)).T
