@@ -4,9 +4,12 @@ Installation
 Install the last published version
 ----------------------------------
 
-.. include:: ../../../README.rst
-   :start-after: inclusion-readme-installation-start
-   :end-before: inclusion-readme-installation-end
+Simply type in a terminal:
+
+.. code-block:: bash
+
+	pip3 install nmrformd
+
 
 Install the last (development) version
 --------------------------------------
