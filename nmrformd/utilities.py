@@ -37,6 +37,8 @@ def autocorrelation_function(data):
 
 def find_nearest(data, value):
     """Find nearest value within an array.
+
+    Return the index of the nearest point.
     
     **Parameters**
 
@@ -45,7 +47,6 @@ def find_nearest(data, value):
 
     **Returns**
     ids : numpy.int
-        The index of the closest point
     """
     data = np.asarray(data)
     idx = (np.abs(data - value)).argmin()
@@ -58,7 +59,7 @@ def fourier_transform(data):
     Wrap function that takes the data in real space with
     columns time, frequency and returns the data in Fourier space
     with columns frequency, signal
-    
+
     Units in : ps, signal
     Units out : MHz, s*signal
 
