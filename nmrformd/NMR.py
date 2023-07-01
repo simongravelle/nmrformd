@@ -16,7 +16,7 @@ from scipy import constants as cst
 from scipy.interpolate import interp1d
 from scipy.special import sph_harm
 
-from .utilities import correlation_function, find_nearest, fourier_transform
+from .utilities import autocorrelation_function, find_nearest, fourier_transform
 
 
 class NMR:
@@ -253,7 +253,7 @@ class NMR:
         """Calculate the correlation function."""
         for idx_j in range(self.group_j.atoms.n_atoms):
             for m in range(self.dim):
-                self.gij[m] += correlation_function(self.data[m, :, idx_j])
+                self.gij[m] += autocorrelation_function(self.data[m, :, idx_j])
         self.gij = np.real(self.gij)
 
     def calculate_fourier_transform(self):

@@ -37,15 +37,11 @@ have a look at the `documentation`_.
 Installation
 ------------
 
-.. inclusion-readme-installation-start
-
 Using pip, type in a terminal:
 
 .. code-block:: bash
 
 	pip3 install nmrformd
-
-.. inclusion-readme-installation-end
 
 To get the last version, clone this repository on your computer
 and use pip3 from the main directory:
@@ -65,26 +61,6 @@ You can run the tests using pytest:
 	cd tests
 	pytest .
 
-.. inclusion-basic-intro-start
-
-Basic example
--------------
-
-This is an example showing how to use NMRforMD to measure NMR signal from 
-a molecular dynamics simulations. See the `tutorial`_ for more information.
-
-.. _`tutorial`: https://nmrformd.readthedocs.io/en/latest/tutorials/tutorial01.html
-
-.. code-block:: python3
-
-	import MDAnalysis as mda
-	import nmrformd
-	u = mda.Universe("topology.tpr", "trajectory.xtc")
-	nmr_result = nmrformd.NMR(u, "type H", "type H")
-
-The NMR relaxation time T1 is given by ``nmr_result.T1``.
-
-.. inclusion-basic-intro-end
 
 Known issues
 ------------
