@@ -24,11 +24,27 @@ Notes and known issues
 
 Figure : Example of systems that can be analysed using NMRforMD, from left to right: a 
 bulk water system, a polymer-water mixture, and water in a slit silica pore with some counter-ions.
-All LAMMPS and GRAOMCS input scripts are given in the `examples/`_ folder. 
+All LAMMPS and GROMACS input scripts are given in the `examples/`_ folder. 
 
 |mdanalysis| |readthedoc|
 
+For developers
+--------------
+
+Build the documentation localy from the `docs/`_ folder by typing:
+
+.. code-block:: bash 
+
+    pip3 install -r requirements.txt
+    make clean
+    make html
+
+
+
+
+.. _`docs/`: docs/
 .. _`examples/`: examples/
+
 .. _`MDAnalysis`: https://www.mdanalysis.org/
 .. _`LAMMPS`: https://www.lammps.org/
 .. _`GROMACS`: https://www.gromacs.org/
