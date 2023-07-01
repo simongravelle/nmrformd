@@ -61,33 +61,20 @@ spin quantum number, and
 
 where :math:`\mu_0` is the vacuum permeability.
 
+Separating intra-molecular and inter-molecular
+----------------------------------------------
+
+Intra-molecular and inter-molecular contributions to :math:`R_1`
+can be extracted separately, by splitting the correlation functions as:
+
+.. math::
+
+    G^{(m)}_\text{R, T} (t) = \dfrac{1}{N_\text{R, T}}
+    \sum_{i \ne j}^{N_\text{R, T}} \left< {\cal F}_{ij}^{(m)} (0) {\cal F}_{ij}^{(m)} (t)  \right>,
+
+where :math:`N_\text{R}` and :math:`N_\text{T}` are partial ensembles,
+where R denotes the rotational and T the translational relaxation modes,
+see Ref :cite:`singerMolecularDynamicsSimulations2017` for more details.
 
 .. bibliography::
    :style: unsrt
-
-
-
-
-
-:math:`T_1` can be related to autocorrelation functions of fluctuating
-magnetic dipole-dipole interactions of the form
-
-
-
-where :math:`N` is the number of spin pairs. The ensemble average is performed by a 
-double summation over spin pair :math:`i` and :math:`j` with :math:`i \ne j`.
-
-
-
-:math:`N_\text{R}` and :math:`N_\text{T}` are the number of intramolecular and
-intermolecular degrees of freedom, respectively, where R denotes the rotational
-and T the translational relaxation modes, see Ref :cite:`singerMolecularDynamicsSimulations2017` for more
-details.
-
-
-
-where the order :math:`m` corresponds
-to the three position coordinates defining the
-dipoles in the lab frame, namely the nuclear spin separation :math:`r_{ij}(t)` and the
-polar and azimuthal angles :math:`\theta_{ij} (t)` and :math:`\varphi_{ij} (t)` with respect
-to the applied static magnetic field that is parallel to :math:`\boldsymbol{e}_z`.
