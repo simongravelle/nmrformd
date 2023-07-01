@@ -147,14 +147,11 @@ class NMR:
             raise ValueError("Empty neighbor atom group")
 
     def define_constants(self):
-        """Define the pre-factor K.
+        """Define some prefactors.
 
-        Gamma is the gyromagnetic constant in Hz/T, and
+        Gamma is the gyromagnetic constant of 1H in Hz/T or C/kg
         K has the units of m^6/s^2
         Prefactors are for the harmonic functions
-        # @tocheck the units
-        # @tofix do atoms have all the same gyromag ratio? Its only for hydrogen so far.
-        # One should allow to specify it, or one should tabulate it.
         """
         self.GAMMA = 2 * np.pi * 42.6e6
         self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
@@ -262,7 +259,7 @@ class NMR:
         Calculate the spectral density J from the 
         Fourier transform of the correlation function.
         """
-        # normalise gij by the number of iteration
+        # normalise gij by the number of iteration (or number of pair spin)
         self.gij /= self.cpt_i+1
         # dimensionalize the correlation function
         # from A-6 to s2/m6

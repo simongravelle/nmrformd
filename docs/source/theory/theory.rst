@@ -34,10 +34,18 @@ Relaxation rate calculation relies on the evaluation of the correlation function
 
 .. math::
 
-    G^{(m)} (t) = \dfrac{1}{N}
+    G^{(m)} (t) = K \dfrac{1}{N}
     \sum_{i \ne j}^{N} \left< {\cal F}_{ij}^{(m)} (0) {\cal F}_{ij}^{(m)} (t)  \right>,
 
-where :math:`N` is the number of spin pairs. Spectral densities are obtained from the
+where :math:`N` is the number of spin pairs, and
+
+.. math::
+
+    K = \dfrac{3}{2}\left(\dfrac{\mu_0}{4 \pi}\right)^2 \hbar^2 \gamma^4 I (I+1),
+
+where :math:`\mu_0` is the vacuum permeability and :math:`I = 1/2` the
+spin quantum number. The constant :math:`K` has the units of :math:`\text{m}^6/\text{s}^2`, and therefore 
+the functions :math:`G^{(m)}` the units of :math:`\text{s}^{-2}`. Spectral densities are obtained from the
 Fourier transforms of the correlation functions, 
 
 .. math::
@@ -48,18 +56,11 @@ from which the relaxation rates can be calculated as
 
 .. math::
 
-    R_1 &=&  K \left[ J^{(1)} (\omega_0) + J^{(2)} (2 \omega_0) \right],
+    R_1 &=&  J^{(1)} (\omega_0) + J^{(2)} (2 \omega_0),
 
-    R_2 &=& \dfrac{1}{4} K \left[ J^{(0)} (0) + 10 J^{(1)} (\omega_0) + J^{(2)} (2 \omega_0) \right],
+    R_2 &=& \dfrac{1}{4} \left[ J^{(0)} (0) + 10 J^{(1)} (\omega_0) + J^{(2)} (2 \omega_0) \right],
 
-were :math:`\omega_0 = \gamma B_0` is the Larmor frequency, :math:`I = 1/2` the
-spin quantum number, and
-
-.. math::
-
-    K = \dfrac{3}{2}\left(\dfrac{\mu_0}{4 \pi}\right)^2 \hbar^2 \gamma^4 I (I+1),
-
-where :math:`\mu_0` is the vacuum permeability.
+were :math:`\omega_0 = \gamma B_0` is the Larmor frequency.
 
 Intra/inter contributions
 -------------------------
@@ -69,7 +70,7 @@ can be extracted separately, by splitting the correlation functions as:
 
 .. math::
 
-    G^{(m)}_\text{R, T} (t) = \dfrac{1}{N_\text{R, T}}
+    G^{(m)}_\text{R, T} (t) = K \dfrac{1}{N_\text{R, T}}
     \sum_{i \ne j}^{N_\text{R, T}} \left< {\cal F}_{ij}^{(m)} (0) {\cal F}_{ij}^{(m)} (t)  \right>,
 
 where :math:`N_\text{R}` and :math:`N_\text{T}` are partial ensembles,
