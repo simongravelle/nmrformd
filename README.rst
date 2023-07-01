@@ -67,7 +67,7 @@ Publish a new pip version by following those |instructions|.
 
 .. |instructions| raw:: html
 
-   <a href=" https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9" target="_blank">instructions</a>
+   <a href="https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9" target="_blank">instructions</a>
 
 .. _`docs/`: docs/
 .. _`examples/`: examples/
