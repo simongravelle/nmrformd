@@ -1,5 +1,8 @@
 .. image:: https://readthedocs.org/projects/nmrformd/badge/?version=latest
 
+.. |Maintenance yes| image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+   :target: https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity
+
 .. image:: docs/source/figures/logo/banner-README.png
 
 .. inclusion-readme-intro-start
