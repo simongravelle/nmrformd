@@ -1,2 +1,0 @@
-Coarse-grained simulation
-=========================
