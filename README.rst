@@ -13,12 +13,12 @@ Details about installation and use are given in the `documentation`_.
 Notes and known issues
 ----------------------
 
-  - NMRforMD is still in development, please raise an issue on `Github`_ if you encounter a problem
-  - the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages, as long as they are compatible with MDAnalysis
-  - NMRforMD does not work with triclinic box, use MDAnalysis to convert your trajectory to orthorhombic
-  - for very large trajectory file, the code requires a lot of memory
-  - the code has only beed tested with hydrogen atoms (spin 1/2)
-  - only works for dipolar interaction, not quadrupolar interaction
+- NMRforMD is still in development, please raise an issue on `Github`_ if you encounter a problem
+- the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages, as long as they are compatible with MDAnalysis
+- NMRforMD does not work with triclinic box, use MDAnalysis to convert your trajectory to orthorhombic
+- for very large trajectory file, the code requires a lot of memory
+- the code has only beed tested with hydrogen atoms (spin 1/2)
+- only works for dipolar interaction, not quadrupolar interaction
 
 .. image:: docs/source/figures/systems/system-white.png
 
