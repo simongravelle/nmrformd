@@ -8,6 +8,8 @@ with |MDAnalysis|, it allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
 |LAMMPS| and |GROMACS|.
 
+.. inclusion-readme-intro-end
+
 Details about installation, use, and common pitfalls are given in the |documentation|. 
 
 Notes and known issues
