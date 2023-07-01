@@ -39,6 +39,10 @@ Build the documentation localy from the `docs/`_ folder by typing:
     make clean
     make html
 
+Publish a new pip version by following those |instructions|.
+
+1 - update the version in *docs/source/conf.py*
+
 
 
 
@@ -57,3 +61,8 @@ Build the documentation localy from the `docs/`_ folder by typing:
 .. |readthedoc| image:: https://readthedocs.org/projects/nmrformd/badge/?version=latest
     :alt: readthedoc
     :target: https://nmrformd.readthedocs.io/en/latest/
+
+.. |instructions|
+    :alt: instructions
+    :target: https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9
+
