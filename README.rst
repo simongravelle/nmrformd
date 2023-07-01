@@ -1,6 +1,6 @@
 .. image:: https://readthedocs.org/projects/nmrformd/badge/?version=latest
 
-.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/NMRforMD_READMEc.png
+.. image:: docs/source/figures/logo/banner-README.png
 
 .. inclusion-readme-intro-start
 
