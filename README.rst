@@ -65,6 +65,10 @@ Publish a new pip version by following those |instructions|.
     
     twine upload dist/nmrformd-0.1.0* \
 
+.. |instructions| raw:: html
+
+   <a href=" https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9" target="_blank">instructions</a>
+
 .. _`docs/`: docs/
 .. _`examples/`: examples/
 
@@ -81,6 +85,3 @@ Publish a new pip version by following those |instructions|.
     :alt: readthedoc
     :target: https://nmrformd.readthedocs.io/en/latest/
 
-.. |instructions| raw:: html
-
-   <a href=" https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9" target="_blank">instructions</a>
