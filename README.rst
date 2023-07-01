@@ -24,12 +24,12 @@ Notes :
     - the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages, as long as they are compatible with MDAnalysis
     - NMRforMD does not work with triclinic box, use MDAnalysis to convert your trajectory to orthorhombic
     
-.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/images/main_image.png
-
 Example of systems that can be analysed using NMRforMD, from left to right: a 
 bulk water reservoir, a PEG molecule, and water in a slit silica pore. 
     
 .. inclusion-readme-intro-end
+
+.. image:: https://raw.githubusercontent.com/simongravelle/nmrformd/main/docs/source/figures/system-white.png
 
 For details and instructions for beginners,
 have a look at the `documentation`_.

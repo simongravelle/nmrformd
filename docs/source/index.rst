@@ -7,10 +7,14 @@ NMRforMD
 
 .. toctree::
    :maxdepth: 2
+
+   tutorials/installation
+
+.. toctree::
+   :maxdepth: 2
    :caption: Tutorials
    :hidden:
    
-   tutorials/installation
    tutorials/bulk-water
    tutorials/solvated-polymers
    tutorials/water-in-silica
