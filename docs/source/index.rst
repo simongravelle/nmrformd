@@ -35,4 +35,4 @@ NMRforMD
    :caption: Theory
    :hidden:
 
-   theory/NMR
+   theory/theory
