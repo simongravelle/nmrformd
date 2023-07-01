@@ -81,7 +81,6 @@ Publish a new pip version by following those |instructions|.
     :alt: readthedoc
     :target: https://nmrformd.readthedocs.io/en/latest/
 
-.. |instructions|
-    :alt: instructions
-    :target: https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9
+.. |instructions| raw:: html
 
+   <a href=" https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9" target="_blank">instructions</a>
