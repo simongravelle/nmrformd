@@ -2,15 +2,28 @@
 
 .. inclusion-readme-intro-start
 
-NMRforMD (see the |documentation| here) is a Python toolkit to calculate NMR relaxation times
+NMRforMD is a Python toolkit to calculate NMR relaxation times
 from molecular dynamics trajectory files. Used in combination
 with |MDAnalysis|, it allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
 |LAMMPS| and |GROMACS|.
 
+.. |MDAnalysis| raw:: html
+
+   <a href="https://www.mdanalysis.org/" target="_blank">MDAnalysis</a>
+
+.. |LAMMPS| raw:: html
+
+   <a href="https://www.lammps.org/" target="_blank">LAMMPS</a>
+
+.. |GROMACS| raw:: html
+
+   <a href="https://www.gromacs.org/" target="_blank">GROMACS</a>
+
 .. inclusion-readme-intro-end
 
 Details about installation, use, and common pitfalls are given in the |documentation|. 
+There is also a description of the theory behind dipolar NMR calculations.
 
 Notes and known issues
 ----------------------
@@ -73,18 +86,6 @@ Publish a new pip version by following those |instructions|.
 .. |instructions| raw:: html
 
    <a href="https://gist.github.com/arsho/fc651bfadd8a0f42be72156fd21bd8a9" target="_blank">instructions</a>
-
-.. |MDAnalysis| raw:: html
-
-   <a href="https://www.mdanalysis.org/" target="_blank">MDAnalysis</a>
-
-.. |LAMMPS| raw:: html
-
-   <a href="https://www.lammps.org/" target="_blank">LAMMPS</a>
-
-.. |GROMACS| raw:: html
-
-   <a href="https://www.gromacs.org/" target="_blank">GROMACS</a>
 
 .. |documentation| raw:: html
 
