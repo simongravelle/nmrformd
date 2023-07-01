@@ -117,8 +117,12 @@ Run NMRforMD
 
 .. code-block:: python
 
-	PEG_nmr = nmrmd.NMR(u, group_H_polymer, neighbor_group=group_H, number_i=40)
-    H2O_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H, number_i=40)
+	PEG_nmr = nmrmd.NMR(u, group_H_polymer, neighbor_group=group_H, number_i=50)
+    H2O_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H, number_i=150)
+
+..  container:: justify
+
+    The calculation with take a few minutes. Use smaller values of *number_i* for faster results.
 
 Extract T1
 ----------
@@ -162,7 +166,8 @@ Plot the spectrum
 
 ..  container:: justify
 
-    NMR relaxation rate R1 for water and polymer PEG as a function of the frequency.
+    Figure: NMR relaxation rate R1 for water and polymer PEG as a function of the frequency.
+    Noise can be reduced by increasing *number_i*.
 
 Plot the correlation functions
 ------------------------------
@@ -172,14 +177,15 @@ Plot the correlation functions
     The correlation function Gij can be accessed from nmr_result.gij[0], and the time 
     from nmr_result.t. Let us plot Gij as a function of t:
 
-.. image:: ../../../examples/polymer-in-water/figures/G-dark.png
+.. image:: ../../../examples/polymer-in-water/figures/Gij-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/polymer-in-water/figures/G-light.png
+.. image:: ../../../examples/polymer-in-water/figures/Gij-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
 ..  container:: justify
 
-    Correlation functions Gij for both water and PEG.
+    Figure: Correlation functions Gij for both water and PEG. Water show
+    shorter characteristic time, which is expected for smaller molecules. 

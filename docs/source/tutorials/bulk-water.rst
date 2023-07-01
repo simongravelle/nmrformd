@@ -140,10 +140,8 @@ Run NMRforMD
     With 'number_i = 40', only 40 randomly selected atoms within 'group_i' are considered for the calculation.
     Increase this number for better resolution. Use 'number_i = 0' to consider all the atoms.
 
-Extract T1
-----------
-
-..  container:: justify
+Extra results
+-------------
 
     Let us access the calculated value of the NMR relaxation time T1:
 
@@ -159,11 +157,6 @@ Extract T1
     The value you get may vary a little, depending on which hydrogen atoms
     were randomly selected by NMRforMD.
 
-Plot the spectrum
------------------
-
-..  container:: justify
-
     The T1 spectrum can be extracted as 1/nmr_result.R1 (i.e. the invert of R1),
     and the corresponding frequency is given by nmr_result.f. Let up plot
     T1 as a function of f:
@@ -176,18 +169,62 @@ Plot the spectrum
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-Plot the correlation functions
-------------------------------
-
 ..  container:: justify
 
     The correlation function Gij can be accessed from nmr_result.gij[0], and the time 
     from nmr_result.t. Let us plot Gij as a function of t:
 
-.. image:: ../../../examples/bulk-water/figures/G-dark.png
+.. image:: ../../../examples/bulk-water/figures/Gij-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/bulk-water/figures/G-light.png
+.. image:: ../../../examples/bulk-water/figures/Gij-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
+
+Intra-Inter molecular contributions
+-----------------------------------
+
+..  container:: justify
+
+    Let us calculate the intra-molecular and inter-molecular contributions to the
+    NMR spectrum R1 by calling NMRforMD twice:
+
+.. code-block:: python
+
+    nmr_result_intra = nmrmd.NMR(u, group_i, type_analysis="intra_molecular", number_i=0)
+    nmr_result_inter = nmrmd.NMR(u, group_i, type_analysis="inter_molecular", number_i=20)
+
+..  container:: justify
+
+    We can plot both intra-molecular and inter-molecular contributions separately:
+
+.. image:: ../../../examples/bulk-water/figures/R1-intra-inter-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../../../examples/bulk-water/figures/R1-intra-inter-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+..  container:: justify
+
+    It appears that the intra-molecular contribution is the dominant one,
+    which is expected for bulk water. We can also look at the 
+    correlation functions:
+
+.. image:: ../../../examples/bulk-water/figures/Gij-intra-inter-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../../../examples/bulk-water/figures/Gij-intra-inter-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+..  container:: justify
+
+    Another expected result: the inter-molecular contribution,
+    which is typically associated with the translational 
+    motion of the molecules, has longer characteristic times
+    than the intra-contribution, which is typically associated to the 
+    rotation of the molecules. 
