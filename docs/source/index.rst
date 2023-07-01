@@ -1,5 +1,5 @@
-NMRforMD
-========
+NMR for MD
+==========
 
 .. include:: ../../README.rst
    :start-after: inclusion-readme-intro-start

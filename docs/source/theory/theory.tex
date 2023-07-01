@@ -1,0 +1,149 @@
+In essence, 
+
+
+
+
+Note that associating intermolecular (respectively intramolecular) 
+degrees of freedom to translational (respectively rotational) relaxation modes
+is not rigorous. Rotational and translational motions are in general correlated \cite{henritzi13a, becher21a, becher22a},
+particularly in the case of fluids confined into nanopores as,
+for instance, rotational motions are strongly correlated to the position of the 
+molecules in the pore. Nevertheless, here we will refer to intramolecular/intermolecular
+degrees of freedom as rotational/translational as it helps to link the molecular motion 
+to the NMR data.
+The ensemble average is performed by a double summation over spin pair $i$ and
+$j$ with $i \ne j$.
+The functions ${\cal F}_{ij}^{(m)} (t)$ are dependent on the vector
+$\boldsymbol{r}_{ij}$ which specifies the position of spin $j$ with respect to
+spin $i$, and read
+\begin{equation}
+{\cal F}_{ij}^{(m)} (t) = \alpha_m 
+\dfrac{1}{r_{ij}^3 (t)}
+Y^{(m)}_2 (\theta_{ij} (t), \varphi_{ij} (t)),
+\label{eq:Fij}
+\end{equation}
+where $Y^{(m)}_2$ are the normalized spherical harmonics with $\ell = 2$, and
+\begin{equation}
+\alpha_0 = \sqrt{\dfrac{16 \pi}{5}}, \; \alpha_1 = \sqrt{\dfrac{8 \pi}{15}}, \;
+\alpha_2 = \sqrt{\dfrac{32 \pi}{15}}.
+\label{eq:alpha}
+\end{equation}
+The spectral densities are obtained from the Fourier transforms of $G^{(m)}_\text{R,T} (t)$,
+\begin{equation}
+J^{(m)}_\text{R,T} (\omega) = \int_{-\infty}^\infty G^{(m)}_\text{R,T} (t) \; 
+\mathrm e^{-i \omega t} \mathrm d t,
+\label{eq:JRT}
+\end{equation}
+from which the relaxation time $T_{1, \text{R}, \text{T}}$ can be calculated as
+\begin{equation}
+\dfrac{1}{T_{1, \text{R}, \text{T}}} = K \left(J^{(1)}_\text{R,T} (\omega_0) 
++ J^{(2)}_\text{R,T} (2 \omega_0) \right),
+\label{eq:T1RT}
+\end{equation}
+where $\omega_0 = \gamma B_0$ is the Larmor frequency.
+The prefactor in Eq.\ \eqref{eq:T1RT} is given by 
+\begin{equation}
+K = \dfrac{3}{2}\left(\dfrac{\mu_0}{4 \pi}\right)^2 \hbar^2 \gamma^4 I (I+1),
+\end{equation}
+where $\mu_0$ is the vacuum permeability, $\hbar$ the reduced Planck constant, 
+and $\gamma/ 2 \pi = 42.58$\,MHz/T is the gyro-magnetic ratio for $^1$H with spin $I = 1/2$.
+The final expression for the relaxation time follows from the additivity,
+\begin{eqnarray}
+\dfrac{1}{T_{1}} & = & \dfrac{1}{T_{1, \text{R}}}+\dfrac{1}{T_{1, \text{T}}}.
+%\dfrac{1}{T_{2}} & = & \dfrac{1}{T_{2, \text{R}}}+\dfrac{1}{T_{2, \text{T}}}.
+\end{eqnarray}
+Convergence tests were used to ensure that the simulation cut-off or system size
+had no significant impact on the calculation of $T_1$, see the Supplemental
+Material. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:cite:`agrawalViscousPeelingNanosheet2022` 
+
+NMR relaxation time :math:`T_1` is calculated from 
+the autocorrelation function of fluctuating magnetic 
+dipole-dipole interactions (see |mcconnell1987| and |bloembergen1948| for more details),
+
+.. math::
+
+    G_\text{R,T} (t) = \dfrac{1}{N_\text{R,T}} \sum_{i \ne j}^{N_\text{R,T}} 
+    \left< {\cal F}_{ij} (t + \tau) {\cal F}_{ij} (\tau)  \right>,
+
+where :math:`\tau` is the lag time. Here :math:`N_\text{R}` and :math:`N_\text{T}`
+correspond to partial ensembles for intramolecular and itermolecular interactions,
+respectively, where R stands for rotational and T for translational (see |singer17a|). The ensemble average is performed by a 
+double summation over spin pair :math:`i` and :math:`j` with :math:`i \ne j`.
+
+The function :math:`{\cal F}_{ij} (t)` reads
+
+.. math::
+    
+    {\cal F}_{ij} (t) = \sqrt{\dfrac{16}{5 \pi}} \dfrac{Y^0_2 (\theta_{ij} (t))}{r_{ij}^3 (t)},
+
+where :math:`Y^0_2` is the normalised spherical harmonics with :math:`\ell = 2` and :math:`m = 0`,
+:math:`r_{ij} (t)` the nuclear spin separation, and :math:`\theta_{ij} (t)` the polar angle
+of the direction :math:`\textbf{r}_{ij}` with respect to laboratory axes (assuming that 
+the applied static magnetic is parallel to :math:`\textbf{e}_z`).
+
+NMR relaxation times are calculated using
+
+.. math::
+
+    \dfrac{1}{T_{1, \text{R}, \text{T}}} = K \left(J_\text{R,T} (\omega_0) + 4 J_\text{R,T} (2 \omega_0) \right),
+
+were :math:`\omega_0 = \gamma B_0` is the Larmor frequency with :math:`\gamma$` the
+gyro-magnetic ratio for :math:`^1`H with spin :math:`I = 1/2`, and 
+
+.. math::
+
+    K = \dfrac{1}{4}\left(\dfrac{\mu_0}{4 \pi}\right)^2 \hbar^2 \gamma^4 I (I+1),
+
+where :math:`\mu_0` is the vacuum permeability.
+
+.. |mcconnell1987| raw:: html
+
+   <a href="https://www.cambridge.org/de/academic/subjects/physics/condensed-matter-physics-nanoscience-and-mesoscopic-physics/theory-nuclear-magnetic-relaxation-liquids?format=PB&isbn=9780521107716" target="_blank">mcconnell1987</a>
+
+.. |bloembergen1948| raw:: html
+
+   <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.73.679" target="_blank">bloembergen1948</a>
+
+.. |singer17a| raw:: html
+
+   <a href="https://www.sciencedirect.com/science/article/pii/S1090780717300319" target="_blank">singer17a</a>

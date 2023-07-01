@@ -22,12 +22,10 @@ extensions = [
     'sphinx.ext.autodoc',
     'nbsphinx',
     'sphinx_favicon',
+    'sphinxcontrib.bibtex',
 ]
 
-# Execute the notebooks
-# nbsphinx_execute = 'never'
-# nbsphinx_allow_errors = True
-# exclude_patterns = ['_build', '**.ipynb_checkpoints']
+bibtex_bibfiles = ['journal-article.bib']
 
 templates_path = ['_templates']
 
