@@ -85,67 +85,59 @@ Create a MDAnalysis universe
 
 .. container:: justify
 
-    Let us define . groups containing the hydrogen atoms, and 
-    the hydrogen atoms of water and the PEG polymer:
+    Let us define groups containing all the hydrogen atoms, and 
+    the hydrogen atoms of water, and the hydrogen atoms of the silica (the -OH groups):
 
 .. code-block:: python
 
     group_H = u.select_atoms("type H*")
     group_H_water = u.select_atoms("resname SOL and type H*")
-    group_H_polymer = u.select_atoms("resname PEG and type H*")
+    group_H_silica = u.select_atoms("resname SiOH and type H*")
 
 .. container:: justify
 
-    Let us extract the number of water and PEG molecules:
+    Let us extract the number of water molecules:
 
 .. code-block:: python
 
-    n_water_molecules = group_water.n_residues
+    n_water_molecules = group_H_water.n_residues
     print(f"The number of water molecules is {n_water_molecules}")
-    n_polymer_molecules = group_polymer.n_residues
-    print(f"The number of PEG molecules is {n_polymer_molecules}")
 
->> The number of water molecules is 334
->> The number of PEG molecules is 20
+>> The number of water molecules is 592
 
 Run NMRforMD
 ------------
 
 ..  container:: justify
 
-    Then, let us run NMRforMD, using the PEG hydrogen (group group_H_polymer) as subject i group,
-    and all the hydrogen atoms (water + PEG) as potential neighbors. 
+    Then, let us run NMRforMD: 
 
 .. code-block:: python
 
-	PEG_nmr = nmrmd.NMR(u, group_H_polymer, neighbor_group=group_H, number_i=40)
-    H2O_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H, number_i=40)
-
-Extract T1
-----------
+    TOTAL_nmr = nmrmd.NMR(u, group_H, neighbor_group=group_H, number_i=50, isotropic=False)
+    H2O_SILICA_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H_silica, number_i=50, isotropic=False)
 
 ..  container:: justify
 
-    Let us access the calculated value of the NMR relaxation time T1, for both PEG and H2O:
+    The *TOTAL_nmr* analyses all the hydrogen atoms, from water and -OH groups. The *H2O_SILICA_nmr* only 
+    considers the contribution from H2O-Silica. 
+
+Extract results
+----------------
+
+..  container:: justify
+
+    Let us access the calculated the values of the NMR relaxation time T1:
 
 .. code-block:: python
 
-    T1_PEG = np.round(PEG_nmr.T1,2)
-    print(f"NMR relaxation time T1 - PEG = {T1_PEG} s")
-    T1_H2O = np.round(H2O_nmr.T1,2)
-    print(f"NMR relaxation time T1 - H2O = {T1_H2O} s")
+    T1_TOTAL = np.round(TOTAL_nmr.T1,2)
+    print(f"NMR relaxation time T1 - H2O - TOTAL = {T1_TOTAL} s")
+    T1_H2O_SILICA = np.round(H2O_SILICA_nmr.T1,2)
+    print(f"NMR relaxation time T1 - H2O - TOTAL = {T1_H2O_SILICA} s")
 
->> NMR relaxation time T1 - PEG = 0.65 s
->> NMR relaxation time T1 - H2O = 0.62 s
-
-..  container:: justify
-
-    The values you get may vary a little, depending on which hydrogen atoms
-    were randomly selected by NMRforMD. Increase the value of *number_i* for
-    more accurate results.
-
-Plot the spectrum
------------------
+>> NMR relaxation time T1 - H2O - TOTAL = 0.4 s
+>> NMR relaxation time T1 - H2O - TOTAL = 18.98 s
 
 ..  container:: justify
 
@@ -163,7 +155,7 @@ Plot the spectrum
 
 ..  container:: justify
 
-    NMR relaxation rate R1 for water and polymer PEG as a function of the frequency.
+    Figure: NMR relaxation rate R1 for all hydrogen atoms, and for water-silica only
 
 Plot the correlation functions
 ------------------------------
@@ -173,14 +165,14 @@ Plot the correlation functions
     The correlation function Gij can be accessed from nmr_result.gij[0], and the time 
     from nmr_result.t. Let us plot Gij as a function of t:
 
-.. image:: ../../../examples/polymer-in-water/figures/G-dark.png
+.. image:: ../../../examples/polymer-in-water/figures/Gij-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/polymer-in-water/figures/G-light.png
+.. image:: ../../../examples/polymer-in-water/figures/Gij-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
 ..  container:: justify
 
-    Correlation functions Gij for both water and PEG.
+    Correlation functions Gij
