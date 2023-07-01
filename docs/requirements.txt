@@ -1,4 +1,5 @@
 sphinx
+sphinx-favicon
 furo
 scipy
 nbsphinx
