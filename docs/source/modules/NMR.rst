@@ -1,4 +1,4 @@
-NMR module
+Parameters
 ==========
 
 .. automodule:: nmrformd.NMR

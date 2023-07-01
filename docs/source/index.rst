@@ -18,6 +18,7 @@ NMRforMD
    :hidden:
 
    tutorials/installation
+   modules/NMR
 
 .. toctree::
    :maxdepth: 2
@@ -30,21 +31,7 @@ NMRforMD
 
 .. toctree::
    :maxdepth: 2
-   :caption: Description
-   :hidden:
-
-   modules/NMR
-
-.. toctree::
-   :maxdepth: 2
    :caption: Theory
    :hidden:
 
    theory/NMR
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contributing
-   :hidden:
-
-   ./contributing/changelog
