@@ -13,6 +13,11 @@ NMR for MD
     :class: only-light
     :alt: molecular dynamics systems used in these examples
 
+.. container:: justify
+
+    Figure : Example of systems that can be analysed using NMRforMD, from left to right: a 
+    bulk water system, a polymer-water mixture, and water in a slit silica pore with sodium counter-ions.
+
 .. toctree::
    :maxdepth: 2
    :hidden:
