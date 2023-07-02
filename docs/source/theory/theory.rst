@@ -2,6 +2,59 @@
 Theory
 ======
 
+Single spin properties
+----------------------
+
+NMR makes use of the behavior of quantum mechanical spins in an external magnetic field :cite:`kowalewskiNuclearSpinRelaxation2006`. 
+Every nuclear species is characterized by a nuclear spin quantum number, :math:`I`, which can attain integer
+or half-integer values (A nucleus with :math:`I = 0` has no spin angular momentum and is not active in NMR.).
+The nuclear spin quantum number is related to the eigenvalue of
+the total spin angular momentum operator, :math:`\hat I^2`, through:
+
+.. math::
+
+    \hat I^2 \Psi = I (I + 1 ) \Psi
+
+where :math:`\Psi`` is an eigenfunction of the operator :math:`\hat I^2`. Another important operator is the 
+:math:`z` component of the spin angular momentum vector, 
+
+.. math::
+
+    \hat I_z \Psi = m \Psi
+
+where the quantum number :math:`m` can attain values ranging between :math:`-I` and :math:`I`, in steps of one.
+For spin with :math:`I = 1/2`, :math:`m` has two possible eigenvalues, `-1/2` and `1/2`. The spin angular momentum
+is related to the nuclear magnetic moment :math:`\mu_z`, 
+
+.. math::
+
+    \mu_z = \gamma_I I_z
+
+where :math:`\gamma_I` is gyromagnetic ratio (for ¹H, :math:`I = 1/2` and :math:`\gamma_I = 26.752` rad/T/s,
+for ¹³C, :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`).
+
+A nuclear spin and a magnetic field :math:`B` of magnitude :math:`B_0` interact through
+the so-called Zeeman interaction, which is described by the Zeeman Hamiltonian (or the total energy operator):
+
+.. math::
+
+    \hat H_z = - \gamma_I B_0 \hat I_z
+
+For :math:`I = 1/2`, the Zeeman Hamiltonian has two eigenvalues, :math:`E_{ \pm 1/2} = \mp \frac{1}{2} \gamma_I B_0`
+(in angular frequency units). The difference between the two eigenvalues, :math:`\omega_0 = \gamma_I B_0`,
+is called the Larmor frequency. Note that quantum mechanics does not require the system to be in a specific
+eigenstate of the Hamiltonian, and the system can also exist in a superposition state.
+
+Crucially for NMR relaxation, the time evolution of the wave function for a quantum system is given by
+the time-dependent Schrödinger equation:
+
+.. math::
+
+    \partial_t \Psi (t) = - i \hat H \Psi (t)
+
+Spin relaxation
+---------------
+
 Let us consider an ensemble of identical spins, characterized by the gyromagnetic
 ratio :math:`\gamma` and the spin quantum number :math:`I`. The magnetic dipolar
 interaction between two spins, :math:`i` and :math:`j`, may be written in terms
@@ -83,7 +136,7 @@ Isotropic system
 For isotropic system, the correlation functions are proportional to each others, 
 and only :math:`G^{(0)} (t)` needs to be calculated.
 
-In that case, :math:`G^{(0)} = 6 G^{(1)}`
+In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = \frac{3}{2} G^{(2)}`.
 
 For isotropic system, spectrums can be calculated as:
 
