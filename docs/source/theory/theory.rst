@@ -52,6 +52,31 @@ the time-dependent Schrödinger equation:
 
     \partial_t \Psi (t) = - i \hat H \Psi (t)
 
+Magnetisation
+-------------
+
+The magnitude of the magnetization of an ensemble of
+N non-interacting spins at thermal equilibrium reads 
+
+.. math::
+
+    M_0 = \dfrac{N \gamma_I^2 \hbar^2 I (I + 1) B_0}{3 k_B T}.
+
+The evolution of the magnetization vector with time is given by the phenomenological 
+Bloch equations:
+
+.. math::
+
+    \dfrac{d M_z}{d t} = \dfrac{M_0 - M_z}{T_1},
+
+    \dfrac{d M_y}{d t} = - M_x \omega_\text{off} \dfrac{M_y}{T_2}
+
+    \dfrac{d M_x}{d t} = M_y \omega_\text{off} \dfrac{M_x}{T_2},
+
+where :math:`\omega_\text{off}` is the frequency offset between the applied radiofrequency
+and the Larmor frequency.
+
+
 Spin relaxation
 ---------------
 
