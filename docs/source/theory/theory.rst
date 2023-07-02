@@ -107,12 +107,19 @@ Spectral density can be obtained as the Fourier transform of :math:`G(t)`:
 
     J (\omega) = 2 \int_0^\infty G(\tau) \exp(- i \omega \tau) \mathrm d \tau.
 
-The spectral density is a measure of the distribution of the fluctuations of :math:`Y(t)` among different frequencies.
+The spectral density is a measure of the distribution of the fluctuations of :math:`Y(t)` among different frequencies,
+so they provide information on the distribution of the power available for causing spin transitions among different frequencies.
 The spectral density of an exponentially decaying correlation function is a Lorentzian:
 
 .. math::
 
     J (\omega) = G(0) \dfrac{2 \tau_c}{1 + \omega^2 \tau_c^2}
+
+In most cases, the spectral densities are linear combinations of Lorentzian functions.
+
+The fundamental molecular dynamic quantities of primary interest for NMR are time-correlation
+functions for rank-2 spherical harmonics of the pair of angles specifying the direction of a
+given molecule-fixed axis with respect to the laboratory frame.
 
 Dipolar relaxation
 ------------------
@@ -243,5 +250,12 @@ For isotropic system, spectrums can be calculated as:
 
     R_2 &=& \frac{1}{6} \left[ J^{(0)} (0) + \frac{5}{2} J^{(0)} (\omega_0) + J^{(0)} (2 \omega_0) \right].
 
+The case of small molecules
+---------------------------
+
+Small molecules in low-viscosity solutions typically have rotational correlation times of a few tens of
+picoseconds or less. In that case the extreme narrowing conditions usually prevail, therefore :math:`J_2(\omega) = J_2(0)`.
+
 .. bibliography::
    :style: unsrt
+
