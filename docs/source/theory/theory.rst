@@ -1,6 +1,6 @@
 
-Theory
-======
+Theory (UNDER CONSTRUCTION)
+===========================
 
 Single spin properties
 ----------------------
@@ -52,7 +52,7 @@ the time-dependent Schrödinger equation:
 
     \partial_t \Psi (t) = - i \hat H \Psi (t)
 
-Magnetisation
+Magnetization
 -------------
 
 The magnitude of the magnetization of an ensemble of
@@ -76,6 +76,78 @@ Bloch equations:
 where :math:`\omega_\text{off}` is the frequency offset between the applied radiofrequency
 and the Larmor frequency.
 
+Alternative presentation
+------------------------
+
+One consider the autocorrelation function of a complex function Y:
+
+.. math::
+
+    G (\tau) = < Y (t) Y^* (t + \tau)>
+
+with :math:`G(0) = \sigma` and 
+
+.. math::
+
+    \lim_{t \to \infty} G (\tau) = 0
+
+Thus, we expect a general time-correlation function to be a decaying function of time,
+with an initial value given by the variance of Y. A reasonable choice is:
+
+.. math::
+
+    G(\tau) = G(0) \exp(- | \tau | /\tau_c) 
+
+where :math:`\tau_c` is the correlation time, which is a measure of the time scale of oscillations of the random process
+or a measure of the persistence of the correlation between values of :math:`Y(t)` at different points in time.
+
+Spectral density can be obtained as the Fourier transform of :math:`G(t)`:
+
+.. math::
+
+    J (\omega) = 2 \int_0^\infty G(\tau) \exp(- i \omega \tau) \mathrm d \tau.
+
+The spectral density is a measure of the distribution of the fluctuations of :math:`Y(t)` among different frequencies.
+The spectral density of an exponentially decaying correlation function is a Lorentzian:
+
+.. math::
+
+    J (\omega) = G(0) \dfrac{2 \tau_c}{1 + \omega^2 \tau_c^2}
+
+Dipolar relaxation
+------------------
+
+Assuming that two nuclear magnetic moments or magnetic dipoles, :math:`\mu_1` and :math:`\mu_2` are close in space.
+The field created by the dipole :math:`\mu_2` reads
+
+.. math::
+
+    \textbf{B}_\text{loc} (\mu_2) = - \dfrac{\mu_0}{4 \pi r^3} \left( \mu_2 - 3 \dfrac{\textbf{rr}}{r^2} \cdot \mu_2 \right)
+
+where :math:`\mu_0` is the permeability of vacuum, :math:`r` is the distance from the origin and :math:`\textbf{rr}` a tensor. 
+The classical dipole-dipole energy is 
+
+.. math::
+
+    \textbf{E}_\text{DD} = \dfrac{\mu_0}{4 \pi r^3} \left( \mu_1 \cdot \mu_2 - 3 \mu_1 \cdot \dfrac{\textbf{rr}}{r^2} \cdot \mu_2 \right)
+
+Here \textbf{r} is the vector connecting the two dipoles. The quantum mechanical counterpart is 
+obtained by replacing the magnetic dipoles by :math:`\gamma_I \hbar \hat{\textbf{I}}` and :math:`\gamma_S \hbar \hat{\textbf{S}}`,
+
+.. math::
+
+    \hat{\textbf{H}}_\text{DD} = - \dfrac{\mu_0 \gamma_I \gamma_S \hbar}{4 \pi r^3} \left( 3 \hat{\textbf{I}} \cdot \dfrac{\textbf{rr}}{r^2} \cdot \hat{\textbf{S}}
+    - \hat{\textbf{I}} \cdot \hat{\textbf{S}} \right) = b_\text{IS} \hat{\textbf{I}} \cdot \textbf{D} \cdot \hat{\textbf{S}},
+
+where :math:`b_\text{IS}` is the dipole-dipole coupling constant and :math:`\textbf{D}` is the dipolar tensor, which in spherical polar coordinate reads: 
+
+.. math::
+
+    \textbf{D} = \begin{pmatrix}
+            3 \sin^2 \theta \cos^2 \phi - 1 & 3 \sin^2 \theta \cos \phi \sin \phi &  3 \sin \theta \cos \theta \cos \phi  \\
+            3 \sin^2 \theta \cos \phi \sin \phi & 3 \sin^2 \theta \sin^2 \phi - 1 & 3 \sin \theta \cos \theta \sin \phi \\
+            3 \sin \theta \cos \theta \cos \phi & 3 \sin \theta \cos \theta \sin \phi & 3 \cos^2 \theta - 1
+        \end{pmatrix}
 
 Spin relaxation
 ---------------
