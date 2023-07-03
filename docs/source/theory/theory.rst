@@ -2,6 +2,38 @@
 Theory (UNDER CONSTRUCTION)
 ===========================
 
+When the SLR is dominated by fluctuations of the magnetic dipole-dipole interaction,
+as is the case for protons in molecular systems, the rate :math:`R_1 (\omega)` is
+related to the spectral densities :math:`J(m)(\omega)` of these fluctuations via the
+Bloembergen-Purcell-Pound (BPP) equation :cite:`bloembergenRelaxationEffectsNuclear1948`:
+
+.. math::
+    :label: eq_BPP
+
+    R_1 (\omega) = K \left[ J^{(1)} (\omega) + J^{(2)} (2 \omega) \right],
+
+where
+
+.. math::
+
+    K = \dfrac{3}{2}\left(\dfrac{\mu_0}{4 \pi}\right)^2 \hbar^2 \gamma^4 I (I+1),
+
+where :math:`\mu_0` is the vacuum permeability, :math:`\hbar` the Planck constant (divided by :math:`2 \pi`),
+:math:`\gamma_I` is the gyromagnetic ratio (for ¹H, :math:`I = 1/2` and :math:`\gamma_I = 26.752` rad/T/s,
+for ¹³C, :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`), and
+:math:`I = 1/2` the spin quantum number. The constant :math:`K` has the units of :math:`\text{m}^6/\text{s}^2`.
+
+
+The spectral density in Eq. :eq:`eq_BPP` can be obtained as the Fourier transform of :math:`G(t)`:
+
+.. math::
+
+    J (\omega) = 2 \int_0^\infty G(\tau) \exp(- i \omega \tau) \mathrm d \tau.
+
+The spectral density is a measure of the distribution of the fluctuations of :math:`Y(t)` among different frequencies,
+so they provide information on the distribution of the power available for causing spin transitions among different frequencies.
+
+
 Single spin properties
 ----------------------
 
@@ -121,6 +153,16 @@ The fundamental molecular dynamic quantities of primary interest for NMR are tim
 functions for rank-2 spherical harmonics of the pair of angles specifying the direction of a
 given molecule-fixed axis with respect to the laboratory frame.
 
+The functions :math:`Y` reads :cite:`bloembergenRelaxationEffectsNuclear1948`
+
+.. math::
+
+    Y_{0j} & = & \dfrac{1 - 3 \cos^2 \theta_\text{ij} }{r_{ij}^3}
+
+    Y_{1j} & = & \dfrac{ \sin \theta_\text{ij} \cos \theta_\text{ij} \exp{i \phi_{ij}} }{r_{ij}^3}
+
+    Y_{2j} & = &  \dfrac{ \sin^2 \theta_\text{ij} \exp{2 i \phi_{ij}} }{r_{ij}^3}
+
 Dipolar relaxation
 ------------------
 
@@ -138,7 +180,7 @@ The classical dipole-dipole energy is
 
     \textbf{E}_\text{DD} = \dfrac{\mu_0}{4 \pi r^3} \left( \mu_1 \cdot \mu_2 - 3 \mu_1 \cdot \dfrac{\textbf{rr}}{r^2} \cdot \mu_2 \right)
 
-Here \textbf{r} is the vector connecting the two dipoles. The quantum mechanical counterpart is 
+Here :math:`\textbf{r}` is the vector connecting the two dipoles. The quantum mechanical counterpart is 
 obtained by replacing the magnetic dipoles by :math:`\gamma_I \hbar \hat{\textbf{I}}` and :math:`\gamma_S \hbar \hat{\textbf{S}}`,
 
 .. math::
@@ -240,7 +282,7 @@ Isotropic system
 For isotropic system, the correlation functions are proportional to each others, 
 and only :math:`G^{(0)} (t)` needs to be calculated.
 
-In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = \frac{3}{2} G^{(2)}`.
+In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = 6 / 4 G^{(2)}` :cite:`becherMolecularDynamicsSimulations2021`.
 
 For isotropic system, spectrums can be calculated as:
 
