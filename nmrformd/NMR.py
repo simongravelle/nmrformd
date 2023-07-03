@@ -205,10 +205,10 @@ class NMR:
             self.group_j = self.u.select_atoms('index ' + str_j)
 
     def initialise_data(self):
-        """Initialise data arrays.
+        """Initialise arrays.
 
-        # @tofix if step>1, matrix will be too large
-        # either adapt or cut it before calculating correlation
+        Create an array of zeros for the data and the correlation function.
+        Create an array for the time. 
         """
         self.data = np.zeros((self.dim, self.u.trajectory.n_frames // self.step,
                                 self.group_j.atoms.n_atoms),
