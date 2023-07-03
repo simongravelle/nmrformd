@@ -38,7 +38,7 @@ The autocorrelation functions :math:`G^{(m)}(\tau)` read
 .. math::
 
     G^{(m)} (\tau) = \dfrac{\alpha_m^2}{N}
-    \sum_i \sum_{j \ne i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij} (0)} \dfrac{Y_2^{(m)} [\Omega_{ij} (\tau)]}{r_{ij} (\tau)},
+    \sum_i \sum_{j \ne i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij} (0)} \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij} (\tau)},
 
 where :math:`\alpha_0^2 = 16 \pi /5`, :math:`\alpha_1^2 = 8 \pi /15`, and :math:`\alpha_2^2 = 32\pi /5`,
 :math:`N` is the number of spins, and :math:`Y_2^{(m)}` are normalized spherical harmonics. :math:`G^{(m)}(\tau)`
