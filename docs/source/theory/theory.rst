@@ -23,16 +23,28 @@ where :math:`\mu_0` is the vacuum permeability, :math:`\hbar` the Planck constan
 for ¹³C, :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`), and
 :math:`I = 1/2` the spin quantum number. The constant :math:`K` has the units of :math:`\text{m}^6/\text{s}^2`.
 
-
-The spectral density in Eq. :eq:`eq_BPP` can be obtained as the Fourier transform of :math:`G(t)`:
+The spectral densities :math:`J^{(m)} (\omega)` in Eq. :eq:`eq_BPP` can be obtained as the Fourier transform
+of the autocorrelation functions :math:`G^{(m)}(\tau)`
 
 .. math::
 
-    J (\omega) = 2 \int_0^\infty G(\tau) \exp(- i \omega \tau) \mathrm d \tau.
+    J^{(m)} (\omega) = \int_0^\infty G^{(m)} (\tau) \cos(\omega \tau) \mathrm d \tau.
 
-The spectral density is a measure of the distribution of the fluctuations of :math:`Y(t)` among different frequencies,
-so they provide information on the distribution of the power available for causing spin transitions among different frequencies.
+The spectral densities are a measure of the distribution of the fluctuations of :math:`G^{(m)}(\tau)`
+among different frequencies, so they provide information on the distribution of the power available
+for causing spin transitions among different frequencies.
+The autocorrelation functions :math:`G^{(m)}(\tau)` read
 
+.. math::
+
+    G^{(m)} (\tau) = \dfrac{\alpha_m^2}{N}
+    \sum_i \sum_{j \ne i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij} (0)} \dfrac{Y_2^{(m)} [\Omega_{ij} (\tau)]}{r_{ij} (\tau)},
+
+where :math:`\alpha_0^2 = 16 \pi /5`, :math:`\alpha_1^2 = 8 \pi /15`, and :math:`\alpha_2^2 = 32\pi /5`,
+:math:`N` is the number of spins, and :math:`Y_2^{(m)}` are normalized spherical harmonics. :math:`G^{(m)}(\tau)`
+are functions of the vector :math:`\textbf{r}_{ij}` between the spin pairs, which is 
+characterised by its norm :math:`r_{ij}` and orientation :math:`\Omega_{ij}`
+with respect to a reference applied magnetic field, assumed to be in the :math:`\textbf{e}_z` direction.
 
 Single spin properties
 ----------------------
