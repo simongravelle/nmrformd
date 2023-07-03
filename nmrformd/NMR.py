@@ -130,7 +130,7 @@ class NMR:
             self.loop_over_trajectory()
             self.calculate_correlation_ij()
         # calculate spectrums
-        self.apply_prefactor()
+        self.normalize_Gij()
         self.calculate_fourier_transform()
         self.calculate_spectrum()
         self.calculate_relaxationtime()
@@ -152,14 +152,13 @@ class NMR:
 
         Gamma is the gyromagnetic constant of 1H in Hz/T or C/kg
         K has the units of m^6/s^2
-        Prefactors are for the harmonic functions
         """
         self.GAMMA = 2 * np.pi * 42.6e6
         self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
             * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)
-        self.prefactors = [np.sqrt(16 * np.pi / 5),
-                           np.sqrt(8 * np.pi / 15),
-                           np.sqrt(32 * np.pi / 15)]
+        self.alpha_m = [np.sqrt(16 * np.pi / 5),
+                        np.sqrt(8 * np.pi / 15),
+                        np.sqrt(32 * np.pi / 15)]
 
     def select_target_i(self):
         if self.number_i == 0:
@@ -241,9 +240,9 @@ class NMR:
                 raise ValueError("NMRforMD does not accept non-orthogonal box"
                                  "You can use triclinic_to_orthorhombic from the package"
                                  "lipyphilic to convert the trajectory file.")
-            self.vector_ij()
+            self.vector_rij()
             self.cartesian_to_spherical()
-            self.spherical_harmonic()
+            self.evaluate_function_F()
             self.data[:, cpt] = self.sph_val
 
     def calculate_correlation_ij(self):
@@ -253,17 +252,17 @@ class NMR:
                 self.gij[m] += autocorrelation_function(self.data[m, :, idx_j])
         self.gij = np.real(self.gij)
 
-    def apply_prefactor(self):
+    def normalize_Gij(self):
         """Apply prefartors to correlation function.
         
         1) Divide Gij by the number of spin pairs
-        2) Convert Gij from A**-6 to m**-6
-        3) Multiply Gij by the constant K to convert Gij from m**-6 to s**-2
+        # 2) Convert Gij from A**-6 to m**-6
+        # 3) Multiply Gij by the constant K to convert Gij from m**-6 to s**-2
         4) For coarse grained model, apply a coefficient "hydrogen_per_atom" != 1
         """
         # normalise gij by the number of iteration (or number of pair spin)
         self.gij /= self.cpt_i+1
-        self.gij *= self.K/cst.angstrom ** 6
+        #self.gij *= self.K/cst.angstrom ** 6
         if self.hydrogen_per_atom != 1:
             self.gij *= np.float32(self.hydrogen_per_atom)
 
@@ -281,7 +280,7 @@ class NMR:
         self.J = np.array(self.J)
         self.f = np.real(fij.T[0])
 
-    def vector_ij(self):
+    def vector_rij(self):
         """Calculate distance between position_i and position_j.
         
         By defaults, periodic boundary conditions are assumed, but can also be turned off.
@@ -298,32 +297,34 @@ class NMR:
         self.theta = np.arctan2(np.sqrt(self.rij[0]**2 + self.rij[1]**2), self.rij[2])
         self.phi = np.arctan2(self.rij[1], self.rij[0])
 
-    def spherical_harmonic(self):
-        """Evaluate spherical harmonic functions from rij vector.
+    def evaluate_function_F(self):
+        """Evaluate the F functions.
 
+        F = alpha Y / r ** 3
+        Y : spherical harmonic
+        r : spin-spin distance
+        
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
         """
-        sph_val = []
+        F_val = []
         for m in range(self.dim):
-            sph_val.append(self.prefactors[m] * sph_harm(m, 2, self.phi, self.theta) / np.power(self.r, 3))
+            F_val.append(self.alpha_m[m] * sph_harm(m, 2, self.phi, self.theta) / np.power(self.r, 3))
         if self.isotropic:
-            sph_val[0] = sph_val[0].real
-        self.sph_val = sph_val
+            F_val[0] = F_val[0].real
+        self.sph_val = F_val
 
     def calculate_spectrum(self):
         """Calculate spectrums R1 and R2 from J."""
         inter1d_0 = interp1d(self.f, self.J[0], fill_value="extrapolate")
         if self.isotropic:
-            self.R1 = (inter1d_0(self.f) + 4 * inter1d_0(2 * self.f))/6
-            self.R2 = (3/2*inter1d_0(self.f[0]) + 5/2*inter1d_0(self.f)
-                       + inter1d_0(2 * self.f))/6
+            self.R1 = self.K/cst.angstrom ** 6 * ( inter1d_0(self.f) + 4 * inter1d_0(2 * self.f) )/6
+            self.R2 = self.K/cst.angstrom ** 6 * ( 3/2*inter1d_0(self.f[0]) + 5/2*inter1d_0(self.f) + inter1d_0(2 * self.f) )/6
         elif self.isotropic is False:
             inter1d_1 = interp1d(self.f, self.J[1], fill_value="extrapolate")
             inter1d_2 = interp1d(self.f, self.J[2], fill_value="extrapolate")
-            self.R1 = inter1d_1(self.f) + inter1d_2(2 * self.f)
-            self.R2 = (1/4)*(inter1d_0(self.f[0]) + 10*inter1d_1(self.f)
-                             + inter1d_2(2 * self.f))
+            self.R1 = self.K/cst.angstrom ** 6 * (inter1d_1(self.f) + inter1d_2(2 * self.f))
+            self.R2 = self.K/cst.angstrom ** 6 * ((1/4)*(inter1d_0(self.f[0]) + 10*inter1d_1(self.f) + inter1d_2(2 * self.f)))
         
     def calculate_relaxationtime(self):
         """Calculate the relaxation time at a given frequency f0 (default is 0)"""

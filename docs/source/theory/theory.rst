@@ -2,7 +2,7 @@
 Theory (UNDER CONSTRUCTION)
 ===========================
 
-When the SLR is dominated by fluctuations of the magnetic dipole-dipole interaction,
+When the spin-lattice relaxation is dominated by fluctuations of the magnetic dipole-dipole interaction,
 as is the case for protons in molecular systems, the rate :math:`R_1 (\omega)` is
 related to the spectral densities :math:`J(m)(\omega)` of these fluctuations via the
 Bloembergen-Purcell-Pound (BPP) equation :cite:`bloembergenRelaxationEffectsNuclear1948`:
@@ -37,14 +37,26 @@ The autocorrelation functions :math:`G^{(m)}(\tau)` read
 
 .. math::
 
-    G^{(m)} (\tau) = \dfrac{\alpha_m^2}{N}
-    \sum_i \sum_{j \ne i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij} (0)} \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij} (\tau)},
+    G^{(m)} (\tau) = \left< F_2^{(m)} [\textbf{r}_{ij} (t)] F_2^{*(m)} [\textbf{r}_{ij} (0)] \right>
 
-where :math:`\alpha_0^2 = 16 \pi /5`, :math:`\alpha_1^2 = 8 \pi /15`, and :math:`\alpha_2^2 = 32\pi /5`,
-:math:`N` is the number of spins, and :math:`Y_2^{(m)}` are normalized spherical harmonics. :math:`G^{(m)}(\tau)`
-are functions of the vector :math:`\textbf{r}_{ij}` between the spin pairs, which is 
-characterised by its norm :math:`r_{ij}` and orientation :math:`\Omega_{ij}`
-with respect to a reference applied magnetic field, assumed to be in the :math:`\textbf{e}_z` direction.
+where :math:`F_2^{(m)}` are some complex functions of the vector :math:`\textbf{r}_{ij}` between the spin pairs,
+with norm :math:`r_{ij}` and orientation :math:`\Omega_{ij}` with respect to a reference applied magnetic
+field, assumed to be in the :math:`\textbf{e}_z` direction. The functions :math:`F_2^{(m)}` read 
+
+.. math::
+
+    F_2^{(m)} [\textbf{r}_{ij} (t)] = \alpha_m \dfrac{Y_2^{(m)} [\Omega_{ij} (t)]}{r_{ij}^3 (t)}
+
+where :math:`Y_2^{(m)}` are normalized spherical harmonics and
+:math:`\alpha_0^2 = 16 \pi /5`, :math:`\alpha_1^2 = 8 \pi /15`, and :math:`\alpha_2^2 = 32\pi /5`.
+Therefore, one can write for the correlation functions:
+
+.. math::
+
+    G^{(m)} (\tau) = \dfrac{\alpha_m^2}{N}
+    \sum_i \sum_{j \ne i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)} \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij}^3 (\tau)},
+
+where :math:`N` is the number of spins.
 
 Single spin properties
 ----------------------
