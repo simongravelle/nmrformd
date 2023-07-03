@@ -1,6 +1,6 @@
 
-Theory (UNDER CONSTRUCTION)
-===========================
+Theory
+======
 
 Dipolar relaxation
 ------------------
@@ -66,17 +66,21 @@ where :math:`N` is the number of spins.
 Intra/inter contributions
 -------------------------
 
-Intra-molecular and inter-molecular contributions to :math:`R_1`
+Intra-molecular and inter-molecular contributions to :math:`R_1` and :math:`R_2`
 can be extracted separately, by splitting the correlation functions as:
 
 .. math::
 
-    G^{(m)}_\text{R, T} (t) = K \dfrac{1}{N_\text{R, T}}
-    \sum_{i \ne j}^{N_\text{R, T}} \left< {\cal F}_{ij}^{(m)} (0) {\cal F}_{ij}^{(m)} (t)  \right>,
+    G^{(m)}_\text{intra} (t) = \dfrac{\alpha_m^2}{N}
+    \sum_i \sum_{j \in M_i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)}
+    \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij}^3 (\tau)},
 
-where :math:`N_\text{R}` and :math:`N_\text{T}` are partial ensembles,
-where R denotes the rotational and T the translational relaxation modes,
-see Ref :cite:`singerMolecularDynamicsSimulations2017` for more details.
+    G^{(m)}_\text{inter} (t) = \dfrac{\alpha_m^2}{N}
+    \sum_i \sum_{j \notin M_i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)}
+    \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij}^3 (\tau)},
+
+where :math:`j \in M_i` and  :math:`j \notin M_i` refer to summation on spin from the 
+same molecule as :math:`i`, and from different molecules as :math:`i`, respectively.
 
 Isotropic system
 ----------------
@@ -84,21 +88,27 @@ Isotropic system
 For isotropic system, the correlation functions are proportional to each others, 
 and only :math:`G^{(0)} (t)` needs to be calculated.
 
-In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = 6 / 4 G^{(2)}` :cite:`becherMolecularDynamicsSimulations2021`.
+In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = 6 / 4 G^{(2)}`
+:cite:`becherMolecularDynamicsSimulations2021`, which can easily be checked, for instance
+for a bulk water system:
 
-For isotropic system, spectrums can be calculated as:
+.. image:: ../../../examples/bulk-water/figures/Gij-aniso-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../../../examples/bulk-water/figures/Gij-aniso-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+Therefore, the spectrums can be calculated as:
 
 .. math::
 
     R_1 &=&  \frac{1}{6} \left[ J^{(0)} (\omega_0) + 4 J^{(0)} (2 \omega_0) \right],
 
-    R_2 &=& \frac{1}{6} \left[ J^{(0)} (0) + \frac{5}{2} J^{(0)} (\omega_0) + J^{(0)} (2 \omega_0) \right].
+    R_2 &=& \frac{1}{6} \left[ J^{(0)} (0) + \frac{5}{2} J^{(0)} (\omega_0) + J^{(0)} (2 \omega_0) \right],
 
-The case of small molecules
----------------------------
-
-Small molecules in low-viscosity solutions typically have rotational correlation times of a few tens of
-picoseconds or less. In that case the extreme narrowing conditions usually prevail, therefore :math:`J_2(\omega) = J_2(0)`.
+which require less computational time and less memory to achieve.
 
 .. bibliography::
    :style: unsrt
