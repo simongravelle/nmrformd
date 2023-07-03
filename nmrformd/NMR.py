@@ -209,9 +209,14 @@ class NMR:
         Create an array of zeros for the data and the correlation function.
         Create an array for the time. 
         """
-        self.data = np.zeros((self.dim, self.u.trajectory.n_frames // self.step,
-                                self.group_j.atoms.n_atoms),
-                                dtype=np.float32)
+        if self.isotropic:
+            self.data = np.zeros((self.dim, self.u.trajectory.n_frames // self.step,
+                                    self.group_j.atoms.n_atoms),
+                                    dtype=np.float16)
+        else:
+            self.data = np.zeros((self.dim, self.u.trajectory.n_frames // self.step,
+                                    self.group_j.atoms.n_atoms),
+                                    dtype=np.complex64)
         self.gij = np.zeros((self.dim,  self.u.trajectory.n_frames // self.step),
                                 dtype=np.float32)
         if self.actual_dt is None:
@@ -250,6 +255,7 @@ class NMR:
         for idx_j in range(self.group_j.atoms.n_atoms):
             for m in range(self.dim):
                 self.gij[m] += autocorrelation_function(self.data[m, :, idx_j])
+
         self.gij = np.real(self.gij)
 
     def normalize_Gij(self):
