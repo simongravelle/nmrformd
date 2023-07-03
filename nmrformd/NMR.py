@@ -107,9 +107,6 @@ class NMR:
         self.r = None
         self.theta = None
         self.phi = None
-        self.sh20 = None
-        self.sh21 = None
-        self.sh22 = None
         self.gij = None
         self.T1 = None
         self.T2 = None

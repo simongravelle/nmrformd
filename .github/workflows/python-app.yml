@@ -36,6 +36,5 @@ jobs:
     - name: Test with pytest
       run: |
         cd tests
-        # remove test for now
-        # coverage run --branch -m pytest --disable-pytest-warnings .
-        # coverage report -m --show-missing
+        coverage run --branch -m pytest --disable-pytest-warnings .
+        coverage report -m --show-missing
