@@ -1,8 +1,0 @@
-; atom types ==== masses ====== ; description
-Na                22.9900 	; sodium (Na)
-Cl                35.4500 	; chlorine (Cl)
-HW                 1.0080 	; water hydrogen (HW)
-OW                15.9994 	; water oxygen (OW)
-MW                 0.0000 	; water virtual site (MW)
-O		  15.9994 	; oxygen SO4 (O)
-S                 32.0600 	; sulfure SO4 (S)

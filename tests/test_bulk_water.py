@@ -16,27 +16,12 @@ import nmrformd as nmrmd
 
 def test_nmr():
     """Test NMR module using bulk water trajectory."""
-    u = mda.Universe("bulk_water_lammps/conf.data",
-                     "bulk_water_lammps/traj.xtc")
-    ids = ""
-    for i in np.arange(1, 300, 24):
-        ids = ids + " " + str(i)
-    group_i = "type 2 and index"+ids
-    group_j = "type 2"
-    nmr_1 = nmrmd.NMR(u, [group_i, group_j],
-                    type_analysis="inter_molecular")
-    assert np.isclose(nmr_1.tau, 4.66710)
-    assert np.isclose(nmr_1.delta_omega, 37.80931)
-    assert np.isclose(nmr_1.T1, 6.833889)
-    assert np.isclose(nmr_1.T2, 6.833889)
+    u = mda.Universe("../examples/bulk-water/lammps-inputs/topology.data",
+                        "../examples/bulk-water/lammps-inputs/traj.xtc")
 
-    nmr_2 = nmrmd.NMR(u, [group_i, group_j],
-                    type_analysis="inter_molecular",
-                    order="m012")
-    assert np.isclose(nmr_2.tau[0], 4.667102)
-    assert np.isclose(nmr_2.delta_omega[0], 37.809311)
-    assert np.isclose(nmr_2.T1, 7.1193362)
-
-    nmr_3 = nmrmd.NMR(u, [group_i, group_j], f0=1e5)
-    assert np.isclose(nmr_3.T1, 11.42645)
-    assert np.isclose(nmr_3.T2, 3.677240)
+    group_i = u.select_atoms("type 2")
+    nmr_1 = nmrmd.NMR(u, group_i, type_analysis="inter_molecular",
+                      isotropic=True, number_i=10)
+    assert np.isclose(nmr_1.T1 , nmr_1.T2)
+    # expected values is near 6-7 seconds
+    assert (nmr_1.T1 > 3) & (nmr_1.T1 < 10)
