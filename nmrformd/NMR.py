@@ -259,16 +259,12 @@ class NMR:
         self.gij = np.real(self.gij)
 
     def normalize_Gij(self):
-        """Apply prefartors to correlation function.
+        """Divide Gij by the number of spin pairs.
         
-        1) Divide Gij by the number of spin pairs
-        # 2) Convert Gij from A**-6 to m**-6
-        # 3) Multiply Gij by the constant K to convert Gij from m**-6 to s**-2
-        4) For coarse grained model, apply a coefficient "hydrogen_per_atom" != 1
+        Optional, for coarse grained model, apply a coefficient "hydrogen_per_atom" != 1
         """
         # normalise gij by the number of iteration (or number of pair spin)
         self.gij /= self.cpt_i+1
-        #self.gij *= self.K/cst.angstrom ** 6
         if self.hydrogen_per_atom != 1:
             self.gij *= np.float32(self.hydrogen_per_atom)
 
@@ -324,13 +320,19 @@ class NMR:
         """Calculate spectrums R1 and R2 from J."""
         inter1d_0 = interp1d(self.f, self.J[0], fill_value="extrapolate")
         if self.isotropic:
-            self.R1 = self.K/cst.angstrom ** 6 * ( inter1d_0(self.f) + 4 * inter1d_0(2 * self.f) )/6
-            self.R2 = self.K/cst.angstrom ** 6 * ( 3/2*inter1d_0(self.f[0]) + 5/2*inter1d_0(self.f) + inter1d_0(2 * self.f) )/6
+            self.R1 = self.K/cst.angstrom ** 6 * (inter1d_0(self.f)
+                                                  + 4 * inter1d_0(2 * self.f) )/6
+            self.R2 = self.K/cst.angstrom ** 6 * (3/2*inter1d_0(self.f[0])
+                                                  + 5/2*inter1d_0(self.f)
+                                                  + inter1d_0(2 * self.f) )/6
         elif self.isotropic is False:
             inter1d_1 = interp1d(self.f, self.J[1], fill_value="extrapolate")
             inter1d_2 = interp1d(self.f, self.J[2], fill_value="extrapolate")
-            self.R1 = self.K/cst.angstrom ** 6 * (inter1d_1(self.f) + inter1d_2(2 * self.f))
-            self.R2 = self.K/cst.angstrom ** 6 * ((1/4)*(inter1d_0(self.f[0]) + 10*inter1d_1(self.f) + inter1d_2(2 * self.f)))
+            self.R1 = self.K/cst.angstrom ** 6 * (inter1d_1(self.f)
+                                                  + inter1d_2(2 * self.f))
+            self.R2 = self.K/cst.angstrom ** 6 * ((1/4)*(inter1d_0(self.f[0])
+                                                         + 10*inter1d_1(self.f)
+                                                         + inter1d_2(2 * self.f)))
         
     def calculate_relaxationtime(self):
         """Calculate the relaxation time at a given frequency f0 (default is 0)"""
