@@ -29,7 +29,7 @@ Bulk water
     `LAMMPS <https://www.lammps.org/>`__ at a temperature of 20°C. The total
     duration of the simulation is 1\,ns, and the timestep is 2 fs. You can
     access the input files in this
-    `repository <https://github.com/simongravelle/nmrformd/tree/main/tests>`__,
+    `repository <https://github.com/simongravelle/nmrformd/tree/main/examples>`__,
     which you can use to create larger system or longer trajectory. If
     you are not familiar with LAMMPS, you can find `tutorials
     here <https://lammpstutorials.github.io/>`__.

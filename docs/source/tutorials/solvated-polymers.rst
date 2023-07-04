@@ -26,7 +26,7 @@ Solvated polymer
     simulated in the NVT ensemble with GROMACS at a temperature of 295.15°K. The total
     duration of the simulation is 5\,ns, and the timestep is 1 fs. You can
     access the input files in this
-    `repository <https://github.com/simongravelle/nmrformd/tree/main/tests>`__,
+    `repository <https://github.com/simongravelle/nmrformd/tree/main/examples>`__,
     which you can use to create larger system or longer trajectory. If
     you are not familiar with GROMACS, you can find `tutorials
     here <https://gromacstutorials.github.io/>`__.
