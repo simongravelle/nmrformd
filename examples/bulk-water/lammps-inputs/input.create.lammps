@@ -5,6 +5,8 @@
 # set some variables
 variable pre equal 1 # desired pressure (Atm)
 variable tem equal 293.15 # desired temperature (K)
+variable nml equal 300 # desired number of molecules
+variable lbx equal 10 # desired box size
 
 # main parameters
 units real # style of units (A, fs, Kcal/mol)
@@ -17,7 +19,15 @@ kspace_style pppm/tip4p 1.0e-5
 pair_modify mix arithmetic tail yes # eij = sqrt(ei*ej), dij = 0.5*(di+dj)
 
 # import positions and parameters
-read_data topology.data
+region box block -${lbx} ${lbx} -${lbx} ${lbx} -${lbx} ${lbx}
+create_box 2 box &
+            bond/types 1 &
+            angle/types 1 &
+            extra/bond/per/atom 2 &
+            extra/angle/per/atom 1 &
+            extra/special/per/atom 2
+molecule h2omol H2O.lammps
+create_atoms 0 random ${nml} 456415 NULL mol h2omol 454756 overlap 2.5 maxtry 50
 include PARM.lammps
 
 # dynamics
@@ -25,8 +35,8 @@ timestep 2 # (fs)
 fix myshk all shake 1.0e-5 200 0 b 1 a 1 # shake with increased precision
 fix mynpt all npt temp ${tem} ${tem} 100 iso ${pre} ${pre} 1000 # npt equilibrium
 
-# output 
-dump dp1 all atom 10000 dump.npt.lammpstrj
+# output
+dump dp1 all atom 10000 _dump.create.lammpstrj
 thermo 1000
 
 # run 
