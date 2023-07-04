@@ -34,4 +34,4 @@ dump dp1 wat xtc 500 traj.xtc # print atom positions every 1 picosecond
 thermo 1000 
 
 # run 
-run 2000000 # 5 ns
+run 2500000 # 5 ns
