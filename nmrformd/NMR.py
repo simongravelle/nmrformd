@@ -50,12 +50,6 @@ class NMR:
     hydrogen_per_atom : float, default 1.0
         Specify the number of hydrogen per atom, usefull for 
         coarse-grained simulations.
-    start : int, default 0
-        To specify the first frame to be considered for the analysis.
-    stop : int, default 0
-        To specify the last frame to be considered for the analysis.
-    step : int, default 1
-        To jump frame during the analysis.  
     pdb : bool, default True
         To turn off/on the periodic boundary condition treatment.            
     """
@@ -71,9 +65,6 @@ class NMR:
                  actual_dt: float = None,
                  hydrogen_per_atom: float = 1.0,
                  spin: float = 1/2,
-                 start: int = 0,
-                 stop: int = 0,
-                 step: int = 1,
                  pbc: bool = True
                  ):
         """Initialise class NMR."""
@@ -95,12 +86,6 @@ class NMR:
         self.actual_dt = actual_dt
         self.hydrogen_per_atom = hydrogen_per_atom
         self.spin = spin
-        self.start = start
-        if stop == 0:
-            self.stop = u.trajectory.n_frames
-        else:
-            self.stop = stop
-        self.step = step
         self.pbc = pbc
         self.data = None
         self.rij = None
@@ -110,8 +95,8 @@ class NMR:
         self.gij = None
         self.T1 = None
         self.T2 = None
-        self.tau = None
-        self.delta_omega = None
+        # self.tau = None
+        # self.delta_omega = None
 
         self.verify_entry()
         self.define_constants()
@@ -207,20 +192,19 @@ class NMR:
         Create an array for the time. 
         """
         if self.isotropic:
-            self.data = np.zeros((self.dim, self.u.trajectory.n_frames // self.step,
+            self.data = np.zeros((self.dim, self.u.trajectory.n_frames,
                                     self.group_j.atoms.n_atoms),
                                     dtype=np.float16)
         else:
-            self.data = np.zeros((self.dim, self.u.trajectory.n_frames // self.step,
+            self.data = np.zeros((self.dim, self.u.trajectory.n_frames,
                                     self.group_j.atoms.n_atoms),
                                     dtype=np.complex64)
-        self.gij = np.zeros((self.dim,  self.u.trajectory.n_frames // self.step),
+        self.gij = np.zeros((self.dim,  self.u.trajectory.n_frames),
                                 dtype=np.float32)
         if self.actual_dt is None:
             self.timestep = np.round(self.u.trajectory.dt, 4)
         else:
             self.timestep = self.actual_dt
-        self.timestep *= self.step
         self.t = np.arange(self.u.trajectory.n_frames) * self.timestep
 
     def loop_over_trajectory(self):
@@ -230,10 +214,8 @@ class NMR:
 
         Run over the MDA trajectory. If start, stop, or step are
         specified, only a sub-part of the trajectory is analysed.
-
-        Note: if step>1 is given, the timestep is adapted.
         """
-        for cpt, ts in enumerate(self.u.trajectory[self.start:self.stop:self.step]):
+        for cpt, ts in enumerate(self.u.trajectory):
             self.position_i = self.group_i.atoms.positions
             self.position_j = self.group_j.atoms.positions
             self.box = ts.dimensions
