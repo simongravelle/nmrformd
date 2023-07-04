@@ -8,7 +8,7 @@ import copy
 
 Na = 6.022e23 #constants.Avogadro
 Mh2o = 0.018053 # kg/mol - water
-nwater = 3000
+nwater = 2180
 dw = 3.1
 
 # ### loop
