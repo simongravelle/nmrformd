@@ -67,8 +67,8 @@ class NMR:
                  spin: float = 1/2,
                  pbc: bool = True
                  ):
+        
         """Initialise class NMR."""
-
         self.u = u
         self.target_i = atom_group
         if neighbor_group is None:
@@ -95,29 +95,16 @@ class NMR:
         self.gij = None
         self.T1 = None
         self.T2 = None
-        # self.tau = None
-        # self.delta_omega = None
 
+        self.initialize()
+        self.collect_data()
+        self.finalize()
+
+    def initialize(self):
+        """Prepare the calculation"""
         self.verify_entry()
         self.define_constants()
         self.select_target_i()
-        # Loop on all the atom of group i
-        for cpt_i, _ in enumerate(self.index_i):
-            self.cpt_i = cpt_i
-            #self.atom_index_i = atom_index_i # not used
-            self.select_atoms_group_i()
-            self.select_atoms_group_j()
-            if cpt_i == 0:
-                self.initialise_data()
-            self.loop_over_trajectory()
-            self.calculate_correlation_ij()
-        # calculate spectrums
-        self.normalize_Gij()
-        self.calculate_fourier_transform()
-        self.calculate_spectrum()
-        self.calculate_relaxationtime()
-        #self.calculate_tau()
-        #self.calculate_secondmoment()
 
     def verify_entry(self):
         """Verify that entries are correct, and that groups are not empty."""
@@ -160,6 +147,19 @@ class NMR:
             self.index_i = np.array(self.target_i.atoms.indices)
         else:
             self.index_i = np.array(random.choices(self.target_i.atoms.indices, k=self.number_i))
+
+    def collect_data(self):
+        """Collect data by looping over atoms, time, and evaluate correlation"""
+        # Loop on all the atom of group i
+        for cpt_i, _ in enumerate(self.index_i):
+            self.cpt_i = cpt_i
+            #self.atom_index_i = atom_index_i # not used
+            self.select_atoms_group_i()
+            self.select_atoms_group_j()
+            if cpt_i == 0:
+                self.initialise_data()
+            self.loop_over_trajectory()
+            self.calculate_correlation_ij()
 
     def select_atoms_group_i(self):
         """Select atoms of the group i for the calculation."""
@@ -238,37 +238,6 @@ class NMR:
             self.evaluate_function_F()
             self.data[:, cpt] = self.sph_val
 
-    def calculate_correlation_ij(self):
-        """Calculate the correlation function."""
-        for idx_j in range(self.group_j.atoms.n_atoms):
-            for m in range(self.dim):
-                self.gij[m] += autocorrelation_function(self.data[m, :, idx_j])
-
-        self.gij = np.real(self.gij)
-
-    def normalize_Gij(self):
-        """Divide Gij by the number of spin pairs.
-        
-        Optional, for coarse grained model, apply a coefficient "hydrogen_per_atom" != 1
-        """
-        # normalise gij by the number of iteration (or number of pair spin)
-        self.gij /= self.cpt_i+1
-        if self.hydrogen_per_atom != 1:
-            self.gij *= np.float32(self.hydrogen_per_atom)
-
-    def calculate_fourier_transform(self):
-        """Calculate spectral density J.
-        
-        Calculate the spectral density J from the 
-        Fourier transform of the correlation function.
-        """
-        # for coarse grained models, possibly more than 1 hydrogen per atom
-        self.J = []
-        for m in range(self.dim):
-            fij = fourier_transform(np.vstack([self.t, self.gij[m]]).T)
-            self.J.append(np.real(fij.T[1]))
-        self.J = np.array(self.J)
-        self.f = np.real(fij.T[0])
 
     def vector_rij(self):
         """Calculate distance between position_i and position_j.
@@ -303,6 +272,45 @@ class NMR:
         if self.isotropic:
             F_val[0] = F_val[0].real
         self.sph_val = F_val
+
+    def calculate_correlation_ij(self):
+        """Calculate the correlation function."""
+        for idx_j in range(self.group_j.atoms.n_atoms):
+            for m in range(self.dim):
+                self.gij[m] += autocorrelation_function(self.data[m, :, idx_j])
+
+        self.gij = np.real(self.gij)
+
+    def finalize(self):
+        # calculate spectrums
+        self.normalize_Gij()
+        self.calculate_fourier_transform()
+        self.calculate_spectrum()
+        self.calculate_relaxationtime()
+
+    def normalize_Gij(self):
+        """Divide Gij by the number of spin pairs.
+        
+        Optional, for coarse grained model, apply a coefficient "hydrogen_per_atom" != 1
+        """
+        # normalise gij by the number of iteration (or number of pair spin)
+        self.gij /= self.cpt_i+1
+        if self.hydrogen_per_atom != 1:
+            self.gij *= np.float32(self.hydrogen_per_atom)
+
+    def calculate_fourier_transform(self):
+        """Calculate spectral density J.
+        
+        Calculate the spectral density J from the 
+        Fourier transform of the correlation function.
+        """
+        # for coarse grained models, possibly more than 1 hydrogen per atom
+        self.J = []
+        for m in range(self.dim):
+            fij = fourier_transform(np.vstack([self.t, self.gij[m]]).T)
+            self.J.append(np.real(fij.T[1]))
+        self.J = np.array(self.J)
+        self.f = np.real(fij.T[0])
 
     def calculate_spectrum(self):
         """Calculate spectrums R1 and R2 from J."""
