@@ -1,0 +1,7 @@
+#include "ff/forcefield.itp"
+#include "ff/tip4peps.itp"
+[ System ]
+Pure water
+
+[ Molecules ]
+SOL 3000

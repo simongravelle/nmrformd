@@ -1,0 +1,12 @@
+[ defaults ]
+;nbfunc	comb-rule	gen-pairs	fudgeLJ	fudgeQQ
+1       2           yes         1.0     1.0
+
+; TIP4P/e water model (J. Phys. Chem. B 2014, 118, 5, 1263–1272, https://doi.org/10.1021/jp410865y)
+[atomtypes]
+;name           mass      charge  ptype   sigma  epsilon
+MW              0        -1.054   D       0.0    0.0
+OW             15.9994    0       A       0.3165 0.77324
+HW              1.0079    0.527   A       0.0    0.0
+
+
