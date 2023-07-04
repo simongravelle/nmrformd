@@ -1,4 +1,4 @@
-# MDAnalysis files
+    # MDAnalysis files
 **/*xtc_offsets.npz
 **/*xtc_offsets.lock
 
@@ -19,6 +19,7 @@ docs/build
 nmrformd.egg-info/
 dist/
 build/
+**/_*
 
 .tox/
 docs/bin/
