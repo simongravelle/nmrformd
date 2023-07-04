@@ -5,7 +5,7 @@
 # set some variables
 variable pre equal 1 # desired pressure (Atm)
 variable tem equal 300 # desired temperature (K)
-#variable nml equal 300 # desired number of molecules
+variable nml equal 300
 variable lbx equal 2*${nml}^(1/3) # desired box size
 
 # main parameters
