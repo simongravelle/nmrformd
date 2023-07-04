@@ -42,3 +42,4 @@ NMR for MD
 
    theory/theory
    theory/best-practice
+   theory/bibliography
