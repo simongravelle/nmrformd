@@ -13,6 +13,9 @@ import numpy as np
 
 import nmrformd as nmrmd
 
+import sys
+sys.path.append('../nmrformd/')
+from utilities import calculate_tau
 
 def test_nmr():
     """Test NMR module using bulk water trajectory."""
@@ -23,5 +26,7 @@ def test_nmr():
     nmr_1 = nmrmd.NMR(u, group_i, type_analysis="inter_molecular",
                       isotropic=True, number_i=10)
     assert np.isclose(nmr_1.T1 , nmr_1.T2)
-    # expected values is near 6-7 seconds
+    # expected values is near 6-7 seconds for T1 and T2
     assert (nmr_1.T1 > 3) & (nmr_1.T1 < 10)
+    tau_inter = calculate_tau(nmr_1.J, nmr_1.gij, nmr_1.dim)
+    assert (tau_inter > 2.5) & (tau_inter < 5.5)
