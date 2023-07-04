@@ -147,6 +147,7 @@ class NMR:
             self.index_i = np.array(self.target_i.atoms.indices)
         elif self.number_i > self.target_i.atoms.n_atoms:
             print('Note : number_i is larger than the number of atoms in group target i\n'
+                  '-> The number_i value will be ignored'
                   '-> All the atoms of the group i have been selected')
             self.index_i = np.array(self.target_i.atoms.indices)
         else:
