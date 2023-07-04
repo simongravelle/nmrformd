@@ -69,16 +69,11 @@ def test_spherical():
 def test_correlation():
     u, group_H2O = import_universe()
     nmr_1 = nmrmd.NMR(u, group_H2O)
-    #_pref = nmr_1._K / cst.angstrom ** 6
-    #assert np.isclose(np.unique(nmr_1.gij/_pref), 1/8**6)
-    #nmr_2 = nmrmd.NMR(u, group_H2O_1, order="m012")
-    #assert np.isclose(np.unique(nmr_2.gij[0] / _pref), 1.0 / 8 ** 6)
-    #assert np.isclose(np.unique(nmr_2.gij[1] / _pref), 0)
-    #assert np.isclose(np.unique(nmr_2.gij[2] / _pref), 1.0 / 8 ** 6)
-    #nmr_3 = nmrmd.NMR(u, group_H2O_1, pbc=False)
-    #assert np.isclose(np.unique(nmr_3.gij / _pref), 1.0 / 10 ** 6)
-    #nmr_4 = nmrmd.NMR(u, group_H2O_1, hydrogen_per_atom=2)
-    #assert np.isclose(np.unique(nmr_4.gij / _pref), 2.0 / 8 ** 6)
+    assert nmr_1.r == 8
+    assert np.float32(np.round(nmr_1.gij[0][0], 7)) == np.float32(np.round(1/8**6, 7))
+    nmr_2 = nmrmd.NMR(u, group_H2O, pbc=False)
+    assert nmr_2.r == 10
+    assert np.float32(np.round(nmr_2.gij[0][0], 7)) == np.float32(np.round(1/10**6, 7))
 
 def test_fourier_transform():
     u, group_H2O = import_universe()
@@ -89,12 +84,9 @@ def test_fourier_transform():
 def test_group():
     """Assert that the number of atoms in both groups in correct."""
     u, group_H2O = import_universe()
-    #nmr_1 = nmrmd.NMR(u, group_H2O, type_analysis="intra_molecular")
-    #assert nmr_1.group_i.atoms.n_atoms == 1
-    #assert nmr_1.group_j.atoms.n_atoms == 1
-    #nmr_2 = nmrmd.NMR(u, group_H2O_1, type_analysis="inter_molecular")
-    #assert nmr_2.group_i.atoms.n_atoms == 1
-    #assert nmr_2.group_j.atoms.n_atoms == 2
-    #nmr_3 = nmrmd.NMR(u, group_H2O_1, type_analysis="full")
-    #assert nmr_3.group_i.atoms.n_atoms == 1
-    #assert nmr_3.group_j.atoms.n_atoms == 3
+    nmr_2 = nmrmd.NMR(u, group_H2O, type_analysis="inter_molecular")
+    assert nmr_2.group_i.atoms.n_atoms == 1
+    assert nmr_2.group_j.atoms.n_atoms == 1
+    nmr_3 = nmrmd.NMR(u, group_H2O, type_analysis="full")
+    assert nmr_3.group_i.atoms.n_atoms == 1
+    assert nmr_3.group_j.atoms.n_atoms == 1
