@@ -80,3 +80,16 @@ def fourier_transform(data):
     dt = (data[1, 0] - data[0, 0]) * cst.pico  # second
     return np.vstack((np.fft.rfftfreq(len(data), dt)
                      / cst.mega, np.fft.rfft(data[:, 1], norm=None) * dt * 2)).T
+
+def calculate_tau(J, gij, dim):
+    """
+    Calculate correlation time using tau = 0.5 J(0) / G(0).
+
+    The unit are in picosecond. If only the 0th m order is used (isotropic=True),
+    one value for tau is returned, if all three m orders are used (isotropic=False),
+    three values for tau are returned.
+    """
+    tau = []
+    for m in range(dim):
+        tau.append(0.5*(J[m][0] / gij.T[0][m]) / cst.pico)
+    return np.array(tau)

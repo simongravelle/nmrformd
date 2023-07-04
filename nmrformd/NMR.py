@@ -130,10 +130,12 @@ class NMR:
             raise ValueError("Empty neighbor atom group")
 
     def define_constants(self):
-        """Define some prefactors.
+        """Define prefactors.
 
+        See this page for details : https://nmrformd.readthedocs.io
         Gamma is the gyromagnetic constant of 1H in Hz/T or C/kg
         K has the units of m^6/s^2
+        alpha_m are normalizing coefficient for harmonic function
         """
         self.GAMMA = 2 * np.pi * 42.6e6
         self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
@@ -143,6 +145,12 @@ class NMR:
                         np.sqrt(32 * np.pi / 15)]
 
     def select_target_i(self):
+        """Select the target atoms i
+        
+        If number_i=0, select all atoms in target_i
+        If number_i > target_i.atoms.n_atoms, raise message
+        Else, if 0<number_i<target_i.atoms.n_atoms, select atoms randomly
+        """
         if self.number_i == 0:
             self.index_i = np.array(self.target_i.atoms.indices)
         elif self.number_i > self.target_i.atoms.n_atoms:
@@ -156,7 +164,7 @@ class NMR:
     def select_atoms_group_i(self):
         """Select atoms of the group i for the calculation."""
         self.group_i = self.u.select_atoms('index ' + str(self.index_i[self.cpt_i]))
-        self._resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]
+        self.resids_i = self.group_i.resids[self.group_i.atoms.indices == self.index_i[self.cpt_i]]
 
     def select_atoms_group_j(self):
         """Select atoms of the group j for the calculation.
@@ -168,12 +176,12 @@ class NMR:
         For full analysis, group j are made of atoms that are not in group i.
         """
         if self.type_analysis == "intra_molecular":
-            same_residue : bool = self.neighbor_j.resids == self._resids_i
+            same_residue : bool = self.neighbor_j.resids == self.resids_i
             different_atom : bool = self.neighbor_j.indices != self.index_i[self.cpt_i]
             index_j = self.neighbor_j.atoms.indices[same_residue & different_atom]
             str_j = ' '.join(str(e) for e in index_j)
         elif self.type_analysis == "inter_molecular":
-            different_residue : bool = self.neighbor_j.resids != self._resids_i
+            different_residue : bool = self.neighbor_j.resids != self.resids_i
             index_j = self.neighbor_j.atoms.indices[different_residue]
             str_j = ' '.join(str(e) for e in index_j)
         elif self.type_analysis == "full":
@@ -190,7 +198,9 @@ class NMR:
         """Initialise arrays.
 
         Create an array of zeros for the data and the correlation function.
-        Create an array for the time. 
+        If anisotropic, the spherical harmonic may be complex, so dtype=complex64
+        is used.
+        Create an array for of values separated by timestep for the time. 
         """
         if self.isotropic:
             self.data = np.zeros((self.dim, self.u.trajectory.n_frames,
@@ -211,8 +221,6 @@ class NMR:
     def loop_over_trajectory(self):
         """Loop of the MDA trajectory and extract rij. 
         
-        @tofix find better name
-
         Run over the MDA trajectory. If start, stop, or step are
         specified, only a sub-part of the trajectory is analysed.
         """
@@ -323,31 +331,3 @@ class NMR:
             idx = find_nearest(self.f, self.f0)
             self.T1 = 1 / self.R1[idx]
             self.T2 = 1 / self.R2[idx]
-
-    def calculate_tau(self):
-        """
-        Calculate correlation time using tau = 0.5 J(0) / G(0).
-
-        The unit are in picosecond. If only the 0th m order is used (isotropic=True),
-        one value for tau is returned, if all three m orders are used (isotropic=False),
-        three values for tau are returned.
-        """
-        tau = []
-        for m in range(self.dim):
-            tau.append(0.5*(self.J[m][0] / self.gij.T[0][m]) / cst.pico)
-        self.tau = tau
-
-    def calculate_secondmoment(self):
-        """
-        Calculate second moment Delta omega.
-
-        The unit of Delta omega are kHz /2 pi. The formula is G(0) = (1/3)
-        (Delta omega)**2 where G(0) is the correlation function
-        at time 0. If only the 0th m order is used, one value for Delta omega
-        is returned, if all three m orders are used, three values for Delta
-        omega are returned.
-        """
-        delta_omega = []
-        for m in range(self.dim):
-            delta_omega.append(np.sqrt(3*self.gij[0][m]) / (1000*2*np.pi))
-        self.delta_omega = delta_omega
