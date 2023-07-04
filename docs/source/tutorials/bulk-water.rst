@@ -125,7 +125,7 @@ Run NMRforMD
 
 .. code-block:: python
 
-	group_i = "type 2"
+	group_i = u.select_atoms("type 2")
 
 ..  container:: justify
 
@@ -133,7 +133,7 @@ Run NMRforMD
 
 .. code-block:: python
 
-	nmr_result = nmrmd.NMR(u, [group_i, group_i], number_i=40)
+	nmr_result = nmrmd.NMR(u, group_i, number_i=40)
 
 ..  container:: justify
 
@@ -197,6 +197,8 @@ Intra-Inter molecular contributions
 
 ..  container:: justify
 
+    Note that the intra_molecular contribution is always noisier than the inter_molecular,
+    which is why all atoms are included in the analysis (by using number_i=0).
     We can plot both intra-molecular and inter-molecular contributions separately:
 
 .. image:: ../../../examples/bulk-water/figures/R1-intra-inter-dark.png

@@ -1,0 +1,45 @@
+# LAMMPS input file
+# Bulk TIP4P/2005 water system
+# author : Simon Gravelle
+
+# set some variables
+variable pre equal 1 # desired pressure (Atm)
+variable tem equal 300 # desired temperature (K)
+#variable nml equal 300 # desired number of molecules
+variable lbx equal 2*${nml}^(1/3) # desired box size
+
+# main parameters
+units real # style of units (A, fs, Kcal/mol)
+atom_style full # molecular + charge
+bond_style harmonic
+angle_style harmonic
+boundary p p p # periodic boundary conditions
+pair_style lj/cut/tip4p/long 1 2 1 1 0.105 10 # cut-off 1 nm
+kspace_style pppm/tip4p 1.0e-5
+pair_modify mix arithmetic tail yes # eij = sqrt(ei*ej), dij = 0.5*(di+dj)
+
+# import positions and parameters
+region box block -${lbx} ${lbx} -${lbx} ${lbx} -${lbx} ${lbx}
+create_box 2 box &
+            bond/types 1 &
+            angle/types 1 &
+            extra/bond/per/atom 2 &
+            extra/angle/per/atom 1 &
+            extra/special/per/atom 2
+molecule h2omol H2O.lammps
+create_atoms 0 random ${nml} 456415 NULL mol h2omol 454756 overlap 1.5 maxtry 5000
+include PARM.lammps
+
+# dynamics
+timestep 2 # (fs)
+fix myshk all shake 1.0e-5 200 0 b 1 a 1 # shake with increased precision
+fix mynpt all npt temp ${tem} ${tem} 100 iso ${pre} ${pre} 1000 # npt equilibrium
+
+# output
+dump dp1 all atom 10000 dump.create.lammpstrj
+thermo 1000
+
+# run 
+run 50000 # 100 ps
+write_data topology.data
+write_dump all atom topology.lammpstrj
