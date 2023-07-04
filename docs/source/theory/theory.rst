@@ -110,6 +110,3 @@ Therefore, the spectrums can be calculated as:
 
 which require less computational time and less memory to achieve.
 
-.. bibliography::
-   :style: unsrt
-

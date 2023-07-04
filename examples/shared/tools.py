@@ -31,7 +31,7 @@ def figure_improvement(ax1, mygray, font, fontsize, xlabel=None, ylabel=None, xl
     ax1.legend(frameon=False, fontsize=fontsize, 
             loc='best', handletextpad=0.5,
             handlelength = 0.2, borderpad = 0.3, 
-            labelspacing=0.3) 
+            labelspacing=0.3, labelcolor=mygray) 
 
     if xlabel is not None:
         ax1.set_xlabel(xlabel, fontdict=font, color=mygray)
