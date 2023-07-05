@@ -23,26 +23,46 @@ include PARM.lammps
 group PEG type 1 2 3 4 5
 group H2O type 6 7
 
-
 # dynamics
 timestep 1
 fix myshk H2O shake 1.0e-5 200 0 b 6 a 9
-fix mynpt all npt temp ${tem} ${tem} 100 iso ${pre} ${pre} 1000
+fix mynve all nve/limit 0.1
+fix myber all temp/berendsen 1 1 100
 
 # output 1
-dump mydmp all atom 20000 dump.lammpstrj
-thermo 20000
+dump mydmp all atom 1000 dump.lammpstrj
+thermo 1000
 
 # run
-run 100000
-undump dp1
+run 5000
+unfix mynve
+unfix myber
+undump mydmp
+
+# dynamics
+fix mynpt all npt temp ${tem} ${tem} 100 iso 100 100 1000
+
+# output 2
+dump mydmp all atom 10000 dump.lammpstrj
+dump_modify mydmp append yes
+thermo 10000
+
+# run
+run 10000
+
+# dynamics
+fix mynpt all npt temp ${tem} ${tem} 100 iso ${pre} ${pre} 1000
+
+# run
+run 90000
+undump mydmp
 
 # save configuration
 write_data topology.data
 write_dump all atom topology.lammpstrj
 
-# output 2
-dump dp1 all xtc 1000 prod.xtc # print positions every 1 picosecond
+# output 3
+dump mydmp all xtc 1000 prod.xtc # print positions every 1 picosecond
 
 # run 
 run 10000000 # 10 ns

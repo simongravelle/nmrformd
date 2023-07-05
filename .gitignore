@@ -28,3 +28,6 @@ docs/pyvenv.cfg
 
 # LAMMPS files
 **/log.lammps
+
+# raw rata file
+examples/raw-data/*

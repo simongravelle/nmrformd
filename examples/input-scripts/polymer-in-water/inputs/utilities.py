@@ -183,7 +183,7 @@ def place_molecules(Np, NH2O, atomsPEG, bondsPEG, anglesPEG, dihedralsPEG):
             x,y,z = randomlocation(Lx,Ly,Lz)
             if cptPEG > 0:
                 d = neighborsearch(atoms[:cptatoms].T[4:].T,atomsPEG.T[3:].T, x, y, z, Lx, Ly, Lz)
-                if d < 0.3:
+                if d < 1:
                     insert = 0
 
             if insert == 1:
@@ -513,21 +513,37 @@ def prepare_lammps(atoms, bonds, angles, dihedrals):
     return atoms, bonds, angles, dihedrals
 
 def write_lammps(atoms, bonds, angles, dihedrals, Lx, Ly, Lz):
+
+    # estimate dihedral number 
+    n_dihedral = 0
+    for cpt, mydihedral in enumerate(dihedrals):
+        id1 = np.int32(mydihedral[0])
+        id2 = np.int32(mydihedral[1])
+        id3 = np.int32(mydihedral[2])
+        id4 = np.int32(mydihedral[3])
+        t1 = np.int32(atoms[atoms.T[0] == id1].T[2][0])
+        t2 = np.int32(atoms[atoms.T[0] == id2].T[2][0])
+        t3 = np.int32(atoms[atoms.T[0] == id3].T[2][0])
+        t4 = np.int32(atoms[atoms.T[0] == id4].T[2][0])
+        dihedral_types = detect_dihedral_type(t1, t2, t3, t4, id1, id2, id3, id4)
+        for dihedral_type in dihedral_types:
+            n_dihedral += 1
+
     f = open("data.lammps", "w")
     f.write('# LAMMPS data file \n\n')
     f.write(str(len(atoms))+' atoms\n')
     f.write(str(len(bonds))+' bonds\n')
     f.write(str(len(angles))+' angles\n')
-    f.write(str(len(dihedrals))+' dihedrals\n')
+    f.write(str(n_dihedral)+' dihedrals\n')
     f.write('\n')
     f.write('7 atom types\n')
     f.write('6 bond types\n')
     f.write('9 angle types\n')
     f.write('14 dihedral types\n')
     f.write('\n')
-    f.write(str(-Lx/2)+' '+str(Lx/2)+' xlo xhi\n')
-    f.write(str(-Ly/2)+' '+str(Ly/2)+' ylo yhi\n')
-    f.write(str(-Lz/2)+' '+str(Lz/2)+' zlo zhi\n')
+    f.write(str(-Lx/2*10)+' '+str(Lx/2*10)+' xlo xhi\n')
+    f.write(str(-Ly/2*10)+' '+str(Ly/2*10)+' ylo yhi\n')
+    f.write(str(-Lz/2*10)+' '+str(Lz/2*10)+' zlo zhi\n')
     f.write('\n')
     f.write('Atoms\n')
     f.write('\n')
@@ -535,6 +551,9 @@ def write_lammps(atoms, bonds, angles, dihedrals, Lx, Ly, Lz):
         if myatom[2] < 8:
             if myatom[2] == 6:
                 myatom[3] = -2*0.527
+            myatom[4] *= 10
+            myatom[5] *= 10
+            myatom[6] *= 10
             for col in range(len(myatom)):
                 if col < 3:
                     f.write(str(int(myatom[col]))+' ')
@@ -573,6 +592,7 @@ def write_lammps(atoms, bonds, angles, dihedrals, Lx, Ly, Lz):
     f.write('\n')
     f.write('Dihedrals\n')
     f.write('\n')   
+    n_dihedral = 0
     for cpt, mydihedral in enumerate(dihedrals):
         id1 = np.int32(mydihedral[0])
         id2 = np.int32(mydihedral[1])
@@ -584,7 +604,8 @@ def write_lammps(atoms, bonds, angles, dihedrals, Lx, Ly, Lz):
         t4 = np.int32(atoms[atoms.T[0] == id4].T[2][0])
         dihedral_types = detect_dihedral_type(t1, t2, t3, t4, id1, id2, id3, id4)
         for dihedral_type in dihedral_types:
-            myline = [cpt + 1, dihedral_type, mydihedral[0], mydihedral[1], mydihedral[2], mydihedral[3]]
+            myline = [n_dihedral + 1, dihedral_type, mydihedral[0], mydihedral[1], mydihedral[2], mydihedral[3]]
+            n_dihedral += 1
             for col in range(len(myline)):
                 f.write(str(int(myline[col]))+' ')
             f.write('\n')
