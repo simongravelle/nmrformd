@@ -21,7 +21,7 @@ do
             sed -i '/'"$oldline"'/c\'"$newline" create-system.py
             python3 create-system.py
         cd ..
-        if ((${n_peg} > 15));
+        if ((${n_peg} > 100));
         then
             echo 'Create GROMACS configuration for Npeg = '${n_peg}
             # Use GROMACS
