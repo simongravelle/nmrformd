@@ -155,7 +155,7 @@ def place_molecules(Np, NH2O, atomsPEG, bondsPEG, anglesPEG, dihedralsPEG):
     cptH2O = 0
     while (cptPEG<Np) | (cptH2O<NH2O):
         ## choose initial box dimensions
-        Lx, Ly, Lz = 2.5+0.5*attempt, 2.5+0.5*attempt, 2.5+0.5*attempt # nm
+        Lx, Ly, Lz = 2.3+0.5*attempt, 2.3+0.5*attempt, 2.3+0.5*attempt # nm
         
         box = np.array([Lx, Ly, Lz])
         ## initialise matrix
@@ -173,7 +173,7 @@ def place_molecules(Np, NH2O, atomsPEG, bondsPEG, anglesPEG, dihedralsPEG):
         atoName = ["" for x in range(1000000)]
 
         fail_attempt = 0
-        while (cptPEG < Np) & (fail_attempt<1e3):
+        while (cptPEG < Np) & (fail_attempt<5e3):
 
             nO = 0
             nH = 0
@@ -183,7 +183,7 @@ def place_molecules(Np, NH2O, atomsPEG, bondsPEG, anglesPEG, dihedralsPEG):
             x,y,z = randomlocation(Lx,Ly,Lz)
             if cptPEG > 0:
                 d = neighborsearch(atoms[:cptatoms].T[4:].T,atomsPEG.T[3:].T, x, y, z, Lx, Ly, Lz)
-                if d < 1:
+                if d < 0.26:
                     insert = 0
 
             if insert == 1:
@@ -310,7 +310,7 @@ def place_molecules(Np, NH2O, atomsPEG, bondsPEG, anglesPEG, dihedralsPEG):
             pos = np.array([x,y,z])
             dxdydz = np.remainder((pos - atoms[:cptatoms].T[4:].T) + box/2., box) - box/2.
             d = np.min(norm(dxdydz,axis=1))
-            if d > 0.31:
+            if d > 0.24:
                 for m in atomH2O:
                     atoms[cptatoms] = cptatoms+1, cptres+1, m[1], m[2], m[3]+x, m[4]+y, m[5]+z
                     resName[cptatoms] = 'SOL'
