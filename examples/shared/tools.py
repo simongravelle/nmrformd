@@ -1,8 +1,8 @@
 from matplotlib import pyplot as plt
-# from matplotlib.ticker import AutoMinorLocator
+from matplotlib.ticker import AutoMinorLocator
 # from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-def figure_improvement(ax1, mygray, font, fontsize, xlabel=None, ylabel=None, xlim=None, ylim=None):
+def figure_improvement(ax1, mygray, font, fontsize, xlabel=None, ylabel=None, xlim=None, ylim=None, cut_x=None, cut_y=None):
 
     plt.xticks(fontsize=fontsize)
     plt.yticks(fontsize=fontsize)
@@ -44,10 +44,13 @@ def figure_improvement(ax1, mygray, font, fontsize, xlabel=None, ylabel=None, xl
 
     #ax1.set_xticks([0, 5, 10, 15, 20])
     #ax1.set_yticks([0, 0.4, 0.8, 1.2, 1.6])
-    #minor_locator_y = AutoMinorLocator(2)
-    #ax1.yaxis.set_minor_locator(minor_locator_y)
-    #minor_locator_x = AutoMinorLocator(2)
-    #ax1.xaxis.set_minor_locator(minor_locator_x)
+
+    if cut_x is not None:
+        minor_locator_y = AutoMinorLocator(cut_x)
+        ax1.yaxis.set_minor_locator(minor_locator_y)
+    if cut_y is not None:
+        minor_locator_x = AutoMinorLocator(cut_y)
+        ax1.xaxis.set_minor_locator(minor_locator_x)
 
 def save_figure(plt, fig, mode, name):
     fig.tight_layout()        
