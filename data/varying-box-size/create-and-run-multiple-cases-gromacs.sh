@@ -4,7 +4,7 @@ set -e
 
 gmx=/WORK/simon/gromacs-2023/build-gpu/bin/gmx
 
-for n_mol in 3000 2180 1584 1151 836 608 442 321 233 169 123 89 65 47 34 25 # np.int32(np.logspace(np.log10(25), np.log10(3000), 16))
+for n_mol in 2180 1584 1151 836 608 442 321 233 169 123 89 65 47 34 25 # np.int32(np.logspace(np.log10(25), np.log10(3000), 16))
 do
     folder=_N${n_mol}-gromacs/
     if [ ! -d "$folder" ];
@@ -15,6 +15,7 @@ do
         newline='nwater = '$n_mol
         oldline=$(cat generate_system.py | grep 'nwater = ')
         sed -i '/'"$oldline"'/c\'"$newline" generate_system.py
+    	python3 generate_system.py 
     cd ..
 
     cp -r gromacs-inputs/* $folder
