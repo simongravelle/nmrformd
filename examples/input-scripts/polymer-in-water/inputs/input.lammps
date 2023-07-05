@@ -40,12 +40,18 @@ unfix myber
 undump mydmp
 
 # dynamics
-fix mynpt all npt temp ${tem} ${tem} 100 iso ${pre} ${pre} 1000
+fix mynpt all npt temp ${tem} ${tem} 100 iso 100 100 1000
 
 # output 2
 dump mydmp all atom 10000 dump.lammpstrj
 dump_modify mydmp append yes
 thermo 10000
+
+# run
+run 10000
+
+# dynamics
+fix mynpt all npt temp ${tem} ${tem} 100 iso ${pre} ${pre} 1000
 
 # run
 run 100000
