@@ -5,8 +5,8 @@ import numpy as np
 from utilities import PEGgenerator, place_molecules, write_topol, write_conf, write_lammps, prepare_lammps
 
 # fix the number of polymer
-Number_polymer = 40
-EOperH2O = 0.5
+Number_polymer = 79
+EOperH2O = 1
 Nseg = 3 # with Nseg = 3, MPEG ~ 200 g/mol
 
 atomsPEG, bondsPEG, anglesPEG, dihedralsPEG = PEGgenerator(Nseg)
@@ -25,6 +25,8 @@ print('The total number of PEG molecules is '+str(Number_polymer))
 atoms, bonds, angles, dihedrals, atoName, resName, Lx, Ly, Lz = place_molecules(Number_polymer, Number_water, atomsPEG, bondsPEG, anglesPEG, dihedralsPEG)
 write_topol(Number_polymer, Number_water)
 write_conf(atoms, atoName, resName, Lx, Ly, Lz)
+
+print('The total number of atoms is', str(len(atoms)))
 
 # Convert to LAMMPS
 atoms, bonds, angles, dihedrals = prepare_lammps(atoms, bonds, angles, dihedrals)
