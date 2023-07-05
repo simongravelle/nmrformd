@@ -46,6 +46,9 @@ All LAMMPS and GROMACS input scripts are given in the `examples/`_ folder.
 For developers
 --------------
 
+If you intend to make modification, please raise an issue or send me and email
+first, the create a fork of the repository.
+
 Build the documentation localy from the `docs/`_ folder by typing:
 
 .. code-block:: bash 
