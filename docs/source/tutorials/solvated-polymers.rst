@@ -104,9 +104,10 @@ Create a MDAnalysis universe
     n_polymer_molecules = group_polymer.n_residues
     print(f"The number of PEG molecules is {n_polymer_molecules}")
 
->> The number of water molecules is 334
+.. code-block:: bash
 
->> The number of PEG molecules is 20
+    >> The number of water molecules is 334
+    >> The number of PEG molecules is 20
 
 Run NMRforMD
 ------------
@@ -139,9 +140,10 @@ Extract T1
     T1_H2O = np.round(H2O_nmr.T1,2)
     print(f"NMR relaxation time T1 - H2O = {T1_H2O} s")
 
->> NMR relaxation time T1 - PEG = 1.64 s
+.. code-block:: bash
 
->> NMR relaxation time T1 - H2O = 4.05 s
+    >> NMR relaxation time T1 - PEG = 1.64 s
+    >> NMR relaxation time T1 - H2O = 4.05 s
 
 ..  container:: justify
 
