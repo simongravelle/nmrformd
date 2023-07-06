@@ -52,11 +52,12 @@ def figure_improvement(ax1, mygray, font, fontsize, xlabel=None, ylabel=None, xl
         minor_locator_x = AutoMinorLocator(cut_y)
         ax1.xaxis.set_minor_locator(minor_locator_x)
 
-def save_figure(plt, fig, mode, name):
+def save_figure(plt, fig, mode, name, path='../../../docs/source/figures/', save=True):
     fig.tight_layout()        
     if mode == 'light':
-        file = "figures/" + name + "-light.png"
+        file = path + name + "-light.png"
     else:
-        file = "figures/" + name + "-dark.png"
-    plt.savefig(file, bbox_inches = 'tight', pad_inches = 0.057, transparent=True)
+        file = path + name + "-dark.png"
+    if save:
+        plt.savefig(file, bbox_inches = 'tight', pad_inches = 0.057, transparent=True)
     plt.show()    
