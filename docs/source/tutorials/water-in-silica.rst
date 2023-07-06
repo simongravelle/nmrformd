@@ -53,7 +53,7 @@ File preparation
 
 .. code-block:: python
 
-	datapath = "gromacs-inputs/"
+	datapath = "../../raw-data/water-in-silica/N50/"
 
 .. |repository| raw:: html
 
@@ -116,7 +116,7 @@ Run NMRforMD
 
 .. code-block:: python
 
-    TOTAL_nmr = nmrmd.NMR(u, group_H, neighbor_group=group_H, number_i=50, isotropic=False)
+    TOTAL_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H, number_i=50, isotropic=False)
     H2O_SILICA_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H_silica, number_i=50, isotropic=False)
 
 ..  container:: justify
