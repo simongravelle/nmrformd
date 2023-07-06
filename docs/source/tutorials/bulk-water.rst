@@ -48,7 +48,7 @@ File preparation
 
 .. container:: justify
 
-    The data are located in 'examples/raw-data/bulk-water/N398/'.
+    The datasets are located in 'examples/raw-data/bulk-water/N398/'.
 
     Open a Python script or a Jupyter notebook, and start by defining
     a path to the data files. In my case, since I am working from
@@ -93,6 +93,10 @@ Create a MDAnalysis universe
     reduce the number of frames, and therefore reduce the duration of 
     the calculation. Feel free to remove it, or change its value.
 
+    Note : the figures here have been generated using the 
+    full trajectory (i.e. without *u.transfer_to_memory(stop=501)*),
+    but its takes a few minutes to complete.
+
     The MDAnalysis universe *u* contains both topology (atoms types, masses, etc.)
     and trajectory (atom positions at every frame).
 
@@ -123,7 +127,7 @@ Create a MDAnalysis universe
 Run NMRforMD
 ------------
 
-..  container:: justify
+.. container:: justify
 
     Let us isolate a group of atoms containing all the hydrogen atoms (i.e. atoms of 
     type 2) of the system:
@@ -132,7 +136,7 @@ Run NMRforMD
 
 	group_i = u.select_atoms("type 2")
 
-..  container:: justify
+.. container:: justify
 
     Then, let us run NMRforMD, using the same group as i and j types:
 
@@ -140,13 +144,15 @@ Run NMRforMD
 
 	nmr_result = nmrmd.NMR(u, group_i, number_i=40)
 
-..  container:: justify
+.. container:: justify
 
     With 'number_i = 40', only 40 randomly selected atoms within 'group_i' are considered for the calculation.
     Increase this number for better resolution. Use 'number_i = 0' to consider all the atoms.
 
-Extra results
--------------
+Extract results
+---------------
+
+.. container:: justify
 
     Let us access the calculated value of the NMR relaxation time T1:
 
@@ -187,8 +193,8 @@ Extra results
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-Intra-Inter molecular contributions
------------------------------------
+Intra vs inter-molecular
+------------------------
 
 ..  container:: justify
 

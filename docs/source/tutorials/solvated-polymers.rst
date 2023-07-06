@@ -5,13 +5,13 @@ Solvated polymer
 
    Dealing with multiple groups
 
-.. image:: ../../../examples/polymer-in-water/figures/peg-dark.png
+.. image:: ../figures/tutorials/polymer-in-water/peg-dark.png
     :class: only-dark
     :alt: PEG-water mixture simulated with gromacs - NMR relaxation time calculation
     :width: 350
     :align: right
 
-.. image:: ../../../examples/polymer-in-water/figures/peg-light.png
+.. image:: ../figures/tutorials/polymer-in-water/peg-light.png
     :class: only-light
     :alt: PEG-water mixture simulated with gromacs - NMR relaxation time calculation
     :width: 350
@@ -45,14 +45,14 @@ File preparation
 
 .. container:: justify
 
-    The data are located in 'examples/polymer-in-water/gromacs-inputs/'.
+    The datasets are located in 'examples/raw-data/polymer-in-water/N17/'.
 
     Open a Python script or a Jupyter notebook, and define
     the path to the data files:
 
 .. code-block:: python
 
-	datapath = "gromacs-inputs/"
+	datapath = "../../raw-data/polymer-in-water/N17/"
 
 .. |repository| raw:: html
 
@@ -105,6 +105,7 @@ Create a MDAnalysis universe
     print(f"The number of PEG molecules is {n_polymer_molecules}")
 
 >> The number of water molecules is 334
+
 >> The number of PEG molecules is 20
 
 Run NMRforMD
@@ -117,8 +118,8 @@ Run NMRforMD
 
 .. code-block:: python
 
-	PEG_nmr = nmrmd.NMR(u, group_H_polymer, neighbor_group=group_H, number_i=50)
-    H2O_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H, number_i=150)
+    PEG_nmr = nmrmd.NMR(u, group_H_polymer, neighbor_group=group_H, number_i=17)
+    H2O_nmr = nmrmd.NMR(u, group_H_water, neighbor_group=group_H, number_i=82)
 
 ..  container:: justify
 
@@ -138,8 +139,9 @@ Extract T1
     T1_H2O = np.round(H2O_nmr.T1,2)
     print(f"NMR relaxation time T1 - H2O = {T1_H2O} s")
 
->> NMR relaxation time T1 - PEG = 0.65 s
->> NMR relaxation time T1 - H2O = 0.62 s
+>> NMR relaxation time T1 - PEG = 1.64 s
+
+>> NMR relaxation time T1 - H2O = 4.05 s
 
 ..  container:: justify
 
@@ -156,11 +158,11 @@ Plot the spectrum
     and the corresponding frequency is given by nmr_result.f. Let up plot
     R1 as a function of f:
 
-.. image:: ../../../examples/polymer-in-water/figures/R1-dark.png
+.. image:: ../figures/tutorials/polymer-in-water/R1-dark.png
     :class: only-dark
     :alt: NMR results obtained from the GROMACS simulation of polymer-water mixture
 
-.. image:: ../../../examples/polymer-in-water/figures/R1-light.png
+.. image:: ../figures/tutorials/polymer-in-water/R1-light.png
     :class: only-light
     :alt: NMR results obtained from the GROMACS simulation of polymer-water mixture
 
@@ -177,11 +179,11 @@ Plot the correlation functions
     The correlation function Gij can be accessed from nmr_result.gij[0], and the time 
     from nmr_result.t. Let us plot Gij as a function of t:
 
-.. image:: ../../../examples/polymer-in-water/figures/Gij-dark.png
+.. image:: ../figures/tutorials/polymer-in-water/Gij-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/polymer-in-water/figures/Gij-light.png
+.. image:: ../figures/tutorials/polymer-in-water/Gij-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 

@@ -5,13 +5,13 @@ Water in silica
 
    The case of anisotropic systems
 
-.. image:: ../../../examples/water-in-silica/figures/silica-dark.png
+.. image:: ../figures/tutorials/water-in-silica/silica-dark.png
     :class: only-dark
     :alt: Nanoconfined water simulated with gromacs - NMR relaxation time calculation
     :width: 250
     :align: right
 
-.. image:: ../../../examples/water-in-silica/figures/silica-light.png
+.. image:: ../figures/tutorials/water-in-silica/silica-light.png
     :class: only-light
     :alt: Nanoconfined water simulated with gromacs - NMR relaxation time calculation
     :width: 250
