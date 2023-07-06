@@ -92,11 +92,11 @@ In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = 6 / 4 G^{(2)}`
 :cite:`becherMolecularDynamicsSimulations2021`, which can easily be checked, for instance
 for a bulk water system:
 
-.. image:: ../../../examples/bulk-water/figures/Gij-aniso-dark.png
+.. image:: ../figures/best-practices/proportionality-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/bulk-water/figures/Gij-aniso-light.png
+.. image:: ../figures/best-practices/proportionality-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
