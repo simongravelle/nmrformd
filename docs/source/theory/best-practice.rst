@@ -17,8 +17,39 @@ on :math:`R_1`.
 Box size
 --------
 
-NMR relaxation measurements are quite unsensitive to the box size, as indicated by
-measurement performed on bulk water.
+NMR relaxation measurements are not extremely sensitive to the box size, however,
+a small effect of the box size can be see, particularly when reaching extremely small boxes:
+
+.. image:: ../figures/best-practices/size-effect-tau-R1-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/best-practices/size-effect-tau-R1-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+Looking at the correlation functions, a strong effect of the box size can be 
+see on the inter-molecular contribution, while almost no effect is seen 
+on the intra-molecular contribution:
+
+.. image:: ../figures/best-practices/size-effect-gij-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/best-practices/size-effect-gij-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+Despite the strongly modified correlation functions obtained for small boxes,
+the relaxation rate is not so affected:
+
+.. image:: ../figures/best-practices/size-effect-R1-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/best-practices/size-effect-R1-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
 
 Simulation duration
 -------------------
@@ -48,11 +79,11 @@ actually stands. For a system of bulk water, the superimposition is clearly veri
 
 #todo : superimpose water, PEG-water, and slit silica on the same graph
 
-.. image:: ../../../examples/bulk-water/figures/Gij-aniso-dark.png
+.. image:: ../figures/best-practices/proportionality-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/bulk-water/figures/Gij-aniso-light.png
+.. image:: ../figures/best-practices/proportionality-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 

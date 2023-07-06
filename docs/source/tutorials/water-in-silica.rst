@@ -24,8 +24,8 @@ Water in silica
     NMRforMD. Make sure you followed the 'bulk water' tutorial first.
 
     The system is made of 592 TIP4P water molecules and 20 sodium counter ion (Na+)
-    simulated with GROMACS at a temperature of 300°K. The total
-    duration of the simulation is 1\,ns, and the timestep is 1 fs. You can
+    simulated with GROMACS at a temperature of 300 K. The total
+    duration of the simulation is 20\,ns, and the timestep is 1 fs. You can
     access the input files in this
     `repository <https://github.com/simongravelle/nmrformd/tree/main/examples>`__,
     which you can use to create larger system or longer trajectory. If
