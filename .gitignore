@@ -32,8 +32,10 @@ docs/pyvenv.cfg
 # raw rata file
 examples/raw-data/bulk-water/*
 !examples/raw-data/bulk-water/N398/
-!examples/raw-data/bulk-water/N398/topology.data
-!examples/raw-data/bulk-water/N398/prod.xtc
+examples/raw-data/bulk-water/N398/log.*
+examples/raw-data/bulk-water/N398/*.lammpstrj
+examples/raw-data/bulk-water/N398/*.lammps
+examples/raw-data/bulk-water/N398/*.sh
 examples/raw-data/polymer-in-water/*
 examples/raw-data/water-in-silica/*
 
