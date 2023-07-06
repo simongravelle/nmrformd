@@ -103,7 +103,9 @@ Create a MDAnalysis universe
     n_water_molecules = group_H_water.n_residues
     print(f"The number of water molecules is {n_water_molecules}")
 
->> The number of water molecules is 592
+.. code-block:: bash
+
+    >> The number of water molecules is 594
 
 Run NMRforMD
 ------------
@@ -119,8 +121,8 @@ Run NMRforMD
 
 ..  container:: justify
 
-    The *TOTAL_nmr* analyses all the hydrogen atoms, from water and -OH groups. The *H2O_SILICA_nmr* only 
-    considers the contribution from H2O-Silica. 
+    The *TOTAL_nmr* contains the analyses for all the hydrogen atoms, from water and -OH groups. The *H2O_SILICA_nmr* only 
+    considers the contribution from the H2O-Silica spin pairs. 
 
 Extract results
 ----------------
@@ -136,8 +138,10 @@ Extract results
     T1_H2O_SILICA = np.round(H2O_SILICA_nmr.T1,2)
     print(f"NMR relaxation time T1 - H2O - TOTAL = {T1_H2O_SILICA} s")
 
->> NMR relaxation time T1 - H2O - TOTAL = 0.4 s
->> NMR relaxation time T1 - H2O - TOTAL = 18.98 s
+.. code-block:: bash
+
+    >> NMR relaxation time T1 - H2O - TOTAL = 0.4 s
+    >> NMR relaxation time T1 - H2O - TOTAL = 18.98 s
 
 ..  container:: justify
 
@@ -145,11 +149,11 @@ Extract results
     and the corresponding frequency is given by nmr_result.f. Let up plot
     R1 as a function of f:
 
-.. image:: ../../../examples/polymer-in-water/figures/R1-dark.png
+.. image:: ../figures/tutorials/water-in-silica/R1-dark.png
     :class: only-dark
     :alt: NMR results obtained from the GROMACS simulation of polymer-water mixture
 
-.. image:: ../../../examples/polymer-in-water/figures/R1-light.png
+.. image:: ../figures/tutorials/water-in-silica/R1-light.png
     :class: only-light
     :alt: NMR results obtained from the GROMACS simulation of polymer-water mixture
 
@@ -162,14 +166,31 @@ Plot the correlation functions
 
 ..  container:: justify
 
-    The correlation function Gij can be accessed from nmr_result.gij[0], and the time 
+    The correlation function Gij can be accessed from nmr_result.gij[0]
+    (and nmr_result.gij[1] and nmr_result.gij[2]), and the time 
     from nmr_result.t. Let us plot Gij as a function of t:
 
-.. image:: ../../../examples/polymer-in-water/figures/Gij-dark.png
+.. image:: ../figures/tutorials/water-in-silica/Gij-0-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/polymer-in-water/figures/Gij-light.png
+.. image:: ../figures/tutorials/water-in-silica/Gij-0-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/tutorials/water-in-silica/Gij-1-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/tutorials/water-in-silica/Gij-1-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/tutorials/water-in-silica/Gij-2-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/tutorials/water-in-silica/Gij-2-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 

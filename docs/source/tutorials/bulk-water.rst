@@ -115,14 +115,18 @@ Create a MDAnalysis universe
 	timestep = np.int32(u.trajectory.dt)
 	print(f"The timestep is {timestep} ps")
 
->> The timestep is 1 ps
+.. code-block:: bash
+
+    >> The timestep is 1 ps
 
 .. code-block:: python
 
 	total_time = np.int32(u.trajectory.totaltime)
 	print(f"The total simulation time is {total_time} ps")
 
->> The total simulation time is 500 ps
+.. code-block:: bash
+
+    >> The total simulation time is 500 ps
 
 Run NMRforMD
 ------------
@@ -161,7 +165,9 @@ Extract results
 	T1 = np.round(nmr_result.T1,2)
 	print(f"NMR relaxation time T1 = {T1} s")
 
->> NMR relaxation time T1 = 3.08 s
+.. code-block:: bash
+
+    >> NMR relaxation time T1 = 3.08 s
 
 ..  container:: justify
 

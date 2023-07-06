@@ -45,3 +45,4 @@ examples/raw-data/water-in-silica/N50/ff/
 examples/raw-data/water-in-silica/N50/input/
 examples/raw-data/water-in-silica/N50/emd.*
 examples/raw-data/water-in-silica/N50/*.sh
+examples/raw-data/water-in-silica/N50/*.cpt
