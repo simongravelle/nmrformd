@@ -81,7 +81,7 @@ def fourier_transform(data):
     return np.vstack((np.fft.rfftfreq(len(data), dt)
                      / cst.mega, np.fft.rfft(data[:, 1], norm=None) * dt * 2)).T
 
-def calculate_tau(J, gij, dim):
+def calculate_tau(J, gij, dim, integral=False, t=None, oneDarray=False):
     """
     Calculate correlation time using tau = 0.5 J(0) / G(0).
 
@@ -89,7 +89,17 @@ def calculate_tau(J, gij, dim):
     one value for tau is returned, if all three m orders are used (isotropic=False),
     three values for tau are returned.
     """
-    tau = []
-    for m in range(dim):
-        tau.append(0.5*(J[m][0] / gij.T[0][m]) / cst.pico)
+
+    if oneDarray:
+        tau = 0.5*(J[0] / gij[0]) / cst.pico
+    else:
+        tau = []
+        for m in range(dim):
+            if integral:
+                if t is None:
+                    print("time vector must be supplied with integral=True")
+                else:
+                    tau.append(np.trapz(gij[m], t)/gij.T[0][m])
+            else:
+                tau.append(0.5*(J[m][0] / gij.T[0][m]) / cst.pico)
     return np.array(tau)

@@ -38,4 +38,10 @@ examples/raw-data/bulk-water/N398/*.lammps
 examples/raw-data/bulk-water/N398/*.sh
 examples/raw-data/polymer-in-water/*
 examples/raw-data/water-in-silica/*
-
+!examples/raw-data/water-in-silica/N50/
+examples/raw-data/water-in-silica/N50/nvt.*
+examples/raw-data/water-in-silica/N50/npt.*
+examples/raw-data/water-in-silica/N50/ff/
+examples/raw-data/water-in-silica/N50/input/
+examples/raw-data/water-in-silica/N50/emd.*
+examples/raw-data/water-in-silica/N50/*.sh

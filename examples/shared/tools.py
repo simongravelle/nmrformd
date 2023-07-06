@@ -35,8 +35,12 @@ def figure_improvement(ax1, mygray, font, fontsize, xlabel=None, ylabel=None, xl
 
     if xlabel is not None:
         ax1.set_xlabel(xlabel, fontdict=font, color=mygray)
+    else:
+        ax1.set_xticklabels([])
     if ylabel is not None:
         ax1.set_ylabel(ylabel, fontdict=font, color=mygray)
+    else:
+        ax1.set_yticklabels([])
     if xlim is not None:
         plt.xlim(xlim)
     if ylim is not None:
