@@ -5,13 +5,13 @@ Bulk water
 
    The NMR relaxation time :math:`T_1`  of water is calculated
 
-.. image:: ../../../examples/bulk-water/figures/water-dark-square.png
+.. image:: ../figures/tutorials/bulk-water/water-dark-square.png
     :class: only-dark
     :alt: Water molecules simulated with lammps - NMR relaxation time calculation
     :width: 250
     :align: right
 
-.. image:: ../../../examples/bulk-water/figures/water-light-square.png
+.. image:: ../figures/tutorials/bulk-water/water-light-square.png
     :class: only-light
     :alt: Water molecules simulated with lammps - NMR relaxation time calculation
     :width: 250
@@ -25,9 +25,9 @@ Bulk water
     `matplotlib <https://www.matplotlib.org>`__ and NMRforMD must be
     installed.
 
-    The system is made of 300 TIP4P water molecules simulated in the NPT ensemble with
-    `LAMMPS <https://www.lammps.org/>`__ at a temperature of 20°C. The total
-    duration of the simulation is 1\,ns, and the timestep is 2 fs. You can
+    The system is made of 398 TIP4P water molecules simulated in the NPT ensemble with
+    `LAMMPS <https://www.lammps.org/>`__ at a temperature of 300 K. The total
+    duration of the simulation is 10\,ns, and the timestep is 2 fs. You can
     access the input files in this
     `repository <https://github.com/simongravelle/nmrformd/tree/main/examples>`__,
     which you can use to create larger system or longer trajectory. If
@@ -48,19 +48,19 @@ File preparation
 
 .. container:: justify
 
-    The data are located in 'examples/bulk-water/lammps-inputs/'.
+    The data are located in 'examples/raw-data/bulk-water/N398/'.
 
     Open a Python script or a Jupyter notebook, and start by defining
     a path to the data files. In my case, since I am working from
-    'examples/bulk-water/', its simply 'lammps-inputs/':
+    'examples/analyse-scripts/bulk-water/', its simply:
 
 .. code-block:: python
 
-	datapath = "lammps-inputs/"
+	datapath = "../../raw-data/bulk-water/N398/"
 
 .. |repository| raw:: html
 
-   <a href="ttps://github.com/simongravelle/nmrformd/tree/main/tests" target="_blank">repository</a>
+   <a href="https://github.com/simongravelle/nmrformd/tree/main" target="_blank">repository</a>
 
 Import the libraries
 --------------------
@@ -84,9 +84,14 @@ Create a MDAnalysis universe
 
 .. code-block:: python
 
-	u = mda.Universe(datapath+"topology.data", datapath+"traj.xtc")
+    u = mda.Universe(datapath+"topology.data", datapath+"traj.xtc")
+    u.transfer_to_memory(stop=501)
 
 .. container:: justify
+
+    The *u.transfer_to_memory(stop=501)*, is optional, it only serve to 
+    reduce the number of frames, and therefore reduce the duration of 
+    the calculation. Feel free to remove it, or change its value.
 
     The MDAnalysis universe *u* contains both topology (atoms types, masses, etc.)
     and trajectory (atom positions at every frame).
@@ -99,7 +104,7 @@ Create a MDAnalysis universe
 	n_molecules = u.atoms.n_residues
 	print(f"The number of water molecules is {n_molecules}")
 
->> The number of water molecules is 300
+>> The number of water molecules is 398
 
 .. code-block:: python
 
@@ -113,7 +118,7 @@ Create a MDAnalysis universe
 	total_time = np.int32(u.trajectory.totaltime)
 	print(f"The total simulation time is {total_time} ps")
 
->> The total simulation time is 1000 ps
+>> The total simulation time is 500 ps
 
 Run NMRforMD
 ------------
@@ -161,11 +166,11 @@ Extra results
     and the corresponding frequency is given by nmr_result.f. Let up plot
     T1 as a function of f:
 
-.. image:: ../../../examples/bulk-water/figures/T1-dark.png
+.. image:: ../figures/tutorials/bulk-water/T1-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/bulk-water/figures/T1-light.png
+.. image:: ../figures/tutorials/bulk-water/T1-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
@@ -174,11 +179,11 @@ Extra results
     The correlation function Gij can be accessed from nmr_result.gij[0], and the time 
     from nmr_result.t. Let us plot Gij as a function of t:
 
-.. image:: ../../../examples/bulk-water/figures/Gij-dark.png
+.. image:: ../figures/tutorials/bulk-water/Gij-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/bulk-water/figures/Gij-light.png
+.. image:: ../figures/tutorials/bulk-water/Gij-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
@@ -192,20 +197,20 @@ Intra-Inter molecular contributions
 
 .. code-block:: python
 
-    nmr_result_intra = nmrmd.NMR(u, group_i, type_analysis="intra_molecular", number_i=0)
+    nmr_result_intra = nmrmd.NMR(u, group_i, type_analysis="intra_molecular", number_i=40)
     nmr_result_inter = nmrmd.NMR(u, group_i, type_analysis="inter_molecular", number_i=20)
 
 ..  container:: justify
 
     Note that the intra_molecular contribution is always noisier than the inter_molecular,
-    which is why all atoms are included in the analysis (by using number_i=0).
+    which is why more atoms were included in the analysis.
     We can plot both intra-molecular and inter-molecular contributions separately:
 
-.. image:: ../../../examples/bulk-water/figures/R1-intra-inter-dark.png
+.. image:: ../figures/tutorials/bulk-water/R1-intra-inter-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/bulk-water/figures/R1-intra-inter-light.png
+.. image:: ../figures/tutorials/bulk-water/R1-intra-inter-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
@@ -215,11 +220,11 @@ Intra-Inter molecular contributions
     which is expected for bulk water. We can also look at the 
     correlation functions:
 
-.. image:: ../../../examples/bulk-water/figures/Gij-intra-inter-dark.png
+.. image:: ../figures/tutorials/bulk-water/Gij-intra-inter-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../../../examples/bulk-water/figures/Gij-intra-inter-light.png
+.. image:: ../figures/tutorials/bulk-water/Gij-intra-inter-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
