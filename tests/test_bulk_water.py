@@ -19,9 +19,10 @@ from utilities import calculate_tau
 
 def test_nmr():
     """Test NMR module using bulk water trajectory."""
-    u = mda.Universe("../examples/bulk-water/lammps-inputs/topology.data",
-                        "../examples/bulk-water/lammps-inputs/traj.xtc")
-
+    u = mda.Universe("../examples/raw-data/bulk-water/N398/topology.data",
+                        "../examples/raw-data/bulk-water/N398/prod.xtc")
+    u.transfer_to_memory(step=2, stop=1000)
+    print(u.trajectory.n_frames)
     group_i = u.select_atoms("type 2")
     nmr_1 = nmrmd.NMR(u, group_i, type_analysis="inter_molecular",
                       isotropic=True, number_i=10)
