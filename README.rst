@@ -67,7 +67,7 @@ Publish a new pip version by following those |instructions|.
 
     python3 setup.py sdist
 
-3 - Create a new release on Github using the generated tar.gz file
+3 - Create a new release on Github using the generated tar.gz file locqted in dist/
 
 4 - Update the link in setup.py
 

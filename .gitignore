@@ -20,6 +20,7 @@ nmrformd.egg-info/
 dist/
 build/
 **/_*
+save.sh
 
 .tox/
 docs/bin/

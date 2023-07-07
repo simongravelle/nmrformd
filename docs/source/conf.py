@@ -14,7 +14,7 @@ copyright = 'All source code is available under the GNU General Public License v
 author = 'Simon Gravelle'
 
 version = '0.1'
-release = '0.1.0'
+release = '0.1.1'
 
 # -- General configuration ---------------------------------------------------
 
