@@ -11,8 +11,8 @@
 from setuptools import setup
 
 setup(name='nmrformd',
-      version='v0.1.0',
-      description='Calculate NMR relaxation time from \
+      version='v0.1.1',
+      description='Calculate dipolar NMR relaxation time from \
                    molecular dynamics trajectory file',
       long_description=open('README.rst').read(),
       long_description_content_type='text/x-rst',
