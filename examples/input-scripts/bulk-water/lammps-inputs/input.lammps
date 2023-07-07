@@ -6,7 +6,7 @@
 variable pre equal 1 # desired pressure (Atm)
 variable tem equal 300 # desired temperature (K)
 # desired number of molecules:
-variable nml equal 631
+variable nml equal 280
 # desired inital box size 
 variable lbx equal 1.6*${nml}^(1/3)
 
