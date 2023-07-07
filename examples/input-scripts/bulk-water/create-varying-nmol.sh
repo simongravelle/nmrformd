@@ -8,7 +8,8 @@ set -e
 raw_data=../../raw-data/bulk-water/
 
 # loop over log-spaced data created using np.int32(np.logspace(np.log10(25), np.log10(4000), 12))
-for n_mol in 25 39 62 99 158 251 398 631 1002 1589 2521 4000
+# for n_mol in 25 39 62 99 158 251 398 631 1002 1589 2521 4000
+for n_mol in 280
 do
 
     folder=${raw_data}N${n_mol}
