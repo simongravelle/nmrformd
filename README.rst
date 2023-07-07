@@ -81,7 +81,7 @@ Publish a new pip version by following those |instructions|.
 
 .. code-block:: bash 
     
-    twine upload dist/nmrformd-0.1.0* \
+    twine upload dist/nmrformd-0.1.0*
 
 .. _`docs/`: docs/
 .. _`examples/`: examples/
