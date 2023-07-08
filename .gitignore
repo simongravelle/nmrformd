@@ -47,7 +47,6 @@ examples/raw-data/polymer-in-water/N20/*.lammps
 examples/raw-data/polymer-in-water/N20/*.sh
 ### water in silica
 examples/raw-data/water-in-silica/*
-!examples/raw-data/water-in-silica/N50/
 !examples/raw-data/water-in-silica/N50-coarse/
 examples/raw-data/water-in-silica/N50-coarse/nvt.*
 examples/raw-data/water-in-silica/N50-coarse/npt.*
