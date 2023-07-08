@@ -22,8 +22,9 @@ files from any MDAnalysis-compatible simulation package, including
 
 .. inclusion-readme-intro-end
 
-Details about installation, use, and common pitfalls are given in the |documentation|. 
-There is also a description of the theory behind dipolar NMR calculations.
+Details about installation, use, and some of the common pitfalls of NMR calculations
+are given in the |documentation|. The documentation also contains a description of
+the theory behind dipolar NMR calculations.
 
 Notes and known issues
 ----------------------
