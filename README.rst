@@ -57,13 +57,6 @@ Build the documentation localy from the `docs/`_ folder by typing:
     make clean
     make html
 
-To reduce the .git history by suppressing large files (can be usefull if large
-trajectory files were saved)
-
-.. code-block:: bash 
-
-        git filter-repo --strip-blobs-bigger-than 100
-
 Publish a new pip version by following those |instructions|.
 
 1 - if necessary, update *docs/source/conf.py*, *CITATION.cff*, and *setup.py*
