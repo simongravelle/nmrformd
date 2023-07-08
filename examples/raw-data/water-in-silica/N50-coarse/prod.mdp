@@ -2,13 +2,13 @@
 ;	File 'prod.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Sat Jul  8 09:38:59 2023
+;	At date: Sat Jul  8 09:50:36 2023
 ;
 ;	Created by:
-;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
+;	      :-) GROMACS - gmx grompp, 2024-dev-20230207-1b9e69bb16-unknown (-:
 ;	
-;	Executable:   /usr/bin/gmx
-;	Data prefix:  /usr
+;	Executable:   /home/simon/Softwares/gromacs/build-gpu/bin/gmx
+;	Data prefix:  /home/simon/Softwares/gromacs (source tree)
 ;	Working dir:  /home/simon/Workspace/nmrformd/examples/raw-data/water-in-silica/N50-coarse
 ;	Command line:
 ;	  gmx grompp -f input/prod.mdp -o prod -pp prod -po prod -c npt.gro -maxwarn 1
@@ -25,7 +25,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 10000000
+nsteps                   = 5000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -98,7 +98,7 @@ rlist                    = 1
 coulombtype              = pme
 coulomb-modifier         = Potential-shift-Verlet
 rcoulomb-switch          = 0
-rcoulomb                 = 1.4
+rcoulomb                 = 1.2
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
@@ -107,7 +107,7 @@ vdw-type                 = Cut-off
 vdw-modifier             = Potential-shift-Verlet
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.4
+rvdw                     = 1.2
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                 = No
 ; Extension of the potential lookup tables beyond the cut-off
@@ -130,6 +130,8 @@ epsilon-surface          = 0
 implicit-solvent         = no
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
+ensemble-temperature-setting = auto
+ensemble-temperature     = -1
 ; Temperature coupling  
 tcoupl                   = v-rescale
 nsttcouple               = -1
@@ -169,7 +171,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = no
 gen-temp                 = 300
-gen-seed                 = -77726081
+gen-seed                 = 921092079
 
 ; OPTIONS FOR BONDS    
 constraints              = hbonds
