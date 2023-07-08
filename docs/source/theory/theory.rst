@@ -201,3 +201,10 @@ characteristic signature of diffusion, which controls the return of the neighbor
 .. image:: ../figures/best-practices/gij-R1-illustration-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
+
+The intra molecular spectrum :math:`J_\textrm{intra}^{(0)}` can be adjusted by a Lorentzian
+
+.. math::
+    :label: eq_lorenzian_G
+
+    J_\text{intra} (t) = G_\text{intra} (0) \dfrac{2 \tau_\text{c}}{1 + \omega^2 \tau_\text{c}^2}
