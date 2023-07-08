@@ -8,7 +8,8 @@ set -e
 raw_data=../../raw-data/polymer-in-water/
 
 # loop over log-spaced data created using np.int32(np.logspace(np.log10(25), np.log10(4000), 12))
-for n_peg in 3 4 5 7 9 13 17 24 32 44 59 79
+#for n_peg in 3 4 5 7 9 13 17 24 32 44 59 79
+for n_peg in 20
 do
 
     folder=${raw_data}N${n_peg}/

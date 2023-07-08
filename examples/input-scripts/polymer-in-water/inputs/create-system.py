@@ -5,7 +5,7 @@ import numpy as np
 from utilities import PEGgenerator, place_molecules, write_topol, write_conf, write_lammps, prepare_lammps
 
 # fix the number of polymer
-Number_polymer = 79
+Number_polymer = 20
 EOperH2O = 1
 Nseg = 3 # with Nseg = 3, MPEG ~ 200 g/mol
 
