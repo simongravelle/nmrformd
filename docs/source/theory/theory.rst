@@ -87,10 +87,14 @@ Intra/inter contributions
     can be extracted separately, by splitting the correlation functions as:
 
 .. math::
+    :label: G_intra
 
     G^{(m)}_\text{intra} (t) = \dfrac{\alpha_m^2}{N}
     \sum_i \sum_{j \in M_i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)}
     \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij}^3 (\tau)},
+
+.. math::
+    :label: G_inter
 
     G^{(m)}_\text{inter} (t) = \dfrac{\alpha_m^2}{N}
     \sum_i \sum_{j \notin M_i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)}
@@ -141,6 +145,7 @@ Isotropic system
     which require less computational time and less memory to achieve, as only 
 
 .. math::
+    :label: F_2_0
 
     F_2^{(0)} [\textbf{r}_{ij} (t)] & = & \alpha_m \dfrac{Y_2^{(0)} [\Omega_{ij} (t)]}{r_{ij}^3 (t)}
 

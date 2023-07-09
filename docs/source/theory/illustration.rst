@@ -17,15 +17,21 @@ Illustration
 .. container:: justify
 
     Let us first visualize how :math:`r_{ij}` and :math:`\Omega_{ij}` evolve with time in the case of a 
-    bulk water simulation at 300 K.
-    First, look at the intramolecular motion within a single (rigid) water molecule. As expected, the 
-    average distance :math:`r_{ij}` between the two hydrogens atoms within the same molecule remains
+    bulk water simulation at 300 K. For such bulk systems, it is known that the correlations functions 
+    are proportional to each others :cite:`hubbardTheoryNuclearMagnetic1963`, so only :math:`G^{0}` and 
+    :math:`J^{0}` will be evaluated, which depends only in the polar angle :math:`\theta_{ij}` as 
+    :math:`Y^{0}_2` is independent from the azimuthal angle :math:`\varphi`.
+
+    First, let us have a look at the intramolecular motion within a single water molecule. As expected
+    for the rigid water model used here (TIP4P/:math:`\epsilon`), the 
+    average distance :math:`r_{ij}` between the two hydrogen atoms of the same molecule remains
     constant (within the uncertainty of the shake algorithm used to maintain the water molecule rigid),
-    while the polar angle :math:`\theta_{ij}` fluctuates due to the molecule rotating. Following the 
-    fluctuations of :math:`\theta_{ij}`, the function :math:`F_{0}^{(2)}` fluctuates with time 
-    between the bounds given by :math:`(3 \cos^2 0 - 1 ) / a^3 = 2 / a^3 \approx 0.58\,A^{-3}`,
-    where :math:`a \approx 1.51\,A` is the distance between the two hydrogen atoms of the water
-    molecule, and :math:`(3 \cos^2 \pi/2 - 1 ) / a^3 = -1 / a^3 \approx -0.29\,\,A^{-3}`.
+    while the polar angle :math:`\theta_{ij}` fluctuates with time, following the rotation of the
+    water molecule (see the Figure below). The fluctuations of :math:`\theta_{ij}` with time lead to fluctuations of the
+    function :math:`F_{0}^{(2)}` (see Eq. :eq:`F_2_0`) between a higher bound given by
+    :math:`(3 \cos^2 0 - 1 ) / a^3 \approx 0.58\,A^{-3}`,
+    where :math:`a \approx 1.51\,A` is the typical distance between the two hydrogen atoms of the water
+    molecule, and a lower bound :math:`(3 \cos^2 \pi/2 - 1 ) / a^3 \approx -0.29\,\,A^{-3}`.
 
 .. image:: ../figures/best-practices/intramolecular-signal-illustration-dark.png
     :class: only-dark
@@ -37,10 +43,19 @@ Illustration
 
 .. container:: justify
 
-    Second, let us look at the intermolecular motion between two hydrogen atoms from two different
-    molecules. In that case, :math:`r_{ij}` fluctuates significantly between $\approx 2.5 A$, for when 
-    molecules are next to one another, to larger values (as large as the box allows). The functions
-    :math:`F_{0}^{(2)}` reaches its largest values when :math:`r_{ij}` is the shorter.
+    **Figure:** a) :math:`\theta_{ij}` as a function of the time :math:`t`, where :math:`i` and :math:`j`
+    refer to two hydrogen atoms located within the same water molecule. a) :math:`r_{ij}` as a function of 
+    time. c) :math:`F_{2}^{(0)}` as a function of time. The temperature is 300 K, and 
+    the total number of water molecules is 3000.
+
+.. container:: justify
+
+    Second, let us have a look at the intermolecular motion between two hydrogen atoms from two different
+    molecules. In that case, :math:`r_{ij}` fluctuates significantly between :math:`\approx 2.5 A`,
+    corresponding to the shortest typical distance between two molecules
+    that are next to one another, to larger values (potentially as large as the box permits). 
+    As can be seen, the function :math:`F_{0}^{(2)}` reaches its largest absolute values
+    when :math:`r_{ij}` is the shorter.
 
 .. image:: ../figures/best-practices/intermolecular-signal-illustration-dark.png
     :class: only-dark
@@ -52,34 +67,45 @@ Illustration
 
 .. container:: justify
 
-    From the fluctuating quantities :math:`F_{0}^{(2)}` summed up over all the pair of 
-    spins, one can extract correlation functions :math:`G_\textrm{intra}^{(0)}` and
-    :math:`G_\textrm{inter}^{(0)}`. Here, the intra-molecular correlation functions are reasonably 
-    adjusted for $t < 40$ ps by 
+    **Figure:** a) :math:`\theta_{ij}` as a function of the time :math:`t`, where :math:`i` and :math:`j`
+    refer to two hydrogen atoms located within two different water molecules. a) :math:`r_{ij}` as a function of 
+    time. c) :math:`F_{2}^{(0)}` as a function of time. The temperature is 300 K, and 
+    the total number of water molecules is 3000.
+
+.. container:: justify
+
+    From the fluctuating quantities :math:`F_{0}^{(2)}` summed up over all the available pair of 
+    spins, one can extract the two correlation functions :math:`G_\textrm{intra}^{(0)}` and
+    :math:`G_\textrm{inter}^{(0)}` (see Eqs. :eq:`G_intra` and :eq:`G_inter`). For comparison,
+    the results obtained with two different temperatures 275 and 300 K are reported.
+    
+    At short time $t < 40$ ps, the intra-molecular correlation functions follow and
+    a decreasing exponential,
 
 .. math::
     :label: eq_exp_G
 
-    G_\text{intra} (t) = G_\text{intra} (0)  \exp{(-t / \tau_\text{c})}
+    G_\text{intra} (t) = G_\text{intra} (0)  \exp{(-t / \tau_\text{intra})},
 
 .. container:: justify
 
-    using :math:`\tau_\text{c} = 6.3` ps for :math:`T = 300` K 
-    and :math:`\tau_\text{c} = 3.2` ps for :math:`T = 275` K. Models using exponentially 
-    decreasing correlation functions such as Eq. :eq:`eq_exp_G` usually assume 
-    isotropic rotational diffusion :cite:`lippensRelaxationTimeWater1993`.
+    where :math:`\tau_\text{intra} = 6.3` ps was used for :math:`T = 300` K 
+    and :math:`\tau_\text{intra} = 3.2` ps was used for :math:`T = 275` K, see the figure 
+    below. Exponentially decreasing correlation functions such as Eq. :eq:`eq_exp_G` are
+    commonly used to describe systems for which the rotational diffusion
+    is isotropic :cite:`lippensRelaxationTimeWater1993`.
     
-    The inter-molecular correlation
-    functions, however, scale as an exponential [Eq. :eq:`eq_exp_G`] only for the shorter times,
-    probably corresponding to the desorption event ofs the atom/molecule i desorbing from j,
-    but scale as :math:`G_\text{inter} (t) \sim t^{3/2}` for larger time, which is a 
-    characteristic signature of diffusion, which controls the return of the neighbor molecules.
-
-    Note that analytical expressions accounting for the precise scaling 
-    :math:`G_\text{inter} (t) \sim t^{3/2}` have been proposed
-    by Ayant et al. :cite:`ayantCalculDensitesSpectrales1975a`,
-    Hwang and Freed :cite:`hwangDynamicEffectsPair2008`, a theory sometimes refered to as ADHF
-    in the context of freely diffusing hard spheres :cite:`grivetNMRRelaxationParameters2005`. 
+    The inter-molecular correlation functions, however, scale as an
+    exponential [i.e. Eq. :eq:`eq_exp_G`] only for time shorter than a 
+    few tens of pico-second, and show a clear scaling as :math:`G_\text{inter} (t) \sim t^{3/2}`
+    for large time which is a characteristic signature of the diffusion
+    process controlling the motion of the molecules. The scaling
+    :math:`G_\text{inter} (t) \sim t^{3/2}` has long been predicted, and 
+    analytical expressions have been proposed by Ayant et al. :cite:`ayantCalculDensitesSpectrales1975` and
+    Hwang and Freed :cite:`hwangDynamicEffectsPair2008`, in the context of freely diffusing hard spheres
+    
+    Following Ref :cite:`grivetNMRRelaxationParameters2005`, this expression is here referred to 
+    as a ADHF.
 
 .. image:: ../figures/best-practices/gij-R1-illustration-dark.png
     :class: only-dark
