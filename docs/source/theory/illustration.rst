@@ -97,13 +97,15 @@ Illustration
     
     The inter-molecular correlation functions, however, scale as an
     exponential [i.e. Eq. :eq:`eq_exp_G`] only for time shorter than a 
-    few tens of pico-second, and show a clear scaling as :math:`G_\text{inter} (t) \sim t^{3/2}`
+    few tens of pico-second, and show a clear scaling as :math:`G_\text{inter} (t) \sim t^{-3/2}`
     for large time which is a characteristic signature of the diffusion
     process controlling the motion of the molecules. The scaling
-    :math:`G_\text{inter} (t) \sim t^{3/2}` has long been predicted, and 
+    :math:`G_\text{inter} (t) \sim t^{-3/2}` has long been predicted, and 
     analytical expressions have been proposed by Ayant et al. :cite:`ayantCalculDensitesSpectrales1975` and
-    Hwang and Freed :cite:`hwangDynamicEffectsPair2008`, in the context of freely diffusing hard spheres
+    Hwang and Freed :cite:`hwangDynamicEffectsPair2008`, in the context of freely diffusing hard spheres,
     
+
+
     Following Ref :cite:`grivetNMRRelaxationParameters2005`, this expression is here referred to 
     as a ADHF.
 
