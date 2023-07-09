@@ -65,11 +65,21 @@ Illustration
 .. container:: justify
 
     using :math:`\tau_\text{c} = 6.3` ps for :math:`T = 300` K 
-    and :math:`\tau_\text{c} = 3.2` ps for :math:`T = 275` K. The inter-molecular correlation
+    and :math:`\tau_\text{c} = 3.2` ps for :math:`T = 275` K. Models using exponentially 
+    decreasing correlation functions such as Eq. :eq:`eq_exp_G` usually assume 
+    isotropic rotational diffusion :cite:`lippensRelaxationTimeWater1993`.
+    
+    The inter-molecular correlation
     functions, however, scale as an exponential [Eq. :eq:`eq_exp_G`] only for the shorter times,
     probably corresponding to the desorption event ofs the atom/molecule i desorbing from j,
     but scale as :math:`G_\text{inter} (t) \sim t^{3/2}` for larger time, which is a 
     characteristic signature of diffusion, which controls the return of the neighbor molecules.
+
+    Note that analytical expressions accounting for the precise scaling 
+    :math:`G_\text{inter} (t) \sim t^{3/2}` have been proposed
+    by Ayant et al. :cite:`ayantCalculDensitesSpectrales1975a`,
+    Hwang and Freed :cite:`hwangDynamicEffectsPair2008`, a theory sometimes refered to as ADHF
+    in the context of freely diffusing hard spheres :cite:`grivetNMRRelaxationParameters2005`. 
 
 .. image:: ../figures/best-practices/gij-R1-illustration-dark.png
     :class: only-dark
