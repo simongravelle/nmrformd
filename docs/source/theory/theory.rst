@@ -7,6 +7,10 @@ Dipolar relaxation
 
 .. container:: justify
 
+    The system of interest here is an ensemble of identical spins characterized by a gyromagnetic ratio  :math:`\gamma_I`
+    and spin quantum number :math:`I`. For ¹H, the most abundant isotope of hydrogen, :math:`I = 1/2` and :math:`\gamma_I = 26.752` rad/T/s.
+    For ¹³C, a natural and stable isotope of carbon, :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`.
+
     When the spin-lattice relaxation is dominated by fluctuations of the magnetic dipole-dipole interaction,
     as is the case for protons in molecular systems, the rates :math:`R_1 (\omega)` and :math:`R_2 (\omega)` are
     related to the spectral densities :math:`J(m)(\omega)` of these fluctuations via the
@@ -27,11 +31,8 @@ where
 
 .. container:: justify
 
-    where :math:`\mu_0` is the vacuum permeability, :math:`\hbar` the Planck constant (divided by :math:`2 \pi`),
-    :math:`\gamma_I` is the gyromagnetic ratio (for ¹H, :math:`I = 1/2` and :math:`\gamma_I = 26.752` rad/T/s,
-    for ¹³C, :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`), and
-    :math:`I = 1/2` the spin quantum number. The constant :math:`K` has the units of :math:`\text{m}^6/\text{s}^2`.
-
+    where :math:`\mu_0` is the vacuum permeability, and :math:`\hbar` the Planck constant (divided by :math:`2 \pi`).
+    The constant :math:`K` has the units of :math:`\text{m}^6/\text{s}^2`.
     The spectral densities :math:`J^{(m)} (\omega)` in Eq. :eq:`eq_BPP` can be obtained as the Fourier transform
     of the autocorrelation functions :math:`G^{(m)}(\tau)`
 
