@@ -40,6 +40,7 @@ NMR for MD
    :caption: Theory
    :hidden:
 
+   theory/context
    theory/theory
    theory/illustration
    theory/best-practice
