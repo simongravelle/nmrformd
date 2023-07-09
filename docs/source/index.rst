@@ -41,5 +41,6 @@ NMR for MD
    :hidden:
 
    theory/theory
+   theory/illustration
    theory/best-practice
    theory/bibliography
