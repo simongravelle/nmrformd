@@ -11,6 +11,8 @@ Dipolar relaxation
     and spin quantum number :math:`I`. For ¹H, the most abundant isotope of hydrogen, :math:`I = 1/2` and :math:`\gamma_I = 26.752` rad/T/s.
     For ¹³C, a natural and stable isotope of carbon, :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`.
 
+    One assumption is that the cross-correlation terms can be neglected, see Ref :cite:`lippensRelaxationTimeWater1993`.
+
     When the spin-lattice relaxation is dominated by fluctuations of the magnetic dipole-dipole interaction,
     as is the case for protons in molecular systems, the rates :math:`R_1 (\omega)` and :math:`R_2 (\omega)` are
     related to the spectral densities :math:`J(m)(\omega)` of these fluctuations via the
@@ -98,6 +100,11 @@ Intra/inter contributions
 
     where :math:`j \in M_i` and  :math:`j \notin M_i` refer to summation on spin from the 
     same molecule as :math:`i`, and from different molecules as :math:`i`, respectively.
+
+    Intra-molecular relaxation is usually attributed to the rotational motion of the 
+    molecule, and inter-molecular relaxation to the translational motion. This is only an 
+    assumption that simplify the interpretation of results, and can lead to 
+    error :cite:`hubbardTheoryNuclearMagnetic1963`.
 
 Isotropic system
 ----------------
