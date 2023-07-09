@@ -2,6 +2,18 @@
 Illustration
 ============
 
+.. image:: ../figures/tutorials/bulk-water/water-dark-square.png
+    :class: only-dark
+    :alt: Water molecules simulated with lammps - NMR relaxation time calculation
+    :width: 200
+    :align: right
+
+.. image:: ../figures/tutorials/bulk-water/water-light-square.png
+    :class: only-light
+    :alt: Water molecules simulated with lammps - NMR relaxation time calculation
+    :width: 200
+    :align: right
+
 .. container:: justify
 
     Let us first visualize how :math:`r_{ij}` and :math:`\Omega_{ij}` evolve with time in the case of a 
