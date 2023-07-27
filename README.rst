@@ -38,9 +38,10 @@ Notes and known issues
 
 .. image:: docs/source/figures/systems/system-white.png
 
-Figure : Example of systems that can be analysed using NMRforMD, from left to right: a 
-bulk water system, a polymer-water mixture, and water in a slit silica pore with sodium counter-ions.
-All LAMMPS and GROMACS input scripts are given in the `examples/`_ folder. 
+Figure : Examples of systems that can be analysed using NMRforMD, from left to right: a 
+bulk water system, a polymer-water mixture, and water in a slit silica nanopore with
+sodium counter-ions. All LAMMPS and GROMACS input scripts are given in
+the `examples/`_ folder. 
 
 |mdanalysis| |readthedoc|
 
