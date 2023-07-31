@@ -1,6 +1,6 @@
 ;======================== running ============= ; description
 integrator = md ; leap-frog algorithm for integrating Newton’s equations of motion.
-nsteps = 5000000 ; maximum number of steps to integrate or minimize (2 ns)
+nsteps = 25000000 ; maximum number of steps to integrate or minimize (2 ns)
 dt = 0.002 ; time step for integration (1 fs)
 comm_mode = linear ; remove center of mass translation
 comm_grps = system ; group(s) for center of mass motion removal
@@ -33,9 +33,9 @@ continuation = yes ; apply or not constraints to the start configuration
 ; ======================= temp. coupling ======= ; description
 tcoupl = v-rescale ; Berendsen + stochastic term = proper canonical ensemble
 ld-seed = 48456 ; seed
-tc-grps = Water ; groups to couple to separate temperature baths
-tau-t = 0.5 ; time constant for coupling (ps)
-ref-t = 300 ; reference temperature for coupling (K)
+tc-grps = Water Ion Protein ; groups to couple to separate temperature baths
+tau-t = 0.5 0.5 0.5 ; time constant for coupling (ps)
+ref-t = 300 300 300 ; reference temperature for coupling (K)
 nhchainlength = 1 ; number of chained Nose-Hoover thermostats
 
 ; ======================= press. coupling ===== ; description

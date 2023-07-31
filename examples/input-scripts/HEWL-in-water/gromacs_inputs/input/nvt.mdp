@@ -35,7 +35,7 @@ continuation = no ; apply or not constraints to the start configuration
 ; ======================= temp. coupling ======= ; description
 tcoupl = v-rescale ; Berendsen + stochastic term = proper canonical ensemble
 ld-seed = 48456 ; seed
-tc-grps = Water ; groups to couple to separate temperature baths
-tau-t = 0.5 ; time constant for coupling (ps)
-ref-t = 300 ; reference temperature for coupling (K)
+tc-grps = Water Ion Protein ; groups to couple to separate temperature baths
+tau-t = 0.5 0.5 0.5 ; time constant for coupling (ps)
+ref-t = 300 300 300 ; reference temperature for coupling (K)
 nhchainlength = 1 ; number of chained Nose-Hoover thermostats
