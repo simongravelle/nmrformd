@@ -55,3 +55,5 @@ examples/raw-data/water-in-silica/N50-coarse/input/
 examples/raw-data/water-in-silica/N50-coarse/emd.*
 examples/raw-data/water-in-silica/N50-coarse/*.sh
 examples/raw-data/water-in-silica/N50-coarse/*.cpt
+# HEWL-in-water
+examples/raw-data/HEWL-in-water/*
