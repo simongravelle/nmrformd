@@ -2,7 +2,7 @@
 ;	File 'topol.top' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Mon Jul 31 22:07:44 2023
+;	At date: Tue Aug  1 19:55:53 2023
 ;
 ;	This is a standalone topology file
 ;
@@ -11,7 +11,7 @@
 ;	
 ;	Executable:   /usr/bin/gmx
 ;	Data prefix:  /usr
-;	Working dir:  /home/simon/Workspace/nmrformd/examples/input-scripts/HEWL-in-water
+;	Working dir:  /home/simon/Workspace/nmrformd/examples/input-scripts/HEWL-in-water/gromacs_inputs
 ;	Command line:
 ;	  gmx pdb2gmx -f 1AKI_clean.pdb -o 1AKI_processed.gro -water spce
 ;	Force field was read from the standard GROMACS share directory.
@@ -18406,5 +18406,5 @@ LYSOZYME in water
 [ molecules ]
 ; Compound        #mols
 Protein_chain_A     1
-SOL         10636
+SOL         2559
 CL               8
