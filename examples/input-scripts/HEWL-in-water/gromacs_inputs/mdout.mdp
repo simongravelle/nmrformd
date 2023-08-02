@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Wed Aug  2 08:55:38 2023
+;	At date: Wed Aug  2 20:08:58 2023
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /usr
 ;	Working dir:  /home/simon/Workspace/nmrformd/examples/input-scripts/HEWL-in-water/gromacs_inputs
 ;	Command line:
-;	  gmx grompp -f input/ions.mdp -c 1AKI_solv.gro -p topol.top -o ions.tpr
+;	  gmx grompp -f input/ions.mdp -c solvated_protein.gro -p topol.top -o ions.tpr
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -169,7 +169,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = no
 gen-temp                 = 300
-gen-seed                 = -273688746
+gen-seed                 = -495585937
 
 ; OPTIONS FOR BONDS    
 constraints              = none
