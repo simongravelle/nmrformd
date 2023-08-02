@@ -7,7 +7,7 @@ solvated_protein=solvated_protein.gro
 final_protein=conf.gro
 ion_tpr=ions.tpr
 
-gmx editconf -f reference/protein.gro -o $protein_in_box -c -d 0 -bt cubic > /dev/null 2>&1
+gmx editconf -f reference/protein.gro -o $protein_in_box -c -d -0.3 -bt cubic > /dev/null 2>&1
 if test -f "$protein_in_box"
 then
 	echo "Box size:"
@@ -16,8 +16,9 @@ fi
 
 cp reference/topol.top .
 gmx solvate -cp $protein_in_box -cs reference/tip4peps.gro -o $solvated_protein -p topol.top > /dev/null 2>&1
+# -scale 1.05
 
-echo "Number of molecules: (desired 205)"
+echo "Number of molecules:"
 tail -n 1 topol.top
 
 #gmx grompp -f input/ions.mdp -c $solvated_protein -p topol.top -o $ion_tpr > /dev/null 2>&1
@@ -33,7 +34,7 @@ echo "Number of ions:"
 tail -n 1 topol.top
 
 
-for T in 240 260 280 300 320
+for T in 300
 do
 	folder="../../../raw-data/HEWL-in-water/T"${T}"K/"
 
