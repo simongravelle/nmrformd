@@ -18,7 +18,7 @@
 ;
 
 ; Include forcefield parameters
-#include "oplsaa.ff/forcefield.itp"
+#include "perso.oplsaa.ff/forcefield.itp"
 
 [ moleculetype ]
 ; Name            nrexcl
@@ -18387,7 +18387,7 @@ Protein_chain_A     3
 #endif
 
 ; Include water topology
-#include "oplsaa.ff/spce.itp"
+#include "perso.oplsaa.ff/tip4peps.itp"
 
 #ifdef POSRES_WATER
 ; Position restraint for each water oxygen
@@ -18397,7 +18397,7 @@ Protein_chain_A     3
 #endif
 
 ; Include topology for ions
-#include "oplsaa.ff/ions.itp"
+#include "perso.oplsaa.ff/ions.itp"
 
 [ system ]
 ; Name
@@ -18406,5 +18406,5 @@ LYSOZYME in water
 [ molecules ]
 ; Compound        #mols
 Protein_chain_A     1
-SOL         774
+SOL         374
 CL               8
