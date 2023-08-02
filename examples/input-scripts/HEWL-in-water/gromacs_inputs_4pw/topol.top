@@ -18387,7 +18387,7 @@ Protein_chain_A     3
 #endif
 
 ; Include water topology
-#include "oplsaa.ff/spce.itp"
+#include "oplsaa.ff/tip4p.itp"
 
 #ifdef POSRES_WATER
 ; Position restraint for each water oxygen
@@ -18406,5 +18406,5 @@ LYSOZYME in water
 [ molecules ]
 ; Compound        #mols
 Protein_chain_A     1
-SOL         774
+SOL         802
 CL               8
