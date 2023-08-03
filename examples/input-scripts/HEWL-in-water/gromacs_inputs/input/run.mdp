@@ -14,7 +14,7 @@ ns_type = grid
 nstlog = 10000 ; number of steps that elapse between writing energies to the log file
 nstenergy = 10000 ; number of steps that elapse between writing energies to energy file
 nstxout-compressed = 1000 ; frequency to write coordinates to xtc trajectory
-compressed-x-grps = Protein ; group(s) to write to the compressed trajectory file
+; compressed-x-grps = Protein ; group(s) to write to the compressed trajectory file
 
 ;======================== van der Waals ======= ; description
 vdw-type = Cut-off ; plain cut-off with rlist >= rvdw
