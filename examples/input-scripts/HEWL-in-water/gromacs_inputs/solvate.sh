@@ -15,7 +15,7 @@ then
 fi
 
 cp reference/topol.top .
-gmx solvate -cp $protein_in_box -cs reference/tip4peps.gro -o $solvated_protein -p topol.top > /dev/null 2>&1
+gmx solvate -scale 2 -cp $protein_in_box -cs reference/tip4peps.gro -o $solvated_protein -p topol.top > /dev/null 2>&1
 # -scale 1.05
 
 echo "Number of molecules:"
@@ -68,6 +68,7 @@ do
   	cp run_bigfoot_UGA.sh ${folder}run_bigfoot_UGA.sh
   	cp conf.gro ${folder}conf.gro
   	cp topol.top ${folder}topol.top
+  	cp evaluate_mass_ratio.py ${folder}evaluate_mass_ratio.py
 
 done
 
