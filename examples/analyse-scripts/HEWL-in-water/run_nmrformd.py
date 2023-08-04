@@ -18,7 +18,7 @@ for folder in all_folders:
 
     # Import universe
     u = mda.Universe(datapath+folder+"conf.gro", datapath+folder+"prod.xtc")
-
+    
     # Water
     water = u.select_atoms("name OW HW1 HW2")
     h_water = u.select_atoms("name HW1 HW2")
@@ -36,15 +36,19 @@ for folder in all_folders:
     h_protein = u.select_atoms('name '+all_name_H)
 
     # Calculate NMR properties
-    nmr_water = nmrmd.NMR(u, h_water, number_i=np.min([5, h_water.atoms.n_atoms]))
+    nmr_water = nmrmd.NMR(u, h_water, number_i=np.min([100, h_water.atoms.n_atoms]))
     print(folder, "water calculated")
-    nmr_protein = nmrmd.NMR(u, h_protein, number_i=5)
+    nmr_protein = nmrmd.NMR(u, h_protein, number_i=100)
     print(folder, "protein calculated")
     print()
 
     dictionary = {
-        "nmr_water": nmr_water,
-        "nmr_protein": nmr_protein,
+        "nmr_water_f": nmr_water.f,
+        "nmr_water_R1": nmr_water.R1,
+        "nmr_water_R2": nmr_water.R2,
+        "nmr_protein_f": nmr_protein.f,
+        "nmr_protein_R1": nmr_protein.R1,
+        "nmr_protein_R2": nmr_protein.R2,
     }
     np.save(datapath+folder+"analysed-data.npy", dictionary)
 
