@@ -2,7 +2,7 @@
 
 .. inclusion-readme-intro-start
 
-NMRforMD is a Python toolkit to calculate NMR relaxation times
+NMRforMD is a Python toolkit to calculate H-NMR relaxation times
 from molecular dynamics trajectory files. Used in combination
 with |MDAnalysis|, it allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
@@ -24,7 +24,7 @@ files from any MDAnalysis-compatible simulation package, including
 
 Details about installation, use, and some of the common pitfalls of NMR calculations
 are given in the |documentation|. The documentation also contains a description of
-the theory behind dipolar NMR calculations.
+the theory behind dipolar H-NMR calculations.
 
 Notes and known issues
 ----------------------
