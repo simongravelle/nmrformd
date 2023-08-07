@@ -10,7 +10,7 @@ datapath = "../../raw-data/HEWL-in-water/"
 
 alpha_m = [np.sqrt(16 * np.pi / 5), np.sqrt(8 * np.pi / 15), np.sqrt(32 * np.pi / 15)]
 
-all_folders = ["T300K_ratio0.61/"] #, "T300K_ratio2.73/"]
+all_folders = ["T300K_ratio0.11/", "T300K_ratio0.61/"] #, "T300K_ratio2.73/"]
 
 for folder in all_folders:
 
@@ -45,5 +45,4 @@ for folder in all_folders:
         "nmr_all_R1": nmr_all_all.R1,
         "nmr_all_R2": nmr_all_all.R2,
     }
-    np.save(datapath+folder+"analysed-all-data.npy", dictionary)
-    np.save("analysed-all-data.npy", dictionary)
+    np.save(folder[:-1]+"_analysed-all-data.npy", dictionary)

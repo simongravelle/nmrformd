@@ -2,7 +2,7 @@
 integrator = md ; leap-frog algorithm for integrating Newtons equations of motion.
 nsteps = 100000000 ; maximum number of steps to integrate or minimize (2 ns)
 dt = 0.002 ; time step for integration (1 fs)
-comm_mode = linear ; remove center of mass translation
+comm_mode = angular ; remove center of mass translation
 comm_grps = system ; group(s) for center of mass motion removal
 
 ;======================== neighbor searching == ; description
@@ -38,10 +38,3 @@ tc-grps = Water Ion Protein ; groups to couple to separate temperature baths
 tau-t = 0.5 0.5 0.5 ; time constant for coupling (ps)
 ref-t = 300 300 300 ; reference temperature for coupling (K)
 nhchainlength = 1 ; number of chained Nose-Hoover thermostats
-
-; ======================= press. coupling ===== ; description
-pcoupl = c-rescale
-Pcoupltype = isotropic ; isotropic pressure coupling
-tau_p = 1.0 ; time constant for pressure coupling (ps)
-ref_p = 1.0 ; reference pressure for coupling (bar)
-compressibility = 4.5e-5 ; compressibility (bar-1)
