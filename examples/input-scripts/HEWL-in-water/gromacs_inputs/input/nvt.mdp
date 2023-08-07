@@ -1,8 +1,8 @@
 ;======================== running ============= ; description
 integrator = md ; leap-frog algorithm for integrating Newton’s equations of motion.
-nsteps = 5000 ; maximum number of steps to integrate or minimize
+nsteps = 500000 ; maximum number of steps to integrate or minimize
 dt = 0.002 ; time step for integration (1 fs)
-comm_mode = linear ; remove center of mass translation
+comm_mode = angular ; remove center of mass translation
 comm_grps = system ; group(s) for center of mass motion removal
 gen-vel = yes ; generate velocities according to a Maxwell distribution
 gen-temp = 300 ; temperature for Maxwell distribution (K)
@@ -13,9 +13,9 @@ nstlist = 10 ; frequency to update the neighbor list
 ns_type = grid
 
 ;======================== output ============== ; description
-nstlog = 1000 ; number of steps that elapse between writing energies to the log file
-nstenergy = 1000 ; number of steps that elapse between writing energies to energy file
-nstxout-compressed = 1000 ; frequency to write coordinates to xtc trajectory
+nstlog = 50000 ; number of steps that elapse between writing energies to the log file
+nstenergy = 50000 ; number of steps that elapse between writing energies to energy file
+nstxout-compressed = 50000 ; frequency to write coordinates to xtc trajectory
 
 ;======================== van der Waals ======= ; description
 vdw-type = Cut-off ; plain cut-off with rlist >= rvdw

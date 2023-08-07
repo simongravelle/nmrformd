@@ -14,4 +14,4 @@ for name in np.unique(u.atoms.names):
 protein = u.select_atoms('name '+all_name)
 mass_protein = np.sum(protein.masses)
 
-print("mass_water/mass_protein", np.round(mass_water/mass_protein,2))
+print("mass_water/mass_protein = ", np.round(mass_water/mass_protein,3))

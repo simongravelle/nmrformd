@@ -7,15 +7,16 @@ solvated_protein=solvated_protein.gro
 final_protein=conf.gro
 ion_tpr=ions.tpr
 
-gmx editconf -f reference/protein.gro -o $protein_in_box -c -d -0.3 -bt cubic > /dev/null 2>&1
+gmx editconf -f reference/protein.gro -o $protein_in_box -c -d 0.5 -bt cubic > /dev/null 2>&1
 if test -f "$protein_in_box"
 then
 	echo "Box size:"
 	tail -n 1 $protein_in_box
 fi
 
+# change scale to vary the number of water molecules
 cp reference/topol.top .
-gmx solvate -scale 2 -cp $protein_in_box -cs reference/tip4peps.gro -o $solvated_protein -p topol.top > /dev/null 2>&1
+gmx solvate -scale 1.55 -cp $protein_in_box -cs reference/tip4peps.gro -o $solvated_protein -p topol.top > /dev/null 2>&1
 # -scale 1.05
 
 echo "Number of molecules:"
@@ -33,7 +34,6 @@ echo "CL 8" >> topol.top
 echo "Number of ions:"
 tail -n 1 topol.top
 
-
 for T in 300
 do
 	folder="../../../raw-data/HEWL-in-water/T"${T}"K/"
@@ -42,17 +42,11 @@ do
   	then
   		echo "Creating folder T"${T}"K"
   		mkdir ${folder}
-  	else
-  		echo "Folder T"${T}"K exists"
   	fi
 
 	newline='ref-t = '${T}' '${T}' '${T}' ; reference temperature for coupling (K)'
     oldline=$(cat input/run.mdp  | grep 'ref-t = ')
     sed -i '/'"$oldline"'/c\'"$newline" input/run.mdp 
-    
-   	newline='ref-t = '${T}' '${T}' '${T}' ; reference temperature for coupling (K)'
-    oldline=$(cat input/npt.mdp  | grep 'ref-t = ')
-    sed -i '/'"$oldline"'/c\'"$newline" input/npt.mdp
     
     newline='ref-t = '${T}' '${T}' '${T}' ; reference temperature for coupling (K)'
     oldline=$(cat input/nvt.mdp  | grep 'ref-t = ')
@@ -62,7 +56,6 @@ do
     oldline=$(cat input/nvt.mdp  | grep 'gen-temp = ')
     sed -i '/'"$oldline"'/c\'"$newline" input/nvt.mdp
    
-
   	cp -r perso.oplsaa.ff/ ${folder}perso.oplsaa.ff
   	cp -r input/ ${folder}input
   	cp run_bigfoot_UGA.sh ${folder}run_bigfoot_UGA.sh
@@ -70,6 +63,7 @@ do
   	cp topol.top ${folder}topol.top
   	cp evaluate_mass_ratio.py ${folder}evaluate_mass_ratio.py
 
+    python3 evaluate_mass_ratio.py
 done
 
 
