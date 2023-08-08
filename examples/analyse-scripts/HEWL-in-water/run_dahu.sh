@@ -7,5 +7,7 @@
 
 source /bettik/gravells/venv/bin/activate
 
-python3 run_nmrformd.py
-
+for i in {1..50}
+do
+    python3 run_nmrformd.py
+done

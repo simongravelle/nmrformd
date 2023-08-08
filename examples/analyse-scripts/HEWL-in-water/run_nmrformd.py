@@ -1,48 +1,37 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[6]:
+
+
 import os
 import numpy as np
 import nmrformd as nmrmd
 import MDAnalysis as mda
 
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+
+from utilities import detect_groups, save_nmr_data
 
 # Path to data
 datapath = "../../raw-data/HEWL-in-water/"
 
-alpha_m = [np.sqrt(16 * np.pi / 5), np.sqrt(8 * np.pi / 15), np.sqrt(32 * np.pi / 15)]
+f_cut_off = 5e4
 
-all_folders = ["T300K_ratio0.11/", "T300K_ratio0.61/"] #, "T300K_ratio2.73/"]
-
-for folder in all_folders:
+for rho_water in [0.08, 0.17, 0.25, 0.39, 0.52, 0.73]:
+    folder = "T300K_ratio"+str(rho_water)+"/"
+    filename = "T300K_ratio"+str(rho_water)+".npy"
 
     # Import universe
-    u = mda.Universe(datapath+folder+"conf.gro", datapath+folder+"prod.xtc")
-    #u.transfer_to_memory(step=5, stop=50000)
-    
-    # Water
-    water = u.select_atoms("name OW HW1 HW2")
-    h_water = u.select_atoms("name HW1 HW2")
+    u = mda.Universe(datapath+folder+"prod.tpr", datapath+folder+"prod.xtc")
+    h_all, h_water, h_protein = detect_groups(u)
 
-    # Protein
-    all_name = ' '
-    for name in np.unique(u.atoms.names):
-        if (name != 'OW') & (name != 'HW2') & (name != 'HW1'):
-            all_name += name + ' '
-    protein = u.select_atoms('name '+all_name)
-    all_name_H = ' '
-    for name in np.unique(u.atoms.names):
-        if (name != 'OW') & (name != 'HW2') & (name != 'HW1') & (name[0] == 'H'):
-            all_name_H += name + ' '
-    h_protein = u.select_atoms('name '+all_name_H)
+    # Calculate NMR properties for only one or 5 atoms at a time
+    nmr_h2o_intra = nmrmd.NMR(u, atom_group=h_water, neighbor_group=h_water, number_i=1, type_analysis="intra_molecular")
+    nmr_h2o_inter = nmrmd.NMR(u, atom_group=h_water, neighbor_group=h_water, number_i=1, type_analysis="inter_molecular")
+    nmr_pro_intra = nmrmd.NMR(u, atom_group=h_protein, neighbor_group=h_protein, number_i=1)
+    nmr_h2o_pro = nmrmd.NMR(u, atom_group=h_water, neighbor_group=h_protein, number_i=1)
+    nmr_tot_tot = nmrmd.NMR(u, atom_group=h_all, neighbor_group=h_all, number_i=5)
 
-    # All
-    h_all = h_protein+h_water
+    save_nmr_data(filename, f_cut_off, nmr_h2o_intra, nmr_h2o_inter, nmr_pro_intra, nmr_h2o_pro, nmr_tot_tot)
 
-    # Calculate NMR properties
-    nmr_all_all = nmrmd.NMR(u, atom_group=h_all, neighbor_group=h_all, number_i=100) #np.min([40, h_all.atoms.n_atoms]))
-
-    dictionary = {
-        "nmr_all_f": nmr_all_all.f,
-        "nmr_all_R1": nmr_all_all.R1,
-        "nmr_all_R2": nmr_all_all.R2,
-    }
-    np.save(folder[:-1]+"_analysed-all-data.npy", dictionary)
