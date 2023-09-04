@@ -49,7 +49,8 @@ For developers
 --------------
 
 If you intend to make modification, please raise an issue or send me and email
-first, the create a fork of the repository.
+first. You will need to make a fork of the repository, apply your changes, then
+make a pull request.
 
 Build the documentation localy from the `docs/`_ folder by typing:
 
