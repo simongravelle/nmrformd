@@ -171,7 +171,7 @@ Extract results
 
 ..  container:: justify
 
-    The value you get may vary a little, depending on which hydrogen atoms
+    The value you obtain may vary, depending on which hydrogen atoms
     were randomly selected by NMRforMD.
 
     The T1 spectrum can be extracted as 1/nmr_result.R1 (i.e. the invert of R1),
@@ -214,7 +214,7 @@ Intra vs inter-molecular
 
 ..  container:: justify
 
-    Note that the intra_molecular contribution is always noisier than the inter_molecular,
+    Note that the intra_molecular contribution is always more noisy than the inter_molecular,
     which is why more atoms were included in the analysis.
     We can plot both intra-molecular and inter-molecular contributions separately:
 
