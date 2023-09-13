@@ -36,7 +36,7 @@ Notes and known issues
 - the code has only beed tested with hydrogen atoms (spin 1/2)
 - only works for dipolar interaction, not quadrupolar interaction
 
-.. image:: docs/source/figures/systems/system-white.png
+.. image:: docs/source/figures/systems/system-README.png
 
 Figure : Examples of systems that can be analysed using NMRforMD, from left to right: a 
 bulk water system, a polymer-water mixture, and water in a slit silica nanopore with
