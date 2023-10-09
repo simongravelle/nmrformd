@@ -2,9 +2,9 @@
 
 .. inclusion-readme-intro-start
 
-NMRforMD is a Python toolkit to calculate H-NMR relaxation times
-from molecular dynamics trajectory files. Used in combination
-with |MDAnalysis|, it allows for the analysis of trajectory
+NMRforMD is a Python toolkit designed for the computation of 
+dipolar H-NMR relaxation times from molecular dynamics simulations.
+Used in combination with |MDAnalysis|, it allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
 |LAMMPS| and |GROMACS|.
 
@@ -34,7 +34,7 @@ Notes and known issues
 - NMRforMD does not work with triclinic box, use MDAnalysis to convert your trajectory to orthorhombic
 - for very large trajectory file, the code requires a lot of memory
 - the code has only beed tested with hydrogen atoms (spin 1/2)
-- only works for dipolar interaction, not quadrupolar interaction
+- NMRforMD only works for dipolar interaction, not quadrupolar interaction
 
 .. image:: docs/source/figures/systems/system-README.png
 
