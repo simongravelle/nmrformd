@@ -45,14 +45,14 @@ File preparation
 
 .. container:: justify
 
-    The datasets are located in 'examples/raw-data/polymer-in-water/N17/'.
+    The datasets are located in 'examples/raw-data/polymer-in-water/N20/'.
 
     Open a Python script or a Jupyter notebook, and define
     the path to the data files:
 
 .. code-block:: python
 
-	datapath = "../../raw-data/polymer-in-water/N17/"
+	datapath = "../../raw-data/polymer-in-water/N20/"
 
 .. |repository| raw:: html
 
