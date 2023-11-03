@@ -1,5 +1,5 @@
-NMR for MD
-==========
+DNMR from MD
+============
 
 .. include:: ../../README.rst
    :start-after: inclusion-readme-intro-start
@@ -31,10 +31,7 @@ NMR for MD
    :caption: Tutorials
    :hidden:
    
-   tutorials/bulk-water
-   tutorials/solvated-polymers
-   tutorials/water-in-silica
-
+   tutorials/isotropic-system
 .. toctree::
    :maxdepth: 2
    :caption: Theory
