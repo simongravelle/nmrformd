@@ -179,8 +179,8 @@ Create a MDAnalysis universe
     timestep of :math:`1\,\text{fs}` used for the LAMMPS
     molecular dynamics simulation.
 
-Run NMRforMD
-------------
+Launch the NMR analysis
+-----------------------
 
 .. container:: justify
 
@@ -207,8 +207,8 @@ Run NMRforMD
     considered for the calculation. Increase this number for better resolution,
     and use 'number_i = 0' to consider all the atoms.
 
-Extract the results
--------------------
+Extract the NMR spectra
+-----------------------
 
 .. container:: justify
 
@@ -269,8 +269,8 @@ Extract the results
     of the frequency :math:`f` for
     the :math:`\text{PEG-H}_2\text{O}` bulk mixture.
 
-Intra molecular NMR relaxation
-------------------------------
+Calculate the intra-molecular NMR relaxation
+--------------------------------------------
 
 ..  container:: justify
 
