@@ -1,0 +1,3 @@
+[submodule "nmrformd-data"]
+	path = nmrformd-data
+	url = git@github.com:simongravelle/nmrformd-data.git
