@@ -262,6 +262,12 @@ Extract the results
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
+.. container:: figurelegend
+
+    Figure: NMR relaxation times :math:`T_1` and 
+    :math:`T_2` as a function of the frequency for
+    the :math:`\text{PEG-H}_2\text{O}` bulk mixture.
+
 Intra molecular NMR relaxation
 ------------------------------
 
