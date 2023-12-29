@@ -35,20 +35,24 @@ System
     and 20 :math:`\text{PEG}300` polymer molecules simulated in the NVT ensemble
     using GROMACS at a temperature :math:`T = 295.15^\circ\text{K}`. The total
     duration of the simulation is :math:`5\,\text{ns}`, and the
-    timestep is :math:`1\,\text{fs}`. You can
-    access the input files in this |repository-examples|.
+    timestep is :math:`1\,\text{fs}`. 
+    
+.. container:: justify
+
+    You can access all the simulation files
+    and trajectories in this separate Github |repository-examples|.
 
 .. |repository-examples| raw:: html
 
-   <a href="https://github.com/simongravelle/nmrformd/tree/main/examples" target="_blank">repository</a>
+   <a href="https://github.com/simongravelle/nmrformd-data" target="_blank">repository</a>
 
 .. container:: justify
 
     If you are not familiar with GROMACS, you can find `tutorials
     here <https://gromacstutorials.github.io/>`__.
 
-File preparation
-----------------
+File preparation and libraries
+------------------------------
 
 .. container:: justify
 
@@ -65,7 +69,7 @@ File preparation
 
 .. container:: justify
 
-    Open a new Python script or a Jupyter notebook, and define
+    Open a new Python script or a new notebook, and define
     the path to the data files:
 
 .. code-block:: python
@@ -75,9 +79,6 @@ File preparation
 .. |repository| raw:: html
 
    <a href="ttps://github.com/simongravelle/nmrformd/tree/main/tests" target="_blank">repository</a>
-
-Import the libraries
---------------------
 
 .. container:: justify
 
