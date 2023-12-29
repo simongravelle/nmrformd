@@ -8,11 +8,10 @@ Isotropic systems
 .. container:: justify
 
     In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
-    are measured from a bulk polymer-water mixture using |NMRforMD| . 
-    |MDAnalysis|,
+    are measured from a bulk polymer-water mixture using |NMRforMD|.
+    To follow the tutorial, |MDAnalysis|,
     |numpy|, and
-    |matplotlib| and *NMRforMD* must be
-    installed.
+    |matplotlib| must be installed.
 
 .. |NMRforMD| raw:: html
 
@@ -53,7 +52,8 @@ System
     in the NPT ensemble using a timestep of :math:`1\,\text{fs}`.
     The imposed was temperature :math:`T = 300\,^\circ\text{K}`, and the pressure
     :math:`p = 1\,\text{atm}`. The positions of the atoms were recorded in
-    a a file every :math:`1\,\text{ps}`.
+    the *prod.xtc* file
+    every :math:`1\,\text{ps}`.
     
 .. container:: justify
 
@@ -86,7 +86,9 @@ File preparation and libraries
 
 .. container:: justify
 
-    The datasets are located in 'nmrformd-data/polymer-in-water/raw-data/NPEG32/'.
+    Here the secondary repository *nmrformd-data* is imported as
+    as submodule. The dataset needed to follow this tutorial is located
+    in *nmrformd-data/polymer-in-water/raw-data/NPEG32/*.
 
 .. container:: justify
 
@@ -103,7 +105,7 @@ File preparation and libraries
 
 .. container:: justify
 
-    Import numpy, MDAnalysis, and NMRforMD:
+    Also import numpy, MDAnalysis, and NMRforMD:
 
 .. code-block:: python
 
@@ -116,6 +118,7 @@ Create a MDAnalysis universe
 
 .. container:: justify
 
+    From the trajectory files, let us create a MDAnalysis universe.
     Import the configuration file and the trajectory:
 
 .. code-block:: python
@@ -127,14 +130,20 @@ Create a MDAnalysis universe
 
     The *u.transfer_to_memory(stop=501)*, is optional, it only serve to 
     reduce the number of frames, and therefore reduce the duration of 
-    the calculation. Feel free to remove it, or change its value.
+    the calculation. Feel free to remove it, or increase its value.
+
+.. container:: justify
 
     Note : the figures here have been generated using the 
     full trajectory (i.e. without *u.transfer_to_memory(stop=501)*),
     but its takes a few minutes to complete.
 
+.. container:: justify
+
     The MDAnalysis universe *u* contains both topology (atoms types, masses, etc.)
     and trajectory (atom positions at every frame).
+
+.. container:: justify
 
     Let us extract a few information from the universe, such as number of molecules,
     timestep, and total duration:
@@ -144,7 +153,9 @@ Create a MDAnalysis universe
 	n_molecules = u.atoms.n_residues
 	print(f"The number of water molecules is {n_molecules}")
 
->> The number of water molecules is 398
+.. code-block:: bash
+
+    >> The number of water molecules is 398
 
 .. code-block:: python
 
