@@ -5,6 +5,18 @@ Isotropic systems
 
    Measuring the NMR relaxation time from a bulk water-polymer mixture
 
+.. image:: ../figures/tutorials/polymer-in-water/peg-dark.png
+    :class: only-dark
+    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
+    :width: 250
+    :align: right
+
+.. image:: ../figures/tutorials/polymer-in-water/peg-light.png
+    :class: only-light
+    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
+    :width: 250
+    :align: right
+
 .. container:: justify
 
     In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
@@ -28,18 +40,6 @@ Isotropic systems
 .. |matplotlib| raw:: html
 
    <a href="https://www.matplotlib.org" target="_blank">matplotlib</a>
-
-.. image:: ../figures/tutorials/polymer-in-water/peg-dark.png
-    :class: only-dark
-    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
-    :width: 250
-    :align: right
-
-.. image:: ../figures/tutorials/polymer-in-water/peg-light.png
-    :class: only-light
-    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
-    :width: 250
-    :align: right
 
 MD system
 ---------
@@ -123,7 +123,7 @@ Create a MDAnalysis universe
 
 .. code-block:: python
 
-    u = mda.Universe(datapath+"topology.data", datapath+"traj.xtc")
+    u = mda.Universe(datapath+"init.data", datapath+"prod.xtc")
     u.transfer_to_memory(stop=501)
 
 .. container:: justify
@@ -131,10 +131,7 @@ Create a MDAnalysis universe
     The *u.transfer_to_memory(stop=501)*, is optional, it only serve to 
     reduce the number of frames, and therefore reduce the duration of 
     the calculation. Feel free to remove it, or increase its value.
-
-.. container:: justify
-
-    Note : the figures here have been generated using the 
+    The figures here have been generated using the 
     full trajectory (i.e. without the *transfer_to_memory* command).
 
 .. container:: justify
@@ -144,17 +141,17 @@ Create a MDAnalysis universe
 
 .. container:: justify
 
-    Let us extract a few information from the universe, such as number of molecules,
-    timestep, and total duration:
+    Let us extract a few information from the universe,
+    such as number of molecules (water + PEG), timestep, and total duration:
 
 .. code-block:: python
 
 	n_molecules = u.atoms.n_residues
-	print(f"The number of water molecules is {n_molecules}")
+	print(f"The number of molecules is {n_molecules}")
 
 .. code-block:: bash
 
-    >> The number of water molecules is 398
+    >> The number of molecules is 352
 
 .. code-block:: python
 
@@ -172,7 +169,7 @@ Create a MDAnalysis universe
 
 .. code-block:: bash
 
-    >> The total simulation time is 500 ps
+    >> The total simulation time is 1000 ps
 
 .. container:: justify
 
@@ -187,58 +184,87 @@ Run NMRforMD
 
 .. container:: justify
 
-    Let us isolate a group of atoms containing all the hydrogen atoms (i.e. atoms of 
-    type 2) of the system:
+    Let us create 3 atoms for the hydrogen atoms of the PEG, the hydrogen
+    atoms of the water, and all the hydrogen atoms:
 
 .. code-block:: python
 
-	group_i = u.select_atoms("type 2")
+    H_PEG = u.select_atoms("type 3 5")
+    H_H2O = u.select_atoms("type 7")
+    H_ALL = H_PEG + H_H2O
 
 .. container:: justify
 
-    Then, let us run NMRforMD, using the same group as i and j types:
+    Then, let us run NMRforMD for all the hydrogen atoms:
 
 .. code-block:: python
 
-	nmr_result = nmrmd.NMR(u, group_i, number_i=40)
+	nmr_ALL = nmrmd.NMR(u, atom_group = H_ALL, neighbor_group = H_ALL, number_i=40)
 
 .. container:: justify
 
-    With 'number_i = 40', only 40 randomly selected atoms within 'group_i' are considered for the calculation.
-    Increase this number for better resolution. Use 'number_i = 0' to consider all the atoms.
+    With 'number_i = 40', only 40 randomly selected atoms within 'H_ALL' are
+    considered for the calculation. Increase this number for better resolution,
+    and use 'number_i = 0' to consider all the atoms.
 
-Extract results
----------------
+Extract the results
+-------------------
 
 .. container:: justify
 
-    Let us access the calculated value of the NMR relaxation time T1:
+    Let us access the calculated value of the NMR relaxation time :math:`T_1`:
 
 .. code-block:: python
 
-	T1 = np.round(nmr_result.T1,2)
-	print(f"NMR relaxation time T1 = {T1} s")
+    T1 = np.round(nmr_ALL.T1,2)
+    print(f"The total NMR relaxation time is T1 = {T1} s")
 
 .. code-block:: bash
 
-    >> NMR relaxation time T1 = 3.08 s
+    >> NMR relaxation time T1 = 2.53 s
 
 ..  container:: justify
 
     The value you obtain may vary, depending on which hydrogen atoms
-    were randomly selected by NMRforMD.
+    were randomly selected for the calculation.
 
-    The T1 spectrum can be extracted as 1/nmr_result.R1 (i.e. the invert of R1),
-    and the corresponding frequency is given by nmr_result.f. Let up plot
-    T1 as a function of f:
+..  container:: justify
 
-.. image:: ../figures/tutorials/bulk-water/T1-dark.png
+    The full :math:`T_1` and :math:`T_2` spectra can be extracted as well
+    as 1/nmr_ALL.R1 and 1/nmr_ALL.R2, respectively,
+    and the corresponding frequency is given by nmr_ALL.f.
+
+.. code-block:: python
+
+    R1_spectrum = nmr_ALL.R1
+    R2_spectrum = nmr_ALL.R2
+    T1_spectrum = 1/R1_spectrum
+    T2_spectrum = 1/R2_spectrum
+    f = nmr_ALL.f
+
+..  container:: justify
+
+    The spectra :math:`T_1` and :math:`T_2` can then be
+    plotted as a function of :math:`f` using pyplot.
+
+.. code-block:: python
+
+    from matplotlib import pyplot as plt
+    plt.loglog(f, T1_spectrum, 'o')
+    plt.loglog(f, T2_spectrum, 's')
+    plt.show()
+
+.. image:: ../figures/tutorials/isotropic-systems/T1-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../figures/tutorials/bulk-water/T1-light.png
+.. image:: ../figures/tutorials/isotropic-systems/T1-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
+
+Intra molecular NMR relaxation
+------------------------------
+
 
 ..  container:: justify
 

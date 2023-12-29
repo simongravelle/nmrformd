@@ -1,3 +1,6 @@
 [submodule "nmrformd-data"]
 	path = nmrformd-data
 	url = git@github.com:simongravelle/nmrformd-data.git
+[submodule "examples/pyplot-perso"]
+	path = examples/pyplot-perso
+	url = git@github.com:simongravelle/pyplot-perso.git
