@@ -8,11 +8,27 @@ Isotropic systems
 .. container:: justify
 
     In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
-    are measured from a bulk polymer-water mixture using
-    *NMRforMD*. `MDAnalysis <https://www.mdanalysis.org>`__,
-    `numpy <https://www.numpy.org>`__, and
-    `matplotlib <https://www.matplotlib.org>`__ and *NMRforMD* must be
+    are measured from a bulk polymer-water mixture using |NMRforMD| . 
+    |MDAnalysis|,
+    |numpy|, and
+    |matplotlib| and *NMRforMD* must be
     installed.
+
+.. |NMRforMD| raw:: html
+
+   <a href="https://nmrformd.readthedocs.io" target="_blank">NMRforMD</a>
+
+.. |MDAnalysis| raw:: html
+
+   <a href="https://www.mdanalysis.org" target="_blank">MDAnalysis</a>
+
+.. |numpy| raw:: html
+
+   <a href="https://www.numpy.org" target="_blank">numpy</a>
+
+.. |matplotlib| raw:: html
+
+   <a href="https://www.matplotlib.org" target="_blank">matplotlib</a>
 
 System
 ------
@@ -35,8 +51,8 @@ System
     and 32 :math:`\text{PEG}300` polymer molecules. The trajectory was recorded
     during a :math:`10\,\text{ns}` production run performed with the open source code LAMMPS
     in the NPT ensemble using a timestep of :math:`1\,\text{fs}`.
-    The imposed was temperature :math:`T = 300^\circ\text{K}`, and the pressure
-    :math:`p = 1^\circ\text{atm}`. The positions of the atoms were recorded in
+    The imposed was temperature :math:`T = 300\,^\circ\text{K}`, and the pressure
+    :math:`p = 1\,\text{atm}`. The positions of the atoms were recorded in
     a a file every :math:`1\,\text{ps}`.
     
 .. container:: justify
