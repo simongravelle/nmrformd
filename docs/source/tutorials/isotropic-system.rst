@@ -265,65 +265,33 @@ Extract the results
 Intra molecular NMR relaxation
 ------------------------------
 
-
 ..  container:: justify
 
-    The correlation function Gij can be accessed from nmr_result.gij[0], and the time 
-    from nmr_result.t. Let us plot Gij as a function of t:
-
-.. image:: ../figures/tutorials/bulk-water/Gij-dark.png
-    :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. image:: ../figures/tutorials/bulk-water/Gij-light.png
-    :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-Intra vs inter-molecular
-------------------------
-
-..  container:: justify
-
-    Let us calculate the intra-molecular and inter-molecular contributions to the
-    NMR spectrum R1 by calling NMRforMD twice:
+    Let us measuring the intra-molecular contribution to the NMR
+    relaxation time measurement. To make the analysis easier,
+    let us also differentiate between PEG and :math:`\text{H}_2\text{O}`
+    molecule, and perform 2 separate analysis.
 
 .. code-block:: python
 
-    nmr_result_intra = nmrmd.NMR(u, group_i, type_analysis="intra_molecular", number_i=40)
-    nmr_result_inter = nmrmd.NMR(u, group_i, type_analysis="inter_molecular", number_i=20)
+    nmr_H2O_intra = nmrmd.NMR(u, atom_group = H_H2O, type_analysis="intra_molecular", number_i=40)
+    nmr_PEG_intra = nmrmd.NMR(u, atom_group = H_PEG, type_analysis="intra_molecular", number_i=40)
 
 ..  container:: justify
 
-    Note that the intra_molecular contribution is always more noisy than the inter_molecular,
-    which is why more atoms were included in the analysis.
-    We can plot both intra-molecular and inter-molecular contributions separately:
+    The correlation function Gij can be accessed from nmr_H2O_intra.gij[0],
+    and the time  from nmr_H2O_intra.t.
 
-.. image:: ../figures/tutorials/bulk-water/R1-intra-inter-dark.png
+.. code-block:: python
+
+    t = nmr_PEG_intra.t
+    G_intra_H2O = nmr_H2O_intra.gij[0]
+    G_intra_PEG = nmr_PEG_intra.gij[0]
+
+.. image:: ../figures/tutorials/isotropic-systems/Gintra-dark.png
     :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
+    :alt: NMR results obtained from the LAMMPS simulation of water-PEG
 
-.. image:: ../figures/tutorials/bulk-water/R1-intra-inter-light.png
+.. image:: ../figures/tutorials/isotropic-systems/Gintra-light.png
     :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-..  container:: justify
-
-    It appears that the intra-molecular contribution is the dominant one,
-    which is expected for bulk water. We can also look at the 
-    correlation functions:
-
-.. image:: ../figures/tutorials/bulk-water/Gij-intra-inter-dark.png
-    :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. image:: ../figures/tutorials/bulk-water/Gij-intra-inter-light.png
-    :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-..  container:: justify
-
-    Another expected result: the inter-molecular contribution,
-    which is typically associated with the translational 
-    motion of the molecules, has longer characteristic times
-    than the intra-contribution, which is typically associated to the 
-    rotation of the molecules. 
+    :alt: NMR results obtained from the LAMMPS simulation of water-PEG
