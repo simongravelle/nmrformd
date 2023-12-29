@@ -135,8 +135,7 @@ Create a MDAnalysis universe
 .. container:: justify
 
     Note : the figures here have been generated using the 
-    full trajectory (i.e. without *u.transfer_to_memory(stop=501)*),
-    but its takes a few minutes to complete.
+    full trajectory (i.e. without the *transfer_to_memory* command).
 
 .. container:: justify
 
