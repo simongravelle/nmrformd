@@ -149,7 +149,7 @@ Create a MDAnalysis universe
 	n_molecules = u.atoms.n_residues
 	print(f"The number of molecules is {n_molecules}")
 
-.. code-block:: bash
+.. code-block:: bw
 
     >> The number of molecules is 352
 
@@ -158,7 +158,7 @@ Create a MDAnalysis universe
 	timestep = np.int32(u.trajectory.dt)
 	print(f"The timestep is {timestep} ps")
 
-.. code-block:: bash
+.. code-block:: bw
 
     >> The timestep is 1 ps
 
@@ -167,7 +167,7 @@ Create a MDAnalysis universe
 	total_time = np.int32(u.trajectory.totaltime)
 	print(f"The total simulation time is {total_time} ps")
 
-.. code-block:: bash
+.. code-block:: bw
 
     >> The total simulation time is 1000 ps
 
@@ -219,7 +219,7 @@ Extract the results
     T1 = np.round(nmr_ALL.T1,2)
     print(f"The total NMR relaxation time is T1 = {T1} s")
 
-.. code-block:: bash
+.. code-block:: bw
 
     >> NMR relaxation time T1 = 2.53 s
 
@@ -320,7 +320,7 @@ Intra molecular NMR relaxation
     print(f"The rotational time of H2O is = {tau_rot_H2O} ps")
     print(f"The rotational time of PEG is = {tau_rot_PEG} ps")
 
-.. code-block:: bash
+.. code-block:: bw
 
-    The rotational time of H2O is = 6.35 ps
-    The rotational time of PEG is = 8.34 ps
+    >> The rotational time of H2O is = 6.35 ps
+    >> The rotational time of PEG is = 8.34 ps
