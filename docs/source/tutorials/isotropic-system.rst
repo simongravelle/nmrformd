@@ -295,3 +295,20 @@ Intra molecular NMR relaxation
 .. image:: ../figures/tutorials/isotropic-systems/Gintra-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water-PEG
+
+..  container:: justify
+
+    From the correlation functions, one can obtain the typical
+    rotational time of the molecules.
+
+.. code-block:: python
+
+    tau_rot_H2O = np.round(np.trapz(G_intra_H2O, t)/G_intra_H2O[0],2)
+    tau_rot_PEG = np.round(np.trapz(G_intra_PEG, t)/G_intra_PEG[0],2)
+    print(f"The rotational time of H2O is = {tau_rot_H2O} ps")
+    print(f"The rotational time of PEG is = {tau_rot_PEG} ps")
+
+.. code-block:: bash
+
+    The rotational time of H2O is = 6.35 ps
+    The rotational time of PEG is = 8.34 ps
