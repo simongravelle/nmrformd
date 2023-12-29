@@ -3,14 +3,15 @@ Isotropic systems
 
 .. container:: hatnote
 
-   NMR relaxation time :math:`T_1` measured from a water-polymer mixture
+   Measuring the NMR relaxation time from a bulk water-polymer mixture
 
 .. container:: justify
 
-    In this tutorial, the NMR relaxation time :math:`T_1` of water is measured using
-    *DNMRfromMD*. `MDAnalysis <https://www.mdanalysis.org>`__,
+    In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
+    are measured from a bulk polymer-water mixture using
+    *NMRforMD*. `MDAnalysis <https://www.mdanalysis.org>`__,
     `numpy <https://www.numpy.org>`__, and
-    `matplotlib <https://www.matplotlib.org>`__ and NMRforMD must be
+    `matplotlib <https://www.matplotlib.org>`__ and *NMRforMD* must be
     installed.
 
 System
@@ -30,20 +31,22 @@ System
 
 .. container:: justify
 
-    The system is made of 334 TIP4P-:math:`\epsilon` water molecules
-    and 20 PEG300 polymer molecules
-    simulated in the NVT ensemble using GROMACS at a temperature of 295.15°K. The total
-    duration of the simulation is 5\,ns, and the timestep is 1 fs. You can
+    The system is made of 334 :math:`\text{TIP4P}-\epsilon` water molecules
+    and 20 `\text{PEG}-300` polymer molecules simulated in the NVT ensemble
+    using GROMACS at a temperature :math:`T = 295.15^\circ\text{K}`. The total
+    duration of the simulation is :math:`:5\,\text{ns}`, and the
+    timestep is :math:`1\,\text{fs}`. You can
     access the input files in this |repository-examples|.
-
-    If you are not familiar with GROMACS, you can find `tutorials
-    here <https://gromacstutorials.github.io/>`__.
-
 
 .. |repository-examples| raw:: html
 
    <a href="https://github.com/simongravelle/nmrformd/tree/main/examples" target="_blank">repository</a>
 
+
+.. container:: justify
+
+    If you are not familiar with GROMACS, you can find `tutorials
+    here <https://gromacstutorials.github.io/>`__.
 
 File preparation
 ----------------
