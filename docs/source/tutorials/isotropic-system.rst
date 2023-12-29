@@ -52,25 +52,25 @@ File preparation
 
 .. container:: justify
 
-    Either download the files from the Github |repository|, or clone
-    the NMRforMD repository:
+    To access all trajectory files, simply clone
+    the *NMRforMD* repository with its submodule:
 
 .. code-block:: bash
 
-    git clone git@github.com:simongravelle/nmrformd.git
+    git clone --recurse-submodules https://github.com/simongravelle/nmrformd.git
 
 .. container:: justify
 
-    The datasets are located in 'examples/raw-data/polymer-in-water/N20/'.
+    The datasets are located in 'nmrformd-data/polymer-in-water/raw-data/NPEG32/'.
 
 .. container:: justify
 
-    Open a Python script or a Jupyter notebook, and define
+    Open a new Python script or a Jupyter notebook, and define
     the path to the data files:
 
 .. code-block:: python
 
-	datapath = "mypath/raw-data/polymer-in-water/N20/"
+	datapath = "mypath/nmrformd-data/polymer-in-water/raw-data/NPEG32/"
 
 .. |repository| raw:: html
 
