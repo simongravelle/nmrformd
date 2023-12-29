@@ -29,9 +29,6 @@ Isotropic systems
 
    <a href="https://www.matplotlib.org" target="_blank">matplotlib</a>
 
-System
-------
-
 .. image:: ../figures/tutorials/polymer-in-water/peg-dark.png
     :class: only-dark
     :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
@@ -43,6 +40,9 @@ System
     :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
+
+MD system
+---------
 
 .. container:: justify
 
@@ -72,8 +72,8 @@ System
 
    <a href="https://lammpstutorials.github.io/" target="_blank">tutorials</a>
 
-File preparation and libraries
-------------------------------
+File preparation
+----------------
 
 .. container:: justify
 
@@ -90,6 +90,9 @@ File preparation and libraries
     as submodule. The dataset needed to follow this tutorial is located
     in *nmrformd-data/polymer-in-water/raw-data/NPEG32/*.
 
+Create a MDAnalysis universe
+----------------------------
+
 .. container:: justify
 
     Open a new Python script or a new notebook, and define
@@ -105,16 +108,13 @@ File preparation and libraries
 
 .. container:: justify
 
-    Also import numpy, MDAnalysis, and NMRforMD:
+    Then, import numpy, MDAnalysis, and NMRforMD:
 
 .. code-block:: python
 
 	import numpy as np
 	import MDAnalysis as mda
 	import nmrformd as nmrmd
-
-Create a MDAnalysis universe
-----------------------------
 
 .. container:: justify
 
