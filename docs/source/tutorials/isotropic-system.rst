@@ -32,16 +32,15 @@ System
 .. container:: justify
 
     The system is made of 334 :math:`\text{TIP4P}-\epsilon` water molecules
-    and 20 `\text{PEG}-300` polymer molecules simulated in the NVT ensemble
+    and 20 :math:`\text{PEG}-300` polymer molecules simulated in the NVT ensemble
     using GROMACS at a temperature :math:`T = 295.15^\circ\text{K}`. The total
-    duration of the simulation is :math:`:5\,\text{ns}`, and the
+    duration of the simulation is :math:`5\,\text{ns}`, and the
     timestep is :math:`1\,\text{fs}`. You can
     access the input files in this |repository-examples|.
 
 .. |repository-examples| raw:: html
 
    <a href="https://github.com/simongravelle/nmrformd/tree/main/examples" target="_blank">repository</a>
-
 
 .. container:: justify
 
