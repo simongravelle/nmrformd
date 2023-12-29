@@ -264,8 +264,9 @@ Extract the results
 
 .. container:: figurelegend
 
-    Figure: NMR relaxation times :math:`T_1` and 
-    :math:`T_2` as a function of the frequency for
+    Figure: NMR relaxation times :math:`T_1` (disks) and 
+    :math:`T_2` (squares) as a function
+    of the frequency :math:`f` for
     the :math:`\text{PEG-H}_2\text{O}` bulk mixture.
 
 Intra molecular NMR relaxation
@@ -301,6 +302,11 @@ Intra molecular NMR relaxation
 .. image:: ../figures/tutorials/isotropic-systems/Gintra-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water-PEG
+
+.. container:: figurelegend
+
+    Figure: Intra-molecular correlation function :math:`G_\text{R}`
+    for both PEG (squares) and :math:`\text{H}_2\text{O}` (disks).
 
 ..  container:: justify
 
