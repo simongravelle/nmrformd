@@ -2,8 +2,9 @@
 
 .. inclusion-readme-intro-start
 
-NMRforMD is a Python toolkit designed for the computation of 
-dipolar H-NMR relaxation times from molecular dynamics simulations.
+Dipolar Nuclear Magnetic Resonance from Molecular Dynamics (DNMRfromMD) simulations
+is a Python toolkit designed for the computation of 
+dipolar NMR relaxation times (:math:`T1`` and :math:`T2`) from molecular dynamics simulations.
 Used in combination with |MDAnalysis|, it allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
 |LAMMPS| and |GROMACS|.
@@ -29,11 +30,11 @@ the theory behind dipolar H-NMR calculations.
 Notes and known issues
 ----------------------
 
-- NMRforMD is still in development, please raise an issue here if you encounter a problem
+- this code is still in development, please raise an issue here if you encounter a problem
 - the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages, as long as they are compatible with MDAnalysis
-- NMRforMD does not work with triclinic box, use MDAnalysis to convert your trajectory to orthorhombic
+- the code is not adapted to triclinic box, convert your trajectory to orthorhombic prior to calculation
 - for very large trajectory file, the code requires a lot of memory
-- the code has only beed tested with hydrogen atoms (spin 1/2)
+- the code has mostly been tested in the case of 1H-NMR (i.e. spin 1/2)
 - NMRforMD only works for dipolar interaction, not quadrupolar interaction
 
 .. image:: docs/source/figures/systems/system-README.png
@@ -48,9 +49,9 @@ the `examples/`_ folder.
 For developers
 --------------
 
-If you intend to make modification, please raise an issue or send me and email
-first. You will need to make a fork of the repository, apply your changes, then
-make a pull request.
+If you intend to make modification, please raise an issue or send me an email
+first. Then, fork the repository, apply your changes, then make a pull request 
+that will be review.
 
 Build the documentation localy from the `docs/`_ folder by typing:
 
@@ -70,7 +71,7 @@ Publish a new pip version by following those |instructions|.
 
     python3 setup.py sdist
 
-3 - Create a new release on Github using the generated tar.gz file locqted in dist/
+3 - Create a new release on Github using the generated tar.gz file located in dist/
 
 4 - Update the link in setup.py
 
