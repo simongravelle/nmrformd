@@ -175,6 +175,14 @@ Create a MDAnalysis universe
 
     >> The total simulation time is 500 ps
 
+.. container:: justify
+
+    Note that in the context of MDAnalysis,
+    the *timestep* refers to the duration
+    between two recorded frames, which is different from the actual
+    timestep of :math:`1\,\text{fs}` used for the LAMMPS
+    molecular dynamics simulation.
+
 Run NMRforMD
 ------------
 
