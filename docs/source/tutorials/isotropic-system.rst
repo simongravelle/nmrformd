@@ -31,11 +31,13 @@ System
 
 .. container:: justify
 
-    The system is made of 334 :math:`\text{TIP4P}-\epsilon` water molecules
-    and 20 :math:`\text{PEG}300` polymer molecules simulated in the NVT ensemble
-    using GROMACS at a temperature :math:`T = 295.15^\circ\text{K}`. The total
-    duration of the simulation is :math:`5\,\text{ns}`, and the
-    timestep is :math:`1\,\text{fs}`. 
+    The system is made of a bulk mixture of 320 :math:`\text{TIP4P}-\epsilon` water molecules
+    and 32 :math:`\text{PEG}300` polymer molecules. The trajectory was recorded
+    during a :math:`10\,\text{ns}` production run performed with the open source code LAMMPS
+    in the NPT ensemble using a timestep of :math:`1\,\text{fs}`.
+    The imposed was temperature :math:`T = 300^\circ\text{K}`, and the pressure
+    :math:`p = 1^\circ\text{atm}`. The positions of the atoms were recorded in
+    a a file every :math:`1\,\text{ps}`.
     
 .. container:: justify
 
@@ -48,8 +50,11 @@ System
 
 .. container:: justify
 
-    If you are not familiar with GROMACS, you can find `tutorials
-    here <https://gromacstutorials.github.io/>`__.
+    If you are not familiar with LAMMPS, you can find |lammps-tutorials| here.
+
+.. |lammps-tutorials| raw:: html
+
+   <a href="https://lammpstutorials.github.io/" target="_blank">tutorials</a>
 
 File preparation and libraries
 ------------------------------
