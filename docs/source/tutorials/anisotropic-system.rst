@@ -1,11 +1,11 @@
-.. _isotropic-label:
+.. _anisotropic-label:
 
-Isotropic systems
-=================
+Anisotropic systems
+===================
 
 .. container:: hatnote
 
-   Measuring the NMR relaxation time from a bulk water-polymer mixture
+   Measuring the NMR relaxation time of nanoconfined water
 
 .. image:: ../figures/tutorials/polymer-in-water/peg-dark.png
     :class: only-dark
@@ -22,26 +22,12 @@ Isotropic systems
 .. container:: justify
 
     In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
-    are measured from a bulk polymer-water mixture using |NMRforMD|.
-    To follow the tutorial, |MDAnalysis|,
-    |numpy|, and
-    |matplotlib| must be installed.
+    are measured from water confined in a nanoslit os silica.
 
-.. |NMRforMD| raw:: html
+.. container:: justify
 
-   <a href="https://nmrformd.readthedocs.io" target="_blank">NMRforMD</a>
-
-.. |MDAnalysis| raw:: html
-
-   <a href="https://www.mdanalysis.org" target="_blank">MDAnalysis</a>
-
-.. |numpy| raw:: html
-
-   <a href="https://www.numpy.org" target="_blank">numpy</a>
-
-.. |matplotlib| raw:: html
-
-   <a href="https://www.matplotlib.org" target="_blank">matplotlib</a>
+    I recommend you to follow
+    this tutorial on a simpler :ref:`isotropic-label` first.
 
 MD system
 ---------

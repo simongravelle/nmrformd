@@ -32,6 +32,8 @@ DNMR from MD
    :hidden:
    
    tutorials/isotropic-system
+   tutorials/anisotropic-system
+
 .. toctree::
    :maxdepth: 2
    :caption: Theory
