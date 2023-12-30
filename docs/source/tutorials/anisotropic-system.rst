@@ -7,15 +7,15 @@ Anisotropic systems
 
    Measuring the NMR relaxation time of nanoconfined water
 
-.. image:: ../figures/tutorials/polymer-in-water/peg-dark.png
+.. image:: ../figures/tutorials/anisotropic-system/snapshot-dark.png
     :class: only-dark
-    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
+    :alt: Water confined in silica slit - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
 
-.. image:: ../figures/tutorials/polymer-in-water/peg-light.png
+.. image:: ../figures/tutorials/anisotropic-system/snapshot-light.png
     :class: only-light
-    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
+    :alt: Water confined in silica slit - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
 

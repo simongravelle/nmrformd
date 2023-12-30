@@ -7,15 +7,15 @@ Isotropic systems
 
    Measuring the NMR relaxation time from a bulk water-polymer mixture
 
-.. image:: ../figures/tutorials/polymer-in-water/peg-dark.png
+.. image:: ../figures/tutorials/isotropic-systems/snapshot-dark.png
     :class: only-dark
-    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
+    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
 
-.. image:: ../figures/tutorials/polymer-in-water/peg-light.png
+.. image:: ../figures/tutorials/isotropic-systems/snapshot-light.png
     :class: only-light
-    :alt: PEG-water mixture simulated with GROMACS - Dipolar NMR relaxation time calculation
+    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
 
