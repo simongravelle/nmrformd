@@ -38,6 +38,8 @@ MD system
     in a slit silica nanopore. The trajectory was recorded
     during a :math:`10\,\text{ns}` production run performed with the open source code GROMACS
     in the anisotropic NPzT ensemble using a timestep of :math:`1\,\text{fs}`.
+    In order to balance the charge of the surface, 20 sodium ions are
+    present in the slit.
     The imposed was temperature :math:`T = 300\,^\circ\text{K}`, and the pressure
     :math:`p = 1\,\text{bar}`. The positions of the atoms were recorded in
     the *prod.xtc* file
