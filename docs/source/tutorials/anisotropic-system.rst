@@ -21,8 +21,8 @@ Anisotropic systems
 
 .. container:: justify
 
-    In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
-    are measured from water confined in a nanoslit os silica.
+    In this tutorial, the NMR relaxation rate :math:`R_1`
+    is measured from water confined in a nanoslit os silica.
 
 .. container:: justify
 
