@@ -210,3 +210,10 @@ Extract the NMR spectra
 
     Figure: NMR relaxation rates :math:`R_1` for the water confined in
     a silica slit.
+
+.. container:: justify
+
+    Note that the :math:`\text{H}_2\text{O}-\text{silica}` contribution is 
+    much smaller than the intra and inter molecular contribution from the
+    water. This can be explained by the comparatively small number of hydrogen
+    atoms from the silica: 92, compared to the 1204 hydrogen atoms from the water.
