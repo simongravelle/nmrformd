@@ -7,13 +7,13 @@ Anisotropic systems
 
    Measuring the NMR relaxation time of nanoconfined water
 
-.. image:: ../figures/tutorials/anisotropic-system/snapshot-dark.png
+.. image:: ../figures/tutorials/anisotropic-systems/snapshot-dark.png
     :class: only-dark
     :alt: Water confined in silica slit - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
 
-.. image:: ../figures/tutorials/anisotropic-system/snapshot-light.png
+.. image:: ../figures/tutorials/anisotropic-systems/snapshot-light.png
     :class: only-light
     :alt: Water confined in silica slit - Dipolar NMR relaxation time calculation
     :width: 250
@@ -34,14 +34,14 @@ MD system
 
 .. container:: justify
 
-    The system is made of a bulk mixture of 320 :math:`\text{TIP4P}-\epsilon` water molecules
-    and 32 :math:`\text{PEG}300` polymer molecules. The trajectory was recorded
-    during a :math:`10\,\text{ns}` production run performed with the open source code LAMMPS
-    in the NPT ensemble using a timestep of :math:`1\,\text{fs}`.
+    The system is made of 602 :math:`\text{TIP4P}-\epsilon` water molecules
+    in a slit silica nanopore. The trajectory was recorded
+    during a :math:`10\,\text{ns}` production run performed with the open source code GROMACS
+    in the anisotropic NPzT ensemble using a timestep of :math:`1\,\text{fs}`.
     The imposed was temperature :math:`T = 300\,^\circ\text{K}`, and the pressure
-    :math:`p = 1\,\text{atm}`. The positions of the atoms were recorded in
+    :math:`p = 1\,\text{bar}`. The positions of the atoms were recorded in
     the *prod.xtc* file
-    every :math:`1\,\text{ps}`.
+    every :math:`2\,\text{ps}`.
     
 .. container:: justify
 
@@ -54,11 +54,11 @@ MD system
 
 .. container:: justify
 
-    If you are not familiar with LAMMPS, you can find |lammps-tutorials| here.
+    If you are not familiar with GROMACS, you can find |gromacs-tutorials| here.
 
-.. |lammps-tutorials| raw:: html
+.. |gromacs-tutorials| raw:: html
 
-   <a href="https://lammpstutorials.github.io/" target="_blank">tutorials</a>
+   <a href="https://gromacstutorials.github.io/" target="_blank">tutorials</a>
 
 File preparation
 ----------------
@@ -76,7 +76,7 @@ File preparation
 
     Here the secondary repository *nmrformd-data* is imported as
     as submodule. The dataset needed to follow this tutorial is located
-    in *nmrformd-data/polymer-in-water/raw-data/NPEG32/*.
+    in *nmrformd-data/water-in-silica/raw-data/N50/.
 
 Create a MDAnalysis universe
 ----------------------------
@@ -88,7 +88,7 @@ Create a MDAnalysis universe
 
 .. code-block:: python
 
-	datapath = "mypath/nmrformd-data/polymer-in-water/raw-data/NPEG32/"
+	datapath = "mypath/nmrformd-data/water-in-silica/raw-data/N50/"
 
 .. |repository| raw:: html
 
@@ -111,61 +111,27 @@ Create a MDAnalysis universe
 
 .. code-block:: python
 
-    u = mda.Universe(datapath+"init.data", datapath+"prod.xtc")
-    u.transfer_to_memory(stop=501)
-
-.. container:: justify
-
-    The *u.transfer_to_memory(stop=501)*, is optional, it only serve to 
-    reduce the number of frames, and therefore reduce the duration of 
-    the calculation. Feel free to remove it, or increase its value.
-    The figures here have been generated using the 
-    full trajectory (i.e. without the *transfer_to_memory* command).
-
-.. container:: justify
-
-    The MDAnalysis universe *u* contains both topology (atoms types, masses, etc.)
-    and trajectory (atom positions at every frame).
+    u = mda.Universe(datapath+"prod.tpr", datapath+"prod.xtc")
 
 .. container:: justify
 
     Let us extract a few information from the universe,
-    such as number of molecules (water + PEG), timestep, and total duration:
+    such as number of molecules, timestep, and total duration:
 
 .. code-block:: python
 
-	n_molecules = u.atoms.n_residues
-	print(f"The number of molecules is {n_molecules}")
+    n_molecules = u.atoms.n_residues
+    print(f"The number of molecules is {n_molecules}")
+    timestep = np.int32(u.trajectory.dt)
+    print(f"The timestep is {timestep} ps")
+    total_time = np.int32(u.trajectory.totaltime)
+    print(f"The total simulation time is {total_time} ps")
 
 .. code-block:: bw
 
-    >> The number of molecules is 352
-
-.. code-block:: python
-
-	timestep = np.int32(u.trajectory.dt)
-	print(f"The timestep is {timestep} ps")
-
-.. code-block:: bw
-
-    >> The timestep is 1 ps
-
-.. code-block:: python
-
-	total_time = np.int32(u.trajectory.totaltime)
-	print(f"The total simulation time is {total_time} ps")
-
-.. code-block:: bw
-
-    >> The total simulation time is 1000 ps
-
-.. container:: justify
-
-    Note that in the context of MDAnalysis,
-    the *timestep* refers to the duration
-    between two recorded frames, which is different from the actual
-    timestep of :math:`1\,\text{fs}` used for the LAMMPS
-    molecular dynamics simulation.
+    >> The number of molecules is 623
+    >> The timestep is 2 ps
+    >> The total simulation time is 10000 ps
 
 Launch the NMR analysis
 -----------------------
