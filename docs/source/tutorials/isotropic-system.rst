@@ -186,7 +186,8 @@ Launch the NMR analysis
 
 .. container:: justify
 
-    Let us create 3 atoms for the hydrogen atoms of the PEG, the hydrogen
+    Let us create 3 atom groups for respectively the hydrogen
+    atoms of the PEG, the hydrogen
     atoms of the water, and all the hydrogen atoms:
 
 .. code-block:: python
