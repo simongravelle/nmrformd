@@ -3,22 +3,6 @@
 Isotropic systems
 =================
 
-.. container:: hatnote
-
-   Measuring the NMR relaxation time from a bulk water-polymer mixture
-
-.. image:: ../figures/tutorials/isotropic-systems/snapshot-dark.png
-    :class: only-dark
-    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
-    :width: 250
-    :align: right
-
-.. image:: ../figures/tutorials/isotropic-systems/snapshot-light.png
-    :class: only-light
-    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
-    :width: 250
-    :align: right
-
 .. container:: justify
 
     In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
@@ -45,6 +29,22 @@ Isotropic systems
 
 MD system
 ---------
+
+.. container:: hatnote
+
+   Measuring the NMR relaxation time from a bulk water-polymer mixture
+
+.. image:: ../figures/tutorials/isotropic-systems/snapshot-dark.png
+    :class: only-dark
+    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
+    :width: 250
+    :align: right
+
+.. image:: ../figures/tutorials/isotropic-systems/snapshot-light.png
+    :class: only-light
+    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
+    :width: 250
+    :align: right
 
 .. container:: justify
 

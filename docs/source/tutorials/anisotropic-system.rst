@@ -3,6 +3,19 @@
 Anisotropic systems
 ===================
 
+.. container:: justify
+
+    In this tutorial, the NMR relaxation rate :math:`R_1`
+    is measured from water confined in a nanoslit os silica.
+
+.. container:: justify
+
+    I recommend you to follow
+    this tutorial on a simpler :ref:`isotropic-label` first.
+
+MD system
+---------
+
 .. container:: hatnote
 
    Measuring the NMR relaxation time of nanoconfined water
@@ -18,19 +31,6 @@ Anisotropic systems
     :alt: Water confined in silica slit - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
-
-.. container:: justify
-
-    In this tutorial, the NMR relaxation rate :math:`R_1`
-    is measured from water confined in a nanoslit os silica.
-
-.. container:: justify
-
-    I recommend you to follow
-    this tutorial on a simpler :ref:`isotropic-label` first.
-
-MD system
----------
 
 .. container:: justify
 

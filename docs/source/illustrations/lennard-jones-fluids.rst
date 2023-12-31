@@ -3,6 +3,9 @@
 Lennard-Jones fluid
 ===================
 
+MD system
+---------
+
 .. container:: hatnote
 
    Measuring the NMR relaxation time from a Lennard-Jones fluid
@@ -18,9 +21,6 @@ Lennard-Jones fluid
     :alt: LJ fluid simulated with LAMMPS - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
-
-MD system
----------
 
 .. container:: justify
 
