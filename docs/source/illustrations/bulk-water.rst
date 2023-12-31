@@ -2,6 +2,10 @@
 Bulk water
 ==========
 
+.. container:: hatnote
+
+   Measuring the NMR relaxation time of water
+
 MD system
 ---------
 

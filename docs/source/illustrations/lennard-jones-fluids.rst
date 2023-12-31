@@ -3,12 +3,12 @@
 Lennard-Jones fluid
 ===================
 
-MD system
----------
-
 .. container:: hatnote
 
    Measuring the NMR relaxation time from a Lennard-Jones fluid
+
+MD system
+---------
 
 .. image:: ../figures/illustrations/lennard-jones-fluid/snapshot-dark.png
     :class: only-dark

@@ -41,6 +41,7 @@ DNMR from MD
 
    illustrations/lennard-jones-fluids
    illustrations/bulk-water
+   illustrations/lysozyme-in-water
 
 .. toctree::
    :maxdepth: 2
