@@ -50,8 +50,9 @@ MD system
 
     The system is made of 1638 particles interacting through the classical 
     Lennard-Jones (LJ) 12-6 potential with a cut-off of :math:`9\,\text{Å}`. Each particle
-    was associated with a mass :math:`m = 1\,`g/mol, and LJ parameters :math:`\sigma = 3\,\text{Å}`
-    and :math:`\epsilon = 0.1\,`kcal/mol. The volume of
+    was associated with a mass :math:`m = 1\,\text{g/mol}`,
+    and LJ parameters :math:`\sigma = 3\,\text{Å}`
+    and :math:`\epsilon = 0.1\,\text{kcal/mol}`. The volume of
     the box :math:`(37.5\,\text{Å})^3`  was chosen to match the 
     density of the paper by Grivet :cite:`grivetNMRRelaxationParameters2005`.
     Calculations were made at constant volume and energy, in the NVE ensemble.
