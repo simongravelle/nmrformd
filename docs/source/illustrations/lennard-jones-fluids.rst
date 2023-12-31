@@ -7,15 +7,15 @@ Lennard-Jones fluid
 
    Measuring the NMR relaxation time from a Lennard-Jones fluid
 
-.. image:: ../figures/tutorials/isotropic-systems/snapshot-dark.png
+.. image:: ../figures/illustrations/lennard-jones-fluid/snapshot-dark.png
     :class: only-dark
-    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
+    :alt: LJ fluid simulated with LAMMPS - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
 
-.. image:: ../figures/tutorials/isotropic-systems/snapshot-light.png
+.. image:: ../figures/illustrations/lennard-jones-fluid/snapshot-light.png
     :class: only-light
-    :alt: PEG-water mixture simulated with LAMMPS - Dipolar NMR relaxation time calculation
+    :alt: LJ fluid simulated with LAMMPS - Dipolar NMR relaxation time calculation
     :width: 250
     :align: right
 
@@ -113,8 +113,10 @@ Results
 .. image:: ../figures/illustrations/lennard-jones-fluid/R1_spectra-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
+
 .. container:: figurelegend
 
     Figure: NMR relaxation rates :math:`R_1`
     and :math:`R_2` at
-    a frequency :math:`f_0 = 150\,\text{GHz}`.
+    a frequency :math:`f_0 = 150\,\text{GHz}`. 
+    The data from Grivet :cite:`grivetNMRRelaxationParameters2005` are shown with open symbols.
