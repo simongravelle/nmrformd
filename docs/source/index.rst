@@ -40,6 +40,7 @@ DNMR from MD
    :hidden:
 
    illustrations/lennard-jones-fluids
+   illustrations/bulk-water
 
 .. toctree::
    :maxdepth: 2
@@ -48,6 +49,5 @@ DNMR from MD
 
    theory/context
    theory/theory
-   theory/illustration
    theory/best-practice
    theory/bibliography
