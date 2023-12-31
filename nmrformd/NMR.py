@@ -124,7 +124,7 @@ class NMR:
         K has the units of m^6/s^2
         alpha_m are normalizing coefficient for harmonic function
         """
-        self.GAMMA = 2 * np.pi * 42.6e6
+        self.GAMMA = 2 * np.pi * 42.6e6 #todo offer this a an input parameter
         self.K = (3 / 2) * (cst.mu_0 / 4 / np.pi) ** 2 \
             * cst.hbar ** 2 * self.GAMMA ** 4 * self.spin * (1 + self.spin)
         self.alpha_m = [np.sqrt(16 * np.pi / 5),
@@ -222,7 +222,7 @@ class NMR:
         """Loop of the MDA trajectory and extract rij. 
         
         Run over the MDA trajectory. If start, stop, or step are
-        specified, only a sub-part of the trajectory is analysed.
+        specified, only a sub-part of the trajectory is analyzed.
         """
         for cpt, ts in enumerate(self.u.trajectory):
             self.position_i = self.group_i.atoms.positions
@@ -242,7 +242,7 @@ class NMR:
     def vector_rij(self):
         """Calculate distance between position_i and position_j.
         
-        By defaults, periodic boundary conditions are assumed, but can also be turned off.
+        By defaults, periodic boundary conditions are assumed. Pbc can be turned off using pbc = False.
         """
         if self.pbc:
             self.rij = (np.remainder(self.position_i - self.position_j
@@ -265,6 +265,8 @@ class NMR:
         
         convention : theta = polar angle, phi = azimuthal angle
         note: scipy uses the opposite convention
+
+        F has the units of Angstrom^(-6)
         """
         F_val = []
         for m in range(self.dim):
