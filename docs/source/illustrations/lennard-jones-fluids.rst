@@ -76,6 +76,16 @@ MD system
 
    <a href="https://github.com/simongravelle/nmrformd-data" target="_blank">repository</a>
 
+Results
+-------
+
+.. container:: justify
+
+    The correlation function :math:`G^(0)` was first extract for two temperatures, :math:`T = 50`
+    and :math:`140\,\text{K}`, and compared with the correlation functions reported by Grivet :cite:`grivetNMRRelaxationParameters2005`.
+    Our results show an excellent agreement with the results from Grivet, thus validating the
+    NMR formalism used here as well as the LJ system and parameters. 
+
 .. image:: ../figures/illustrations/lennard-jones-fluid/G_correlation-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
@@ -86,7 +96,5 @@ MD system
 
 .. container:: figurelegend
 
-    Figure: NMR relaxation times :math:`T_1` (disks) and 
-    :math:`T_2` (squares) as a function
-    of the frequency :math:`f` for
-    the :math:`\text{PEG-H}_2\text{O}` bulk mixture.
+    Figure: Correlation function :math:`G^(0)` as extracted from the LJ fluid simulation
+    for two different temperatures, and compared with the data from Grivet :cite:`grivetNMRRelaxationParameters2005` (open symbols).
