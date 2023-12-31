@@ -19,30 +19,6 @@ Lennard-Jones fluid
     :width: 250
     :align: right
 
-.. container:: justify
-
-    In this tutorial, the NMR relaxation times :math:`T_1` and :math:`T_2`
-    are measured from a bulk polymer-water mixture using |NMRforMD|.
-    To follow the tutorial, |MDAnalysis|,
-    |numpy|, and
-    |matplotlib| must be installed.
-
-.. |NMRforMD| raw:: html
-
-   <a href="https://nmrformd.readthedocs.io" target="_blank">NMRforMD</a>
-
-.. |MDAnalysis| raw:: html
-
-   <a href="https://www.mdanalysis.org" target="_blank">MDAnalysis</a>
-
-.. |numpy| raw:: html
-
-   <a href="https://www.numpy.org" target="_blank">numpy</a>
-
-.. |matplotlib| raw:: html
-
-   <a href="https://www.matplotlib.org" target="_blank">matplotlib</a>
-
 MD system
 ---------
 
