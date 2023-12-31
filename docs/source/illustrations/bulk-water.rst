@@ -1,6 +1,9 @@
 
-Illustration
-============
+Bulk water
+==========
+
+MD system
+---------
 
 .. image:: ../figures/tutorials/bulk-water/water-dark-square.png
     :class: only-dark
@@ -16,11 +19,17 @@ Illustration
 
 .. container:: justify
 
+    The system is a bulk liquid water.
+
+.. container:: justify
+
     Let us first visualize how :math:`r_{ij}` and :math:`\Omega_{ij}` evolve with time in the case of a 
     bulk water simulation at 300 K. For such bulk systems, it is known that the correlations functions 
     are proportional to each others :cite:`hubbardTheoryNuclearMagnetic1963`, so only :math:`G^{0}` and 
     :math:`J^{0}` will be evaluated, which depends only in the polar angle :math:`\theta_{ij}` as 
     :math:`Y^{0}_2` is independent from the azimuthal angle :math:`\varphi`.
+
+.. container:: justify
 
     First, let us have a look at the intramolecular motion within a single water molecule. As expected
     for the rigid water model used here (TIP4P/:math:`\epsilon`), the 
