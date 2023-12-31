@@ -81,7 +81,7 @@ Results
 
 .. container:: justify
 
-    The correlation function :math:`G^(0)` was first extract for two temperatures, :math:`T = 50`
+    The correlation function :math:`G^{(0)}` was first extract for two temperatures, :math:`T = 50`
     and :math:`140\,\text{K}`, and compared with the correlation functions reported by Grivet :cite:`grivetNMRRelaxationParameters2005`.
     Our results show an excellent agreement with the results from Grivet, thus validating the
     NMR formalism used here as well as the LJ system and parameters. 
@@ -96,5 +96,25 @@ Results
 
 .. container:: figurelegend
 
-    Figure: Correlation function :math:`G^(0)` as extracted from the LJ fluid simulation
+    Figure: Correlation function :math:`G^{(0)}` as extracted from the LJ fluid simulation
     for two different temperatures, and compared with the data from Grivet :cite:`grivetNMRRelaxationParameters2005` (open symbols).
+
+.. container:: justify
+
+    The NMR relaxation rates :math:`R_1`
+    and :math:`R_2` was also extracted for all the temperatures, at
+    a frequency :math:`f_0 = 150\,\text{GHz}`. Our results
+    show a good agreement with the data from Grivet :cite:`grivetNMRRelaxationParameters2005`.
+
+.. image:: ../figures/illustrations/lennard-jones-fluid/R1_spectra-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/illustrations/lennard-jones-fluid/R1_spectra-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+.. container:: figurelegend
+
+    Figure: NMR relaxation rates :math:`R_1`
+    and :math:`R_2` at
+    a frequency :math:`f_0 = 150\,\text{GHz}`.
