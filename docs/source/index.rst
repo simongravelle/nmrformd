@@ -36,6 +36,13 @@ DNMR from MD
 
 .. toctree::
    :maxdepth: 2
+   :caption: Illustrations
+   :hidden:
+
+   illustrations/lennard-jones-fluids
+
+.. toctree::
+   :maxdepth: 2
    :caption: Theory
    :hidden:
 
