@@ -55,8 +55,16 @@ MD system
     the box :math:`(37.5\,\text{Å})^3`  was chosen to match the 
     density of the paper by Grivet :cite:`grivetNMRRelaxationParameters2005`.
     Calculations were made at constant volume and energy, in the NVE ensemble.
-    The total duration of the simulation was 11000 steps,
-    with a timestep of :math:`1.16\,\text{fs}`.
+    The total duration of the simulation was 11000 steps, and the data were recorded every 10 steps
+    with a timestep of :math:`1.16\,\text{fs}`. The imposed temperatures
+    were ranging from :math:`T = 30` to :math:`160\,\text{K}`.
+
+.. container:: justify
+
+    The parameters were chosen to match the reduced parameters used by Grivet :cite:`grivetNMRRelaxationParameters2005`,
+    namely a reduced temperature ranging from :math:`T^* = 0.8` to 3.0,
+    a density :math:`\rho^* = 0.84`. However, a slightly different number of particles,
+    a smaller timestep, and a slightly longer cut-off was used here.
     
 .. container:: justify
 
