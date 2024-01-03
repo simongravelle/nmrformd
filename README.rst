@@ -109,12 +109,11 @@ Publish a new pip version by following those |instructions|.
 Acknowledgments
 ---------------
 
-.. image:: docs/source/figures/logo/MSCA.jpg
-    :alt: Nanoconfined water simulated with gromacs - NMR relaxation time calculation
-    :width: 50
-    :align: right
-
 This project has received funding from the European
 Union's Horizon 2020 research and innovation programme
 under the Marie Skłodowska-Curie grant agreement No 101065060.
 
+.. image:: docs/source/figures/logo/MSCA.jpg
+    :alt: Nanoconfined water simulated with gromacs - NMR relaxation time calculation
+    :width: 50
+    :align: right
