@@ -22,7 +22,6 @@ DNMR from MD
    :maxdepth: 2
    :hidden:
 
-   tutorials/installation
    modules/NMR
    modules/utilities
 
@@ -31,6 +30,7 @@ DNMR from MD
    :caption: Tutorials
    :hidden:
    
+   tutorials/installation
    tutorials/isotropic-system
    tutorials/anisotropic-system
 
@@ -57,5 +57,5 @@ DNMR from MD
    :caption: Additional
    :hidden:
 
-   theory/bibliography
-   theory/acknowledgments
+   additional/bibliography
+   additional/acknowledgments
