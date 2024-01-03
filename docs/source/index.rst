@@ -51,5 +51,11 @@ DNMR from MD
    theory/context
    theory/theory
    theory/best-practice
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Additional
+   :hidden:
+
    theory/bibliography
    theory/acknowledgments
