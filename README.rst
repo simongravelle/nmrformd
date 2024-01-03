@@ -110,8 +110,7 @@ Acknowledgments
 ---------------
 
 <p float="left">
-  <a href="https://lammpstutorials.github.io">
-  <img src="docs/source/figures/logo/MSCA.jpg" width="30%" /></a>
+  <img src="docs/source/figures/logo/MSCA.jpg" width="30%" />
 </p>
 
 This project has received funding from the European
