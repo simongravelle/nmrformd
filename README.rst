@@ -106,3 +106,12 @@ Publish a new pip version by following those |instructions|.
     :alt: readthedoc
     :target: https://nmrformd.readthedocs.io/en/latest/
 
+Acknowledgments
+---------------
+
+<img src="docs/source/figures/logo/MSCA.jpg" width="10%" align="right"/></a>
+
+This project has received funding from the European
+Union's Horizon 2020 research and innovation programme
+under the Marie Skłodowska-Curie grant agreement No 101065060.
+
