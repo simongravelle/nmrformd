@@ -109,7 +109,10 @@ Publish a new pip version by following those |instructions|.
 Acknowledgments
 ---------------
 
-<img src="docs/source/figures/logo/MSCA.jpg" width="10%" align="right"/></a>
+<p float="left">
+  <a href="https://lammpstutorials.github.io">
+  <img src="docs/source/figures/logo/MSCA.jpg" width="30%" /></a>
+</p>
 
 This project has received funding from the European
 Union's Horizon 2020 research and innovation programme
