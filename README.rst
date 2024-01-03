@@ -111,7 +111,7 @@ Acknowledgments
 
 .. image:: docs/source/figures/logo/MSCA.jpg
     :alt: Nanoconfined water simulated with gromacs - NMR relaxation time calculation
-    :width: 250
+    :width: 50
     :align: right
 
 This project has received funding from the European
