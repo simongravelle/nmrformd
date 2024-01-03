@@ -52,3 +52,4 @@ DNMR from MD
    theory/theory
    theory/best-practice
    theory/bibliography
+   theory/acknowledgments
