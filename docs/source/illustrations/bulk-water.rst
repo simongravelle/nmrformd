@@ -34,6 +34,40 @@ MD system
     :math:`p = 1\,\text{atm}`. The positions of the atoms were recorded in the *prod.xtc* file
     every :math:`\Delta t`, with :math:`\Delta t` ranging from :math:`0.2\,\text{ps}` to :math:`32\,\text{ps}`.
 
+Results
+-------
+
+.. container:: justify
+
+    Both intra and inter-molecular correlation functions were extracted, 
+    and the respective intra and inter NMR spectra were calculated.
+    The total NMR spectrum :math:`R_1` was also calculated.
+
+.. image:: ../figures/illustrations/bulk-water/water_spectrum-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/illustrations/bulk-water/water_spectrum-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. container:: figurelegend
+
+    Figure: a) Correlation function :math:`G^{(0)}` as extracted from the bulk
+    water simulation with :math:`N = 4000` and :math:`N = \Delta t = 1\,\text{ps}`.
+    b) Corresponding NMR spectra :math:`R_1`.
+
+.. container:: justify
+
+    The inter-molecular correlation function shows the expected power law at longer time,
+    while the intra-molecular correlation decreases faster with time.
+
+ .. container:: justify
+
+    Our results also show that the relaxation is dominated by intra-molecular contribution,
+    as expected for water under ambient conditions :cite:`singerMolecularDynamicsSimulations2017`.
+    For the lowest frequency considered here, the spectrum :math:`R_1` is almost flat.
+
 .. container:: justify
 
     Let us first visualize how :math:`r_{ij}` and :math:`\Omega_{ij}` evolve with time in the case of a 

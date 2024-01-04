@@ -57,7 +57,7 @@ Results
 
 .. container:: justify
 
-    The correlation function :math:`G^{(0)}` was first extract for two temperatures, :math:`T = 50`
+    The correlation function :math:`G^{(0)}` was first extracted for two temperatures, :math:`T = 50`
     and :math:`140\,\text{K}`, and compared with the correlation functions reported by Grivet :cite:`grivetNMRRelaxationParameters2005`.
     Our results show an excellent agreement with the results from Grivet, thus validating the
     NMR formalism used here as well as the LJ system and parameters. 
