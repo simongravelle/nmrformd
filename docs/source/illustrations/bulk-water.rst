@@ -23,7 +23,16 @@ MD system
 
 .. container:: justify
 
-    The system is a bulk liquid water.
+    The system is a bulk liquid water with a number :math:`N` of water molecules,
+    where :math:`N` was varied from 25 to 4000. The simulation box was cubic, 
+    with equilibrium dimensions ranging from :math:`(0.9\,\text{nm})^3`
+    to :math:`(4.9\,\text{nm})^3`. The trajectory was recorded
+    during a :math:`8\,\text{ns}` production run performed with
+    the open source codes LAMMPS (for the smallest systems) and GROMACS (for the largest systems).
+    Simulations were performed in the NPT ensemble using a timestep of :math:`2\,\text{fs}`.
+    The imposed was temperature :math:`T = 300\,^\circ\text{K}`, and the pressure
+    :math:`p = 1\,\text{atm}`. The positions of the atoms were recorded in the *prod.xtc* file
+    every :math:`\Delta t`, with :math:`\Delta t` ranging from :math:`0.2\,\text{ps}` to :math:`32\,\text{ps}`.
 
 .. container:: justify
 
