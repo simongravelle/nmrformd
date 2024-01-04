@@ -19,3 +19,6 @@
 [submodule "data/HEWL-in-water"]
 	path = data/HEWL-in-water
 	url = git@github.com:simongravelle/HEWL-in-water.git
+[submodule "data/bulk-water-tip3p"]
+	path = data/bulk-water-tip3p
+	url = git@github.com:simongravelle/bulk-water-tip3p.git
