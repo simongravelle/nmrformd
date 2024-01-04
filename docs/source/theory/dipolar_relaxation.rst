@@ -155,5 +155,21 @@ Isotropic system
 
 .. container:: justify
 
-    needs to be evaluated.
+    needs to be evaluated. One can check the validity of the
+    relation :math:`G^{(0)} = 6 G^{(1)} = 6 / 4 G^{(2)}` on a simple 
+    bulk water system with 4000 molecules, similarly to what
+    was done in Ref. :cite:`becherMolecularDynamicsSimulations2021`
+    with glycerol. 
 
+.. image:: ../figures/illustrations/bulk-water/effect_of_anisotropy-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/illustrations/bulk-water/effect_of_anisotropy-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. container:: figurelegend
+
+    Figure: Validity of the relation :math:`G^{(0)} = 6 G^{(1)} = 6 / 4 G^{(2)}`
+    on a bulk water system.
