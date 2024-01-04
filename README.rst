@@ -27,15 +27,20 @@ Details about installation, use, and some of the common pitfalls of NMR calculat
 are given in the |documentation|. The documentation also contains a description of
 the theory behind dipolar H-NMR calculations.
 
-Notes and known issues
-----------------------
+Notes
+-----
 
-- this code is still in development, please raise an issue here if you encounter a problem
-- the code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with other molecular dynamics packages, as long as they are compatible with MDAnalysis
-- the code is not adapted to triclinic box, convert your trajectory to orthorhombic prior to calculation
-- for very large trajectory file, the code requires a lot of memory
-- the code has mostly been tested in the case of 1H-NMR (i.e. spin 1/2)
-- NMRforMD only works for dipolar interaction, not quadrupolar interaction
+The code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with all other
+MDAnalysis-compatible simulation packages. The code has mostly been tested in the case of 1H-NMR (i.e. spin 1/2).
+NMRforMD only works for dipolar interaction, not quadrupolar interaction.
+
+Known issues
+------------
+
+For very large trajectory file, the code requires a lot of memory.
+The code is not adapted to triclinic box, convert your trajectory
+to orthorhombic prior to calculation. This code is still in development,
+please raise an issue here if you encounter another problem.
 
 .. image:: docs/source/figures/systems/system-README.png
 
