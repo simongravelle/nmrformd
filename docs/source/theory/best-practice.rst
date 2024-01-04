@@ -1,22 +1,30 @@
 Best practice
 =============
 
-Force field
------------
+Choosing the force field
+------------------------
 
 .. container:: justify
 
-    Force fields are usually parametrized based on thermodynamic quantities only.
-    However, NMR relaxation quantities depend on both structural and dynamical quantities. 
+    The agreement between experiments and simulations can only be as good as the
+    force field used in the simulations. Although it has been shown that some
+    force fields lead to excellent agreement with experimental data, as for instance
+    for water, hydrocarbons, or polymer melts
+    :cite:`singerMolecularDynamicsSimulations2017,gravelleNMRInvestigationWater2023,gravelleAssessingValidityNMR2023`,
+    it is important to keep in mind that force fields are usually parametrized
+    based on thermodynamic quantities. Since NMR relaxation quantities
+    depend on both structural and dynamical quantities, differences between experiments
+    and simulations can sometimes be expected.
 
-Simulation precision
---------------------
+Simulation accuracy
+-------------------
 
 .. container:: justify
 
-    NMR relaxation rate measurements are extremely sensitive to the precision of the
-    simulation. The cut-off, for instance, was noted to have a slight impact
-    on :math:`R_1`.
+    Since NMR relaxation rate measurements are sensitive both thermodynamic and dynamic quantities, 
+    it is important to ensure the accuracy of the simulation.
+    For instance, the cut-off for the Lennard-Jones interaction has a slight impact
+    on the value :math:`R_1` :cite:`gravelleNMRInvestigationWater2023`.
 
 Box size
 --------
