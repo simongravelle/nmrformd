@@ -1,9 +1,6 @@
 
-Theory
-======
-
 Dipolar relaxation
-------------------
+==================
 
 .. container:: justify
 
@@ -84,7 +81,7 @@ Dipolar relaxation
 
 .. math::
 
-    G^{(m)} (\tau) = \dfrac{\alpha_m^2}{N}
+    G^{(\text{m)} (\tau) = \dfrac{\alpha_m^2}{N}
     \sum_i \sum_{j \ne i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)} \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij}^3 (\tau)},
 
 .. container:: justify
@@ -118,8 +115,10 @@ Intra/inter contributions
     where :math:`j \in M_i` and  :math:`j \notin M_i` refer to summation on spin from the 
     same molecule as :math:`i`, and from different molecules as :math:`i`, respectively.
 
+.. container:: justify
+
     Intra-molecular relaxation is usually attributed to the rotational motion of the 
-    molecule, and inter-molecular relaxation to the translational motion. This is only an 
+    molecules, and inter-molecular relaxation to their translational motion. This is only an 
     assumption that simplify the interpretation of results, and can lead to 
     error :cite:`hubbardTheoryNuclearMagnetic1963`.
 
@@ -128,24 +127,14 @@ Isotropic system
 
 .. container:: justify
 
-    For isotropic system, the correlation functions are proportional to each others, 
+    For isotropic systems, the correlation functions are proportional to each others, 
     and only :math:`G^{(0)} (t)` needs to be calculated.
-
-    In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = 6 / 4 G^{(2)}`
-    :cite:`becherMolecularDynamicsSimulations2021`, which can easily be checked, for instance
-    for a bulk water system:
-
-.. image:: ../figures/best-practices/proportionality-dark.png
-    :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. image:: ../figures/best-practices/proportionality-light.png
-    :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
 
 .. container:: justify
 
-    Therefore, the spectrums can be calculated as:
+    In that case, :math:`G^{(0)} = 6 G^{(1)}`, and :math:`G^{(0)} = 6 / 4 G^{(2)}`
+    :cite:`becherMolecularDynamicsSimulations2021`,
+    and the spectrums can be calculated as:
 
 .. math::
 

@@ -49,7 +49,7 @@ DNMR from MD
    :hidden:
 
    theory/context
-   theory/theory
+   theory/dipolar_relaxation
    theory/best-practice
 
 .. toctree::
