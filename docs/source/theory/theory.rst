@@ -7,16 +7,24 @@ Dipolar relaxation
 
 .. container:: justify
 
-    The system of interest here is an ensemble of identical spins characterized by a gyromagnetic ratio  :math:`\gamma_I`
-    and spin quantum number :math:`I`. For ¹H, the most abundant isotope of hydrogen, :math:`I = 1/2` and :math:`\gamma_I = 26.752` rad/T/s.
-    For ¹³C, a natural and stable isotope of carbon, :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`.
+    The system of interest here is an ensemble of identical spins
+    characterized by a gyromagnetic ratio  :math:`\gamma_I`
+    and spin quantum number :math:`I`.
+    For :math:`^{1} \text{H}`, the most abundant isotope of
+    hydrogen, :math:`I = 1/2` and :math:`\gamma_I = 26.752` rad/T/s.
+    For :math:`^{13} \text{C}`, a natural and stable isotope of carbon,
+    :math:`I = 1/2` and :math:`\gamma_I = 6.728` rad/T/s :cite:`kowalewskiNuclearSpinRelaxation2006`.
+
+.. container:: justify
 
     One assumption behind the theory presented here is that the cross-correlation terms
-    can be neglected, see Ref :cite:`lippensRelaxationTimeWater1993`.
+    can be neglected, see Ref. :cite:`lippensRelaxationTimeWater1993`.
+
+.. container:: justify
 
     When the spin-lattice relaxation is dominated by fluctuations of the magnetic dipole-dipole interaction,
     as is the case for protons in molecular systems, the rates :math:`R_1 (\omega)` and :math:`R_2 (\omega)` are
-    related to the spectral densities :math:`J(m)(\omega)` of these fluctuations via the
+    related to the spectral densities :math:`J^{(m)}(\omega)` of these fluctuations via the
     Bloembergen-Purcell-Pound (BPP) equations :cite:`bloembergenRelaxationEffectsNuclear1948`:
 
 .. math::
@@ -26,7 +34,9 @@ Dipolar relaxation
 
     R_2 (\omega) & = & K \left[ J^{(0)} (0) + 10 J^{(1)} (\omega) + J^{(2)} (2 \omega) \right] / 4,
 
-where
+.. container:: justify
+
+    where
 
 .. math::
 
@@ -34,9 +44,11 @@ where
 
 .. container:: justify
 
-    where :math:`\mu_0` is the vacuum permeability, and :math:`\hbar` the Planck constant (divided by :math:`2 \pi`).
+    where :math:`\mu_0` is the vacuum permeability, and :math:`\hbar` the
+    Planck constant (divided by :math:`2 \pi`).
     The constant :math:`K` has the units of :math:`\text{m}^6/\text{s}^2`.
-    The spectral densities :math:`J^{(m)} (\omega)` in Eq. :eq:`eq_BPP` can be obtained as the Fourier transform
+    The spectral densities :math:`J^{(m)} (\omega)` in Eq. :eq:`eq_BPP`
+    can be obtained as the Fourier transform
     of the autocorrelation functions :math:`G^{(m)}(\tau)`
 
 .. math::

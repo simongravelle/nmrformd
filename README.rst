@@ -39,7 +39,7 @@ Notes and known issues
 
 .. image:: docs/source/figures/systems/system-README.png
 
-Figure : Examples of systems that can be analysed using NMRforMD, from left to right: a 
+Figure : Examples of systems that can be analyzed using NMRforMD, from left to right: a 
 bulk water system, a polymer-water mixture, and water in a slit silica nanopore with
 sodium counter-ions. All LAMMPS and GROMACS input scripts are given in
 the `examples/`_ folder. 
@@ -53,7 +53,7 @@ If you intend to make modification, please raise an issue or send me an email
 first. Then, fork the repository, apply your changes, then make a pull request 
 that will be review.
 
-Build the documentation localy from the `docs/`_ folder by typing:
+Build the documentation locally from the `docs/`_ folder by typing:
 
 .. code-block:: bash 
 
