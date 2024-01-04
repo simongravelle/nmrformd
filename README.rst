@@ -58,6 +58,13 @@ If you intend to make modification, please raise an issue or send me an email
 first. Then, fork the repository, apply your changes, then make a pull request 
 that will be review.
 
+Close the repository as follow (use the --recurse-submodule
+option only if you want to clone the data as well):
+
+.. code-block:: bash 
+
+   git clone https://github.com/simongravelle/nmrformd.git --recurse-submodule
+
 Build the documentation locally from the `docs/`_ folder by typing:
 
 .. code-block:: bash 
