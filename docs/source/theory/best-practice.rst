@@ -86,33 +86,3 @@ Dumping frequency
 
     Dumping period must be smaller than the smaller correlation time of the system, or a 
     significative error on :math:`R_1` will be connected.
-
-For bulk system: check isotropy
--------------------------------
-
-.. container:: justify
-
-    Although generally true for bulk systems, as showed for glycerol :cite:`becherMolecularDynamicsSimulations2021`,
-    it can be worth ensuring that the relation
-
-.. math::
-
-    \frac{1}{6} G^{(0)} (t) = G^{(1)} (t) = \frac{1}{4} G^{(2)} (t) 
-
-.. container:: justify
-
-    actually stands. For a system of bulk water, the superimposition is clearly verified:
-
-    #todo : superimpose water, PEG-water, and slit silica on the same graph
-
-.. image:: ../figures/best-practices/proportionality-dark.png
-    :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. image:: ../figures/best-practices/proportionality-light.png
-    :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. container:: justify
-
-    If not, all three correlation functions must be calculated.
