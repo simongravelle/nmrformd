@@ -2,7 +2,7 @@
 
 .. inclusion-readme-intro-start
 
-Dipolar Nuclear Magnetic Resonance from Molecular Dynamics (DNMRfromMD) simulations
+Dipolar Nuclear Magnetic Resonance from Molecular Dynamics (DNMRfromMD or formerly NMRforMD) simulations
 is a Python toolkit designed for the computation of 
 dipolar NMR relaxation times (:math:`T1`` and :math:`T2`) from molecular dynamics simulations.
 Used in combination with |MDAnalysis|, it allows for the analysis of trajectory
