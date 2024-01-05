@@ -14,7 +14,20 @@ Choosing the force field
     it is important to keep in mind that force fields are usually parametrized
     based on thermodynamic quantities. Since NMR relaxation quantities
     depend on both structural and dynamical quantities, differences between experiments
-    and simulations can sometimes be expected.
+    and simulations can be expected for the less accurate force field.
+
+.. image:: ../figures/illustrations/bulk-water/experimental_comparison-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/illustrations/bulk-water/experimental_comparison-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. container:: figurelegend
+
+    Figure: Comparison between MD simulations and
+    experiments from :cite:`krynickiProtonSpinlatticeRelaxation1966, hindmanRelaxationProcessesWater2003`.
 
 Simulation accuracy
 -------------------
