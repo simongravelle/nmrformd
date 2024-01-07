@@ -1,58 +1,46 @@
-.. image:: docs/source/figures/logo/banner-README.png
+# NMRforMD
 
-.. inclusion-readme-intro-start
-
-Dipolar Nuclear Magnetic Resonance from Molecular Dynamics (DNMRfromMD or formerly NMRforMD) simulations
+Dipolar Nuclear Magnetic Resonance for Molecular Dynamics
+(NMRforMD or formerly NMRforMD) simulations
 is a Python toolkit designed for the computation of 
-dipolar NMR relaxation times (the so called :math:`T1`` and :math:`T2`) from molecular dynamics simulations.
-Used in combination with |MDAnalysis|, it allows for the analysis of trajectory
+dipolar NMR relaxation times (the so called :math:`T1`` and :math:`T2`)
+from molecular dynamics simulations.
+Used in combination with [MDAnalysis](https://www.mdanalysis.org/),
+it allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
-|LAMMPS| and |GROMACS|.
-
-.. |MDAnalysis| raw:: html
-
-   <a href="https://www.mdanalysis.org/" target="_blank">MDAnalysis</a>
-
-.. |LAMMPS| raw:: html
-
-   <a href="https://www.lammps.org/" target="_blank">LAMMPS</a>
-
-.. |GROMACS| raw:: html
-
-   <a href="https://www.gromacs.org/" target="_blank">GROMACS</a>
-
-.. inclusion-readme-intro-end
+[LAMMPS](https://www.lammps.org/) and [GROMACS](https://www.gromacs.org/).
 
 Details about installation, use, and some of the common pitfalls of NMR calculations
-are given in the |documentation|. The documentation also contains a description of
+are given in the [documentation](https://nmrformd.readthedocs.io/en/latest/).
+The documentation also contains a description of
 the theory behind dipolar H-NMR calculations.
 
-Notes
------
+## Warning
 
 The code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with all other
 MDAnalysis-compatible simulation packages. The code has mostly been tested in the case of 1H-NMR (i.e. spin 1/2).
 NMRforMD only works for dipolar interaction, not quadrupolar interaction.
 
-Known issues
-------------
+## Known issues
 
 For very large trajectory file, the code requires a lot of memory.
 The code is not adapted to triclinic box, convert your trajectory
 to orthorhombic prior to calculation. This code is still in development,
 please raise an issue here if you encounter another problem.
 
-.. image:: docs/source/figures/systems/system-README.png
+<p float="left">
+    <a href="https://nmrformd.readthedocs.io/en/latest/">
+        <img src="avatars/bulk-water.png" width="32%" />
+    </a>
+    <a href="https://nmrformd.readthedocs.io/en/latest/">
+        <img src="avatars/bulk-water.png" width="32%" />
+    </a>
+    <a href="https://nmrformd.readthedocs.io/en/latest/">
+        <img src="avatars/bulk-water.png" width="32%" />
+    </a>
+</p>
 
-Figure : Examples of systems that can be analyzed using NMRforMD, from left to right: a 
-bulk water system, a polymer-water mixture, and water in a slit silica nanopore with
-sodium counter-ions. All LAMMPS and GROMACS input scripts are given in
-the `examples/`_ folder. 
-
-|mdanalysis| |readthedoc|
-
-For developers
---------------
+## For developers
 
 If you intend to make modification, please raise an issue or send me an email
 first. Then, fork the repository, apply your changes, then make a pull request 
@@ -61,13 +49,13 @@ that will be review.
 Close the repository as follow (use the --recurse-submodule
 option only if you want to clone the data as well):
 
-.. code-block:: bash 
+.. code-block:: bash
 
    git clone https://github.com/simongravelle/nmrformd.git --recurse-submodule
 
 Build the documentation locally from the `docs/`_ folder by typing:
 
-.. code-block:: bash 
+.. code-block:: bash
 
     pip3 install -r requirements.txt
     make clean
@@ -79,7 +67,7 @@ Publish a new pip version by following those |instructions|.
 
 2 - Create source distribution using
 
-.. code-block:: bash 
+.. code-block:: bash
 
     python3 setup.py sdist
 
@@ -89,14 +77,14 @@ Publish a new pip version by following those |instructions|.
 
 5 - Create wheel using:
 
-.. code-block:: bash 
+.. code-block:: bash
 
     python3 setup.py bdist_wheel
 
 6 - Upload to pypi using (with the appropriate number):
 
-.. code-block:: bash 
-    
+.. code-block:: bash
+
     twine upload dist/nmrformd-0.1.0*
 
 .. _`docs/`: docs/
@@ -118,11 +106,10 @@ Publish a new pip version by following those |instructions|.
     :alt: readthedoc
     :target: https://nmrformd.readthedocs.io/en/latest/
 
-Acknowledgments
----------------
+## Acknowledgments
 
 This project has received funding from the European
 Union's Horizon 2020 research and innovation programme
 under the Marie Skłodowska-Curie grant agreement No 101065060.
 
-.. image:: docs/source/figures/logo/msca.png
+![MSCA image](docs/source/figures/logo/msca.png)
