@@ -1,5 +1,9 @@
 # NMRforMD
 
+<a href="webp">
+  <img src="docs/source/figures/logo/logo-b.png" align="right" width="30%"/>
+</a>
+
 Dipolar Nuclear Magnetic Resonance for Molecular Dynamics
 (NMRforMD or formerly NMRforMD) simulations
 is a Python toolkit designed for the computation of
