@@ -24,15 +24,17 @@ a explanation of some common pitfalls of NMR calculations.
 
 <p float="left">
     <a href="https://nmrformd.readthedocs.io/en/latest/">
-        <img src="avatars/lennard-jones-fluid.png" width="32%" />
+        <img src="avatars/bulk-water.png" width="32%" />
     </a>
     <a href="https://nmrformd.readthedocs.io/en/latest/">
-        <img src="avatars/bulk-water.png" width="32%" />
+        <img src="avatars/lennard-jones-fluid.png" width="32%" />
     </a>
     <a href="https://nmrformd.readthedocs.io/en/latest/">
         <img src="avatars/lysozyme-in-water.png" width="32%" />
     </a>
 </p>
+
+Figure: Examples of systems that can be analysed using NMRforMD, from left to right: a bulk water system, a lennard-jones fluid, and a lysozyme in water.
 
 ## Warning
 
