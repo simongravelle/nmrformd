@@ -94,7 +94,7 @@ Create a MDAnalysis universe
 
 .. |repository| raw:: html
 
-   <a href="ttps://github.com/simongravelle/nmrformd/tree/main/tests" target="_blank">repository</a>
+   <a href="https://github.com/simongravelle/nmrformd/tree/main/tests" target="_blank">repository</a>
 
 .. container:: justify
 

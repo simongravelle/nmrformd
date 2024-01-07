@@ -1,22 +1,43 @@
-DNMR from MD
-============
-
-.. include:: ../../README.rst
-   :start-after: inclusion-readme-intro-start
-   :end-before: inclusion-readme-intro-end
-
-.. image:: figures/systems/system-dark.png
-    :class: only-dark
-    :alt: molecular dynamics systems used in these examples 
-
-.. image:: figures/systems/system-light.png
-    :class: only-light
-    :alt: molecular dynamics systems used in these examples
+NMR fom MD
+==========
 
 .. container:: justify
 
-    Figure : Example of systems that can be analysed using NMRforMD, from left to right: a 
-    bulk water system, a polymer-water mixture, and water in a slit silica pore with sodium counter-ions.
+    Dipolar Nuclear Magnetic Resonance for Molecular Dynamics
+    (NMRforMD or formerly NMRforMD) simulations
+    is a Python toolkit designed for the computation of
+    dipolar NMR relaxation times (the so called $T_1$ and $T_2$)
+    from molecular dynamics simulations.
+    Used in combination with |MDAnalysis|,
+    NMRforMD allows for the analysis of trajectory
+    files from any MDAnalysis-compatible simulation package, including
+    |LAMMPS| and |GROMACS|.
+
+.. |MDAnalysis| raw:: html
+
+   <a href="https://www.mdanalysis.org/" target="_blank">MDAnalysis</a>
+
+.. |LAMMPS| raw:: html
+
+   <a href="https://www.lammps.org/" target="_blank">LAMMPS</a>
+
+.. |GROMACS| raw:: html
+
+   <a href="https://www.gromacs.org/" target="_blank">GROMACS</a>
+
+.. image:: ../../avatars/avatars.png
+    :class: only-dark
+    :alt: molecular dynamics systems used in these examples 
+
+.. image:: ../../avatars/avatars.png
+    :class: only-light
+    :alt: molecular dynamics systems used in these examples
+
+.. container:: figurelegend
+
+    Figure: Example of systems that can be analysed
+    using NMRforMD, from left to right: a lennard-jones fluid,
+    a bulk water system, and a lysozyme in water.
 
 .. toctree::
    :maxdepth: 2
