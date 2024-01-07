@@ -5,7 +5,7 @@
 </a>
 
 Dipolar Nuclear Magnetic Resonance for Molecular Dynamics
-(NMRforMD or formerly NMRforMD) simulations
+(NMRforMD) simulations
 is a Python toolkit designed for the computation of
 dipolar NMR relaxation times (the so called $T_1$ and $T_2$)
 from molecular dynamics simulations.
