@@ -43,4 +43,4 @@ favicons = [
     {"href": "favicon-32x32.png"},
 ]
 
-html_logo = "figures/logo/logo.png"
+html_logo = "figures/logo/logo-b.png"
