@@ -3,23 +3,26 @@
 Dipolar Nuclear Magnetic Resonance for Molecular Dynamics
 (NMRforMD or formerly NMRforMD) simulations
 is a Python toolkit designed for the computation of
-dipolar NMR relaxation times (the so called $T_1$ and `T_2`)
+dipolar NMR relaxation times (the so called $T_1$ and $T_2$)
 from molecular dynamics simulations.
 Used in combination with [MDAnalysis](https://www.mdanalysis.org/),
-it allows for the analysis of trajectory
+NMRforMD allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
 [LAMMPS](https://www.lammps.org/) and [GROMACS](https://www.gromacs.org/).
 
-Details about installation, use, and some of the common pitfalls of NMR calculations
+## Documentation
+
+Details about installation and use of NMRforMD
 are given in the [documentation](https://nmrformd.readthedocs.io/en/latest/).
 The documentation also contains a description of
-the theory behind dipolar H-NMR calculations.
+the theory behind dipolar dipolar NMR calculations, as well as
+a explanation of some common pitfalls of NMR calculations.
 
 ## Warning
 
-The code has mostly been tested with GROMACS and LAMMPS trajectory files, but should work with all other
-MDAnalysis-compatible simulation packages. The code has mostly been tested in the case of 1H-NMR (i.e. spin 1/2).
-NMRforMD only works for dipolar interaction, not quadrupolar interaction.
+The code has mostly been tested in the case of 1H-NMR (i.e. spin 1/2).
+It is also important to keep in mind that NMRforMD only works for
+dipolar interaction, not quadrupolar interaction.
 
 ## Known issues
 
@@ -30,28 +33,28 @@ please raise an issue here if you encounter another problem.
 
 <p float="left">
     <a href="https://nmrformd.readthedocs.io/en/latest/">
-        <img src="avatars/bulk-water.png" width="32%" />
+        <img src="avatars/lennard-jones-fluid.png" width="32%" />
     </a>
     <a href="https://nmrformd.readthedocs.io/en/latest/">
         <img src="avatars/bulk-water.png" width="32%" />
     </a>
     <a href="https://nmrformd.readthedocs.io/en/latest/">
-        <img src="avatars/bulk-water.png" width="32%" />
+        <img src="avatars/lysozyme-in-water.png" width="32%" />
     </a>
 </p>
 
 ## For developers
 
-If you intend to make modification, please raise an issue or send me an email
-first. Then, fork the repository, apply your changes, then make a pull request 
-that will be review.
+If you intend to make modification to the code, please raise an issue or send me an email
+first. Then, fork the repository, apply your changes, then make a pull request
+that will be reviewed.
 
 Close the repository as follow (use the --recurse-submodule
 option only if you want to clone the data as well):
 
-.. code-block:: bash
-
+``` bash
    git clone https://github.com/simongravelle/nmrformd.git --recurse-submodule
+```
 
 Build the documentation locally from the `docs/`_ folder by typing:
 
