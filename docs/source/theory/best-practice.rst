@@ -23,7 +23,7 @@ Choosing the force field
     of bulk water was measured as a function of the temperature
     for three different water models:
     :math:`\text{TIP4P}-\epsilon` :cite:`fuentes-azcatlNonPolarizableForceField2014`,
-    :math:`\text{SPC/E}-\epsilon` :cite:`berendsenMissingTermEffective1987`,
+    :math:`\text{SPC/E}` :cite:`berendsenMissingTermEffective1987`,
     and :math:`\text{TIP3P}` :cite:`jorgensenComparisonSimplePotential1983`,
 
 .. image:: ../figures/illustrations/bulk-water/experimental_comparison-dark.png
@@ -36,8 +36,14 @@ Choosing the force field
 
 .. container:: figurelegend
 
-    Figure: Comparison between MD simulations and
-    experiments from :cite:`krynickiProtonSpinlatticeRelaxation1966, hindmanRelaxationProcessesWater2003`.
+    Figure: NMR relaxation time :math:`T_1` between MD simulations of bulk 
+    water obtained with three different water models:
+    :math:`\text{TIP4P}-\epsilon` :cite:`fuentes-azcatlNonPolarizableForceField2014`,
+    :math:`\text{SPC/E}` :cite:`berendsenMissingTermEffective1987`,
+    and :math:`\text{TIP3P}` :cite:`jorgensenComparisonSimplePotential1983`.
+    Results are compared with experiments 
+    from Krynicki et al. :cite:`krynickiProtonSpinlatticeRelaxation1966`
+    and from Hindman et al. :cite:`hindmanRelaxationProcessesWater2003`.
 
 Simulation accuracy
 -------------------
