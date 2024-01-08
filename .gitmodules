@@ -1,0 +1,3 @@
+[submodule "examples/shared/pyplot-perso"]
+	path = examples/shared/pyplot-perso
+	url = git@github.com:simongravelle/pyplot-perso.git
