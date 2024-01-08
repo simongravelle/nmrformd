@@ -11,10 +11,20 @@ Choosing the force field
     force fields lead to excellent agreement with experimental data, as for instance
     for water, hydrocarbons, or polymer melts
     :cite:`singerMolecularDynamicsSimulations2017,gravelleNMRInvestigationWater2023,gravelleAssessingValidityNMR2023`,
-    it is important to keep in mind that force fields are usually parametrized
-    based on thermodynamic quantities. Since NMR relaxation quantities
-    depend on both structural and dynamical quantities, differences between experiments
+    it is important to keep in mind that force fields are often parametrized
+    to reproduce thermodynamic quantities, such as solvation energy.
+    However, NMR relaxation times depend on both structural
+    and dynamical quantities, differences between experiments
     and simulations can be expected for the less accurate force field.
+
+.. container:: justify
+
+    Here, as an illustration, the NMR relaxation time :math:`T_1`
+    of bulk water was measured as a function of the temperature
+    for three different water models:
+    :math:`\text{TIP4P}-\epsilon` :cite:`fuentes-azcatlNonPolarizableForceField2014`,
+    :math:`\text{SPC/E}-\epsilon` :cite:`berendsenMissingTermEffective1987`,
+    and :math:`\text{TIP3P}` :cite:`jorgensenComparisonSimplePotential1983`,
 
 .. image:: ../figures/illustrations/bulk-water/experimental_comparison-dark.png
     :class: only-dark
