@@ -12,8 +12,7 @@ that will be reviewed.
 
 ## Build the documentation
 
-Close the repository as follow (use the --recurse-submodule
-option only if you want to clone the data as well):
+Clone the repository as follow:
 
 ``` bash
    git clone https://github.com/simongravelle/nmrformd.git --recurse-submodule
