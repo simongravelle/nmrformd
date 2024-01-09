@@ -24,7 +24,18 @@ Choosing the force field
     for three different water models:
     :math:`\text{TIP4P}-\epsilon` :cite:`fuentes-azcatlNonPolarizableForceField2014`,
     :math:`\text{SPC/E}` :cite:`berendsenMissingTermEffective1987`,
-    and :math:`\text{TIP3P}` :cite:`jorgensenComparisonSimplePotential1983`,
+    and :math:`\text{TIP3P}` :cite:`jorgensenComparisonSimplePotential1983`.
+    Our results show that the :math:`\text{TIP4P}-\epsilon` water models
+    is in excellent agreement with experimental measurements from 
+    Krynicki et al. :cite:`krynickiProtonSpinlatticeRelaxation1966`
+    and Hindman et al. :cite:`hindmanRelaxationProcessesWater2003`.
+    By contrast, :math:`\text{SPC/E}` and :math:`\text{TIP3P}`
+    both overestimate the NMR relaxation time :math:`T_1`, in 
+    excellent agreement with previous results
+    by Calero et al. :math:`calero1HNuclearSpin2015`. Note that Calero et al.
+    used :math:`\text{TIP4P}-2005` water model instead of :math:`\text{TIP4P}-\epsilon`,
+    however these two models have very
+    similar structures and viscosities :cite:`fuentes-azcatlNonPolarizableForceField2014`.
 
 .. image:: ../figures/illustrations/bulk-water/experimental_comparison-dark.png
     :class: only-dark
