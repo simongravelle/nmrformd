@@ -33,9 +33,9 @@ Choosing the force field
     both overestimate the NMR relaxation time :math:`T_1`, in 
     excellent agreement with previous results
     by Calero et al. :cite:`calero1HNuclearSpin2015`. Note that Calero et al.
-    used :math:`\text{TIP4P}-2005` water model instead of :math:`\text{TIP4P}-\epsilon`,
-    however these two models have very
-    similar structures and viscosities :cite:`fuentes-azcatlNonPolarizableForceField2014`.
+    used :math:`\text{TIP4P}-2005` water model instead of the :math:`\text{TIP4P}-\epsilon` model used here,
+    however these two models show very similar structures and viscosities for liquid water :cite:`fuentes-azcatlNonPolarizableForceField2014`,
+    and are thus expected to yield similar relaxation times.
 
 .. image:: ../figures/illustrations/bulk-water/experimental_comparison-dark.png
     :class: only-dark
@@ -63,8 +63,23 @@ Simulation accuracy
 
     Since NMR relaxation rate measurements are sensitive both thermodynamic and dynamic quantities, 
     it is important to ensure the accuracy of the simulation.
-    For instance, the cut-off for the Lennard-Jones interaction has a slight impact
-    on the value :math:`R_1` :cite:`gravelleNMRInvestigationWater2023`.
+    For instance, the cut-off for the Lennard-Jones (LJ) interaction has a slight impact
+    on the value of the inter-molecular :math:`T_1^\text{inter}` :cite:`gravelleNMRInvestigationWater2023`.
+
+.. image:: ../figures/illustrations/bulk-water/effect_cutoff-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/illustrations/bulk-water/effect_cutoff-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. container:: figurelegend
+
+    Figure: a) Inter-molecular NMR relaxation time :math:`T_1^\text{inter}`
+    as a function of the LJ cut-off for a bulk water system.
+    b) Inter-molecular characteristic time :math:`\tau_\text{inter}`
+    as a function of LJ cut-off.
 
 Box size
 --------
