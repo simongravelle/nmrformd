@@ -58,7 +58,7 @@ that will be reviewed.
 Clone the repository as follow:
 
 ``` bash
-   git clone https://github.com/simongravelle/nmrformd.git --recurse-submodule
+git clone https://github.com/simongravelle/nmrformd.git --recurse-submodule
 ```
 
 Find more instructions [here](developers/README.md).
