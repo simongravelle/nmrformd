@@ -4,3 +4,6 @@
 [submodule "nmrformd-data/polymer-in-water"]
 	path = nmrformd-data/polymer-in-water
 	url = git@github.com:simongravelle/polymer-in-water.git
+[submodule "nmrformd-data/water-in-silica"]
+	path = nmrformd-data/water-in-silica
+	url = git@github.com:simongravelle/water-in-silica.git
