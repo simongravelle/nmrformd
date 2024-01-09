@@ -137,7 +137,34 @@ Simulation duration
 Dumping frequency
 -----------------
 
+    The dumping frequency at which atom positions is analyzed is crucial.
+    Dumping period must be smaller than the smaller correlation time of the system.
+    For instance, for bulk water at :math:`T = 300\,\text{K}`, using a dumping period
+    larger than about :math:`\Delta t = 200\,\text{ps}` lead to a decrease
+    of the measured relaxation time :math:`T_1`. If the smaller correlation time
+    in the system is not known, the appropriate dumping
+    frequency :math:`\Delta t` can be identified from convergence testing.
+
+.. image:: ../figures/illustrations/bulk-water/effect_dumping_frequency-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/illustrations/bulk-water/effect_dumping_frequency-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. container:: figurelegend
+
+    Figure: NMR relaxation time :math:`T_1` as a function of the
+    trajectory dumping frequency for a bulk water system.
+
+Finding the right Dumping frequency - Simulation duration compromise
+--------------------------------------------------------------------
+
 .. container:: justify
 
-    Dumping period must be smaller than the smaller correlation time of the system, or a 
-    significative error on :math:`R_1` will be connected.
+    Using both long simulation duration and a high dumping frequency
+    can lead to generating large trajectory files that in turn
+    are computationally expensive to analyze.
+
+    
