@@ -1,3 +1,6 @@
 [submodule "examples/shared/pyplot-perso"]
 	path = examples/shared/pyplot-perso
 	url = git@github.com:simongravelle/pyplot-perso.git
+[submodule "nmrformd-data/polymer-in-water"]
+	path = nmrformd-data/polymer-in-water
+	url = git@github.com:simongravelle/polymer-in-water.git
