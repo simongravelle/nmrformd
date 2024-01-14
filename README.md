@@ -20,7 +20,7 @@ Details about installation and use of NMRforMD
 are given in the [documentation](https://nmrformd.readthedocs.io/en/latest/).
 The documentation also contains a description of
 the theory behind dipolar dipolar NMR calculations, as well as
-a explanation of some common pitfalls of NMR calculations.
+details on some common pitfalls of NMR calculations.
 
 <p float="left">
     <a href="https://nmrformd.readthedocs.io/en/latest/">
@@ -34,7 +34,9 @@ a explanation of some common pitfalls of NMR calculations.
     </a>
 </p>
 
-Figure: Examples of systems that can be analysed using NMRforMD, from left to right: a bulk water system, a lennard-jones fluid, and a lysozyme in water.
+Figure: Examples of systems that can be analysed using NMRforMD,
+from left to right: a bulk water system, a lennard-jones fluid,
+and a lysozyme in water.
 
 ## Warning
 
