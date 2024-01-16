@@ -26,16 +26,10 @@ MD system
 
     The system is made of a lysozyme (HEWL) with 594 water molecules, which
     corresponds to water-to-protein mass ratio of :math:`73\,\%`.
-    The simulation was made using GROMACS using a timestep of :math:`1\,\text{fs}`.
-    
-.. container:: justify
-
-    You can access all the simulation files
-    and trajectories in this separate Github |repository-examples|.
-
-.. |repository-examples| raw:: html
-
-   <a href="https://github.com/simongravelle/nmrformd-data" target="_blank">repository</a>
+    The simulation was made using GROMACS using a timestep of :math:`2\,\text{fs}`.
+    The production run was performed for 100 ns, and the trajectory
+    was recorded with a period :math:`\Delta t = 1 \,\text{ps}`.
+    The temperature was imposed to be 300 K.
 
 Results
 -------
@@ -43,11 +37,13 @@ Results
 .. container:: justify
 
     NMR relaxation rate :math:`R_1` was measured. The spectra show variations
-    with the frequency :math:`f` down to frequency values as low as a few MegaHertz,
-    which is due to the lysozyme. The spectrum for water alone still shows
-    a slight variation with frequency, which is not the case for bulk water, and is 
-    likely induced by the interaction with the protein, as adsorbed water molecules
-    are expected to share the slower motion of the protein.
+    with the frequency :math:`f` down to the lower frequency accessible.
+    When splitting the signal into the water and the lysozyme contribution, it
+    appears that the variation of :math:`R_1` at low frequency is primarily
+    due to the lysozyme. The spectrum for water alone shows
+    a slight variation with frequency even at the lowest frequency, which is 
+    likely induced by the interaction with the protein: the adsorbed water molecules
+    are expected to move more slowly as free water.
 
 .. image:: ../figures/illustrations/lysozyme-in-water/R1_spectra-dark.png
     :class: only-dark
@@ -59,5 +55,5 @@ Results
 
 .. container:: justify
 
-    **Figure:** NMR relaxation rate :math:`R_1` for water alone,
-    lysozyme alone, and the full system.
+    **Figure:** NMR relaxation rate :math:`R_1` for the lysozyme-water system.
+    The spectra for water alone and lysozyme alone are also given.
