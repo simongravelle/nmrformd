@@ -137,11 +137,14 @@ Simulation duration
 Dumping frequency
 -----------------
 
-    The dumping frequency at which atom positions is analyzed is crucial.
-    Dumping period must be smaller than the smaller correlation time of the system.
+.. container:: justify
+
+    The dumping frequency set the minimum temporal resolution of the analysis, and
+    The dumping period must be smaller than the smaller correlation time of the system.
     For instance, for bulk water at :math:`T = 300\,\text{K}`, using a dumping period
-    larger than about :math:`\Delta t = 200\,\text{ps}` lead to a decrease
-    of the measured relaxation time :math:`T_1`. If the smaller correlation time
+    larger than about :math:`\Delta t = 1\,\text{ps}` leads to a significant decrease
+    of the measured relaxation time :math:`T_1`, as well as an increase of the measured
+    relaxation times. If the smaller correlation time
     in the system is not known, the appropriate dumping
     frequency :math:`\Delta t` can be identified from convergence testing.
 
@@ -155,8 +158,9 @@ Dumping frequency
 
 .. container:: figurelegend
 
-    Figure: NMR relaxation time :math:`T_1` as a function of the
-    trajectory dumping frequency for a bulk water system.
+    Figure: Convergence testing showing the NMR relaxation time :math:`T_1` (a)
+    and inter-molecular relaxation times :math:`\tau_\text{T}` as a function of the
+    trajectory dumping frequency :math:`\Delta t` for a bulk water system.
 
 Finding the right Dumping frequency - Simulation duration compromise
 --------------------------------------------------------------------
