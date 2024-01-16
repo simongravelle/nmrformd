@@ -41,7 +41,7 @@ while run:
                                     neighbor_group = hydrogen,
                                     type_analysis = "inter_molecular",
                                     number_i = 1)
-                save_result(inter, name = "N4000_inter_T" + str(T) + "K")
+                save_result(inter, name = n_inter)
         else:
             run = False
         # Print information

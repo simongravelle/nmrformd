@@ -159,16 +159,13 @@ Dumping frequency
 .. container:: figurelegend
 
     Figure: Convergence testing showing the NMR relaxation time :math:`T_1` (a)
-    and inter-molecular relaxation times :math:`\tau_\text{T}` as a function of the
-    trajectory dumping frequency :math:`\Delta t` for a bulk water system.
-
-Finding the right Dumping frequency - Simulation duration compromise
---------------------------------------------------------------------
+    and inter-molecular relaxation times :math:`\tau_\text{inter}` as a function of the
+    trajectory dumping frequency :math:`\Delta t` for a bulk water system at :math:`T = 300 \text{K}`.
+    The dashed line show the respective values for :math:`T_1` and :math:`\tau_\text{inter}`
+    measured for :math:`\Delta t \to 0`.
 
 .. container:: justify
 
-    Using both long simulation duration and a high dumping frequency
+    Using a high dumping frequency
     can lead to generating large trajectory files that in turn
     are computationally expensive to analyze.
-
-    
