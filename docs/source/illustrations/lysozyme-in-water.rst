@@ -57,3 +57,24 @@ Results
 
     **Figure:** NMR relaxation rate :math:`R_1` for the lysozyme-water system.
     The spectra for water alone and lysozyme alone are also given.
+
+.. container:: justify
+
+    The effect of the interaction with the lysozyme on the NMR relaxation properties of
+    the water is made apparent when compared to pure bulk water. The spectrum from
+    bulk water shows a plateau for frequency lower than :math:`\approx 2 \cdot 10^3` MHz,
+    while the spectrum from the water in contact with the lysozyme varies for frequencies 
+    down to :math:`\approx \cdot 10` MHz, highlighting slower characteristic motion of the molecules.
+
+.. image:: ../figures/illustrations/lysozyme-in-water/R1_spectra_water-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water and lysozyme
+
+.. image:: ../figures/illustrations/lysozyme-in-water/R1_spectra_water-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water and lysozyme
+
+.. container:: justify
+
+    **Figure:** Contribution to the NMR relaxation rate :math:`R_1` from the water only,
+    comparing the residual water in contact with the lysozyme, and pure bulk water.
