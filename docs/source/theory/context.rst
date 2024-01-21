@@ -11,15 +11,19 @@ Context
     as well as proteins and other biological systems
     :cite:`jacobsonProtonMagneticResonance1954, rorschachProteinDynamicsNMR1986`.
 
+.. container:: justify
+
     The key ingredient needed for an accurate description of the nuclear spin relaxation
-    of 1H in soft matter systems is a realistic description of the random rotational and
+    of :math:`^1`H in soft matter systems is a realistic description of the random rotational and
     translational motions that molecules undergo, which makes classical molecular dynamics
     simulations (MDS) a natural choice.  For instance, MDS have been used to characterize the
     NMR relaxation properties of Lennard-Jones fluid :cite:`odeliusIntermolecularDipoleDipoleRelaxation1993, grivetNMRRelaxationParameters2005`,
     water and other small molecules :cite:`lippensT1RelaxationTime1993, calero1HNuclearSpin2015, singerMolecularDynamicsSimulations2017, singerNMRSpinrotationRelaxation2018, philipsProtonNMRRelaxation2019, singerElucidatingNMRRelaxation2020`.
-    MDS are also used to study of molecules confined within
+    MDS are also used to study the NMR relaxation properties of molecules confined within
     nanoporous materials :cite:`khudozhitkovDynamicsPropenePropane2020, gravelleNMRInvestigationWater2023`,
     as well as large polymer molecules, lipid membranes, and proteins.
+
+.. container:: justify
 
     In addition to classical MD, Ab initio MD has also been used to extract NMR relaxation time
     from water :cite:`calero1HNuclearSpin2015`. Ab initio and its variants are 
@@ -31,6 +35,8 @@ Context
     such as autocorrelation functions :cite:`huitemaCanMonteCarlo1999`. Recently,
     the possibility to calculate NMR relaxation rate from coarse grained models was also
     discussed :cite:`gravelleAssessingValidityNMR2023`. 
+
+.. container:: justify
 
     Authors have also directly combined simulations and experiments, for instance to study
     glass transition phenomenon of glycerol :cite:`becherMolecularDynamicsSimulations2021`,
