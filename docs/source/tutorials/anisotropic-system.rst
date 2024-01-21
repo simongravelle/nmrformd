@@ -78,7 +78,7 @@ File preparation
 
     Here the secondary repository *nmrformd-data* is imported as
     as submodule. The dataset needed to follow this tutorial is located
-    in *nmrformd-data/water-in-silica/raw-data/N50/.
+    in *nmrformd-data/water-in-silica/raw-data/N50/*.
 
 Create a MDAnalysis universe
 ----------------------------
