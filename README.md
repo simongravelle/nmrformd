@@ -65,7 +65,7 @@ If you intend to make modification to the code, please raise an issue or send me
 first. Then, fork the repository, apply your changes, then make a pull request
 that will be reviewed.
 
-Clone the repository as follow:
+Clone the repository with its submodules as follow:
 
 ``` bash
 git clone https://github.com/simongravelle/nmrformd.git --recurse-submodule

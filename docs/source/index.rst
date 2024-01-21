@@ -36,7 +36,7 @@ NMR fom MD
 
 .. container:: figurelegend
 
-    Figure: Examples of systems that can be analysed
+    Figure: Examples of systems that can be analyzed
     using NMRforMD, from left to right: a bulk water system, 
     a lennard-jones fluid, and a lysozyme in water.
 
