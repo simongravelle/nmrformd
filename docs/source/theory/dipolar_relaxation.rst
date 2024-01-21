@@ -15,7 +15,7 @@ Dipolar relaxation
 .. container:: justify
 
     One assumption behind the theory presented here is that the cross-correlation terms
-    can be neglected, see Ref. :cite:`lippensRelaxationTimeWater1993`.
+    can be neglected, see Ref. :cite:`lippensT1RelaxationTime1993`.
 
 .. container:: justify
 

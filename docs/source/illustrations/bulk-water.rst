@@ -149,7 +149,7 @@ Results
     and :math:`\tau_\text{intra} = 3.2` ps was used for :math:`T = 275` K, see the figure 
     below. Exponentially decreasing correlation functions such as Eq. :eq:`eq_exp_G` are
     commonly used to describe systems for which the rotational diffusion
-    is isotropic :cite:`lippensRelaxationTimeWater1993`.
+    is isotropic :cite:`lippensT1RelaxationTime1993`.
     
     The inter-molecular correlation functions, however, scale as an
     exponential [i.e. Eq. :eq:`eq_exp_G`] only for time shorter than a 

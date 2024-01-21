@@ -16,7 +16,7 @@ Context
     translational motions that molecules undergo, which makes classical molecular dynamics
     simulations (MDS) a natural choice.  For instance, MDS have been used to characterize the
     NMR relaxation properties of Lennard-Jones fluid :cite:`odeliusIntermolecularDipoleDipoleRelaxation1993, grivetNMRRelaxationParameters2005`,
-    water and other small molecules :cite:`lippensRelaxationTimeWater1993, calero1HNuclearSpin2015, singerMolecularDynamicsSimulations2017, singerNMRSpinrotationRelaxation2018, philipsProtonNMRRelaxation2019, singerElucidatingNMRRelaxation2020`.
+    water and other small molecules :cite:`lippensT1RelaxationTime1993, calero1HNuclearSpin2015, singerMolecularDynamicsSimulations2017, singerNMRSpinrotationRelaxation2018, philipsProtonNMRRelaxation2019, singerElucidatingNMRRelaxation2020`.
     MDS are also used to study of molecules confined within
     nanoporous materials :cite:`khudozhitkovDynamicsPropenePropane2020, gravelleNMRInvestigationWater2023`,
     as well as large polymer molecules, lipid membranes, and proteins.
