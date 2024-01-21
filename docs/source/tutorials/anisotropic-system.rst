@@ -44,15 +44,6 @@ MD system
     :math:`p = 1\,\text{bar}`. The positions of the atoms were recorded in
     the *prod.xtc* file
     every :math:`2\,\text{ps}`.
-    
-.. container:: justify
-
-    You can access all the simulation files
-    and trajectories in this separate Github |repository-examples|.
-
-.. |repository-examples| raw:: html
-
-   <a href="https://github.com/simongravelle/nmrformd-data" target="_blank">repository</a>
 
 .. container:: justify
 
@@ -67,18 +58,18 @@ File preparation
 
 .. container:: justify
 
-    To access all trajectory files, simply clone
-    the *NMRforMD* repository with its submodule:
+    To access all trajectory and input files, download 
+    the *water-in-silica* repository from Github, or simply
+    clone it on your computer using:
 
 .. code-block:: bash
 
-    git clone --recurse-submodules https://github.com/simongravelle/nmrformd.git
+    git clone https://github.com/simongravelle/water-in-silica.git
 
 .. container:: justify
 
-    Here the secondary repository *nmrformd-data* is imported as
-    as submodule. The dataset needed to follow this tutorial is located
-    in *nmrformd-data/water-in-silica/raw-data/N50/*.
+    The dataset required to follow this tutorial is located
+    in *raw-data/N50/*.
 
 Create a MDAnalysis universe
 ----------------------------
@@ -90,11 +81,7 @@ Create a MDAnalysis universe
 
 .. code-block:: python
 
-	datapath = "mypath/nmrformd-data/water-in-silica/raw-data/N50/"
-
-.. |repository| raw:: html
-
-   <a href="https://github.com/simongravelle/nmrformd/tree/main/tests" target="_blank">repository</a>
+	datapath = "mypath/water-in-silica/raw-data/N50/"
 
 .. container:: justify
 

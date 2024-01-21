@@ -56,15 +56,6 @@ MD system
     :math:`p = 1\,\text{atm}`. The positions of the atoms were recorded in
     the *prod.xtc* file
     every :math:`1\,\text{ps}`.
-    
-.. container:: justify
-
-    You can access all the simulation files
-    and trajectories in this separate Github |repository-examples|.
-
-.. |repository-examples| raw:: html
-
-   <a href="https://github.com/simongravelle/nmrformd-data" target="_blank">repository</a>
 
 .. container:: justify
 
@@ -79,18 +70,18 @@ File preparation
 
 .. container:: justify
 
-    To access all trajectory files, simply clone
-    the *NMRforMD* repository with its submodule:
+    To access all trajectory and input files, download 
+    the *polymer-in-water* repository from Github, or simply
+    clone it on your computer using:
 
 .. code-block:: bash
 
-    git clone --recurse-submodules https://github.com/simongravelle/nmrformd.git
+    git clone https://github.com/simongravelle/polymer-in-water.git
 
 .. container:: justify
 
-    Here the secondary repository *nmrformd-data* is imported as
-    as submodule. The dataset needed to follow this tutorial is located
-    in *nmrformd-data/polymer-in-water/raw-data/NPEG32/*.
+    The dataset required to follow this tutorial is located
+    in *raw-data/NPEG32/*.
 
 Create a MDAnalysis universe
 ----------------------------
@@ -102,11 +93,7 @@ Create a MDAnalysis universe
 
 .. code-block:: python
 
-	datapath = "mypath/nmrformd-data/polymer-in-water/raw-data/NPEG32/"
-
-.. |repository| raw:: html
-
-   <a href="ttps://github.com/simongravelle/nmrformd/tree/main/tests" target="_blank">repository</a>
+	datapath = "mypath/polymer-in-water/raw-data/NPEG32/"
 
 .. container:: justify
 
