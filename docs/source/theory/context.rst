@@ -14,7 +14,7 @@ Context
 .. container:: justify
 
     The key ingredient needed for an accurate description of the nuclear spin relaxation
-    of :math:`^1`H in soft matter systems is a realistic description of the random rotational and
+    of :math:`^1 \text{H}` in soft matter systems is a realistic description of the random rotational and
     translational motions that molecules undergo, which makes classical molecular dynamics
     simulations (MDS) a natural choice.  For instance, MDS have been used to characterize the
     NMR relaxation properties of Lennard-Jones fluid :cite:`odeliusIntermolecularDipoleDipoleRelaxation1993, grivetNMRRelaxationParameters2005`,
