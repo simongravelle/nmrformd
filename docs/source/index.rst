@@ -45,11 +45,10 @@ Datasets
 
 .. container:: justify
 
-    Two molecular dynamics datasets are available on Github. One 
-    is a |polymer in water| system generated using LAMMPS, 
-    the second is a |water confined in silica|
-    generated using GROMACS. The datasets are
-    provided to follow the tutorials.
+    Two molecular dynamics datasets are available on Github: 
+    a |polymer in water| system generated using LAMMPS, 
+    and a |water confined in silica| system generated
+    using GROMACS. The datasets are provided to follow the tutorials.
 
 .. |polymer in water| raw:: html
 
