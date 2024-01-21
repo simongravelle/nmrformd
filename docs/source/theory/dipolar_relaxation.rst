@@ -81,7 +81,9 @@ Dipolar relaxation
 
 .. math::
 
-    G^{(\text{m)} (\tau) = \dfrac{\alpha_m^2}{N} \sum_i \sum_{j \ne i} \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)} \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij}^3 (\tau)},
+    G^{(m)} (\tau) = \dfrac{\alpha_m^2}{N} \sum_i \sum_{j \ne i}
+    \dfrac{Y_2^{(m)} [\Omega_{ij} (0)]}{r_{ij}^3 (0)} 
+    \dfrac{Y_2^{*(m)} [\Omega_{ij} (\tau)]}{r_{ij}^3 (\tau)},
 
 .. container:: justify
 

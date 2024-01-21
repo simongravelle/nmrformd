@@ -13,13 +13,13 @@ MD system
 .. image:: ../figures/tutorials/bulk-water/water-dark-square.png
     :class: only-dark
     :alt: Water molecules simulated with lammps - NMR relaxation time calculation
-    :width: 200
+    :width: 250
     :align: right
 
 .. image:: ../figures/tutorials/bulk-water/water-light-square.png
     :class: only-light
     :alt: Water molecules simulated with lammps - NMR relaxation time calculation
-    :width: 200
+    :width: 250
     :align: right
 
 .. container:: justify
