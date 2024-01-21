@@ -1,3 +1,4 @@
+.. _bulk-water-label:
 
 Bulk water
 ==========
@@ -134,7 +135,9 @@ Results
     spins, one can extract the two correlation functions :math:`G_\textrm{intra}^{(0)}` and
     :math:`G_\textrm{inter}^{(0)}` (see Eqs. :eq:`G_intra` and :eq:`G_inter`). For comparison,
     the results obtained with two different temperatures 275 and 300 K are reported.
-    
+
+.. container:: justify
+
     At short time $t < 40$ ps, the intra-molecular correlation functions follow and
     a decreasing exponential,
 
@@ -151,6 +154,8 @@ Results
     commonly used to describe systems for which the rotational diffusion
     is isotropic :cite:`lippensT1RelaxationTime1993`.
     
+.. container:: justify
+
     The inter-molecular correlation functions, however, scale as an
     exponential [i.e. Eq. :eq:`eq_exp_G`] only for time shorter than a 
     few tens of pico-second, and show a clear scaling as :math:`G_\text{inter} (t) \sim t^{-3/2}`
@@ -158,10 +163,7 @@ Results
     process controlling the motion of the molecules. The scaling
     :math:`G_\text{inter} (t) \sim t^{-3/2}` has long been predicted, and 
     analytical expressions have been proposed by Ayant et al. :cite:`ayantCalculDensitesSpectrales1975` and
-    Hwang and Freed :cite:`hwangDynamicEffectsPair2008`, in the context of freely diffusing hard spheres,
-    
-
-
+    Hwang and Freed :cite:`hwangDynamicEffectsPair2008`, in the context of freely diffusing hard spheres.
     Following Ref :cite:`grivetNMRRelaxationParameters2005`, this expression is here referred to 
     as a ADHF.
 
@@ -187,6 +189,8 @@ Results
 
     using :math:`\tau_\text{c} = 6.3` ps and :math:`G(0) = 56300` A⁻⁶ ps⁻² for :math:`T = 300` K
     and :math:`\tau_\text{c} = 3.2` ps and :math:`G(0) = 59500` A⁻⁶ ps⁻² for :math:`T = 275` K. 
+
+.. container:: justify
 
     The inter molecular spectrum :math:`J_\textrm{inter}^{(0)}`, however, does not follow the 
     Lorentzian plateau, particularly at the lowest frequencies, which is consistent with 

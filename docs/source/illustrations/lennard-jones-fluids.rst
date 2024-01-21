@@ -42,15 +42,6 @@ MD system
     namely a reduced temperature ranging from :math:`T^* = 0.8` to 3.0,
     a density :math:`\rho^* = 0.84`. Note however, a smaller number of particles was used,
     as well as a smaller timestep, and a slightly longer cut-off.
-    
-.. container:: justify
-
-    You can access all the simulation files
-    and trajectories in this separate Github |repository-examples|.
-
-.. |repository-examples| raw:: html
-
-   <a href="https://github.com/simongravelle/nmrformd-data" target="_blank">repository</a>
 
 Results
 -------
