@@ -40,6 +40,25 @@ NMR fom MD
     using NMRforMD, from left to right: a bulk water system, 
     a lennard-jones fluid, and a lysozyme in water.
 
+Datasets
+--------
+
+.. container:: justify
+
+    Two molecular dynamics datasets are available on Github. One 
+    is a |polymer in water| system generated using LAMMPS, 
+    the second is a |water confined in silica|
+    generated using GROMACS. The datasets are
+    provided to follow the tutorials.
+
+.. |polymer in water| raw:: html
+
+   <a href="https://github.com/simongravelle/polymer-in-water.git" target="_blank">polymer in water</a>
+
+.. |water confined in silica| raw:: html
+
+   <a href="https://github.com/simongravelle/water-in-silica.git" target="_blank">water confined in silica</a>
+
 .. toctree::
    :maxdepth: 2
    :hidden:
