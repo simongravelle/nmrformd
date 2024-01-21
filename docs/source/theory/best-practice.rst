@@ -65,7 +65,8 @@ Simulation accuracy
     and it is therefore important to ensure the accuracy of the molecular simulation.
     Several parameters are known to affect the accuracy of the simulations,
     such as the force field (as discussed previously), the time step, the cut-offs,
-    or the sampling time :math:`frenkelUnderstandingMolecularSimulation2002, allenComputerSimulationLiquids2017`.
+    or the sampling time
+    :cite:`frenkelUnderstandingMolecularSimulation2002,allenComputerSimulationLiquids2017`.
 
 .. container:: justify
 
