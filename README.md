@@ -34,9 +34,17 @@ details on some common pitfalls of NMR calculations.
     </a>
 </p>
 
-Figure: Examples of systems that can be analysed using NMRforMD,
+Figure: Examples of systems that can be analyzed using NMRforMD,
 from left to right: a bulk water system, a lennard-jones fluid,
 and a lysozyme in water.
+
+## Datasets
+
+Two molecular dynamics datasets are available on Github. One 
+is a [polymer in water](https://github.com/simongravelle/polymer-in-water) system generated using LAMMPS, 
+the second is a [water confined in silica](https://github.com/simongravelle/water-in-silica.git)
+generated using GROMACS. Both datasets are required to follow the tutorials
+provided in the [documentation](https://nmrformd.readthedocs.io/en/latest/).
 
 ## Warning
 
