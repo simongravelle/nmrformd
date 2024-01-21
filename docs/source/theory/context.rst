@@ -21,7 +21,8 @@ Context
     water and other small molecules :cite:`lippensT1RelaxationTime1993, calero1HNuclearSpin2015, singerMolecularDynamicsSimulations2017, singerNMRSpinrotationRelaxation2018, philipsProtonNMRRelaxation2019, singerElucidatingNMRRelaxation2020`.
     MDS are also used to study the NMR relaxation properties of molecules confined within
     nanoporous materials :cite:`khudozhitkovDynamicsPropenePropane2020, gravelleNMRInvestigationWater2023`,
-    as well as large polymer molecules, lipid membranes, and proteins.
+    as well as large polymer molecules, lipid membranes, proteins,
+    or glass transition phenomenon of glycerol :cite:`becherMolecularDynamicsSimulations2021`.
 
 .. container:: justify
 
@@ -31,13 +32,7 @@ Context
     :cite:`philipsQuadrupolarNMRRelaxation2020, chubakNMRRelaxationRates2021`,
     which is beyond the scope of the present contribution.
     Monte carlo simulations have also been used :cite:`friesMonteCarloCalculation1983`,
-    although in that case some care must be taken to extract time dependant quantities
+    although, in that case, some care must be taken to extract time-dependant quantities
     such as autocorrelation functions :cite:`huitemaCanMonteCarlo1999`. Recently,
-    the possibility to calculate NMR relaxation rate from coarse grained models was also
-    discussed :cite:`gravelleAssessingValidityNMR2023`. 
-
-.. container:: justify
-
-    Authors have also directly combined simulations and experiments, for instance to study
-    glass transition phenomenon of glycerol :cite:`becherMolecularDynamicsSimulations2021`,
-    water confined within salt crusts :cite:`gravelleNMRInvestigationWater2023`
+    the possibility to calculate NMR relaxation rate from coarse grained models
+    whose atomic details were reconstructed a posteriori was demonstrated :cite:`gravelleAssessingValidityNMR2023`.

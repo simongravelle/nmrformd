@@ -1,8 +1,8 @@
 Best practice
 =============
 
-Choosing the force field
-------------------------
+Choosing the right force field
+------------------------------
 
 .. container:: justify
 
@@ -14,12 +14,12 @@ Choosing the force field
     it is important to keep in mind that force fields are often parametrized
     to reproduce thermodynamic quantities, such as solvation energy.
     However, NMR relaxation times depend on both structural
-    and dynamical quantities, differences between experiments
-    and simulations can be expected for the less accurate force field.
+    and dynamical quantities, and large differences between experiments
+    and simulations are expected for poorly accurate force fields.
 
 .. container:: justify
 
-    Here, as an illustration, the NMR relaxation time :math:`T_1`
+    As an illustration, the NMR relaxation time :math:`T_1`
     of bulk water was measured as a function of the temperature
     for three different water models:
     :math:`\text{TIP4P}-\epsilon` :cite:`fuentes-azcatlNonPolarizableForceField2014`,
@@ -61,10 +61,22 @@ Simulation accuracy
 
 .. container:: justify
 
-    Since NMR relaxation rate measurements are sensitive both thermodynamic and dynamic quantities, 
-    it is important to ensure the accuracy of the simulation.
-    For instance, the cut-off for the Lennard-Jones (LJ) interaction has a slight impact
-    on the value of the inter-molecular :math:`T_1^\text{inter}` :cite:`gravelleNMRInvestigationWater2023`.
+    NMR relaxation measurements are sensitive both thermodynamic and dynamic quantities, 
+    and it is therefore important to ensure the accuracy of the molecular simulation.
+    Several parameters are known to affect the accuracy of the simulations,
+    such as the force field (as discussed previously), the time step, the cut-offs,
+    or the sampling time :math:`frenkelUnderstandingMolecularSimulation2002, allenComputerSimulationLiquids2017`.
+
+.. container:: justify
+
+    As an illustration, the NMR relaxation time :math:`T_1`
+    of bulk water was measured as a function of the LJ cut-off.
+    Our results show that, for the smallest cut-off,
+    the inter-molecular :math:`T_1^\text{inter}` is slightly
+    under-estimated, which is mainly due to an over-estimation
+    of the inter-molecular characteristic time :math:`\tau_\text{inter}`.
+    These observations are consistent
+    with previous measurements :cite:`gravelleNMRInvestigationWater2023`.
 
 .. image:: ../figures/illustrations/bulk-water/effect_cutoff-dark.png
     :class: only-dark
