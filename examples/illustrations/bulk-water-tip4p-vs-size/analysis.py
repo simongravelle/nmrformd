@@ -22,13 +22,13 @@ while run:
         for n in range(10):
             # Import MDA universe
             datapath = path + "N"+str(N)+"/"
-            if os.path.exists(datapath+"prod"+str(n)+".xtc"):
+            if os.path.exists(datapath+"prod-"+str(n)+".xtc"):
                 # Read current status
                 name_intra = "N"+str(N)+"_intra_n"+str(n)
                 name_inter = "N"+str(N)+"_inter_n"+str(n) 
                 n_intra = measure_N(name_intra)
                 n_inter = measure_N(name_inter)
-                u = mda.Universe(datapath+"topology.data", datapath+"prod"+str(n)+".xtc")
+                u = mda.Universe(datapath+"topology.data", datapath+"prod-"+str(n)+".xtc")
                 hydrogen = u.select_atoms("type 2")
                 n_hydrogen = hydrogen.n_atoms
                 if n_intra < n_hydrogen:
