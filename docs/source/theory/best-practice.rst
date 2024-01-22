@@ -164,10 +164,14 @@ Dumping frequency
 
     The dumping frequency sets the temporal resolution of the analysis.
     The maximum dumping period that can be used is system-dependent
-    and must typically be much smaller than the correlation times. If the
-    typical correlation times in the system is not known,
+    and must typically be much smaller than the correlation times.
+    If the typical correlation times in the system is not known,
     the appropriate dumping frequency :math:`\Delta t` can
     be identified from convergence testing.
+    Note however than using a high dumping frequency
+    increases the size of the trajectory files, which in turn
+    can make the computation of NMR relaxation rates
+    computationally expensive.
 
 .. container:: justify
 
@@ -189,14 +193,10 @@ Dumping frequency
 
 .. container:: figurelegend
 
-    Figure: Convergence testing showing the NMR relaxation time :math:`T_1` (a)
-    and inter-molecular relaxation times :math:`\tau_\text{inter}` as a function of the
-    trajectory dumping frequency :math:`\Delta t` for a bulk water system at :math:`T = 300 \text{K}`.
-    The dashed line show the respective values for :math:`T_1` and :math:`\tau_\text{inter}`
-    measured for :math:`\Delta t \to 0`.
-
-.. container:: justify
-
-    Using a high dumping frequency
-    can lead to generating large trajectory files that in turn
-    are computationally expensive to analyze.
+    Figure: a) Convergence testing showing the NMR relaxation time :math:`T_1`
+    as a function of the trajectory dumping frequency :math:`\Delta t`
+    for a bulk water system at :math:`T = 300 \text{K}`.
+    The dashed line show the value for :math:`T_1`
+    for :math:`\Delta t \to 0`.
+    b) Inter-molecular relaxation times :math:`\tau_\text{inter}` as 
+    a function of :math:`\Delta t`.
