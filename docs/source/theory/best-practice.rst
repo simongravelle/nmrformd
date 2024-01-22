@@ -76,8 +76,12 @@ Simulation accuracy
     the inter-molecular :math:`T_1^\text{inter}` is slightly
     under-estimated, which is mainly due to an over-estimation
     of the inter-molecular characteristic time :math:`\tau_\text{inter}`.
-    These observations are consistent
-    with previous measurements :cite:`gravelleNMRInvestigationWater2023`.
+    Our results also indicate that for a cut-off of 1\,nm,
+    which is commonly used value, a small error of 
+    about 1\,\% is induced. These observations are consistent
+    with previous measurements :cite:`gravelleNMRInvestigationWater2023`,
+    and confirm that care must be taken if one attempt in reproducing
+    accurately NMR quantities.
 
 .. image:: ../figures/illustrations/bulk-water/effect_cutoff-dark.png
     :class: only-dark
