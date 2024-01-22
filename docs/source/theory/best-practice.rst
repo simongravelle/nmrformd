@@ -157,29 +157,27 @@ Box size
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-Simulation duration
--------------------
-
-.. container:: justify
-
-    For comparison with experimental value, the total duration of the simulation
-    must either be larger than :math:`\tau_c`, where :math:`\tau_c` is the longest
-    characteristic motion in the system, or be low enough to match the actual Larmor
-    frequency used in experiments.
-
 Dumping frequency
 -----------------
 
 .. container:: justify
 
-    The dumping frequency set the minimum temporal resolution of the analysis, and
-    The dumping period must be smaller than the smaller correlation time of the system.
-    For instance, for bulk water at :math:`T = 300\,\text{K}`, using a dumping period
-    larger than about :math:`\Delta t = 1\,\text{ps}` leads to a significant decrease
-    of the measured relaxation time :math:`T_1`, as well as an increase of the measured
-    relaxation times. If the smaller correlation time
-    in the system is not known, the appropriate dumping
-    frequency :math:`\Delta t` can be identified from convergence testing.
+    The dumping frequency sets the temporal resolution of the analysis.
+    The maximum dumping period that can be used is system-dependent
+    and must typically be much smaller than the correlation times. If the
+    typical correlation times in the system is not known,
+    the appropriate dumping frequency :math:`\Delta t` can
+    be identified from convergence testing.
+
+.. container:: justify
+
+    As an illustration, the NMR relaxation time :math:`T_1` was measured
+    for an increasing dumping period from :math:`\Delta t = 0.02\,\text{ps}`
+    to :math:`5\,\text{ps}`. Our results show that using a dumping period
+    larger than about :math:`\Delta t = 0.5\,\text{ps}` leads to a significant decrease
+    of the measured relaxation time :math:`T_1`. The decrease in :math:`T_1`
+    is accompanied by an increase of the measured inter-molecular
+    relaxation times :math:`\tau_\text{inter}`. 
 
 .. image:: ../figures/illustrations/bulk-water/effect_dumping_frequency-dark.png
     :class: only-dark

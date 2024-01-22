@@ -40,7 +40,7 @@ MD system
     in the anisotropic NPzT ensemble using a timestep of :math:`1\,\text{fs}`.
     In order to balance the charge of the surface, 20 sodium ions are
     present in the slit.
-    The imposed was temperature :math:`T = 300\,^\circ\text{K}`, and the pressure
+    The imposed was temperature :math:`T = 300\,\text{K}`, and the pressure
     :math:`p = 1\,\text{bar}`. The positions of the atoms were recorded in
     the *prod.xtc* file
     every :math:`2\,\text{ps}`.
