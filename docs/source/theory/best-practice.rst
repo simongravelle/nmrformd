@@ -118,7 +118,9 @@ Box size
 .. container:: figurelegend
 
     Figure: NMR relaxation rate :math:`R_1` as a function of the number of molecules
-    for a bulk water system..
+    for a bulk water system. For the smallest systems, results were averaged
+    from up to 10 independent simulations and the error bar is calculated from
+    the standard deviation.
 
 .. image:: ../figures/best-practices/size-effect-tau-R1-dark.png
     :class: only-dark
