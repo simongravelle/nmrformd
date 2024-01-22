@@ -102,6 +102,18 @@ Box size
     NMR relaxation measurements are not extremely sensitive to the box size, however,
     a small effect of the box size can be see, particularly when reaching extremely small boxes:
 
+.. image:: ../figures/best-practices/effect_L_on_R1-dark.png
+    :class: only-dark
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. image:: ../figures/best-practices/effect_L_on_R1-R1-light.png
+    :class: only-light
+    :alt: NMR results obtained from the LAMMPS simulation of water
+
+.. container:: figurelegend
+
+    Figure: Effect of the box size on the NMR relaxation rate :math:`R_1`.
+
 .. image:: ../figures/best-practices/size-effect-tau-R1-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
