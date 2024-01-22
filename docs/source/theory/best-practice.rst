@@ -99,20 +99,26 @@ Box size
 
 .. container:: justify
 
-    NMR relaxation measurements are not extremely sensitive to the box size, however,
-    a small effect of the box size can be see, particularly when reaching extremely small boxes:
+    NMR relaxation measurements are sensitive to the box size, as small 
+    systems are known to suffer from finite-size effects.
 
-.. image:: ../figures/best-practices/effect_L_on_R1-dark.png
+.. container:: justify
+
+    As an illustration, the NMR relaxation rate :math:`R_1`
+    was measured both water with different number of molecules.
+
+.. image:: ../figures/illustrations/bulk-water/effect_L_on_R1-dark.png
     :class: only-dark
     :alt: NMR results obtained from the LAMMPS simulation of water
 
-.. image:: ../figures/best-practices/effect_L_on_R1-R1-light.png
+.. image:: ../figures/illustrations/bulk-water/effect_L_on_R1-light.png
     :class: only-light
     :alt: NMR results obtained from the LAMMPS simulation of water
 
 .. container:: figurelegend
 
-    Figure: Effect of the box size on the NMR relaxation rate :math:`R_1`.
+    Figure: NMR relaxation rate :math:`R_1` as a function of the number of molecules
+    for a bulk water system..
 
 .. image:: ../figures/best-practices/size-effect-tau-R1-dark.png
     :class: only-dark
