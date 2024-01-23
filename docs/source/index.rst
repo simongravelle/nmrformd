@@ -38,7 +38,8 @@ NMR fom MD
 
     Figure: Examples of systems that can be analyzed
     using NMRforMD, from left to right: a bulk water system, 
-    a lennard-jones fluid, and a lysozyme in water.
+    a lennard-jones fluid, and a lysozyme protein in contact
+    with a thin layer of water molecules.
 
 Datasets
 --------
@@ -48,7 +49,8 @@ Datasets
     Two molecular dynamics datasets are available on Github: 
     a |polymer in water| system generated using LAMMPS, 
     and a |water confined in silica| system generated
-    using GROMACS. The datasets are provided to follow the tutorials.
+    using GROMACS. The datasets can be downloaded
+    to follow the tutorials.
 
 .. |polymer in water| raw:: html
 
