@@ -18,7 +18,7 @@ run = True
 R1_intra = 1e-5
 R1_inter = 1e-5
 while run:
-    for N in [25, 39, 62, 99, 158, 251, 398, 631, 1002, 1589, 2521, 6500, 10000]: 
+    for N in [25, 39, 62, 99, 158, 251, 398, 631, 1002, 1589, 6500, 10000]: # 2521
         for n in range(20):
             # Import MDA universe
             datapath = path + "N"+str(N)+"/"
