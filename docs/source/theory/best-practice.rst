@@ -111,14 +111,17 @@ Box size
     As an illustration, the NMR relaxation rate :math:`R_1`
     was measured for water with different number of molecules
     :math:`N \in [100,\,10000]`, which correspond to equilibrium
-    box size of lateral sizes :math:`L \in [1.4,\,6.7]\,\text{nm}`.
+    box of lateral sizes :math:`L \in [1.4,\,6.7]\,\text{nm}`.
     Our results show that the inter-molecular
     relaxation rate :math:`R_1^\text{inter}` is sensitive to the 
-    box size even for the largest boxes considered here. Note that 
-    :math:`R_1^\text{intra}`, which is the dominant contribution to 
+    box size even for the largest boxes considered here.
+    With small box size, the tail of :math:`G_\text{inter}`, 
+    which decreases as :math:`G_\text{inter} \sim t^{-3/2}`, is cutoff
+    which lead to an error on :math:`R_1^\text{inter}`.
+    Note that :math:`R_1^\text{intra}`, which is the dominant contribution to 
     :math:`R_1` for water at ambient temperature, is barely affected
-    by the box size and therefore the resulting error induced on :math:`R_1`
-    remains small in this case.
+    by the box size and therefore the resulting error induced on the 
+    total relaxation rate :math:`R_1` remains small for :math:`N > 1000`.
 
 .. image:: ../figures/illustrations/bulk-water/effect_L_on_R1-dark.png
     :class: only-dark
