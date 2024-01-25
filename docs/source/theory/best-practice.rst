@@ -109,7 +109,8 @@ Box size
 .. container:: justify
 
     As an illustration, the NMR relaxation rate :math:`R_1`
-    was measured both water with different number of molecules.
+    was measured for water with different number of molecules :math:`N`,
+    with :math:`N \in [100,\,10000]`.
 
 .. image:: ../figures/illustrations/bulk-water/effect_L_on_R1-dark.png
     :class: only-dark
@@ -121,45 +122,11 @@ Box size
 
 .. container:: figurelegend
 
-    Figure: NMR relaxation rate :math:`R_1` as a function of the number of molecules
+    Figure: a) NMR relaxation rate :math:`R_1` as a function of the number of molecules :math:`N`
     for a bulk water system. For the smallest systems, results were averaged
     from up to 10 independent simulations and the error bar is calculated from
-    the standard deviation.
-
-.. image:: ../figures/best-practices/size-effect-tau-R1-dark.png
-    :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. image:: ../figures/best-practices/size-effect-tau-R1-light.png
-    :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. container:: justify
-
-    Looking at the correlation functions, a strong effect of the box size can be 
-    see on the inter-molecular contribution, while almost no effect is seen 
-    on the intra-molecular contribution:
-
-.. image:: ../figures/best-practices/size-effect-gij-dark.png
-    :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. image:: ../figures/best-practices/size-effect-gij-light.png
-    :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. container:: justify
-
-    Despite the strongly modified correlation functions obtained for small boxes,
-    the relaxation rate is not so affected:
-
-.. image:: ../figures/best-practices/size-effect-R1-dark.png
-    :class: only-dark
-    :alt: NMR results obtained from the LAMMPS simulation of water
-
-.. image:: ../figures/best-practices/size-effect-R1-light.png
-    :class: only-light
-    :alt: NMR results obtained from the LAMMPS simulation of water
+    the standard deviation. b) Inter-molecular correlation function :math:`G`
+    for two different number of molecules.
 
 Dumping frequency
 -----------------
