@@ -14,9 +14,9 @@ NMRforMD allows for the analysis of trajectory
 files from any MDAnalysis-compatible simulation package, including
 [LAMMPS](https://www.lammps.org/) and [GROMACS](https://www.gromacs.org/).
 
-## Note
+## Migration
 
-This repository will progressivily be migrated on [here](https://github.com/NMRDfromMD), when I find the time.
+This repository will progressively be migrated on [here](https://github.com/NMRDfromMD), when I find the time.
 
 ## Documentation
 
