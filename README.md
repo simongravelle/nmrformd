@@ -16,7 +16,8 @@ files from any MDAnalysis-compatible simulation package, including
 
 ## Migration
 
-This repository will progressively be migrated on [here](https://github.com/NMRDfromMD), when I find the time.
+This repository will progressively be migrated on [here](https://github.com/NMRDfromMD),
+and the most up-to-date page will be [https://nmrdfrommd.github.io](https://nmrdfrommd.github.io).
 
 ## Documentation
 
