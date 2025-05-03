@@ -3,16 +3,25 @@ NMR fom MD
 
 .. container:: justify
 
-    Dipolar Nuclear Magnetic Resonance for Molecular Dynamics
-    (NMRforMD or formerly NMRforMD) simulations
-    is a Python toolkit designed for the computation of
-    dipolar NMR relaxation times
-    (the so called :math:`T_1` and :math:`T_2`)
-    from molecular dynamics simulations.
-    Used in combination with |MDAnalysis|,
-    NMRforMD allows for the analysis of trajectory
-    files from any MDAnalysis-compatible simulation package, including
-    |LAMMPS| and |GROMACS|.
+   Dipolar Nuclear Magnetic Resonance for Molecular Dynamics
+   (NMRforMD or formerly NMRforMD) simulations
+   is a Python toolkit designed for the computation of
+   dipolar NMR relaxation times
+   (the so called :math:`T_1` and :math:`T_2`)
+   from molecular dynamics simulations.
+   Used in combination with |MDAnalysis|,
+   NMRforMD allows for the analysis of trajectory
+   files from any MDAnalysis-compatible simulation package, including
+   |LAMMPS| and |GROMACS|.
+
+.. container:: justify
+
+   NMRforMD is progressively being replaced by NMRDfromMD, see
+   the new documentation |NMRDfromMD|.
+
+.. |NMRDfromMD| raw:: html
+
+   <a href="https://nmrdfrommd.github.io/" target="_blank">here</a>
 
 .. |MDAnalysis| raw:: html
 
